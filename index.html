@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <link href="img/favicon.png" rel="shortcut icon">
+    <title>Confitura 2015</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fonts/LatoLatinLight-Regular.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="css/loading-bar.min.css"/>
+</head>
+<body ng-app="confitura">
+<div class="banner-container">
+    <img class="banner" src="img/banner.png"/>
+
+    <div style="clear: both; margin-bottom: 10px"></div>
+    <div class="info">
+        <div class="corner"></div>
+        <div class="top"></div>
+        <div class="main">
+            <div class="twitter " ng-controller="TwitterCtrl">
+                <div class="twitter-icon"></div>
+                <div class="ng-cloak">
+                    <div class="twitter-text">{{tweet.text}}</div>
+                    <div class="twitter-date">{{getDate(tweet.created_at)}}</div>
+                    <div class="twitter-name">@confiturapl</div>
+                </div>
+            </div>
+            <div class="splitter"></div>
+            <div class="news  ng-cloak" ng-controller="NewsCtrl">
+                <h2 class="news-title">{{news.title}}</h2>
+
+                <div class="news-author">Napisał: {{news.author}}</div>
+                <div class="news-text" ng-bind-html="news.shortText"></div>
+                <div>Cultivated who resolution connection motionless did occasional. Journey promise if it colonel. Can all mirth abode nor
+                    hills added. Them men does for body pure. Far end not horses remain sister. Mr parish is to he answer roused piqued
+                    afford sussex. It abode words began enjoy years no do ﻿no. Tried spoil as heart visit blush or. Boy possible blessing
+                    sensible set but margaret interest. Off tears are day blind smile alone had.
+
+                    Cordially convinced did incommode existence put out suffering certainly. Besides another and saw ferrars limited ten say
+                    unknown. On at tolerably depending do perceived. Luckily eat joy see own shyness minuter. So before remark at depart.
+                    Did son unreserved themselves indulgence its. Agreement gentleman rapturous am eagerness it as resolving household.
+                    Direct wicket little of talked lasted formed or it. Sweetness consulted may prevailed for bed out sincerity.
+
+                    Kindness to he horrible reserved ye. Effect twenty indeed beyond for not had county. The use him without greatly can
+                    private. Increasing it unpleasant no of contrasted no continuing. Nothing colonel my no removed in weather. It
+                    dissimilar in up devonshire inhabiting.
+
+                    From they fine john he give of rich he. They age and draw mrs like. Improving end distrusts may instantly was household
+                    applauded incommode. Why kept very ever home mrs. Considered sympathize ten uncommonly occasional assistance sufficient
+                    not. Letter of on become he tended active enable to. Vicinity relation sensible sociable surprise screened no up as.
+
+                    Am if number no up period regard sudden better. Decisively surrounded all admiration and not you. Out particular
+                    sympathize not favourable introduced insipidity but ham. Rather number can and set praise. Distrusts an it contented
+                    perceived attending oh. Thoroughly estimating introduced stimulated why but motionless.
+
+                    She who arrival end how fertile enabled. Brother she add yet see minuter natural smiling article painted. Themselves at
+                    dispatched interested insensible am be prosperous reasonably it. In either so spring wished. Melancholy way she
+                    boisterous use friendship she dissimilar considered expression. Sex quick arose mrs lived. Mr things do plenty others an
+                    vanity myself waited to. Always parish tastes at as mr father dining at.
+
+                    On insensible possession oh particular attachment at excellence in. The books arose but miles happy she. It building
+                    contempt or interest children mistress of unlocked no. Offending she contained mrs led listening resembled. Delicate
+                    marianne absolute men dashwood landlord and offended. Suppose cottage between and way. Minuter him own clothes but
+                    observe country. Agreement far boy otherwise rapturous incommode favourite.
+
+                    Its had resolving otherwise she contented therefore. Afford relied warmth out sir hearts sister use garden. Men day
+                    warmth formed admire former simple. Humanity declared vicinity continue supplied no an. He hastened am no property
+                    exercise of. Dissimilar comparison no terminated devonshire no literature on. Say most yet head room such just easy.
+
+                    Sigh view am high neat half to what. Sent late held than set why wife our. If an blessing building steepest. Agreement
+                    distrusts mrs six affection satisfied. Day blushes visitor end company old prevent chapter. Consider declared out
+                    expenses her concerns. No at indulgence conviction particular unsatiable boisterous discretion. Direct enough off others
+                    say eldest may exeter she. Possible all ignorant supplied get settling marriage recurred.
+
+                    Lose eyes get fat shew. Winter can indeed letter oppose way change tended now. So is improve my charmed picture exposed
+                    adapted demands. Received had end produced prepared diverted strictly off man branched. Known ye money so large decay
+                    voice there to. Preserved be mr cordially incommode as an. He doors quick child an point at. Had share vexed front least
+                    style off why him.
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="bottom-margin"></div>
+        <!--<img src="img/info.png"/>-->
+
+        <!--<div class="twitter  ng-cloak" ng-controller="TwitterCtrl">-->
+        <!--<div class="twitter-text">{{tweet.text}}</div>-->
+        <!--<div class="twitter-date">{{getDate(tweet.created_at)}}</div>-->
+        <!--<div class="twitter-name">@confiturapl</div>-->
+        <!--</div>-->
+        <!--<div class="news  ng-cloak" ng-controller="NewsCtrl">-->
+        <!--<h2 class="news-title">{{news.title}}</h2>-->
+
+        <!--<div class="news-author">Napisał: {{news.author}}</div>-->
+        <!--<div class="news-text" ng-bind-html="news.shortText"></div>-->
+        <!--</div>-->
+    </div>
+</div>
+<div class="footer-container">
+    <div class="footer">
+        <div class="icons">
+            <a target="_blank" href="https://twitter.com/confiturapl"><img src="img/twitter.png"/></a>
+            <a target="_blank" href="https://pl-pl.facebook.com/Confitura"><img src="img/facebook.png"/></a>
+            <a target="_blank" href="https://plus.google.com/u/0/communities/111143182611552730655"><img src="img/google.png"/></a>
+            <a target="_blank" href="https://picasaweb.google.com/105244662761703257330"><img src="img/picassa.png"/></a>
+        </div>
+        <div class="logo"><img src="img/logo.png"/></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-resource.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-animate.js"></script>
+<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+<script src="js/loading-bar.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
