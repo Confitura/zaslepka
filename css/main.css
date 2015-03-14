@@ -28,15 +28,12 @@ a {
 }
 
 .banner {
-    width: 40%;
+    width: 100%;
 }
 
 .info {
-    width: 50%;
-    height: 100%;
-    margin: auto;
-    position: relative;
-
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .info img {
@@ -68,6 +65,8 @@ a {
     display: -webkit-flex; /* NEW - Chrome */
     display: flex;
     position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .info .bottom-margin {
@@ -109,23 +108,25 @@ a {
 }
 
 .twitter {
-    width: 27%;
+    flex-basis: 27%;
     margin-left: 15px;
     margin-right: 15px;
     float: left;
+    text-align: center;
 }
 
 .twitter-icon {
     position: relative;
     background: url(../img/twitter-big.png) no-repeat;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-size: 100% 100%;
     margin: auto;
 }
 
 .twitter-text {
     padding-top: 15px;
+    text-align: center;
 }
 
 .twitter-date {
@@ -139,9 +140,9 @@ a {
 }
 
 .news {
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 73%;
+    padding-left: 15px;
+    padding-right: 15px;
+    flex-basis: 67%;
 }
 
 .news-text {
@@ -155,7 +156,19 @@ a {
 .splitter {
     float: left;
     height: 100%;
-    width: 1px;
     border-left: 1px solid white;
     position: absolute;
+}
+
+@media all and (max-width: 768px) {
+    .twitter,
+    .news{
+        flex-basis: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+    .news{
+        border-top: 1px solid white;
+    }
 }
