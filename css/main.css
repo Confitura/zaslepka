@@ -160,7 +160,7 @@ a {
     position: absolute;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 992px) {
     .twitter,
     .news{
         flex-basis: 100%;

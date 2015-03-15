@@ -4,7 +4,7 @@ angular.module('confitura', ['ngResource', 'ngSanitize', 'angular-loading-bar', 
         moment.locale('pl');
     }])
     .factory('Twitter', function ($resource) {
-        return $resource('1http://c4p.confitura.pl/api/twitter');
+        return $resource('http://c4p.confitura.pl/api/twitter');
     })
     .factory('News', function ($resource) {
         return $resource('http://c4p.confitura.pl/api/news/0/1');
