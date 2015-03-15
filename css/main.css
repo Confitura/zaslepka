@@ -169,19 +169,22 @@ a {
         margin-right: 5px;
         margin-bottom: 10px;
     }
+
     .news{
         border-top: 1px solid white;
     }
 
     .footer-container {
-        height: 60px;
+        height: 80px;
     }
+
     .icons img {
-        width: 40px;
+        width: 60px;
         margin-right: 5px;
         margin-top: 10px;
     }
+
     .logo img {
-        height: 60px;
+        height: 80px;
     }
 }
