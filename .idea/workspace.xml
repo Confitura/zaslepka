@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32c49f5f-f20e-445d-a50a-42d33fc13880" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-    </list>
+    <list default="true" id="32c49f5f-f20e-445d-a50a-42d33fc13880" name="Default" comment="" />
     <ignored path="zaslepka.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -457,12 +455,12 @@
       <created>1426433565220</created>
       <option name="number" value="Default" />
       <updated>1426433565220</updated>
-      <workItem from="1426433565777" duration="1723000" />
+      <workItem from="1426433565777" duration="1888000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1723000" />
+    <option name="totallyTimeSpent" value="1888000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="813" extended-state="6" />
