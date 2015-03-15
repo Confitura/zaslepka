@@ -136,6 +136,7 @@ a {
 
 .twitter-name {
     font-weight: bolder;
+    font-size: medium;
     color: lightgray;
 }
 
@@ -170,5 +171,17 @@ a {
     }
     .news{
         border-top: 1px solid white;
+    }
+
+    .footer-container {
+        height: 60px;
+    }
+    .icons img {
+        width: 40px;
+        margin-right: 5px;
+        margin-top: 10px;
+    }
+    .logo img {
+        height: 60px;
     }
 }
