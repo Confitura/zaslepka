@@ -163,14 +163,14 @@ a {
 
 @media all and (max-width: 992px) {
     .twitter,
-    .news{
+    .news {
         flex-basis: 100%;
         margin-left: 5px;
         margin-right: 5px;
         margin-bottom: 10px;
     }
 
-    .news{
+    .news {
         border-top: 1px solid white;
     }
 
@@ -186,5 +186,10 @@ a {
 
     .logo img {
         height: 80px;
+    }
+
+    .footer {
+        width: 272px;
+        margin: auto;
     }
 }
