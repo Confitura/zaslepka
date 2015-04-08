@@ -1,0 +1,214 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #1b0218 url("../img/background.png") no-repeat;
+  background-size: 100%;
+  font-family: "LatoLatinLight", Georgia;
+  color: white;
+  word-wrap: break-word;
+}
+
+a {
+  color: darkgray;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.ng-cloak {
+  display: none;
+}
+
+.banner-container {
+  margin: auto;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.banner {
+  width: 100%;
+  background: url("../img/banner.png");
+  background-size: contain;
+  height: 0;
+  padding-top: 71.50%;
+}
+
+.info {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.info img {
+  width: 100%;
+}
+
+.info .corner {
+  background: url("../img/info-border.png") no-repeat;
+  background-size: 100% 100%;
+  height: 50px;
+  float: left;
+  width: 60%;
+}
+
+.info .top {
+  float: left;
+  width: 40%;
+  height: 50px;
+  background-color: #8e0582;
+}
+
+.info .main {
+  background-color: #8e0582;
+  width: 100%;
+  min-height: 250px;
+  display: inline-flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.info .bottom-margin {
+  background-color: #8e0582;
+  height: 10px;
+}
+
+.footer-container {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #8e0582;
+  background-color: #1b0218;
+}
+
+.footer {
+  width: 45%;
+  margin: auto;
+}
+
+.icons {
+  float: left;
+  margin-top: 10px;
+}
+
+.icon {
+  width: 25px;
+  height: 24px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.icon-twitter {
+  background-image: url("../img/twitter.png");
+}
+
+.icon-facebook {
+  background-image: url("../img/facebook.png");
+}
+
+.icon-google {
+  background-image: url("../img/google.png");
+}
+
+.icon-picasa {
+  background-image: url("../img/picasa.png");
+}
+
+.logo {
+  float: right;
+}
+
+.icon-logo {
+  height: 50px;
+  width: 95px;
+  background-image: url("../img/logo.png");
+
+}
+
+.twitter {
+  flex-basis: 27%;
+  margin-left: 15px;
+  margin-right: 15px;
+  float: left;
+  text-align: center;
+}
+
+.twitter-icon-big {
+  position: relative;
+  background: url("../img/twitter-big.png") no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 100% 100%;
+  margin: auto;
+}
+
+.twitter-text {
+  padding-top: 15px;
+  text-align: center;
+}
+
+.twitter-date {
+  margin-top: 30px;
+  font-weight: bolder;
+}
+
+.twitter-name {
+  font-weight: bolder;
+  font-size: medium;
+  color: lightgray;
+}
+
+.news {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex-basis: 67%;
+}
+
+.news-text {
+  text-align: left;
+}
+
+.news-author {
+  text-align: left;
+}
+
+.splitter {
+  float: left;
+  height: 100%;
+  border-left: 1px solid white;
+  position: absolute;
+}
+
+@media all and (max-width: 992px) {
+  .twitter,
+  .news {
+    flex-basis: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+  }
+
+  .news {
+    border-top: 1px solid white;
+  }
+
+  .footer-container {
+    height: 80px;
+  }
+
+  .icon {
+    width: 60px;
+    height: 58px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .footer {
+    width: 272px;
+    margin: auto;
+  }
+}
