@@ -20,7 +20,7 @@ ng.module('confitura', [
     .config(function($stateProvider){
         $stateProvider
             .state('main',{
-                url: '/',
+                url: '',
                 template: require('../views/main.html')
             })
             .state('partners',{

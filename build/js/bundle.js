@@ -48,15 +48,15 @@
 	__webpack_require__(2);
 	__webpack_require__(1);
 
-	var ng = __webpack_require__(12);
+	var ng = __webpack_require__(13);
 	__webpack_require__(11);
-	__webpack_require__(13);
+	__webpack_require__(12);
 	__webpack_require__(14);
-	__webpack_require__(15);
+	__webpack_require__(16);
 	__webpack_require__(5).locale('pl');
 
 
-	__webpack_require__(16);
+	__webpack_require__(15);
 	ng.module('confitura', [
 	    'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
 	    __webpack_require__(3), __webpack_require__(4)
@@ -66,7 +66,7 @@
 	    .config(function($stateProvider){
 	        $stateProvider
 	            .state('main',{
-	                url: '/',
+	                url: '',
 	                template: __webpack_require__(6)
 	            })
 	            .state('partners',{
@@ -112,17 +112,17 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(104);
+	__webpack_require__(103);
 	__webpack_require__(106);
-	__webpack_require__(100);
-	__webpack_require__(102);
+	__webpack_require__(99);
+	__webpack_require__(101);
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(12).module('twitter',[])
+	__webpack_require__(13).module('twitter',[])
 	    .factory('Twitter', __webpack_require__(7))
 	    .controller('TwitterCtrl', __webpack_require__(8));
 	module.exports ='twitter';
@@ -132,7 +132,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var ng = __webpack_require__(12);
+	var ng = __webpack_require__(13);
 	ng.module('news', [])
 	    .factory('News', __webpack_require__(9))
 	    .controller('NewsCtrl', __webpack_require__(10));
@@ -3225,7 +3225,7 @@
 	    return _moment;
 
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(99)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(105)(module)))
 
 /***/ },
 /* 6 */
@@ -5434,6 +5434,683 @@
 
 /***/ },
 /* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @license AngularJS v1.4.0-beta.6
+	 * (c) 2010-2015 Google, Inc. http://angularjs.org
+	 * License: MIT
+	 */
+	(function(window, angular, undefined) {'use strict';
+
+	var $resourceMinErr = angular.$$minErr('$resource');
+
+	// Helper functions and regex to lookup a dotted path on an object
+	// stopping at undefined/null.  The path must be composed of ASCII
+	// identifiers (just like $parse)
+	var MEMBER_NAME_REGEX = /^(\.[a-zA-Z_$][0-9a-zA-Z_$]*)+$/;
+
+	function isValidDottedPath(path) {
+	  return (path != null && path !== '' && path !== 'hasOwnProperty' &&
+	      MEMBER_NAME_REGEX.test('.' + path));
+	}
+
+	function lookupDottedPath(obj, path) {
+	  if (!isValidDottedPath(path)) {
+	    throw $resourceMinErr('badmember', 'Dotted member path "@{0}" is invalid.', path);
+	  }
+	  var keys = path.split('.');
+	  for (var i = 0, ii = keys.length; i < ii && obj !== undefined; i++) {
+	    var key = keys[i];
+	    obj = (obj !== null) ? obj[key] : undefined;
+	  }
+	  return obj;
+	}
+
+	/**
+	 * Create a shallow copy of an object and clear other fields from the destination
+	 */
+	function shallowClearAndCopy(src, dst) {
+	  dst = dst || {};
+
+	  angular.forEach(dst, function(value, key) {
+	    delete dst[key];
+	  });
+
+	  for (var key in src) {
+	    if (src.hasOwnProperty(key) && !(key.charAt(0) === '$' && key.charAt(1) === '$')) {
+	      dst[key] = src[key];
+	    }
+	  }
+
+	  return dst;
+	}
+
+	/**
+	 * @ngdoc module
+	 * @name ngResource
+	 * @description
+	 *
+	 * # ngResource
+	 *
+	 * The `ngResource` module provides interaction support with RESTful services
+	 * via the $resource service.
+	 *
+	 *
+	 * <div doc-module-components="ngResource"></div>
+	 *
+	 * See {@link ngResource.$resource `$resource`} for usage.
+	 */
+
+	/**
+	 * @ngdoc service
+	 * @name $resource
+	 * @requires $http
+	 *
+	 * @description
+	 * A factory which creates a resource object that lets you interact with
+	 * [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) server-side data sources.
+	 *
+	 * The returned resource object has action methods which provide high-level behaviors without
+	 * the need to interact with the low level {@link ng.$http $http} service.
+	 *
+	 * Requires the {@link ngResource `ngResource`} module to be installed.
+	 *
+	 * By default, trailing slashes will be stripped from the calculated URLs,
+	 * which can pose problems with server backends that do not expect that
+	 * behavior.  This can be disabled by configuring the `$resourceProvider` like
+	 * this:
+	 *
+	 * ```js
+	     app.config(['$resourceProvider', function($resourceProvider) {
+	       // Don't strip trailing slashes from calculated URLs
+	       $resourceProvider.defaults.stripTrailingSlashes = false;
+	     }]);
+	 * ```
+	 *
+	 * @param {string} url A parameterized URL template with parameters prefixed by `:` as in
+	 *   `/user/:username`. If you are using a URL with a port number (e.g.
+	 *   `http://example.com:8080/api`), it will be respected.
+	 *
+	 *   If you are using a url with a suffix, just add the suffix, like this:
+	 *   `$resource('http://example.com/resource.json')` or `$resource('http://example.com/:id.json')`
+	 *   or even `$resource('http://example.com/resource/:resource_id.:format')`
+	 *   If the parameter before the suffix is empty, :resource_id in this case, then the `/.` will be
+	 *   collapsed down to a single `.`.  If you need this sequence to appear and not collapse then you
+	 *   can escape it with `/\.`.
+	 *
+	 * @param {Object=} paramDefaults Default values for `url` parameters. These can be overridden in
+	 *   `actions` methods. If any of the parameter value is a function, it will be executed every time
+	 *   when a param value needs to be obtained for a request (unless the param was overridden).
+	 *
+	 *   Each key value in the parameter object is first bound to url template if present and then any
+	 *   excess keys are appended to the url search query after the `?`.
+	 *
+	 *   Given a template `/path/:verb` and parameter `{verb:'greet', salutation:'Hello'}` results in
+	 *   URL `/path/greet?salutation=Hello`.
+	 *
+	 *   If the parameter value is prefixed with `@` then the value for that parameter will be extracted
+	 *   from the corresponding property on the `data` object (provided when calling an action method).  For
+	 *   example, if the `defaultParam` object is `{someParam: '@someProp'}` then the value of `someParam`
+	 *   will be `data.someProp`.
+	 *
+	 * @param {Object.<Object>=} actions Hash with declaration of custom actions that should extend
+	 *   the default set of resource actions. The declaration should be created in the format of {@link
+	 *   ng.$http#usage $http.config}:
+	 *
+	 *       {action1: {method:?, params:?, isArray:?, headers:?, ...},
+	 *        action2: {method:?, params:?, isArray:?, headers:?, ...},
+	 *        ...}
+	 *
+	 *   Where:
+	 *
+	 *   - **`action`** – {string} – The name of action. This name becomes the name of the method on
+	 *     your resource object.
+	 *   - **`method`** – {string} – Case insensitive HTTP method (e.g. `GET`, `POST`, `PUT`,
+	 *     `DELETE`, `JSONP`, etc).
+	 *   - **`params`** – {Object=} – Optional set of pre-bound parameters for this action. If any of
+	 *     the parameter value is a function, it will be executed every time when a param value needs to
+	 *     be obtained for a request (unless the param was overridden).
+	 *   - **`url`** – {string} – action specific `url` override. The url templating is supported just
+	 *     like for the resource-level urls.
+	 *   - **`isArray`** – {boolean=} – If true then the returned object for this action is an array,
+	 *     see `returns` section.
+	 *   - **`transformRequest`** –
+	 *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
+	 *     transform function or an array of such functions. The transform function takes the http
+	 *     request body and headers and returns its transformed (typically serialized) version.
+	 *     By default, transformRequest will contain one function that checks if the request data is
+	 *     an object and serializes to using `angular.toJson`. To prevent this behavior, set
+	 *     `transformRequest` to an empty array: `transformRequest: []`
+	 *   - **`transformResponse`** –
+	 *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
+	 *     transform function or an array of such functions. The transform function takes the http
+	 *     response body and headers and returns its transformed (typically deserialized) version.
+	 *     By default, transformResponse will contain one function that checks if the response looks like
+	 *     a JSON string and deserializes it using `angular.fromJson`. To prevent this behavior, set
+	 *     `transformResponse` to an empty array: `transformResponse: []`
+	 *   - **`cache`** – `{boolean|Cache}` – If true, a default $http cache will be used to cache the
+	 *     GET request, otherwise if a cache instance built with
+	 *     {@link ng.$cacheFactory $cacheFactory}, this cache will be used for
+	 *     caching.
+	 *   - **`timeout`** – `{number|Promise}` – timeout in milliseconds, or {@link ng.$q promise} that
+	 *     should abort the request when resolved.
+	 *   - **`withCredentials`** - `{boolean}` - whether to set the `withCredentials` flag on the
+	 *     XHR object. See
+	 *     [requests with credentials](https://developer.mozilla.org/en/http_access_control#section_5)
+	 *     for more information.
+	 *   - **`responseType`** - `{string}` - see
+	 *     [requestType](https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest#responseType).
+	 *   - **`interceptor`** - `{Object=}` - The interceptor object has two optional methods -
+	 *     `response` and `responseError`. Both `response` and `responseError` interceptors get called
+	 *     with `http response` object. See {@link ng.$http $http interceptors}.
+	 *
+	 * @param {Object} options Hash with custom settings that should extend the
+	 *   default `$resourceProvider` behavior.  The only supported option is
+	 *
+	 *   Where:
+	 *
+	 *   - **`stripTrailingSlashes`** – {boolean} – If true then the trailing
+	 *   slashes from any calculated URL will be stripped. (Defaults to true.)
+	 *
+	 * @returns {Object} A resource "class" object with methods for the default set of resource actions
+	 *   optionally extended with custom `actions`. The default set contains these actions:
+	 *   ```js
+	 *   { 'get':    {method:'GET'},
+	 *     'save':   {method:'POST'},
+	 *     'query':  {method:'GET', isArray:true},
+	 *     'remove': {method:'DELETE'},
+	 *     'delete': {method:'DELETE'} };
+	 *   ```
+	 *
+	 *   Calling these methods invoke an {@link ng.$http} with the specified http method,
+	 *   destination and parameters. When the data is returned from the server then the object is an
+	 *   instance of the resource class. The actions `save`, `remove` and `delete` are available on it
+	 *   as  methods with the `$` prefix. This allows you to easily perform CRUD operations (create,
+	 *   read, update, delete) on server-side data like this:
+	 *   ```js
+	 *   var User = $resource('/user/:userId', {userId:'@id'});
+	 *   var user = User.get({userId:123}, function() {
+	 *     user.abc = true;
+	 *     user.$save();
+	 *   });
+	 *   ```
+	 *
+	 *   It is important to realize that invoking a $resource object method immediately returns an
+	 *   empty reference (object or array depending on `isArray`). Once the data is returned from the
+	 *   server the existing reference is populated with the actual data. This is a useful trick since
+	 *   usually the resource is assigned to a model which is then rendered by the view. Having an empty
+	 *   object results in no rendering, once the data arrives from the server then the object is
+	 *   populated with the data and the view automatically re-renders itself showing the new data. This
+	 *   means that in most cases one never has to write a callback function for the action methods.
+	 *
+	 *   The action methods on the class object or instance object can be invoked with the following
+	 *   parameters:
+	 *
+	 *   - HTTP GET "class" actions: `Resource.action([parameters], [success], [error])`
+	 *   - non-GET "class" actions: `Resource.action([parameters], postData, [success], [error])`
+	 *   - non-GET instance actions:  `instance.$action([parameters], [success], [error])`
+	 *
+	 *
+	 *   Success callback is called with (value, responseHeaders) arguments. Error callback is called
+	 *   with (httpResponse) argument.
+	 *
+	 *   Class actions return empty instance (with additional properties below).
+	 *   Instance actions return promise of the action.
+	 *
+	 *   The Resource instances and collection have these additional properties:
+	 *
+	 *   - `$promise`: the {@link ng.$q promise} of the original server interaction that created this
+	 *     instance or collection.
+	 *
+	 *     On success, the promise is resolved with the same resource instance or collection object,
+	 *     updated with data from server. This makes it easy to use in
+	 *     {@link ngRoute.$routeProvider resolve section of $routeProvider.when()} to defer view
+	 *     rendering until the resource(s) are loaded.
+	 *
+	 *     On failure, the promise is resolved with the {@link ng.$http http response} object, without
+	 *     the `resource` property.
+	 *
+	 *     If an interceptor object was provided, the promise will instead be resolved with the value
+	 *     returned by the interceptor.
+	 *
+	 *   - `$resolved`: `true` after first server interaction is completed (either with success or
+	 *      rejection), `false` before that. Knowing if the Resource has been resolved is useful in
+	 *      data-binding.
+	 *
+	 * @example
+	 *
+	 * # Credit card resource
+	 *
+	 * ```js
+	     // Define CreditCard class
+	     var CreditCard = $resource('/user/:userId/card/:cardId',
+	      {userId:123, cardId:'@id'}, {
+	       charge: {method:'POST', params:{charge:true}}
+	      });
+
+	     // We can retrieve a collection from the server
+	     var cards = CreditCard.query(function() {
+	       // GET: /user/123/card
+	       // server returns: [ {id:456, number:'1234', name:'Smith'} ];
+
+	       var card = cards[0];
+	       // each item is an instance of CreditCard
+	       expect(card instanceof CreditCard).toEqual(true);
+	       card.name = "J. Smith";
+	       // non GET methods are mapped onto the instances
+	       card.$save();
+	       // POST: /user/123/card/456 {id:456, number:'1234', name:'J. Smith'}
+	       // server returns: {id:456, number:'1234', name: 'J. Smith'};
+
+	       // our custom method is mapped as well.
+	       card.$charge({amount:9.99});
+	       // POST: /user/123/card/456?amount=9.99&charge=true {id:456, number:'1234', name:'J. Smith'}
+	     });
+
+	     // we can create an instance as well
+	     var newCard = new CreditCard({number:'0123'});
+	     newCard.name = "Mike Smith";
+	     newCard.$save();
+	     // POST: /user/123/card {number:'0123', name:'Mike Smith'}
+	     // server returns: {id:789, number:'0123', name: 'Mike Smith'};
+	     expect(newCard.id).toEqual(789);
+	 * ```
+	 *
+	 * The object returned from this function execution is a resource "class" which has "static" method
+	 * for each action in the definition.
+	 *
+	 * Calling these methods invoke `$http` on the `url` template with the given `method`, `params` and
+	 * `headers`.
+	 * When the data is returned from the server then the object is an instance of the resource type and
+	 * all of the non-GET methods are available with `$` prefix. This allows you to easily support CRUD
+	 * operations (create, read, update, delete) on server-side data.
+
+	   ```js
+	     var User = $resource('/user/:userId', {userId:'@id'});
+	     User.get({userId:123}, function(user) {
+	       user.abc = true;
+	       user.$save();
+	     });
+	   ```
+	 *
+	 * It's worth noting that the success callback for `get`, `query` and other methods gets passed
+	 * in the response that came from the server as well as $http header getter function, so one
+	 * could rewrite the above example and get access to http headers as:
+	 *
+	   ```js
+	     var User = $resource('/user/:userId', {userId:'@id'});
+	     User.get({userId:123}, function(u, getResponseHeaders){
+	       u.abc = true;
+	       u.$save(function(u, putResponseHeaders) {
+	         //u => saved user object
+	         //putResponseHeaders => $http header getter
+	       });
+	     });
+	   ```
+	 *
+	 * You can also access the raw `$http` promise via the `$promise` property on the object returned
+	 *
+	   ```
+	     var User = $resource('/user/:userId', {userId:'@id'});
+	     User.get({userId:123})
+	         .$promise.then(function(user) {
+	           $scope.user = user;
+	         });
+	   ```
+
+	 * # Creating a custom 'PUT' request
+	 * In this example we create a custom method on our resource to make a PUT request
+	 * ```js
+	 *    var app = angular.module('app', ['ngResource', 'ngRoute']);
+	 *
+	 *    // Some APIs expect a PUT request in the format URL/object/ID
+	 *    // Here we are creating an 'update' method
+	 *    app.factory('Notes', ['$resource', function($resource) {
+	 *    return $resource('/notes/:id', null,
+	 *        {
+	 *            'update': { method:'PUT' }
+	 *        });
+	 *    }]);
+	 *
+	 *    // In our controller we get the ID from the URL using ngRoute and $routeParams
+	 *    // We pass in $routeParams and our Notes factory along with $scope
+	 *    app.controller('NotesCtrl', ['$scope', '$routeParams', 'Notes',
+	                                      function($scope, $routeParams, Notes) {
+	 *    // First get a note object from the factory
+	 *    var note = Notes.get({ id:$routeParams.id });
+	 *    $id = note.id;
+	 *
+	 *    // Now call update passing in the ID first then the object you are updating
+	 *    Notes.update({ id:$id }, note);
+	 *
+	 *    // This will PUT /notes/ID with the note object in the request payload
+	 *    }]);
+	 * ```
+	 */
+	angular.module('ngResource', ['ng']).
+	  provider('$resource', function() {
+	    var provider = this;
+
+	    this.defaults = {
+	      // Strip slashes by default
+	      stripTrailingSlashes: true,
+
+	      // Default actions configuration
+	      actions: {
+	        'get': {method: 'GET'},
+	        'save': {method: 'POST'},
+	        'query': {method: 'GET', isArray: true},
+	        'remove': {method: 'DELETE'},
+	        'delete': {method: 'DELETE'}
+	      }
+	    };
+
+	    this.$get = ['$http', '$q', function($http, $q) {
+
+	      var noop = angular.noop,
+	        forEach = angular.forEach,
+	        extend = angular.extend,
+	        copy = angular.copy,
+	        isFunction = angular.isFunction;
+
+	      /**
+	       * We need our custom method because encodeURIComponent is too aggressive and doesn't follow
+	       * http://www.ietf.org/rfc/rfc3986.txt with regards to the character set
+	       * (pchar) allowed in path segments:
+	       *    segment       = *pchar
+	       *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
+	       *    pct-encoded   = "%" HEXDIG HEXDIG
+	       *    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+	       *    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+	       *                     / "*" / "+" / "," / ";" / "="
+	       */
+	      function encodeUriSegment(val) {
+	        return encodeUriQuery(val, true).
+	          replace(/%26/gi, '&').
+	          replace(/%3D/gi, '=').
+	          replace(/%2B/gi, '+');
+	      }
+
+
+	      /**
+	       * This method is intended for encoding *key* or *value* parts of query component. We need a
+	       * custom method because encodeURIComponent is too aggressive and encodes stuff that doesn't
+	       * have to be encoded per http://tools.ietf.org/html/rfc3986:
+	       *    query       = *( pchar / "/" / "?" )
+	       *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
+	       *    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+	       *    pct-encoded   = "%" HEXDIG HEXDIG
+	       *    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+	       *                     / "*" / "+" / "," / ";" / "="
+	       */
+	      function encodeUriQuery(val, pctEncodeSpaces) {
+	        return encodeURIComponent(val).
+	          replace(/%40/gi, '@').
+	          replace(/%3A/gi, ':').
+	          replace(/%24/g, '$').
+	          replace(/%2C/gi, ',').
+	          replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
+	      }
+
+	      function Route(template, defaults) {
+	        this.template = template;
+	        this.defaults = extend({}, provider.defaults, defaults);
+	        this.urlParams = {};
+	      }
+
+	      Route.prototype = {
+	        setUrlParams: function(config, params, actionUrl) {
+	          var self = this,
+	            url = actionUrl || self.template,
+	            val,
+	            encodedVal;
+
+	          var urlParams = self.urlParams = {};
+	          forEach(url.split(/\W/), function(param) {
+	            if (param === 'hasOwnProperty') {
+	              throw $resourceMinErr('badname', "hasOwnProperty is not a valid parameter name.");
+	            }
+	            if (!(new RegExp("^\\d+$").test(param)) && param &&
+	              (new RegExp("(^|[^\\\\]):" + param + "(\\W|$)").test(url))) {
+	              urlParams[param] = true;
+	            }
+	          });
+	          url = url.replace(/\\:/g, ':');
+
+	          params = params || {};
+	          forEach(self.urlParams, function(_, urlParam) {
+	            val = params.hasOwnProperty(urlParam) ? params[urlParam] : self.defaults[urlParam];
+	            if (angular.isDefined(val) && val !== null) {
+	              encodedVal = encodeUriSegment(val);
+	              url = url.replace(new RegExp(":" + urlParam + "(\\W|$)", "g"), function(match, p1) {
+	                return encodedVal + p1;
+	              });
+	            } else {
+	              url = url.replace(new RegExp("(\/?):" + urlParam + "(\\W|$)", "g"), function(match,
+	                  leadingSlashes, tail) {
+	                if (tail.charAt(0) == '/') {
+	                  return tail;
+	                } else {
+	                  return leadingSlashes + tail;
+	                }
+	              });
+	            }
+	          });
+
+	          // strip trailing slashes and set the url (unless this behavior is specifically disabled)
+	          if (self.defaults.stripTrailingSlashes) {
+	            url = url.replace(/\/+$/, '') || '/';
+	          }
+
+	          // then replace collapse `/.` if found in the last URL path segment before the query
+	          // E.g. `http://url.com/id./format?q=x` becomes `http://url.com/id.format?q=x`
+	          url = url.replace(/\/\.(?=\w+($|\?))/, '.');
+	          // replace escaped `/\.` with `/.`
+	          config.url = url.replace(/\/\\\./, '/.');
+
+
+	          // set params - delegate param encoding to $http
+	          forEach(params, function(value, key) {
+	            if (!self.urlParams[key]) {
+	              config.params = config.params || {};
+	              config.params[key] = value;
+	            }
+	          });
+	        }
+	      };
+
+
+	      function resourceFactory(url, paramDefaults, actions, options) {
+	        var route = new Route(url, options);
+
+	        actions = extend({}, provider.defaults.actions, actions);
+
+	        function extractParams(data, actionParams) {
+	          var ids = {};
+	          actionParams = extend({}, paramDefaults, actionParams);
+	          forEach(actionParams, function(value, key) {
+	            if (isFunction(value)) { value = value(); }
+	            ids[key] = value && value.charAt && value.charAt(0) == '@' ?
+	              lookupDottedPath(data, value.substr(1)) : value;
+	          });
+	          return ids;
+	        }
+
+	        function defaultResponseInterceptor(response) {
+	          return response.resource;
+	        }
+
+	        function Resource(value) {
+	          shallowClearAndCopy(value || {}, this);
+	        }
+
+	        Resource.prototype.toJSON = function() {
+	          var data = extend({}, this);
+	          delete data.$promise;
+	          delete data.$resolved;
+	          return data;
+	        };
+
+	        forEach(actions, function(action, name) {
+	          var hasBody = /^(POST|PUT|PATCH)$/i.test(action.method);
+
+	          Resource[name] = function(a1, a2, a3, a4) {
+	            var params = {}, data, success, error;
+
+	            /* jshint -W086 */ /* (purposefully fall through case statements) */
+	            switch (arguments.length) {
+	              case 4:
+	                error = a4;
+	                success = a3;
+	              //fallthrough
+	              case 3:
+	              case 2:
+	                if (isFunction(a2)) {
+	                  if (isFunction(a1)) {
+	                    success = a1;
+	                    error = a2;
+	                    break;
+	                  }
+
+	                  success = a2;
+	                  error = a3;
+	                  //fallthrough
+	                } else {
+	                  params = a1;
+	                  data = a2;
+	                  success = a3;
+	                  break;
+	                }
+	              case 1:
+	                if (isFunction(a1)) success = a1;
+	                else if (hasBody) data = a1;
+	                else params = a1;
+	                break;
+	              case 0: break;
+	              default:
+	                throw $resourceMinErr('badargs',
+	                  "Expected up to 4 arguments [params, data, success, error], got {0} arguments",
+	                  arguments.length);
+	            }
+	            /* jshint +W086 */ /* (purposefully fall through case statements) */
+
+	            var isInstanceCall = this instanceof Resource;
+	            var value = isInstanceCall ? data : (action.isArray ? [] : new Resource(data));
+	            var httpConfig = {};
+	            var responseInterceptor = action.interceptor && action.interceptor.response ||
+	              defaultResponseInterceptor;
+	            var responseErrorInterceptor = action.interceptor && action.interceptor.responseError ||
+	              undefined;
+
+	            forEach(action, function(value, key) {
+	              if (key != 'params' && key != 'isArray' && key != 'interceptor') {
+	                httpConfig[key] = copy(value);
+	              }
+	            });
+
+	            if (hasBody) httpConfig.data = data;
+	            route.setUrlParams(httpConfig,
+	              extend({}, extractParams(data, action.params || {}), params),
+	              action.url);
+
+	            var promise = $http(httpConfig).then(function(response) {
+	              var data = response.data,
+	                promise = value.$promise;
+
+	              if (data) {
+	                // Need to convert action.isArray to boolean in case it is undefined
+	                // jshint -W018
+	                if (angular.isArray(data) !== (!!action.isArray)) {
+	                  throw $resourceMinErr('badcfg',
+	                      'Error in resource configuration for action `{0}`. Expected response to ' +
+	                      'contain an {1} but got an {2}', name, action.isArray ? 'array' : 'object',
+	                    angular.isArray(data) ? 'array' : 'object');
+	                }
+	                // jshint +W018
+	                if (action.isArray) {
+	                  value.length = 0;
+	                  forEach(data, function(item) {
+	                    if (typeof item === "object") {
+	                      value.push(new Resource(item));
+	                    } else {
+	                      // Valid JSON values may be string literals, and these should not be converted
+	                      // into objects. These items will not have access to the Resource prototype
+	                      // methods, but unfortunately there
+	                      value.push(item);
+	                    }
+	                  });
+	                } else {
+	                  shallowClearAndCopy(data, value);
+	                  value.$promise = promise;
+	                }
+	              }
+
+	              value.$resolved = true;
+
+	              response.resource = value;
+
+	              return response;
+	            }, function(response) {
+	              value.$resolved = true;
+
+	              (error || noop)(response);
+
+	              return $q.reject(response);
+	            });
+
+	            promise = promise.then(
+	              function(response) {
+	                var value = responseInterceptor(response);
+	                (success || noop)(value, response.headers);
+	                return value;
+	              },
+	              responseErrorInterceptor);
+
+	            if (!isInstanceCall) {
+	              // we are creating instance / collection
+	              // - set the initial promise
+	              // - return the instance / collection
+	              value.$promise = promise;
+	              value.$resolved = false;
+
+	              return value;
+	            }
+
+	            // instance call
+	            return promise;
+	          };
+
+
+	          Resource.prototype['$' + name] = function(params, success, error) {
+	            if (isFunction(params)) {
+	              error = success; success = params; params = {};
+	            }
+	            var result = Resource[name].call(this, params, this, success, error);
+	            return result.$promise || result;
+	          };
+	        });
+
+	        Resource.bind = function(additionalParamDefaults) {
+	          return resourceFactory(url, extend({}, paramDefaults, additionalParamDefaults), actions);
+	        };
+
+	        return Resource;
+	      }
+
+	      return resourceFactory;
+	    }];
+	  });
+
+
+	})(window, window.angular);
+
+
+	/*** EXPORTS FROM exports-loader ***/
+	module.exports = angular
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32839,683 +33516,6 @@
 	module.exports = angular
 
 /***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @license AngularJS v1.4.0-beta.6
-	 * (c) 2010-2015 Google, Inc. http://angularjs.org
-	 * License: MIT
-	 */
-	(function(window, angular, undefined) {'use strict';
-
-	var $resourceMinErr = angular.$$minErr('$resource');
-
-	// Helper functions and regex to lookup a dotted path on an object
-	// stopping at undefined/null.  The path must be composed of ASCII
-	// identifiers (just like $parse)
-	var MEMBER_NAME_REGEX = /^(\.[a-zA-Z_$][0-9a-zA-Z_$]*)+$/;
-
-	function isValidDottedPath(path) {
-	  return (path != null && path !== '' && path !== 'hasOwnProperty' &&
-	      MEMBER_NAME_REGEX.test('.' + path));
-	}
-
-	function lookupDottedPath(obj, path) {
-	  if (!isValidDottedPath(path)) {
-	    throw $resourceMinErr('badmember', 'Dotted member path "@{0}" is invalid.', path);
-	  }
-	  var keys = path.split('.');
-	  for (var i = 0, ii = keys.length; i < ii && obj !== undefined; i++) {
-	    var key = keys[i];
-	    obj = (obj !== null) ? obj[key] : undefined;
-	  }
-	  return obj;
-	}
-
-	/**
-	 * Create a shallow copy of an object and clear other fields from the destination
-	 */
-	function shallowClearAndCopy(src, dst) {
-	  dst = dst || {};
-
-	  angular.forEach(dst, function(value, key) {
-	    delete dst[key];
-	  });
-
-	  for (var key in src) {
-	    if (src.hasOwnProperty(key) && !(key.charAt(0) === '$' && key.charAt(1) === '$')) {
-	      dst[key] = src[key];
-	    }
-	  }
-
-	  return dst;
-	}
-
-	/**
-	 * @ngdoc module
-	 * @name ngResource
-	 * @description
-	 *
-	 * # ngResource
-	 *
-	 * The `ngResource` module provides interaction support with RESTful services
-	 * via the $resource service.
-	 *
-	 *
-	 * <div doc-module-components="ngResource"></div>
-	 *
-	 * See {@link ngResource.$resource `$resource`} for usage.
-	 */
-
-	/**
-	 * @ngdoc service
-	 * @name $resource
-	 * @requires $http
-	 *
-	 * @description
-	 * A factory which creates a resource object that lets you interact with
-	 * [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) server-side data sources.
-	 *
-	 * The returned resource object has action methods which provide high-level behaviors without
-	 * the need to interact with the low level {@link ng.$http $http} service.
-	 *
-	 * Requires the {@link ngResource `ngResource`} module to be installed.
-	 *
-	 * By default, trailing slashes will be stripped from the calculated URLs,
-	 * which can pose problems with server backends that do not expect that
-	 * behavior.  This can be disabled by configuring the `$resourceProvider` like
-	 * this:
-	 *
-	 * ```js
-	     app.config(['$resourceProvider', function($resourceProvider) {
-	       // Don't strip trailing slashes from calculated URLs
-	       $resourceProvider.defaults.stripTrailingSlashes = false;
-	     }]);
-	 * ```
-	 *
-	 * @param {string} url A parameterized URL template with parameters prefixed by `:` as in
-	 *   `/user/:username`. If you are using a URL with a port number (e.g.
-	 *   `http://example.com:8080/api`), it will be respected.
-	 *
-	 *   If you are using a url with a suffix, just add the suffix, like this:
-	 *   `$resource('http://example.com/resource.json')` or `$resource('http://example.com/:id.json')`
-	 *   or even `$resource('http://example.com/resource/:resource_id.:format')`
-	 *   If the parameter before the suffix is empty, :resource_id in this case, then the `/.` will be
-	 *   collapsed down to a single `.`.  If you need this sequence to appear and not collapse then you
-	 *   can escape it with `/\.`.
-	 *
-	 * @param {Object=} paramDefaults Default values for `url` parameters. These can be overridden in
-	 *   `actions` methods. If any of the parameter value is a function, it will be executed every time
-	 *   when a param value needs to be obtained for a request (unless the param was overridden).
-	 *
-	 *   Each key value in the parameter object is first bound to url template if present and then any
-	 *   excess keys are appended to the url search query after the `?`.
-	 *
-	 *   Given a template `/path/:verb` and parameter `{verb:'greet', salutation:'Hello'}` results in
-	 *   URL `/path/greet?salutation=Hello`.
-	 *
-	 *   If the parameter value is prefixed with `@` then the value for that parameter will be extracted
-	 *   from the corresponding property on the `data` object (provided when calling an action method).  For
-	 *   example, if the `defaultParam` object is `{someParam: '@someProp'}` then the value of `someParam`
-	 *   will be `data.someProp`.
-	 *
-	 * @param {Object.<Object>=} actions Hash with declaration of custom actions that should extend
-	 *   the default set of resource actions. The declaration should be created in the format of {@link
-	 *   ng.$http#usage $http.config}:
-	 *
-	 *       {action1: {method:?, params:?, isArray:?, headers:?, ...},
-	 *        action2: {method:?, params:?, isArray:?, headers:?, ...},
-	 *        ...}
-	 *
-	 *   Where:
-	 *
-	 *   - **`action`** – {string} – The name of action. This name becomes the name of the method on
-	 *     your resource object.
-	 *   - **`method`** – {string} – Case insensitive HTTP method (e.g. `GET`, `POST`, `PUT`,
-	 *     `DELETE`, `JSONP`, etc).
-	 *   - **`params`** – {Object=} – Optional set of pre-bound parameters for this action. If any of
-	 *     the parameter value is a function, it will be executed every time when a param value needs to
-	 *     be obtained for a request (unless the param was overridden).
-	 *   - **`url`** – {string} – action specific `url` override. The url templating is supported just
-	 *     like for the resource-level urls.
-	 *   - **`isArray`** – {boolean=} – If true then the returned object for this action is an array,
-	 *     see `returns` section.
-	 *   - **`transformRequest`** –
-	 *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
-	 *     transform function or an array of such functions. The transform function takes the http
-	 *     request body and headers and returns its transformed (typically serialized) version.
-	 *     By default, transformRequest will contain one function that checks if the request data is
-	 *     an object and serializes to using `angular.toJson`. To prevent this behavior, set
-	 *     `transformRequest` to an empty array: `transformRequest: []`
-	 *   - **`transformResponse`** –
-	 *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
-	 *     transform function or an array of such functions. The transform function takes the http
-	 *     response body and headers and returns its transformed (typically deserialized) version.
-	 *     By default, transformResponse will contain one function that checks if the response looks like
-	 *     a JSON string and deserializes it using `angular.fromJson`. To prevent this behavior, set
-	 *     `transformResponse` to an empty array: `transformResponse: []`
-	 *   - **`cache`** – `{boolean|Cache}` – If true, a default $http cache will be used to cache the
-	 *     GET request, otherwise if a cache instance built with
-	 *     {@link ng.$cacheFactory $cacheFactory}, this cache will be used for
-	 *     caching.
-	 *   - **`timeout`** – `{number|Promise}` – timeout in milliseconds, or {@link ng.$q promise} that
-	 *     should abort the request when resolved.
-	 *   - **`withCredentials`** - `{boolean}` - whether to set the `withCredentials` flag on the
-	 *     XHR object. See
-	 *     [requests with credentials](https://developer.mozilla.org/en/http_access_control#section_5)
-	 *     for more information.
-	 *   - **`responseType`** - `{string}` - see
-	 *     [requestType](https://developer.mozilla.org/en-US/docs/DOM/XMLHttpRequest#responseType).
-	 *   - **`interceptor`** - `{Object=}` - The interceptor object has two optional methods -
-	 *     `response` and `responseError`. Both `response` and `responseError` interceptors get called
-	 *     with `http response` object. See {@link ng.$http $http interceptors}.
-	 *
-	 * @param {Object} options Hash with custom settings that should extend the
-	 *   default `$resourceProvider` behavior.  The only supported option is
-	 *
-	 *   Where:
-	 *
-	 *   - **`stripTrailingSlashes`** – {boolean} – If true then the trailing
-	 *   slashes from any calculated URL will be stripped. (Defaults to true.)
-	 *
-	 * @returns {Object} A resource "class" object with methods for the default set of resource actions
-	 *   optionally extended with custom `actions`. The default set contains these actions:
-	 *   ```js
-	 *   { 'get':    {method:'GET'},
-	 *     'save':   {method:'POST'},
-	 *     'query':  {method:'GET', isArray:true},
-	 *     'remove': {method:'DELETE'},
-	 *     'delete': {method:'DELETE'} };
-	 *   ```
-	 *
-	 *   Calling these methods invoke an {@link ng.$http} with the specified http method,
-	 *   destination and parameters. When the data is returned from the server then the object is an
-	 *   instance of the resource class. The actions `save`, `remove` and `delete` are available on it
-	 *   as  methods with the `$` prefix. This allows you to easily perform CRUD operations (create,
-	 *   read, update, delete) on server-side data like this:
-	 *   ```js
-	 *   var User = $resource('/user/:userId', {userId:'@id'});
-	 *   var user = User.get({userId:123}, function() {
-	 *     user.abc = true;
-	 *     user.$save();
-	 *   });
-	 *   ```
-	 *
-	 *   It is important to realize that invoking a $resource object method immediately returns an
-	 *   empty reference (object or array depending on `isArray`). Once the data is returned from the
-	 *   server the existing reference is populated with the actual data. This is a useful trick since
-	 *   usually the resource is assigned to a model which is then rendered by the view. Having an empty
-	 *   object results in no rendering, once the data arrives from the server then the object is
-	 *   populated with the data and the view automatically re-renders itself showing the new data. This
-	 *   means that in most cases one never has to write a callback function for the action methods.
-	 *
-	 *   The action methods on the class object or instance object can be invoked with the following
-	 *   parameters:
-	 *
-	 *   - HTTP GET "class" actions: `Resource.action([parameters], [success], [error])`
-	 *   - non-GET "class" actions: `Resource.action([parameters], postData, [success], [error])`
-	 *   - non-GET instance actions:  `instance.$action([parameters], [success], [error])`
-	 *
-	 *
-	 *   Success callback is called with (value, responseHeaders) arguments. Error callback is called
-	 *   with (httpResponse) argument.
-	 *
-	 *   Class actions return empty instance (with additional properties below).
-	 *   Instance actions return promise of the action.
-	 *
-	 *   The Resource instances and collection have these additional properties:
-	 *
-	 *   - `$promise`: the {@link ng.$q promise} of the original server interaction that created this
-	 *     instance or collection.
-	 *
-	 *     On success, the promise is resolved with the same resource instance or collection object,
-	 *     updated with data from server. This makes it easy to use in
-	 *     {@link ngRoute.$routeProvider resolve section of $routeProvider.when()} to defer view
-	 *     rendering until the resource(s) are loaded.
-	 *
-	 *     On failure, the promise is resolved with the {@link ng.$http http response} object, without
-	 *     the `resource` property.
-	 *
-	 *     If an interceptor object was provided, the promise will instead be resolved with the value
-	 *     returned by the interceptor.
-	 *
-	 *   - `$resolved`: `true` after first server interaction is completed (either with success or
-	 *      rejection), `false` before that. Knowing if the Resource has been resolved is useful in
-	 *      data-binding.
-	 *
-	 * @example
-	 *
-	 * # Credit card resource
-	 *
-	 * ```js
-	     // Define CreditCard class
-	     var CreditCard = $resource('/user/:userId/card/:cardId',
-	      {userId:123, cardId:'@id'}, {
-	       charge: {method:'POST', params:{charge:true}}
-	      });
-
-	     // We can retrieve a collection from the server
-	     var cards = CreditCard.query(function() {
-	       // GET: /user/123/card
-	       // server returns: [ {id:456, number:'1234', name:'Smith'} ];
-
-	       var card = cards[0];
-	       // each item is an instance of CreditCard
-	       expect(card instanceof CreditCard).toEqual(true);
-	       card.name = "J. Smith";
-	       // non GET methods are mapped onto the instances
-	       card.$save();
-	       // POST: /user/123/card/456 {id:456, number:'1234', name:'J. Smith'}
-	       // server returns: {id:456, number:'1234', name: 'J. Smith'};
-
-	       // our custom method is mapped as well.
-	       card.$charge({amount:9.99});
-	       // POST: /user/123/card/456?amount=9.99&charge=true {id:456, number:'1234', name:'J. Smith'}
-	     });
-
-	     // we can create an instance as well
-	     var newCard = new CreditCard({number:'0123'});
-	     newCard.name = "Mike Smith";
-	     newCard.$save();
-	     // POST: /user/123/card {number:'0123', name:'Mike Smith'}
-	     // server returns: {id:789, number:'0123', name: 'Mike Smith'};
-	     expect(newCard.id).toEqual(789);
-	 * ```
-	 *
-	 * The object returned from this function execution is a resource "class" which has "static" method
-	 * for each action in the definition.
-	 *
-	 * Calling these methods invoke `$http` on the `url` template with the given `method`, `params` and
-	 * `headers`.
-	 * When the data is returned from the server then the object is an instance of the resource type and
-	 * all of the non-GET methods are available with `$` prefix. This allows you to easily support CRUD
-	 * operations (create, read, update, delete) on server-side data.
-
-	   ```js
-	     var User = $resource('/user/:userId', {userId:'@id'});
-	     User.get({userId:123}, function(user) {
-	       user.abc = true;
-	       user.$save();
-	     });
-	   ```
-	 *
-	 * It's worth noting that the success callback for `get`, `query` and other methods gets passed
-	 * in the response that came from the server as well as $http header getter function, so one
-	 * could rewrite the above example and get access to http headers as:
-	 *
-	   ```js
-	     var User = $resource('/user/:userId', {userId:'@id'});
-	     User.get({userId:123}, function(u, getResponseHeaders){
-	       u.abc = true;
-	       u.$save(function(u, putResponseHeaders) {
-	         //u => saved user object
-	         //putResponseHeaders => $http header getter
-	       });
-	     });
-	   ```
-	 *
-	 * You can also access the raw `$http` promise via the `$promise` property on the object returned
-	 *
-	   ```
-	     var User = $resource('/user/:userId', {userId:'@id'});
-	     User.get({userId:123})
-	         .$promise.then(function(user) {
-	           $scope.user = user;
-	         });
-	   ```
-
-	 * # Creating a custom 'PUT' request
-	 * In this example we create a custom method on our resource to make a PUT request
-	 * ```js
-	 *    var app = angular.module('app', ['ngResource', 'ngRoute']);
-	 *
-	 *    // Some APIs expect a PUT request in the format URL/object/ID
-	 *    // Here we are creating an 'update' method
-	 *    app.factory('Notes', ['$resource', function($resource) {
-	 *    return $resource('/notes/:id', null,
-	 *        {
-	 *            'update': { method:'PUT' }
-	 *        });
-	 *    }]);
-	 *
-	 *    // In our controller we get the ID from the URL using ngRoute and $routeParams
-	 *    // We pass in $routeParams and our Notes factory along with $scope
-	 *    app.controller('NotesCtrl', ['$scope', '$routeParams', 'Notes',
-	                                      function($scope, $routeParams, Notes) {
-	 *    // First get a note object from the factory
-	 *    var note = Notes.get({ id:$routeParams.id });
-	 *    $id = note.id;
-	 *
-	 *    // Now call update passing in the ID first then the object you are updating
-	 *    Notes.update({ id:$id }, note);
-	 *
-	 *    // This will PUT /notes/ID with the note object in the request payload
-	 *    }]);
-	 * ```
-	 */
-	angular.module('ngResource', ['ng']).
-	  provider('$resource', function() {
-	    var provider = this;
-
-	    this.defaults = {
-	      // Strip slashes by default
-	      stripTrailingSlashes: true,
-
-	      // Default actions configuration
-	      actions: {
-	        'get': {method: 'GET'},
-	        'save': {method: 'POST'},
-	        'query': {method: 'GET', isArray: true},
-	        'remove': {method: 'DELETE'},
-	        'delete': {method: 'DELETE'}
-	      }
-	    };
-
-	    this.$get = ['$http', '$q', function($http, $q) {
-
-	      var noop = angular.noop,
-	        forEach = angular.forEach,
-	        extend = angular.extend,
-	        copy = angular.copy,
-	        isFunction = angular.isFunction;
-
-	      /**
-	       * We need our custom method because encodeURIComponent is too aggressive and doesn't follow
-	       * http://www.ietf.org/rfc/rfc3986.txt with regards to the character set
-	       * (pchar) allowed in path segments:
-	       *    segment       = *pchar
-	       *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
-	       *    pct-encoded   = "%" HEXDIG HEXDIG
-	       *    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
-	       *    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
-	       *                     / "*" / "+" / "," / ";" / "="
-	       */
-	      function encodeUriSegment(val) {
-	        return encodeUriQuery(val, true).
-	          replace(/%26/gi, '&').
-	          replace(/%3D/gi, '=').
-	          replace(/%2B/gi, '+');
-	      }
-
-
-	      /**
-	       * This method is intended for encoding *key* or *value* parts of query component. We need a
-	       * custom method because encodeURIComponent is too aggressive and encodes stuff that doesn't
-	       * have to be encoded per http://tools.ietf.org/html/rfc3986:
-	       *    query       = *( pchar / "/" / "?" )
-	       *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
-	       *    unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
-	       *    pct-encoded   = "%" HEXDIG HEXDIG
-	       *    sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
-	       *                     / "*" / "+" / "," / ";" / "="
-	       */
-	      function encodeUriQuery(val, pctEncodeSpaces) {
-	        return encodeURIComponent(val).
-	          replace(/%40/gi, '@').
-	          replace(/%3A/gi, ':').
-	          replace(/%24/g, '$').
-	          replace(/%2C/gi, ',').
-	          replace(/%20/g, (pctEncodeSpaces ? '%20' : '+'));
-	      }
-
-	      function Route(template, defaults) {
-	        this.template = template;
-	        this.defaults = extend({}, provider.defaults, defaults);
-	        this.urlParams = {};
-	      }
-
-	      Route.prototype = {
-	        setUrlParams: function(config, params, actionUrl) {
-	          var self = this,
-	            url = actionUrl || self.template,
-	            val,
-	            encodedVal;
-
-	          var urlParams = self.urlParams = {};
-	          forEach(url.split(/\W/), function(param) {
-	            if (param === 'hasOwnProperty') {
-	              throw $resourceMinErr('badname', "hasOwnProperty is not a valid parameter name.");
-	            }
-	            if (!(new RegExp("^\\d+$").test(param)) && param &&
-	              (new RegExp("(^|[^\\\\]):" + param + "(\\W|$)").test(url))) {
-	              urlParams[param] = true;
-	            }
-	          });
-	          url = url.replace(/\\:/g, ':');
-
-	          params = params || {};
-	          forEach(self.urlParams, function(_, urlParam) {
-	            val = params.hasOwnProperty(urlParam) ? params[urlParam] : self.defaults[urlParam];
-	            if (angular.isDefined(val) && val !== null) {
-	              encodedVal = encodeUriSegment(val);
-	              url = url.replace(new RegExp(":" + urlParam + "(\\W|$)", "g"), function(match, p1) {
-	                return encodedVal + p1;
-	              });
-	            } else {
-	              url = url.replace(new RegExp("(\/?):" + urlParam + "(\\W|$)", "g"), function(match,
-	                  leadingSlashes, tail) {
-	                if (tail.charAt(0) == '/') {
-	                  return tail;
-	                } else {
-	                  return leadingSlashes + tail;
-	                }
-	              });
-	            }
-	          });
-
-	          // strip trailing slashes and set the url (unless this behavior is specifically disabled)
-	          if (self.defaults.stripTrailingSlashes) {
-	            url = url.replace(/\/+$/, '') || '/';
-	          }
-
-	          // then replace collapse `/.` if found in the last URL path segment before the query
-	          // E.g. `http://url.com/id./format?q=x` becomes `http://url.com/id.format?q=x`
-	          url = url.replace(/\/\.(?=\w+($|\?))/, '.');
-	          // replace escaped `/\.` with `/.`
-	          config.url = url.replace(/\/\\\./, '/.');
-
-
-	          // set params - delegate param encoding to $http
-	          forEach(params, function(value, key) {
-	            if (!self.urlParams[key]) {
-	              config.params = config.params || {};
-	              config.params[key] = value;
-	            }
-	          });
-	        }
-	      };
-
-
-	      function resourceFactory(url, paramDefaults, actions, options) {
-	        var route = new Route(url, options);
-
-	        actions = extend({}, provider.defaults.actions, actions);
-
-	        function extractParams(data, actionParams) {
-	          var ids = {};
-	          actionParams = extend({}, paramDefaults, actionParams);
-	          forEach(actionParams, function(value, key) {
-	            if (isFunction(value)) { value = value(); }
-	            ids[key] = value && value.charAt && value.charAt(0) == '@' ?
-	              lookupDottedPath(data, value.substr(1)) : value;
-	          });
-	          return ids;
-	        }
-
-	        function defaultResponseInterceptor(response) {
-	          return response.resource;
-	        }
-
-	        function Resource(value) {
-	          shallowClearAndCopy(value || {}, this);
-	        }
-
-	        Resource.prototype.toJSON = function() {
-	          var data = extend({}, this);
-	          delete data.$promise;
-	          delete data.$resolved;
-	          return data;
-	        };
-
-	        forEach(actions, function(action, name) {
-	          var hasBody = /^(POST|PUT|PATCH)$/i.test(action.method);
-
-	          Resource[name] = function(a1, a2, a3, a4) {
-	            var params = {}, data, success, error;
-
-	            /* jshint -W086 */ /* (purposefully fall through case statements) */
-	            switch (arguments.length) {
-	              case 4:
-	                error = a4;
-	                success = a3;
-	              //fallthrough
-	              case 3:
-	              case 2:
-	                if (isFunction(a2)) {
-	                  if (isFunction(a1)) {
-	                    success = a1;
-	                    error = a2;
-	                    break;
-	                  }
-
-	                  success = a2;
-	                  error = a3;
-	                  //fallthrough
-	                } else {
-	                  params = a1;
-	                  data = a2;
-	                  success = a3;
-	                  break;
-	                }
-	              case 1:
-	                if (isFunction(a1)) success = a1;
-	                else if (hasBody) data = a1;
-	                else params = a1;
-	                break;
-	              case 0: break;
-	              default:
-	                throw $resourceMinErr('badargs',
-	                  "Expected up to 4 arguments [params, data, success, error], got {0} arguments",
-	                  arguments.length);
-	            }
-	            /* jshint +W086 */ /* (purposefully fall through case statements) */
-
-	            var isInstanceCall = this instanceof Resource;
-	            var value = isInstanceCall ? data : (action.isArray ? [] : new Resource(data));
-	            var httpConfig = {};
-	            var responseInterceptor = action.interceptor && action.interceptor.response ||
-	              defaultResponseInterceptor;
-	            var responseErrorInterceptor = action.interceptor && action.interceptor.responseError ||
-	              undefined;
-
-	            forEach(action, function(value, key) {
-	              if (key != 'params' && key != 'isArray' && key != 'interceptor') {
-	                httpConfig[key] = copy(value);
-	              }
-	            });
-
-	            if (hasBody) httpConfig.data = data;
-	            route.setUrlParams(httpConfig,
-	              extend({}, extractParams(data, action.params || {}), params),
-	              action.url);
-
-	            var promise = $http(httpConfig).then(function(response) {
-	              var data = response.data,
-	                promise = value.$promise;
-
-	              if (data) {
-	                // Need to convert action.isArray to boolean in case it is undefined
-	                // jshint -W018
-	                if (angular.isArray(data) !== (!!action.isArray)) {
-	                  throw $resourceMinErr('badcfg',
-	                      'Error in resource configuration for action `{0}`. Expected response to ' +
-	                      'contain an {1} but got an {2}', name, action.isArray ? 'array' : 'object',
-	                    angular.isArray(data) ? 'array' : 'object');
-	                }
-	                // jshint +W018
-	                if (action.isArray) {
-	                  value.length = 0;
-	                  forEach(data, function(item) {
-	                    if (typeof item === "object") {
-	                      value.push(new Resource(item));
-	                    } else {
-	                      // Valid JSON values may be string literals, and these should not be converted
-	                      // into objects. These items will not have access to the Resource prototype
-	                      // methods, but unfortunately there
-	                      value.push(item);
-	                    }
-	                  });
-	                } else {
-	                  shallowClearAndCopy(data, value);
-	                  value.$promise = promise;
-	                }
-	              }
-
-	              value.$resolved = true;
-
-	              response.resource = value;
-
-	              return response;
-	            }, function(response) {
-	              value.$resolved = true;
-
-	              (error || noop)(response);
-
-	              return $q.reject(response);
-	            });
-
-	            promise = promise.then(
-	              function(response) {
-	                var value = responseInterceptor(response);
-	                (success || noop)(value, response.headers);
-	                return value;
-	              },
-	              responseErrorInterceptor);
-
-	            if (!isInstanceCall) {
-	              // we are creating instance / collection
-	              // - set the initial promise
-	              // - return the instance / collection
-	              value.$promise = promise;
-	              value.$resolved = false;
-
-	              return value;
-	            }
-
-	            // instance call
-	            return promise;
-	          };
-
-
-	          Resource.prototype['$' + name] = function(params, success, error) {
-	            if (isFunction(params)) {
-	              error = success; success = params; params = {};
-	            }
-	            var result = Resource[name].call(this, params, this, success, error);
-	            return result.$promise || result;
-	          };
-	        });
-
-	        Resource.bind = function(additionalParamDefaults) {
-	          return resourceFactory(url, extend({}, paramDefaults, additionalParamDefaults), actions);
-	        };
-
-	        return Resource;
-	      }
-
-	      return resourceFactory;
-	    }];
-	  });
-
-
-	})(window, window.angular);
-
-
-	/*** EXPORTS FROM exports-loader ***/
-	module.exports = angular
-
-/***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -34205,6 +34205,339 @@
 
 /***/ },
 /* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*! 
+	 * angular-loading-bar v0.7.1
+	 * https://chieffancypants.github.io/angular-loading-bar
+	 * Copyright (c) 2015 Wes Cruver
+	 * License: MIT
+	 */
+	/*
+	 * angular-loading-bar
+	 *
+	 * intercepts XHR requests and creates a loading bar.
+	 * Based on the excellent nprogress work by rstacruz (more info in readme)
+	 *
+	 * (c) 2013 Wes Cruver
+	 * License: MIT
+	 */
+
+
+	(function() {
+
+	'use strict';
+
+	// Alias the loading bar for various backwards compatibilities since the project has matured:
+	angular.module('angular-loading-bar', ['cfp.loadingBarInterceptor']);
+	angular.module('chieffancypants.loadingBar', ['cfp.loadingBarInterceptor']);
+
+
+	/**
+	 * loadingBarInterceptor service
+	 *
+	 * Registers itself as an Angular interceptor and listens for XHR requests.
+	 */
+	angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
+	  .config(['$httpProvider', function ($httpProvider) {
+
+	    var interceptor = ['$q', '$cacheFactory', '$timeout', '$rootScope', '$log', 'cfpLoadingBar', function ($q, $cacheFactory, $timeout, $rootScope, $log, cfpLoadingBar) {
+
+	      /**
+	       * The total number of requests made
+	       */
+	      var reqsTotal = 0;
+
+	      /**
+	       * The number of requests completed (either successfully or not)
+	       */
+	      var reqsCompleted = 0;
+
+	      /**
+	       * The amount of time spent fetching before showing the loading bar
+	       */
+	      var latencyThreshold = cfpLoadingBar.latencyThreshold;
+
+	      /**
+	       * $timeout handle for latencyThreshold
+	       */
+	      var startTimeout;
+
+
+	      /**
+	       * calls cfpLoadingBar.complete() which removes the
+	       * loading bar from the DOM.
+	       */
+	      function setComplete() {
+	        $timeout.cancel(startTimeout);
+	        cfpLoadingBar.complete();
+	        reqsCompleted = 0;
+	        reqsTotal = 0;
+	      }
+
+	      /**
+	       * Determine if the response has already been cached
+	       * @param  {Object}  config the config option from the request
+	       * @return {Boolean} retrns true if cached, otherwise false
+	       */
+	      function isCached(config) {
+	        var cache;
+	        var defaultCache = $cacheFactory.get('$http');
+	        var defaults = $httpProvider.defaults;
+
+	        // Choose the proper cache source. Borrowed from angular: $http service
+	        if ((config.cache || defaults.cache) && config.cache !== false &&
+	          (config.method === 'GET' || config.method === 'JSONP')) {
+	            cache = angular.isObject(config.cache) ? config.cache
+	              : angular.isObject(defaults.cache) ? defaults.cache
+	              : defaultCache;
+	        }
+
+	        var cached = cache !== undefined ?
+	          cache.get(config.url) !== undefined : false;
+
+	        if (config.cached !== undefined && cached !== config.cached) {
+	          return config.cached;
+	        }
+	        config.cached = cached;
+	        return cached;
+	      }
+
+
+	      return {
+	        'request': function(config) {
+	          // Check to make sure this request hasn't already been cached and that
+	          // the requester didn't explicitly ask us to ignore this request:
+	          if (!config.ignoreLoadingBar && !isCached(config)) {
+	            $rootScope.$broadcast('cfpLoadingBar:loading', {url: config.url});
+	            if (reqsTotal === 0) {
+	              startTimeout = $timeout(function() {
+	                cfpLoadingBar.start();
+	              }, latencyThreshold);
+	            }
+	            reqsTotal++;
+	            cfpLoadingBar.set(reqsCompleted / reqsTotal);
+	          }
+	          return config;
+	        },
+
+	        'response': function(response) {
+	          if (!response || !response.config) {
+	            $log.error('Broken interceptor detected: Config object not supplied in response:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
+	            return response;
+	          }
+
+	          if (!response.config.ignoreLoadingBar && !isCached(response.config)) {
+	            reqsCompleted++;
+	            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: response.config.url, result: response});
+	            if (reqsCompleted >= reqsTotal) {
+	              setComplete();
+	            } else {
+	              cfpLoadingBar.set(reqsCompleted / reqsTotal);
+	            }
+	          }
+	          return response;
+	        },
+
+	        'responseError': function(rejection) {
+	          if (!rejection || !rejection.config) {
+	            $log.error('Broken interceptor detected: Config object not supplied in rejection:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
+	            return $q.reject(rejection);
+	          }
+
+	          if (!rejection.config.ignoreLoadingBar && !isCached(rejection.config)) {
+	            reqsCompleted++;
+	            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: rejection.config.url, result: rejection});
+	            if (reqsCompleted >= reqsTotal) {
+	              setComplete();
+	            } else {
+	              cfpLoadingBar.set(reqsCompleted / reqsTotal);
+	            }
+	          }
+	          return $q.reject(rejection);
+	        }
+	      };
+	    }];
+
+	    $httpProvider.interceptors.push(interceptor);
+	  }]);
+
+
+	/**
+	 * Loading Bar
+	 *
+	 * This service handles adding and removing the actual element in the DOM.
+	 * Generally, best practices for DOM manipulation is to take place in a
+	 * directive, but because the element itself is injected in the DOM only upon
+	 * XHR requests, and it's likely needed on every view, the best option is to
+	 * use a service.
+	 */
+	angular.module('cfp.loadingBar', [])
+	  .provider('cfpLoadingBar', function() {
+
+	    this.includeSpinner = true;
+	    this.includeBar = true;
+	    this.latencyThreshold = 100;
+	    this.startSize = 0.02;
+	    this.parentSelector = 'body';
+	    this.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>';
+	    this.loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
+
+	    this.$get = ['$injector', '$document', '$timeout', '$rootScope', function ($injector, $document, $timeout, $rootScope) {
+	      var $animate;
+	      var $parentSelector = this.parentSelector,
+	        loadingBarContainer = angular.element(this.loadingBarTemplate),
+	        loadingBar = loadingBarContainer.find('div').eq(0),
+	        spinner = angular.element(this.spinnerTemplate);
+
+	      var incTimeout,
+	        completeTimeout,
+	        started = false,
+	        status = 0;
+
+	      var includeSpinner = this.includeSpinner;
+	      var includeBar = this.includeBar;
+	      var startSize = this.startSize;
+
+	      /**
+	       * Inserts the loading bar element into the dom, and sets it to 2%
+	       */
+	      function _start() {
+	        if (!$animate) {
+	          $animate = $injector.get('$animate');
+	        }
+
+	        var $parent = $document.find($parentSelector).eq(0);
+	        $timeout.cancel(completeTimeout);
+
+	        // do not continually broadcast the started event:
+	        if (started) {
+	          return;
+	        }
+
+	        $rootScope.$broadcast('cfpLoadingBar:started');
+	        started = true;
+
+	        if (includeBar) {
+	          $animate.enter(loadingBarContainer, $parent, angular.element($parent[0].lastChild));
+	        }
+
+	        if (includeSpinner) {
+	          $animate.enter(spinner, $parent, angular.element($parent[0].lastChild));
+	        }
+
+	        _set(startSize);
+	      }
+
+	      /**
+	       * Set the loading bar's width to a certain percent.
+	       *
+	       * @param n any value between 0 and 1
+	       */
+	      function _set(n) {
+	        if (!started) {
+	          return;
+	        }
+	        var pct = (n * 100) + '%';
+	        loadingBar.css('width', pct);
+	        status = n;
+
+	        // increment loadingbar to give the illusion that there is always
+	        // progress but make sure to cancel the previous timeouts so we don't
+	        // have multiple incs running at the same time.
+	        $timeout.cancel(incTimeout);
+	        incTimeout = $timeout(function() {
+	          _inc();
+	        }, 250);
+	      }
+
+	      /**
+	       * Increments the loading bar by a random amount
+	       * but slows down as it progresses
+	       */
+	      function _inc() {
+	        if (_status() >= 1) {
+	          return;
+	        }
+
+	        var rnd = 0;
+
+	        // TODO: do this mathmatically instead of through conditions
+
+	        var stat = _status();
+	        if (stat >= 0 && stat < 0.25) {
+	          // Start out between 3 - 6% increments
+	          rnd = (Math.random() * (5 - 3 + 1) + 3) / 100;
+	        } else if (stat >= 0.25 && stat < 0.65) {
+	          // increment between 0 - 3%
+	          rnd = (Math.random() * 3) / 100;
+	        } else if (stat >= 0.65 && stat < 0.9) {
+	          // increment between 0 - 2%
+	          rnd = (Math.random() * 2) / 100;
+	        } else if (stat >= 0.9 && stat < 0.99) {
+	          // finally, increment it .5 %
+	          rnd = 0.005;
+	        } else {
+	          // after 99%, don't increment:
+	          rnd = 0;
+	        }
+
+	        var pct = _status() + rnd;
+	        _set(pct);
+	      }
+
+	      function _status() {
+	        return status;
+	      }
+
+	      function _completeAnimation() {
+	        status = 0;
+	        started = false;
+	      }
+
+	      function _complete() {
+	        if (!$animate) {
+	          $animate = $injector.get('$animate');
+	        }
+
+	        $rootScope.$broadcast('cfpLoadingBar:completed');
+	        _set(1);
+
+	        $timeout.cancel(completeTimeout);
+
+	        // Attempt to aggregate any start/complete calls within 500ms:
+	        completeTimeout = $timeout(function() {
+	          var promise = $animate.leave(loadingBarContainer, _completeAnimation);
+	          if (promise && promise.then) {
+	            promise.then(_completeAnimation);
+	          }
+	          $animate.leave(spinner);
+	        }, 500);
+	      }
+
+	      return {
+	        start            : _start,
+	        set              : _set,
+	        status           : _status,
+	        inc              : _inc,
+	        complete         : _complete,
+	        includeSpinner   : this.includeSpinner,
+	        latencyThreshold : this.latencyThreshold,
+	        parentSelector   : this.parentSelector,
+	        startSize        : this.startSize
+	      };
+
+
+	    }];     //
+	  });       // wtf javascript. srsly
+	})();       //
+
+
+	/*** EXPORTS FROM exports-loader ***/
+	module.exports = angular
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -38439,339 +38772,6 @@
 	  .filter('isState', $IsStateFilter)
 	  .filter('includedByState', $IncludedByStateFilter);
 	})(window, window.angular);
-
-	/*** EXPORTS FROM exports-loader ***/
-	module.exports = angular
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*! 
-	 * angular-loading-bar v0.7.1
-	 * https://chieffancypants.github.io/angular-loading-bar
-	 * Copyright (c) 2015 Wes Cruver
-	 * License: MIT
-	 */
-	/*
-	 * angular-loading-bar
-	 *
-	 * intercepts XHR requests and creates a loading bar.
-	 * Based on the excellent nprogress work by rstacruz (more info in readme)
-	 *
-	 * (c) 2013 Wes Cruver
-	 * License: MIT
-	 */
-
-
-	(function() {
-
-	'use strict';
-
-	// Alias the loading bar for various backwards compatibilities since the project has matured:
-	angular.module('angular-loading-bar', ['cfp.loadingBarInterceptor']);
-	angular.module('chieffancypants.loadingBar', ['cfp.loadingBarInterceptor']);
-
-
-	/**
-	 * loadingBarInterceptor service
-	 *
-	 * Registers itself as an Angular interceptor and listens for XHR requests.
-	 */
-	angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
-	  .config(['$httpProvider', function ($httpProvider) {
-
-	    var interceptor = ['$q', '$cacheFactory', '$timeout', '$rootScope', '$log', 'cfpLoadingBar', function ($q, $cacheFactory, $timeout, $rootScope, $log, cfpLoadingBar) {
-
-	      /**
-	       * The total number of requests made
-	       */
-	      var reqsTotal = 0;
-
-	      /**
-	       * The number of requests completed (either successfully or not)
-	       */
-	      var reqsCompleted = 0;
-
-	      /**
-	       * The amount of time spent fetching before showing the loading bar
-	       */
-	      var latencyThreshold = cfpLoadingBar.latencyThreshold;
-
-	      /**
-	       * $timeout handle for latencyThreshold
-	       */
-	      var startTimeout;
-
-
-	      /**
-	       * calls cfpLoadingBar.complete() which removes the
-	       * loading bar from the DOM.
-	       */
-	      function setComplete() {
-	        $timeout.cancel(startTimeout);
-	        cfpLoadingBar.complete();
-	        reqsCompleted = 0;
-	        reqsTotal = 0;
-	      }
-
-	      /**
-	       * Determine if the response has already been cached
-	       * @param  {Object}  config the config option from the request
-	       * @return {Boolean} retrns true if cached, otherwise false
-	       */
-	      function isCached(config) {
-	        var cache;
-	        var defaultCache = $cacheFactory.get('$http');
-	        var defaults = $httpProvider.defaults;
-
-	        // Choose the proper cache source. Borrowed from angular: $http service
-	        if ((config.cache || defaults.cache) && config.cache !== false &&
-	          (config.method === 'GET' || config.method === 'JSONP')) {
-	            cache = angular.isObject(config.cache) ? config.cache
-	              : angular.isObject(defaults.cache) ? defaults.cache
-	              : defaultCache;
-	        }
-
-	        var cached = cache !== undefined ?
-	          cache.get(config.url) !== undefined : false;
-
-	        if (config.cached !== undefined && cached !== config.cached) {
-	          return config.cached;
-	        }
-	        config.cached = cached;
-	        return cached;
-	      }
-
-
-	      return {
-	        'request': function(config) {
-	          // Check to make sure this request hasn't already been cached and that
-	          // the requester didn't explicitly ask us to ignore this request:
-	          if (!config.ignoreLoadingBar && !isCached(config)) {
-	            $rootScope.$broadcast('cfpLoadingBar:loading', {url: config.url});
-	            if (reqsTotal === 0) {
-	              startTimeout = $timeout(function() {
-	                cfpLoadingBar.start();
-	              }, latencyThreshold);
-	            }
-	            reqsTotal++;
-	            cfpLoadingBar.set(reqsCompleted / reqsTotal);
-	          }
-	          return config;
-	        },
-
-	        'response': function(response) {
-	          if (!response || !response.config) {
-	            $log.error('Broken interceptor detected: Config object not supplied in response:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
-	            return response;
-	          }
-
-	          if (!response.config.ignoreLoadingBar && !isCached(response.config)) {
-	            reqsCompleted++;
-	            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: response.config.url, result: response});
-	            if (reqsCompleted >= reqsTotal) {
-	              setComplete();
-	            } else {
-	              cfpLoadingBar.set(reqsCompleted / reqsTotal);
-	            }
-	          }
-	          return response;
-	        },
-
-	        'responseError': function(rejection) {
-	          if (!rejection || !rejection.config) {
-	            $log.error('Broken interceptor detected: Config object not supplied in rejection:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
-	            return $q.reject(rejection);
-	          }
-
-	          if (!rejection.config.ignoreLoadingBar && !isCached(rejection.config)) {
-	            reqsCompleted++;
-	            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: rejection.config.url, result: rejection});
-	            if (reqsCompleted >= reqsTotal) {
-	              setComplete();
-	            } else {
-	              cfpLoadingBar.set(reqsCompleted / reqsTotal);
-	            }
-	          }
-	          return $q.reject(rejection);
-	        }
-	      };
-	    }];
-
-	    $httpProvider.interceptors.push(interceptor);
-	  }]);
-
-
-	/**
-	 * Loading Bar
-	 *
-	 * This service handles adding and removing the actual element in the DOM.
-	 * Generally, best practices for DOM manipulation is to take place in a
-	 * directive, but because the element itself is injected in the DOM only upon
-	 * XHR requests, and it's likely needed on every view, the best option is to
-	 * use a service.
-	 */
-	angular.module('cfp.loadingBar', [])
-	  .provider('cfpLoadingBar', function() {
-
-	    this.includeSpinner = true;
-	    this.includeBar = true;
-	    this.latencyThreshold = 100;
-	    this.startSize = 0.02;
-	    this.parentSelector = 'body';
-	    this.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>';
-	    this.loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
-
-	    this.$get = ['$injector', '$document', '$timeout', '$rootScope', function ($injector, $document, $timeout, $rootScope) {
-	      var $animate;
-	      var $parentSelector = this.parentSelector,
-	        loadingBarContainer = angular.element(this.loadingBarTemplate),
-	        loadingBar = loadingBarContainer.find('div').eq(0),
-	        spinner = angular.element(this.spinnerTemplate);
-
-	      var incTimeout,
-	        completeTimeout,
-	        started = false,
-	        status = 0;
-
-	      var includeSpinner = this.includeSpinner;
-	      var includeBar = this.includeBar;
-	      var startSize = this.startSize;
-
-	      /**
-	       * Inserts the loading bar element into the dom, and sets it to 2%
-	       */
-	      function _start() {
-	        if (!$animate) {
-	          $animate = $injector.get('$animate');
-	        }
-
-	        var $parent = $document.find($parentSelector).eq(0);
-	        $timeout.cancel(completeTimeout);
-
-	        // do not continually broadcast the started event:
-	        if (started) {
-	          return;
-	        }
-
-	        $rootScope.$broadcast('cfpLoadingBar:started');
-	        started = true;
-
-	        if (includeBar) {
-	          $animate.enter(loadingBarContainer, $parent, angular.element($parent[0].lastChild));
-	        }
-
-	        if (includeSpinner) {
-	          $animate.enter(spinner, $parent, angular.element($parent[0].lastChild));
-	        }
-
-	        _set(startSize);
-	      }
-
-	      /**
-	       * Set the loading bar's width to a certain percent.
-	       *
-	       * @param n any value between 0 and 1
-	       */
-	      function _set(n) {
-	        if (!started) {
-	          return;
-	        }
-	        var pct = (n * 100) + '%';
-	        loadingBar.css('width', pct);
-	        status = n;
-
-	        // increment loadingbar to give the illusion that there is always
-	        // progress but make sure to cancel the previous timeouts so we don't
-	        // have multiple incs running at the same time.
-	        $timeout.cancel(incTimeout);
-	        incTimeout = $timeout(function() {
-	          _inc();
-	        }, 250);
-	      }
-
-	      /**
-	       * Increments the loading bar by a random amount
-	       * but slows down as it progresses
-	       */
-	      function _inc() {
-	        if (_status() >= 1) {
-	          return;
-	        }
-
-	        var rnd = 0;
-
-	        // TODO: do this mathmatically instead of through conditions
-
-	        var stat = _status();
-	        if (stat >= 0 && stat < 0.25) {
-	          // Start out between 3 - 6% increments
-	          rnd = (Math.random() * (5 - 3 + 1) + 3) / 100;
-	        } else if (stat >= 0.25 && stat < 0.65) {
-	          // increment between 0 - 3%
-	          rnd = (Math.random() * 3) / 100;
-	        } else if (stat >= 0.65 && stat < 0.9) {
-	          // increment between 0 - 2%
-	          rnd = (Math.random() * 2) / 100;
-	        } else if (stat >= 0.9 && stat < 0.99) {
-	          // finally, increment it .5 %
-	          rnd = 0.005;
-	        } else {
-	          // after 99%, don't increment:
-	          rnd = 0;
-	        }
-
-	        var pct = _status() + rnd;
-	        _set(pct);
-	      }
-
-	      function _status() {
-	        return status;
-	      }
-
-	      function _completeAnimation() {
-	        status = 0;
-	        started = false;
-	      }
-
-	      function _complete() {
-	        if (!$animate) {
-	          $animate = $injector.get('$animate');
-	        }
-
-	        $rootScope.$broadcast('cfpLoadingBar:completed');
-	        _set(1);
-
-	        $timeout.cancel(completeTimeout);
-
-	        // Attempt to aggregate any start/complete calls within 500ms:
-	        completeTimeout = $timeout(function() {
-	          var promise = $animate.leave(loadingBarContainer, _completeAnimation);
-	          if (promise && promise.then) {
-	            promise.then(_completeAnimation);
-	          }
-	          $animate.leave(spinner);
-	        }, 500);
-	      }
-
-	      return {
-	        start            : _start,
-	        set              : _set,
-	        status           : _status,
-	        inc              : _inc,
-	        complete         : _complete,
-	        includeSpinner   : this.includeSpinner,
-	        latencyThreshold : this.latencyThreshold,
-	        parentSelector   : this.parentSelector,
-	        startSize        : this.startSize
-	      };
-
-
-	    }];     //
-	  });       // wtf javascript. srsly
-	})();       //
-
 
 	/*** EXPORTS FROM exports-loader ***/
 	module.exports = angular
@@ -55734,26 +55734,10 @@
 /* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(101);
+	var content = __webpack_require__(100);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(108)(content, {});
@@ -55770,20 +55754,20 @@
 	}
 
 /***/ },
-/* 101 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(111)();
 	exports.push([module.id, "html,\nbody {\n  height: 100%;\n}\nbody {\n  background: #1b0218 url("+__webpack_require__(112)+") no-repeat;\n  background-size: 100%;\n  font-family: \"Bebas Neue\", Helvetica;\n  color: white;\n  word-wrap: break-word;\n  margin-top: 40px;\n}\na {\n  color: darkgray;\n  text-decoration: none;\n  font-weight: bold;\n}\n.ng-cloak {\n  display: none;\n}\n.banner-container {\n  margin: auto;\n  text-align: center;\n  margin-bottom: 100px;\n}\n.banner {\n  width: 100%;\n  background: url("+__webpack_require__(113)+");\n  background-size: contain;\n  height: 0;\n  padding-top: 71.50%;\n}\n.info {\n  margin-top: 20px;\n  margin-bottom: 50px;\n}\n.info img {\n  width: 100%;\n}\n.info .corner {\n  background: url("+__webpack_require__(114)+") no-repeat;\n  background-size: 100% 100%;\n  height: 50px;\n  float: left;\n  width: 60%;\n}\n.info .top {\n  float: left;\n  width: 40%;\n  height: 50px;\n  background-color: #8e0582;\n}\n.info .main {\n  background-color: #8e0582;\n  width: 100%;\n  min-height: 250px;\n  display: -webkit-inline-box;\n  display: -webkit-inline-flex;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  position: relative;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n}\n.info .bottom-margin {\n  background-color: #8e0582;\n  height: 10px;\n}\n.footer-container {\n  width: 100%;\n  height: 50px;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  border-top: 1px solid #8e0582;\n  background-color: #1b0218;\n}\n.footer {\n  width: 45%;\n  margin: auto;\n}\n.icons {\n  float: left;\n  margin-top: 10px;\n}\n.icon {\n  width: 25px;\n  height: 24px;\n  display: inline-block;\n  background-size: contain;\n  background-repeat: no-repeat;\n}\n.icon-twitter {\n  background-image: url("+__webpack_require__(115)+");\n}\n.icon-facebook {\n  background-image: url("+__webpack_require__(116)+");\n}\n.icon-google {\n  background-image: url("+__webpack_require__(117)+");\n}\n.icon-picasa {\n  background-image: url("+__webpack_require__(118)+");\n}\n.logo {\n  float: right;\n}\n.icon-logo {\n  height: 50px;\n  width: 95px;\n  background-image: url("+__webpack_require__(119)+");\n}\n.twitter {\n  -webkit-flex-basis: 27%;\n      -ms-flex-preferred-size: 27%;\n          flex-basis: 27%;\n  margin-left: 15px;\n  margin-right: 15px;\n  float: left;\n  text-align: center;\n}\n.twitter-icon-big {\n  position: relative;\n  background: url("+__webpack_require__(120)+") no-repeat;\n  width: 40px;\n  height: 40px;\n  background-size: 100% 100%;\n  margin: auto;\n}\n.twitter-text {\n  padding-top: 15px;\n  text-align: center;\n}\n.twitter-date {\n  margin-top: 30px;\n  font-weight: bolder;\n}\n.twitter-name {\n  font-weight: bolder;\n  font-size: medium;\n  color: lightgray;\n}\n.news {\n  padding-left: 15px;\n  padding-right: 15px;\n  -webkit-flex-basis: 67%;\n      -ms-flex-preferred-size: 67%;\n          flex-basis: 67%;\n}\n.news-text {\n  text-align: left;\n}\n.news-author {\n  text-align: left;\n}\n.splitter {\n  float: left;\n  height: 100%;\n  border-left: 1px solid white;\n  position: absolute;\n}\n.menu {\n  background-color: #120110;\n}\n.menu ul a {\n  font-size: large;\n  color: white;\n}\n.menu ul a:hover,\n.menu ul a:focus,\n.menu ul a.active {\n  background-color: #8e0582;\n}\n@media all and (max-width: 992px) {\n  body {\n    margin-top: 90px;\n  }\n  .twitter,\n  .news {\n    -webkit-flex-basis: 100%;\n        -ms-flex-preferred-size: 100%;\n            flex-basis: 100%;\n    margin-left: 5px;\n    margin-right: 5px;\n    margin-bottom: 10px;\n  }\n  .news {\n    border-top: 1px solid white;\n  }\n  .footer-container {\n    height: 80px;\n  }\n  .icon {\n    width: 60px;\n    height: 58px;\n    display: inline-block;\n    background-size: contain;\n    background-repeat: no-repeat;\n  }\n  .footer {\n    width: 272px;\n    margin: auto;\n  }\n}\n.partners {\n  width: 50%;\n}\n.partners .header {\n  height: 100px;\n  background: url("+__webpack_require__(121)+");\n}\n.partners .header .header-color {\n  width: 100%;\n  height: 70px;\n  background-color: #8e0582;\n  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 50px, 0% 70px);\n          clip-path: polygon(0% 0%, 100% 0%, 100% 50px, 0% 70px);\n}\n.partners .header h3 {\n  text-align: right;\n}\n.partners .content {\n  background-color: #4c0239;\n  height: 500px;\n}\n.partners .footer {\n  background: url("+__webpack_require__(122)+") no-repeat;\n  background-size: contain;\n  height: 0;\n  width: 100%;\n  padding-top: 9.8%;\n}\n", ""]);
 
 /***/ },
-/* 102 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(103);
+	var content = __webpack_require__(102);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(108)(content, {});
@@ -55800,19 +55784,19 @@
 	}
 
 /***/ },
-/* 103 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "/*! \n * angular-loading-bar v0.7.1\n * https://chieffancypants.github.io/angular-loading-bar\n * Copyright (c) 2015 Wes Cruver\n * License: MIT\n */\n\n/* Make clicks pass-through */\n#loading-bar,\n#loading-bar-spinner {\n  pointer-events: none;\n  -webkit-pointer-events: none;\n  -webkit-transition: 350ms linear all;\n  -moz-transition: 350ms linear all;\n  -o-transition: 350ms linear all;\n  transition: 350ms linear all;\n}\n\n#loading-bar.ng-enter,\n#loading-bar.ng-leave.ng-leave-active,\n#loading-bar-spinner.ng-enter,\n#loading-bar-spinner.ng-leave.ng-leave-active {\n  opacity: 0;\n}\n\n#loading-bar.ng-enter.ng-enter-active,\n#loading-bar.ng-leave,\n#loading-bar-spinner.ng-enter.ng-enter-active,\n#loading-bar-spinner.ng-leave {\n  opacity: 1;\n}\n\n#loading-bar .bar {\n  -webkit-transition: width 350ms;\n  -moz-transition: width 350ms;\n  -o-transition: width 350ms;\n  transition: width 350ms;\n\n  background: #29d;\n  position: fixed;\n  z-index: 10002;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 2px;\n  border-bottom-right-radius: 1px;\n  border-top-right-radius: 1px;\n}\n\n/* Fancy blur effect */\n#loading-bar .peg {\n  position: absolute;\n  width: 70px;\n  right: 0;\n  top: 0;\n  height: 2px;\n  opacity: .45;\n  -moz-box-shadow: #29d 1px 0 6px 1px;\n  -ms-box-shadow: #29d 1px 0 6px 1px;\n  -webkit-box-shadow: #29d 1px 0 6px 1px;\n  box-shadow: #29d 1px 0 6px 1px;\n  -moz-border-radius: 100%;\n  -webkit-border-radius: 100%;\n  border-radius: 100%;\n}\n\n#loading-bar-spinner {\n  display: block;\n  position: fixed;\n  z-index: 10002;\n  top: 10px;\n  left: 10px;\n}\n\n#loading-bar-spinner .spinner-icon {\n  width: 14px;\n  height: 14px;\n\n  border:  solid 2px transparent;\n  border-top-color:  #29d;\n  border-left-color: #29d;\n  border-radius: 10px;\n\n  -webkit-animation: loading-bar-spinner 400ms linear infinite;\n  -moz-animation:    loading-bar-spinner 400ms linear infinite;\n  -ms-animation:     loading-bar-spinner 400ms linear infinite;\n  -o-animation:      loading-bar-spinner 400ms linear infinite;\n  animation:         loading-bar-spinner 400ms linear infinite;\n}\n\n@-webkit-keyframes loading-bar-spinner {\n  0%   { -webkit-transform: rotate(0deg);   transform: rotate(0deg); }\n  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }\n}\n@-moz-keyframes loading-bar-spinner {\n  0%   { -moz-transform: rotate(0deg);   transform: rotate(0deg); }\n  100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }\n}\n@-o-keyframes loading-bar-spinner {\n  0%   { -o-transform: rotate(0deg);   transform: rotate(0deg); }\n  100% { -o-transform: rotate(360deg); transform: rotate(360deg); }\n}\n@-ms-keyframes loading-bar-spinner {\n  0%   { -ms-transform: rotate(0deg);   transform: rotate(0deg); }\n  100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }\n}\n@keyframes loading-bar-spinner {\n  0%   { transform: rotate(0deg);   transform: rotate(0deg); }\n  100% { transform: rotate(360deg); transform: rotate(360deg); }\n}\n\n\n/*** EXPORTS FROM exports-loader ***/\nmodule.exports = angular"
 
 /***/ },
-/* 104 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(105);
+	var content = __webpack_require__(104);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(108)(content, {});
@@ -55829,10 +55813,26 @@
 	}
 
 /***/ },
-/* 105 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */\n\n/**\n * 1. Set default font family to sans-serif.\n * 2. Prevent iOS and IE text size adjust after device orientation change,\n *    without disabling user zoom.\n */\n\nhtml {\n  font-family: sans-serif; /* 1 */\n  -ms-text-size-adjust: 100%; /* 2 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/**\n * Remove default margin.\n */\n\nbody {\n  margin: 0;\n}\n\n/* HTML5 display definitions\n   ========================================================================== */\n\n/**\n * Correct `block` display not defined for any HTML5 element in IE 8/9.\n * Correct `block` display not defined for `details` or `summary` in IE 10/11\n * and Firefox.\n * Correct `block` display not defined for `main` in IE 11.\n */\n\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmain,\nmenu,\nnav,\nsection,\nsummary {\n  display: block;\n}\n\n/**\n * 1. Correct `inline-block` display not defined in IE 8/9.\n * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.\n */\n\naudio,\ncanvas,\nprogress,\nvideo {\n  display: inline-block; /* 1 */\n  vertical-align: baseline; /* 2 */\n}\n\n/**\n * Prevent modern browsers from displaying `audio` without controls.\n * Remove excess height in iOS 5 devices.\n */\n\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n\n/**\n * Address `[hidden]` styling not present in IE 8/9/10.\n * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.\n */\n\n[hidden],\ntemplate {\n  display: none;\n}\n\n/* Links\n   ========================================================================== */\n\n/**\n * Remove the gray background color from active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * Improve readability of focused elements when they are also in an\n * active/hover state.\n */\n\na:active,\na:hover {\n  outline: 0;\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Address styling not present in IE 8/9/10/11, Safari, and Chrome.\n */\n\nabbr[title] {\n  border-bottom: 1px dotted;\n}\n\n/**\n * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.\n */\n\nb,\nstrong {\n  font-weight: bold;\n}\n\n/**\n * Address styling not present in Safari and Chrome.\n */\n\ndfn {\n  font-style: italic;\n}\n\n/**\n * Address variable `h1` font-size and margin within `section` and `article`\n * contexts in Firefox 4+, Safari, and Chrome.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/**\n * Address styling not present in IE 8/9.\n */\n\nmark {\n  background: #ff0;\n  color: #000;\n}\n\n/**\n * Address inconsistent and variable font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` affecting `line-height` in all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsup {\n  top: -0.5em;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove border when inside `a` element in IE 8/9/10.\n */\n\nimg {\n  border: 0;\n}\n\n/**\n * Correct overflow not hidden in IE 9/10/11.\n */\n\nsvg:not(:root) {\n  overflow: hidden;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * Address margin not present in IE 8/9 and Safari.\n */\n\nfigure {\n  margin: 1em 40px;\n}\n\n/**\n * Address differences between Firefox and other browsers.\n */\n\nhr {\n  box-sizing: content-box;\n  height: 0;\n}\n\n/**\n * Contain overflow in all browsers.\n */\n\npre {\n  overflow: auto;\n}\n\n/**\n * Address odd `em`-unit font size rendering in all browsers.\n */\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * Known limitation: by default, Chrome and Safari on OS X allow very limited\n * styling of `select`, unless a `border` property is set.\n */\n\n/**\n * 1. Correct color not being inherited.\n *    Known issue: affects color of disabled elements.\n * 2. Correct font properties not being inherited.\n * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  color: inherit; /* 1 */\n  font: inherit; /* 2 */\n  margin: 0; /* 3 */\n}\n\n/**\n * Address `overflow` set to `hidden` in IE 8/9/10/11.\n */\n\nbutton {\n  overflow: visible;\n}\n\n/**\n * Address inconsistent `text-transform` inheritance for `button` and `select`.\n * All other form control elements do not inherit `text-transform` values.\n * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.\n * Correct `select` style inheritance in Firefox.\n */\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/**\n * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`\n *    and `video` controls.\n * 2. Correct inability to style clickable `input` types in iOS.\n * 3. Improve usability and consistency of cursor style between image-type\n *    `input` and others.\n */\n\nbutton,\nhtml input[type=\"button\"], /* 1 */\ninput[type=\"reset\"],\ninput[type=\"submit\"] {\n  -webkit-appearance: button; /* 2 */\n  cursor: pointer; /* 3 */\n}\n\n/**\n * Re-set default cursor for disabled elements.\n */\n\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\n\n/**\n * Remove inner padding and border in Firefox 4+.\n */\n\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n\n/**\n * Address Firefox 4+ setting `line-height` on `input` using `!important` in\n * the UA stylesheet.\n */\n\ninput {\n  line-height: normal;\n}\n\n/**\n * It's recommended that you don't attempt to style these elements.\n * Firefox's implementation doesn't respect box-sizing, padding, or width.\n *\n * 1. Address box sizing set to `content-box` in IE 8/9/10.\n * 2. Remove excess padding in IE 8/9/10.\n */\n\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Fix the cursor style for Chrome's increment/decrement buttons. For certain\n * `font-size` values of the `input`, it causes the cursor style of the\n * decrement button to change from `default` to `text`.\n */\n\ninput[type=\"number\"]::-webkit-inner-spin-button,\ninput[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Address `appearance` set to `searchfield` in Safari and Chrome.\n * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.\n */\n\ninput[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  box-sizing: content-box; /* 2 */\n}\n\n/**\n * Remove inner padding and search cancel button in Safari and Chrome on OS X.\n * Safari (but not Chrome) clips the cancel button when the search input has\n * padding (and `textfield` appearance).\n */\n\ninput[type=\"search\"]::-webkit-search-cancel-button,\ninput[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * Define consistent border, margin, and padding.\n */\n\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\n\n/**\n * 1. Correct `color` not being inherited in IE 8/9/10/11.\n * 2. Remove padding so people aren't caught out if they zero out fieldsets.\n */\n\nlegend {\n  border: 0; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Remove default vertical scrollbar in IE 8/9/10/11.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * Don't inherit the `font-weight` (applied by a rule above).\n * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.\n */\n\noptgroup {\n  font-weight: bold;\n}\n\n/* Tables\n   ========================================================================== */\n\n/**\n * Remove most spacing between table cells.\n */\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\ntd,\nth {\n  padding: 0;\n}\n"
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
 
 /***/ },
 /* 106 */
