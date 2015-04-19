@@ -1,13 +1,16 @@
+@import "colors";
+
 html, body {
   height: 100%;
 }
 
 body {
-  background: #1b0218 url("../img/background.png") no-repeat;
+  background: @secondary url("../img/background.png") no-repeat;
   background-size: 100%;
-  font-family: "LatoLatinLight", Georgia;
+  font-family: "Bebas Neue", Helvetica;
   color: white;
   word-wrap: break-word;
+  margin-top: 40px;
 }
 
 a {
@@ -55,11 +58,11 @@ a {
   float: left;
   width: 40%;
   height: 50px;
-  background-color: #8e0582;
+  background-color: @main;
 }
 
 .info .main {
-  background-color: #8e0582;
+  background-color: @main;
   width: 100%;
   min-height: 250px;
   display: inline-flex;
@@ -69,7 +72,7 @@ a {
 }
 
 .info .bottom-margin {
-  background-color: #8e0582;
+  background-color: @main;
   height: 10px;
 }
 
@@ -79,8 +82,8 @@ a {
   position: fixed;
   bottom: 0;
   left: 0;
-  border-top: 1px solid #8e0582;
-  background-color: #1b0218;
+  border-top: 1px solid @main;
+  background-color: @secondary;
 }
 
 .footer {
@@ -182,7 +185,23 @@ a {
   position: absolute;
 }
 
+.menu {
+  background-color: #120110;
+  ul {
+    a {
+      font-size: large;
+      color: white;
+      &:hover, &:focus, &.active {
+        background-color: @main;
+      }
+    }
+  }
+}
+
 @media all and (max-width: 992px) {
+  body{
+    margin-top: 90px;
+  }
   .twitter,
   .news {
     flex-basis: 100%;
@@ -212,3 +231,5 @@ a {
     margin: auto;
   }
 }
+
+@import "partners";

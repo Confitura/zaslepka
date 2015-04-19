@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+        <div class="banner"></div>
+    </div>
+</div>
+
+<div class="row info">
+    <div class="info col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col">
+        <div class="corner"></div>
+        <div class="top"></div>
+        <div class="main">
+            <div class="twitter " ng-controller="TwitterCtrl">
+                <div class="twitter-icon-big"></div>
+                <div class="ng-cloak">
+                    <div class="twitter-text">{{tweet.text}}</div>
+                    <div class="twitter-date">{{getDate(tweet.created_at)}}</div>
+                    <div class="twitter-name">@confiturapl</div>
+                </div>
+            </div>
+            <div class="splitter hidden-xs hidden-sm "></div>
+            <div class="news" ng-controller="NewsCtrl">
+                <div class="ng-cloak">
+                    <h2 class="news-title">{{news.title}}</h2>
+
+                    <div class="news-author">Napisał: {{news.author}}</div>
+                    <div class="news-text" ng-bind-html="news.shortText"></div>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="bottom-margin"></div>
+    </div>
+</div>
+<div class="footer-container">
+    <div class="footer">
+        <div class="icons">
+            <a target="_blank" href="https://twitter.com/confiturapl">
+                <span class="icon icon-twitter"></span>
+            </a>
+            <a target="_blank" href="https://pl-pl.facebook.com/Confitura">
+                <span class="icon icon-facebook"></span>
+            </a>
+            <a target="_blank" href="https://plus.google.com/u/0/communities/111143182611552730655">
+                <span class="icon icon-google"></span>
+            </a>
+            <a target="_blank" href="https://picasaweb.google.com/105244662761703257330">
+                <span class="icon icon-picasa"></span>
+            </a>
+        </div>
+        <div class="logo hidden-xs hidden-sm">
+            <span class="icon icon-logo"></span>
+        </div>
+    </div>
+</div>
