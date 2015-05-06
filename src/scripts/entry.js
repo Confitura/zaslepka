@@ -13,7 +13,7 @@ require('moment').locale('pl');
 require('angular-loading-bar/build/loading-bar');
 ng.module('confitura', [
     'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
-    require('twitter'), require('news')
+    require('twitter'), require('news'), require('partners')
 ])
     .constant('apiServer', 'http://c4p.confitura.pl/api')
     /* ng Inject*/
