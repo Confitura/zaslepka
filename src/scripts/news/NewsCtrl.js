@@ -1,5 +1,5 @@
 'use strict';
-/* ngInject */
+/* @ngInject */
 function NewsCtrl($scope, News) {
     News.query(function (news) {
         $scope.news = news[0];

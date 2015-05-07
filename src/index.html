@@ -8,9 +8,13 @@
 	<!--<link rel="stylesheet" href="fonts/LatoLatinLight-Regular.css"/>-->
 	<link rel="stylesheet" href="fonts/bebas/Bebas.css"/>
 </head>
-<body ng-app="confitura" class="container-fluid">
+<body ng-app="confitura" ng-strict-di class="container-fluid">
 <div ng-include="'views/menu.html'"></div>
-<div ui-view></div>
+<div class="row info">
+	<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col">
+		<div ui-view></div>
+	</div>
+</div>
 
 <footer>
 	<div class="footer-div">

@@ -1,5 +1,5 @@
 'use strict';
-/* ngInject */
+/* @ngInject */
 function News($resource, apiServer) {
     return $resource(apiServer + '/news/0/1');
 }

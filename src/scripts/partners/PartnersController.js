@@ -1,54 +1,39 @@
 'use strict';
-/* ngInject */
-function PartnersController() {
+var _ = require('lodash');
+
+/* @ngInject */
+function PartnersController(Partners) {
+	var partners = Partners.get();
+
 	var vm = this;
 	vm.types = [
-		'Platinum',
-		'Gold',
-		'Silver',
-		'Bronze',
-		'Technological',
-		'Media'
+		'platinum',
+		'gold',
+		'silver',
+		'bronze',
+		'technological',
+		'media'
 	];
 
-	vm.partners = [
-		{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		},{
-			logo: 'http://placehold.it/300x300',
-			name: 'Some company',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, arcu non condimentum suscipit, felis nibh lobortis sapien, at fringilla libero lacus vitae mi. Aenean eu neque a est lacinia cursus in porttitor eros. Cras vitae nisl vitae dui ullamcorper laoreet. Cras maximus, est eu vulputate tincidunt, turpis velit condimentum lectus, quis ultricies augue dolor et felis. Mauris eget risus euismod nunc sodales convallis. Vivamus pretium placerat ante non pharetra. Duis in laoreet elit.'
-		}
-	];
+	vm.selected = vm.types[0];
+
+
+	vm.hasAnyFor = function (type) {
+		return partners[type].length > 0;
+	};
+
+	vm.select = function (type) {
+		vm.selected = type;
+	};
+
+	vm.getForSelected = function () {
+		return partners[vm.selected];
+	};
+
+	vm.isSelected = function (type) {
+		return vm.selected === type;
+	};
+
+
 }
 module.exports = PartnersController;

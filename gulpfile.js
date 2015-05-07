@@ -2,6 +2,10 @@ var gulp = require('gulp');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
 var plugins = require('gulp-load-plugins')();
+var argv = require('minimist')(process.argv.slice(2));
+if (argv.production) { // --production
+	webpackConfig.plugins = webpackConfig.plugins.concat([new webpack.optimize.UglifyJsPlugin()])
+}
 
 gulp.task('webpack', ['copy'], function () {
 	return gulp.src('src/scripts/entry.js')

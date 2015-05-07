@@ -4,20 +4,42 @@
 		<div class="header-color">
 			<h1>partners</h1>
 		</div>
+
 		<div class="partner-types">
-			<a ng-repeat="type in ctrl.types">{{type}}</a>
+			<div class="navbar-header">
+				<a class="collapsed partner-type navbar-toggle" data-toggle="collapse" data-target="#partners-menu"
+					 aria-expanded="false" aria-controls="navbar">
+					partners
+				</a>
+
+			</div>
+			<div id="partners-menu" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li ng-repeat="type in ctrl.types" ng-if="ctrl.hasAnyFor(type)">
+						<a class="partner-type" ng-click="ctrl.select(type)"
+							 ng-class="{'active' : ctrl.isSelected(type)}">{{type}}</a>
+					</li>
+				</ul>
+
+			</div>
 		</div>
+
 
 	</div>
 	<div class="content">
-		<div ng-repeat="partner in ctrl.partners" class="partner">
+		<div ng-repeat="partner in ctrl.getForSelected()" class="partner">
 			<div class="partner-logo">
-				<img ng-src="{{partner.logo}}" alt=""/>
+				<a ng-href="{{partner.url}}" target="_blank">
+					<img ng-src="{{partner.logo}}" alt=""/>
+				</a>
 			</div>
 
 			<div class="partner-info">
-				<h1 class="partner-name">{{partner.name}}</h1>
-				<div ng-bind-html="partner.text"></div>
+				<h1 class="partner-name">
+					<a href="{{partner.url}}" target="_blank"> {{partner.name}}</a>
+				</h1>
+
+				<div ng-bind-html="partner.description" class="partner-description"></div>
 			</div>
 		</div>
 	</div>

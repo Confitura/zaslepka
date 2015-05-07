@@ -67,8 +67,5 @@ module.exports = {
         new ngAnnotatePlugin({
             add: true
         })
-        //,
-        //new webpack.optimize.UglifyJsPlugin()
-
     ]
 };

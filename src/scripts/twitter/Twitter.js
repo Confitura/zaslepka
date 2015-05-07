@@ -1,5 +1,5 @@
 'use strict';
-/* ngInject */
+/* @ngInject */
 function Twitter($resource, apiServer) {
     return $resource(apiServer + '/twitter');
 }

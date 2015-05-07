@@ -1,4 +1,5 @@
 @import "colors";
+@import "sizes";
 
 html, body {
   height: 100%;
@@ -7,16 +8,24 @@ html, body {
 body {
   background: @secondary url("../img/background.png") no-repeat;
   background-size: 100%;
-  font-family: "Bebas Neue", Helvetica;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   word-wrap: break-word;
   margin-top: 40px;
 }
 
+h1, h2, h3 {
+  font-family: "Bebas Neue", Helvetica;
+}
+
 a {
-  color: darkgray;
+  color: white;
   text-decoration: none;
   font-weight: bold;
+  &:hover, &:focus {
+    text-decoration: none;
+    color: white;
+  }
 }
 
 .ng-cloak {
@@ -31,10 +40,11 @@ a {
 
 .banner {
   width: 100%;
-  background: url("../img/banner.png");
+  background: url("../img/banner.png") no-repeat;
   background-size: contain;
   height: 0;
   padding-top: 71.50%;
+  margin-bottom: 30px;
 }
 
 .info {
@@ -198,7 +208,7 @@ footer {
   }
 }
 
-@media all and (max-width: 992px) {
+@media all and (max-width: @small-screen) {
   body {
     margin-top: 90px;
   }

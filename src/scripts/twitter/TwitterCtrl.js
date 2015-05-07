@@ -1,6 +1,6 @@
 'use strict';
 var moment = require('moment');
-/* ngInject */
+/* @ngInject */
 function TwitterCtrl($scope, Twitter) {
     Twitter.query(function (tweets) {
         $scope.tweet = tweets[0];

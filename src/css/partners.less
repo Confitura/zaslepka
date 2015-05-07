@@ -1,14 +1,12 @@
 @import "colors";
 
 .partners {
-  width: 50%;
-  margin: 140px auto auto;
+  margin-top: 140px;
   position: relative;
   margin-bottom: 60px;
 
   .logo {
-    background: url(../img/logo-small.png);
-    background-repeat: no-repeat;
+    background: url(../img/logo-small.png) no-repeat;
     background-size: 100%;
     width: 350px;
     height: 170px;
@@ -28,17 +26,20 @@
       clip-path: polygon(0% 0%, 100% 0%, 100% 50px, 0% 70px);
     }
     .partner-types {
-      font-size: 30px;
-      font-weight: bold;
-      float: right;
-      a {
+      display: flex;
+      justify-content: flex-end;
+      font-family: "Bebas Neue", Helvetica;
+      a.partner-type {
+        font-weight: bold;
+
         cursor: pointer;
-        float: left;
-        padding-right: 10px;
+        //float: left;
+        padding-right: 3px;
         color: @main;
-        &:hover, &:active {
+        &:hover, &.active {
           color: white;
           text-decoration: none;
+          background-color: transparent;
         }
       }
 
@@ -50,28 +51,30 @@
   }
   .content {
     background-color: @third;
-    //height: 500px;
     padding: 20px;
 
     .partner {
       display: flex;
-      flex-direction: row;
-      padding-top: 10px;
+      padding-top: 30px;
 
       .partner-logo {
-        width: 250px;
+
         flex-basis: 100%;
         flex-grow: 1;
-        padding-right: 10px;
-        border-right: solid white 2px;
 
         img {
+          padding: 20px;
+          background-color: #ffffff;
+          border-radius: 10px;
           width: 100%;
         }
       }
       .partner-info {
         flex-grow: 1;
         padding-left: 10px;
+        .partner-name {
+          font-weight: bold;
+        }
       }
     }
   }
@@ -81,6 +84,45 @@
     height: 0;
     width: 100%;
     padding-top: 9.8%;
+  }
+
+}
+
+@media all and (max-width: @xsmall-screen) {
+  .partner {
+    flex-direction: column;
+    .partner-logo {
+      border-bottom: solid #ffffff 2px;
+      padding-bottom: 10px;
+      max-width: 100%;
+      min-width: 100%;
+
+    }
+  }
+
+  .partner-types {
+    a.partner-type {
+      font-size: 200%;
+      flex-grow: 1;
+      text-align: center;
+    }
+  }
+}
+
+@media all and (min-width: @xsmall-screen) {
+  a.partner-type {
+    font-size: 220%;
+  }
+
+  .partner {
+    flex-direction: row;
+    .partner-logo {
+      max-width: 250px;
+      min-width: 250px;
+      padding-right: 10px;
+      border-right: solid white 2px;
+
+    }
   }
 
 }
