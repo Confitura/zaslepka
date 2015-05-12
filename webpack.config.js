@@ -2,70 +2,88 @@ var webpack = require("webpack");
 var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 module.exports = {
-    entry: 'entry.js',
-    output: {
-        filename: 'bundle.js',
-        publicPath: 'js/'
-    },
-    resolve: {
-        modulesDirectories: ['./src/scripts/', 'node_modules', 'bower_components'],
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],
-        alias: {
-            "ng": "angular/angular",
-            "lodash": "lodash/index",
-            "moment": "moment/moment",
-            "jquery": "jquery/dist/jquery"
-        }
-    },
-    module: {
-        preLoaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules|google/,
-                loader: 'jshint-loader'
-            }
-        ],
-        loaders: [
-            {
-                test: /\.ts$/,
-                loader: 'typescript-loader'
-            },
-            {
-                test: /\.less$/,
-                loader: 'style!css?root=../!autoprefixer!less'
-            },
-            {
-                test: /\.css$/,
-                loader: 'style!raw'
-            },
-            {
-                test: /\.png$/,
-                loader: 'file'
-            },
-            {
-                test: /angular/,
-                loader: 'exports?angular'
-            },
-            {
-                test: /template.html$/,
-                loader: 'ng-cache?prefix=[dir]'
-            },
-            {
-                test: /\.html$/,
-                loader: 'html'
-            }
-        ]
-    },
-    jshint: {
-        globalstrict: true,
-        emitErrors: true
-    },
-    plugins: [
-        new webpack.ResolverPlugin(
-            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
-        ),
-        new ngAnnotatePlugin({
-            add: true
-        })
-    ]
+	entry: {
+		app: ['entry.js'],
+		vendor: [
+			'lodash',
+			'ng',
+			'angular-animate/angular-animate',
+			'angular-resource/angular-resource',
+			'angular-sanitize/angular-sanitize',
+			'angular-ui-router/release/angular-ui-router',
+			'moment',
+			'angular-loading-bar/build/loading-bar',
+			'./src/css/external'
+		]
+	},
+	output: {
+		filename: 'bundle.js',
+		publicPath: 'js/'
+	},
+	resolve: {
+		modulesDirectories: ['./src/scripts/', './src/css/', 'node_modules'],
+		extensions: ['', '.webpack.js', '.web.js', '.js'],
+		alias: {
+			"ng": "angular/angular",
+			"lodash": "lodash/index",
+			"moment": "moment/moment",
+			"jquery": "jquery/dist/jquery"
+		}
+	},
+	module: {
+		//preLoaders: [
+		//	{
+		//		test: /\.js$/,
+		//		exclude: /node_modules|google/,
+		//		loader: 'jshint-loader'
+		//	}
+		//],
+		loaders: [
+			{
+				test: /\.ts$/,
+				loader: 'typescript-loader'
+			},
+			{
+				test: /\.less$/,
+				loader: 'style!css?root=../!autoprefixer!less'
+			},
+			{
+				test: /\.css$/,
+				loader: 'style!raw'
+			},
+			{
+				test: /\.png$/,
+				loader: 'file'
+			},
+			{
+				test: /angular/,
+				loader: 'exports?angular'
+			},
+			{
+				test: /collapse.js$ /,
+				loader: 'imports?jQuery=jquery'
+			},
+			{
+				test: /template.html$/,
+				loader: 'ng-cache?prefix=[dir]'
+			},
+			{
+				test: /\.html$/,
+				loader: 'html'
+			}
+		]
+	},
+	jshint: {
+		globalstrict: true,
+		emitErrors: false
+	},
+	plugins: [
+		new webpack.ResolverPlugin(
+				new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
+		),
+		new ngAnnotatePlugin({
+			add: true
+		}),
+		new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity)
+	]
 };

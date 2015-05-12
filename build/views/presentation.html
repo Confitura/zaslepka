@@ -1,0 +1,45 @@
+<section class="vote">
+	<aside class="navigation" ng-if="ctrl.hasPrevious()">
+		<span class="prev-arrow" ng-click="ctrl.prev()" ></span>
+	</aside>
+
+	<section class="presentation">
+		<section class="speakers">
+			<section class="person" ng-repeat="speaker in presentationVote.presentation.speakers">
+				<div class="person-photo" ng-click="ctrl.showSpeaker(speaker)">
+					<img ng-src="{{speaker.photo}}"/>
+				</div>
+				<h2>{{speaker.fullName}}</h2>
+			</section>
+		</section>
+		<section class="presentation-bottom">
+			<aside class="rating">
+				<div class="rate"
+						 ng-repeat="rate in ctrl.rating"
+						 ng-class="{selected: rate == presentationVote.vote}"
+						 ng-click="ctrl.vote(rate)">{{rate}}
+				</div>
+			</aside>
+			<section class="presentation-info">
+				<h1>{{presentationVote.presentation.title}}</h1>
+
+				<div class="presentation-info-type">
+					<h3 ng-class="{selected: ctrl.configuration.info == ctrl.info.SHORT}"
+							ng-click="ctrl.showInfo(ctrl.info.SHORT)">Krótki opis</h3>
+
+					<h3 ng-class="{selected: ctrl.configuration.info == ctrl.info.FULL}" ng-click="ctrl.showInfo(ctrl.info.FULL)">
+						Pełny opis</h3>
+				</div>
+				<span ng-bind-html="presentationVote.presentation.shortDesc"
+							ng-if="ctrl.configuration.info == ctrl.info.SHORT"></span>
+
+				<span ng-bind-html="presentationVote.presentation.longDesc"
+							ng-if="ctrl.configuration.info == ctrl.info.FULL"></span>
+
+			</section>
+		</section>
+	</section>
+	<aside class="navigation">
+		<span class="next-arrow" ng-click="ctrl.next()"></span>
+	</aside>
+</section>
