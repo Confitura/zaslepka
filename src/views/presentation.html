@@ -1,6 +1,6 @@
 <section class="vote">
-	<aside class="navigation" ng-if="ctrl.hasPrevious()">
-		<span class="prev-arrow" ng-click="ctrl.prev()" ></span>
+	<aside class="navigation">
+		<span class="prev-arrow" ng-click="ctrl.prev()" ng-if="ctrl.hasPrevious()"></span>
 	</aside>
 
 	<section class="presentation">
@@ -30,11 +30,7 @@
 					<h3 ng-class="{selected: ctrl.configuration.info == ctrl.info.FULL}" ng-click="ctrl.showInfo(ctrl.info.FULL)">
 						Pełny opis</h3>
 				</div>
-				<span ng-bind-html="presentationVote.presentation.shortDesc"
-							ng-if="ctrl.configuration.info == ctrl.info.SHORT"></span>
-
-				<span ng-bind-html="presentationVote.presentation.longDesc"
-							ng-if="ctrl.configuration.info == ctrl.info.FULL"></span>
+				<div ng-bind-html="ctrl.getInfoFor(presentationVote.presentation)"></div>
 
 			</section>
 		</section>

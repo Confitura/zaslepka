@@ -42,8 +42,13 @@ function VotingController(Voting, hotkeys, $modal, $scope) {
 	vm.showInfo = function (type) {
 		vm.configuration.info = type;
 	};
+
 	vm.toggleInfo = function () {
 		vm.showInfo(vm.configuration.info === vm.info.SHORT ? vm.info.FULL : vm.info.SHORT);
+	};
+
+	vm.getInfoFor = function (presentation) {
+		return vm.configuration.info === vm.info.SHORT ? presentation.shortDesc : presentation.longDesc;
 	};
 
 	vm.up = function () {
