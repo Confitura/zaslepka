@@ -1,4 +1,4 @@
-<section class="vote">
+<section class="vote" >
 	<aside class="navigation">
 		<span class="prev-arrow" ng-click="ctrl.prev()" ng-if="ctrl.hasPrevious()"></span>
 	</aside>
@@ -21,7 +21,7 @@
 				</div>
 			</aside>
 			<section class="presentation-info">
-				<h1>{{presentationVote.presentation.title}}</h1>
+				<h1 class="presentation-title">{{presentationVote.presentation.title}}</h1>
 
 				<div class="presentation-info-type">
 					<h3 ng-class="{selected: ctrl.configuration.info == ctrl.info.SHORT}"

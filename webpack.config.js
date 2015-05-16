@@ -13,7 +13,9 @@ module.exports = {
 			'angular-ui-router/release/angular-ui-router',
 			'moment',
 			'angular-loading-bar/build/loading-bar',
-			'./src/css/external'
+			'./src/css/external',
+			'hammerjs/hammer.min.js',
+			'imports?require=>false!angular-hammer/angular.hammer.js'
 		]
 	},
 	output: {
@@ -84,6 +86,9 @@ module.exports = {
 		new ngAnnotatePlugin({
 			add: true
 		}),
-		new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity)
+		new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity),
+		new webpack.ProvidePlugin({
+			'window.Hammer': "hammerjs/hammer.js"
+		})
 	]
 };

@@ -1,5 +1,5 @@
 <div ng-controller="VotingController as ctrl">
-	<div class="v4p">
+	<div class="v4p" hm-swipeleft="ctrl.next" hm-swiperight="ctrl.prev">
 		<div ng-if="ctrl.notStarted()">
 			<page name="v4p-start"></page>
 			<div style="text-align: center;">

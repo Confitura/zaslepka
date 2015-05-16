@@ -153,6 +153,10 @@ function VotingController(Voting, hotkeys, $modal, $scope) {
 		});
 	};
 
+	vm.onSwipe = function (event) {
+		console.log(event);
+	};
+
 	vm.helpOpened = false;
 	bindKeys();
 
