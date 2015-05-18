@@ -7,7 +7,7 @@ function PageDirective(Pages) {
 		controller: /* @ngInject */function ($scope) {
 			$scope.content = Pages.get({name: $scope.name});
 		}
-	}
+	};
 }
 
 module.exports = PageDirective;

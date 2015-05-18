@@ -33,13 +33,13 @@ module.exports = {
 		}
 	},
 	module: {
-		//preLoaders: [
-		//	{
-		//		test: /\.js$/,
-		//		exclude: /node_modules|google/,
-		//		loader: 'jshint-loader'
-		//	}
-		//],
+		preLoaders: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules|google/,
+				loader: 'jshint-loader'
+			}
+		],
 		loaders: [
 			{
 				test: /\.ts$/,
@@ -80,9 +80,6 @@ module.exports = {
 		emitErrors: false
 	},
 	plugins: [
-		new webpack.ResolverPlugin(
-				new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
-		),
 		new ngAnnotatePlugin({
 			add: true
 		}),
