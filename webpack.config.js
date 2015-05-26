@@ -19,6 +19,7 @@ module.exports = {
 		]
 	},
 	output: {
+		path: __dirname + '/build',
 		filename: 'bundle.js',
 		publicPath: 'js/'
 	},
@@ -87,5 +88,11 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			'window.Hammer': "hammerjs/hammer.js"
 		})
-	]
+	],
+	devServer: {
+		contentBase: "./build",
+		hot: true,
+		inline: true,
+		stats: { colors: true }
+	}
 };

@@ -31,3 +31,4 @@ ng.module('confitura', [
 					})
 			;
 		});
+console.log("abc")

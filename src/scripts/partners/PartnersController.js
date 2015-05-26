@@ -7,11 +7,11 @@ function PartnersController(Partners) {
 
 	var vm = this;
 	vm.types = [
-		'platinum',
-		'gold',
-		'silver',
-		'bronze',
-		'technological',
+		'platynowi',
+		'złoci',
+		'srebrni',
+		'brązowi',
+		'technologiczni',
 		'media'
 	];
 
