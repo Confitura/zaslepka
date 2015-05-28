@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 /* @ngInject */
-function VotingController(Voting, hotkeys, $modal, $scope) {
+function VotingController(Voting, hotkeys, $scope) {
 	var vm = this;
 	var speakerModal = null;
 
@@ -86,76 +86,21 @@ function VotingController(Voting, hotkeys, $modal, $scope) {
 	};
 
 	vm.showSpeakers = function () {
-		vm.showModal(Voting.getCurrent().presentation.speakers);
+		showModal(Voting.getCurrent().presentation.speakers);
 	};
 
 	vm.showSpeaker = function (speaker) {
-		vm.showModal([speaker]);
+		showModal([speaker]);
 	};
 
-	vm.showModal = function (speakers) {
-		if (speakerModal) {
-			return;
-		}
-		hotkeys.del('alt+left');
-		hotkeys.del('alt+right');
-		speakerModal = $modal.open({
-			backdropClass: 'person-modal-backdrop',
-			windowClass: 'person-modal',
-			size: 'md',
-			templateUrl: 'views/person-modal.html',
-			controller: /* @ngInject */ function (persons, $scope, hotkeys) {
-				hotkeys
-						.add({
-							persistent: false,
-							combo: 'alt+right',
-							description: 'Następna prezentacja?',
-							callback: function (event) {
-								event.preventDefault();
-								$scope.next();
-							}
-						});
-				hotkeys.add({
-					persistent: false,
-					combo: 'alt+left',
-					description: 'Poprzednia prezentacja',
-					callback: function (event) {
-						event.preventDefault();
-						$scope.prev();
-					}
-				});
 
-				var idx = 0;
-				$scope.hasMany = function () {
-					return persons.length > 1;
-				};
 
-				$scope.person = function () {
-					return persons[idx];
-				};
-				$scope.next = function () {
-					idx = (idx + 1) % persons.length;
-				};
-				$scope.prev = function () {
-					idx = Math.abs(idx - 1) % persons.length;
-				};
-			},
-			resolve: {
-				persons: function () {
-					return speakers;
-				}
-			}
-		});
-		speakerModal.result.finally(function () {
-			speakerModal = null;
-			bindKeys();
-
-		});
-	};
-
-	vm.helpOpened = false;
 
 	bindKeys();
+
+	function showModal(speakers) {
+		$scope.$broadcast('person.modal:open', speakers);
+	}
 
 	function submit(callback) {
 		vm.saving = true;

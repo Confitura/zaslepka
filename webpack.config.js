@@ -66,10 +66,10 @@ module.exports = {
 				test: /collapse.js$ /,
 				loader: 'imports?jQuery=jquery'
 			},
-			{
-				test: /template.html$/,
-				loader: 'ng-cache?prefix=[dir]'
-			},
+			//{
+			//	test: /template.html$/,
+			//	loader: 'ng-cache?prefix=[dir]'
+			//},
 			{
 				test: /\.html$/,
 				loader: 'html'

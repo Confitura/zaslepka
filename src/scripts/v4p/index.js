@@ -7,7 +7,7 @@ require('angular-cookies/angular-cookies.min.js');
 require('angular-hotkeys/build/hotkeys.min.js');
 require('angular-hotkeys/build/hotkeys.min.css');
 
-angular.module('v4p',['ngCookies','cfp.hotkeys','ui.bootstrap', 'hmTouchEvents'])
+angular.module('v4p',['ngCookies','cfp.hotkeys','ui.bootstrap', 'hmTouchEvents', require('directives/person')])
     .factory('Vote', require('./Vote'))
     .factory('Voting', require('./Voting'))
     .controller('VotingController', require('./VotingController'));

@@ -5,12 +5,7 @@
 
 	<section class="presentation">
 		<section class="speakers">
-			<section class="person" ng-repeat="speaker in presentationVote.presentation.speakers">
-				<div class="person-photo" ng-click="ctrl.showSpeaker(speaker)">
-					<img ng-src="{{speaker.photo}}"/>
-				</div>
-				<h2>{{speaker.fullName}}</h2>
-			</section>
+			<person for="speaker" ng-repeat="speaker in presentationVote.presentation.speakers"></person>
 		</section>
 		<section class="presentation-bottom">
 			<aside class="rating">

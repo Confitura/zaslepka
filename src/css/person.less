@@ -1,0 +1,56 @@
+.person-photo(@size) {
+  cursor: pointer;
+  overflow: hidden;
+  margin: auto;
+  border-radius: @size;
+  width: @size;
+  height: @size;
+
+  img {
+    width: @size;
+    height: @size;
+    background: url(../img/placeholder.png) no-repeat;
+    background-size: 100%;
+  }
+}
+
+.person (@size: 200px) {
+  text-align: center;
+  width: @size;
+  .person-photo {
+    .person-photo(@size)
+  }
+
+}
+
+.person-modal-backdrop {
+  opacity: .9 !important;
+}
+
+.person-modal {
+  .modal-content {
+    display: flex;
+    justify-content: space-around;
+    background: none;
+    .person-photo {
+      .person-photo(300px);
+    }
+    h3.presentation-title {
+      font-weight: bold;
+      color: @main;
+    }
+  }
+}
+
+.person {
+  .person();
+}
+
+@media all and (max-width: @small-screen) {
+  .person {
+    .person(300px);
+    h2 {
+      font-size: 350%;
+    }
+  }
+}
