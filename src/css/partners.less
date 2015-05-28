@@ -1,91 +1,30 @@
 @import "colors";
 
-.partners {
-  margin-top: 140px;
-  position: relative;
-  margin-bottom: 60px;
+#partners.content {
+  .partner {
+    display: flex;
+    padding-top: 30px;
 
-  .logo {
-    background: url(../img/logo-small.png) no-repeat;
-    background-size: 100%;
-    width: 350px;
-    height: 170px;
-    z-index: 1000;
-    float: left;
-    position: absolute;
-    top: -105px;
-  }
+    .partner-logo {
 
-  .header {
-    height: 100px;
-    background: url(../img/stripes.png);
-    .header-color {
-      width: 100%;
-      height: 70px;
-      background-color: @main;
-      clip-path: polygon(0% 0%, 100% 0%, 100% 50px, 0% 70px);
+      flex-basis: 100%;
+      flex-grow: 1;
+
+      img {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        width: 100%;
+      }
     }
-    .partner-types {
-      display: flex;
-      justify-content: flex-end;
-      font-family: "Bebas Neue", Helvetica;
-      a.partner-type {
+    .partner-info {
+      flex-grow: 1;
+      padding-left: 10px;
+      .partner-name {
         font-weight: bold;
-
-        cursor: pointer;
-        //float: left;
-        padding-right: 3px;
-        color: @main;
-        &:hover, &.active {
-          color: white;
-          text-decoration: none;
-          background-color: transparent;
-        }
-      }
-
-    }
-    h1 {
-      text-align: right;
-      padding: 10px;
-    }
-  }
-  .content {
-    background-color: @third;
-    padding: 20px;
-
-    .partner {
-      display: flex;
-      padding-top: 30px;
-
-      .partner-logo {
-
-        flex-basis: 100%;
-        flex-grow: 1;
-
-        img {
-          padding: 20px;
-          background-color: #ffffff;
-          border-radius: 10px;
-          width: 100%;
-        }
-      }
-      .partner-info {
-        flex-grow: 1;
-        padding-left: 10px;
-        .partner-name {
-          font-weight: bold;
-        }
       }
     }
   }
-  .footer {
-    background: url(../img/partners_footer.png) no-repeat;
-    background-size: contain;
-    height: 0;
-    width: 100%;
-    padding-top: 9.8%;
-  }
-
 }
 
 @media all and (max-width: @xsmall-screen) {
@@ -100,8 +39,8 @@
     }
   }
 
-  .partner-types {
-    a.partner-type {
+  .submenu {
+    a.item {
       font-size: 200%;
       flex-grow: 1;
       text-align: center;
@@ -110,7 +49,7 @@
 }
 
 @media all and (min-width: @xsmall-screen) {
-  a.partner-type {
+  a.item {
     font-size: 260%;
   }
 

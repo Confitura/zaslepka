@@ -1,13 +1,13 @@
-<div class="partners" ng-controller="PartnersController as ctrl">
+<div class="page" ng-controller="PartnersController as ctrl">
 	<div class="logo"></div>
 	<div class="header">
 		<div class="header-color">
 			<h1>partners</h1>
 		</div>
 
-		<div class="partner-types">
+		<div class="submenu">
 			<div class="navbar-header">
-				<a class="collapsed partner-type navbar-toggle" data-toggle="collapse" data-target="#partners-menu"
+				<a class="collapsed item navbar-toggle" data-toggle="collapse" data-target="#partners-menu"
 					 aria-expanded="false" aria-controls="navbar">
 					partnerzy
 				</a>
@@ -16,17 +16,16 @@
 			<div id="partners-menu" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li ng-repeat="type in ctrl.types" ng-if="ctrl.hasAnyFor(type)">
-						<a class="partner-type" ng-click="ctrl.select(type)"
+						<a class="item" ng-click="ctrl.select(type)"
 							 ng-class="{'active' : ctrl.isSelected(type)}">{{type}}</a>
 					</li>
 				</ul>
-
 			</div>
 		</div>
 
 
 	</div>
-	<div class="content">
+	<div class="content" id="partners">
 		<div ng-repeat="partner in ctrl.getForSelected()" class="partner">
 			<div class="partner-logo">
 				<a ng-href="{{partner.url}}" target="_blank">
