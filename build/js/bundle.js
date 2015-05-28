@@ -2,7 +2,7 @@ webpackJsonp([1],[
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(132);
+	module.exports = __webpack_require__(134);
 
 
 /***/ },
@@ -137,13 +137,15 @@ webpackJsonp([1],[
 /* 129 */,
 /* 130 */,
 /* 131 */,
-/* 132 */
+/* 132 */,
+/* 133 */,
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	__webpack_require__(94);
 	__webpack_require__(100);
-	__webpack_require__(133);
+	__webpack_require__(135);
 	//require('bootstrap/js/collapse.js');
 	var ng = __webpack_require__(3);
 	__webpack_require__(4);
@@ -153,16 +155,20 @@ webpackJsonp([1],[
 	__webpack_require__(8).locale('pl');
 	__webpack_require__(93);
 	ng.module('confitura', [
-				'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
-				__webpack_require__(135), __webpack_require__(138), __webpack_require__(141), __webpack_require__(144), __webpack_require__(160), __webpack_require__(163)])
-			//.constant('apiServer', 'http://c4p.confitura.pl/api')
+		'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
+		__webpack_require__(137),
+		__webpack_require__(140),
+		__webpack_require__(143), __webpack_require__(146), __webpack_require__(163),
+		__webpack_require__(166),
+		__webpack_require__(169)])
+		//.constant('apiServer', 'http://c4p.confitura.pl/api')
 			.constant('apiServer', 'http://confitura.pl:18080/api')
 			.config(/*@ngInject*/ ["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
 				$urlRouterProvider.when('', '/');
 				$stateProvider
 						.state('main', {
 							url: '/',
-							template: __webpack_require__(166)
+							template: __webpack_require__(172)
 						})
 						.state('partners', {
 							url: '/partners',
@@ -172,6 +178,10 @@ webpackJsonp([1],[
 							url: '/speakers',
 							templateUrl: 'views/speakers.html'
 						})
+						.state('presentations', {
+							url: '/presentations/:id',
+							templateUrl: 'views/presentations.html'
+						})
 						.state('v4p', {
 							url: '/v4p',
 							templateUrl: 'views/v4p.html'
@@ -180,10 +190,10 @@ webpackJsonp([1],[
 			}]);
 
 /***/ },
-/* 133 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(134);
+	var $ = __webpack_require__(136);
 	$(function () {
 	    'use strict';
 	    (function (i, s, o, g, r, a, m) {
@@ -212,7 +222,7 @@ webpackJsonp([1],[
 	});
 
 /***/ },
-/* 134 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -9428,17 +9438,17 @@ webpackJsonp([1],[
 
 
 /***/ },
-/* 135 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	__webpack_require__(3).module('twitter',[])
-	    .factory('Twitter', __webpack_require__(136))
-	    .controller('TwitterCtrl', __webpack_require__(137));
+	    .factory('Twitter', __webpack_require__(138))
+	    .controller('TwitterCtrl', __webpack_require__(139));
 	module.exports ='twitter';
 
 /***/ },
-/* 136 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9450,7 +9460,7 @@ webpackJsonp([1],[
 	module.exports = Twitter;
 
 /***/ },
-/* 137 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9469,17 +9479,17 @@ webpackJsonp([1],[
 	module.exports = TwitterCtrl;
 
 /***/ },
-/* 138 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	__webpack_require__(3).module('news', [])
-	    .factory('News', __webpack_require__(139))
-	    .controller('NewsCtrl', __webpack_require__(140));
+	    .factory('News', __webpack_require__(141))
+	    .controller('NewsCtrl', __webpack_require__(142));
 	module.exports ='news';
 
 /***/ },
-/* 139 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9491,7 +9501,7 @@ webpackJsonp([1],[
 	module.exports = News;
 
 /***/ },
-/* 140 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9505,17 +9515,17 @@ webpackJsonp([1],[
 	module.exports = NewsCtrl;
 
 /***/ },
-/* 141 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	__webpack_require__(3).module('partners',[])
-	    .factory('Partners', __webpack_require__(142))
-	    .controller('PartnersController', __webpack_require__(143));
+	    .factory('Partners', __webpack_require__(144))
+	    .controller('PartnersController', __webpack_require__(145));
 	module.exports ='partners';
 
 /***/ },
-/* 142 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9528,7 +9538,7 @@ webpackJsonp([1],[
 	module.exports = Partners;
 
 /***/ },
-/* 143 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9573,27 +9583,27 @@ webpackJsonp([1],[
 	module.exports = PartnersController;
 
 /***/ },
-/* 144 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var angular = __webpack_require__(3);
-	__webpack_require__(122);
-	__webpack_require__(145);
-	__webpack_require__(146);
+	__webpack_require__(123);
 	__webpack_require__(147);
 	__webpack_require__(148);
 	__webpack_require__(149);
+	__webpack_require__(150);
+	__webpack_require__(151);
 
-	angular.module('v4p',['ngCookies','cfp.hotkeys','ui.bootstrap', 'hmTouchEvents', __webpack_require__(151)])
-	    .factory('Vote', __webpack_require__(157))
-	    .factory('Voting', __webpack_require__(158))
-	    .controller('VotingController', __webpack_require__(159));
+	angular.module('v4p',['ngCookies','cfp.hotkeys','ui.bootstrap', 'hmTouchEvents', __webpack_require__(153)])
+	    .factory('Vote', __webpack_require__(160))
+	    .factory('Voting', __webpack_require__(161))
+	    .controller('VotingController', __webpack_require__(162));
 
 	module.exports ='v4p';
 
 /***/ },
-/* 145 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -9610,7 +9620,7 @@ webpackJsonp([1],[
 	module.exports = angular
 
 /***/ },
-/* 146 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -9628,7 +9638,7 @@ webpackJsonp([1],[
 	module.exports = angular
 
 /***/ },
-/* 147 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -9646,7 +9656,7 @@ webpackJsonp([1],[
 	module.exports = angular
 
 /***/ },
-/* 148 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! 
@@ -9655,19 +9665,19 @@ webpackJsonp([1],[
 	 * Copyright (c) 2014 Wes Cruver
 	 * License: MIT
 	 */
-	!function(){"use strict";angular.module("cfp.hotkeys",[]).provider("hotkeys",function(){this.includeCheatSheet=!0,this.templateTitle="Keyboard Shortcuts:",this.template='<div class="cfp-hotkeys-container fade" ng-class="{in: helpVisible}" style="display: none;"><div class="cfp-hotkeys"><h4 class="cfp-hotkeys-title">{{ title }}</h4><table><tbody><tr ng-repeat="hotkey in hotkeys | filter:{ description: \'!$$undefined$$\' }"><td class="cfp-hotkeys-keys"><span ng-repeat="key in hotkey.format() track by $index" class="cfp-hotkeys-key">{{ key }}</span></td><td class="cfp-hotkeys-text">{{ hotkey.description }}</td></tr></tbody></table><div class="cfp-hotkeys-close" ng-click="toggleCheatSheet()">×</div></div></div>',this.cheatSheetHotkey="?",this.cheatSheetDescription="Show / hide this help menu",this.$get=["$rootElement","$rootScope","$compile","$window","$document",function(a,b,c,d,e){function f(a){var b={command:"⌘",shift:"⇧",left:"←",right:"→",up:"↑",down:"↓","return":"↩",backspace:"⌫"};a=a.split("+");for(var c=0;c<a.length;c++)"mod"===a[c]&&(a[c]=d.navigator&&d.navigator.platform.indexOf("Mac")>=0?"command":"ctrl"),a[c]=b[a[c]]||a[c];return a.join(" + ")}function g(a,b,c,d,e,f){this.combo=a instanceof Array?a:[a],this.description=b,this.callback=c,this.action=d,this.allowIn=e,this.persistent=f}function h(){for(var a=o.hotkeys.length;a--;){var b=o.hotkeys[a];b&&!b.persistent&&k(b)}}function i(){o.helpVisible=!o.helpVisible,o.helpVisible?(t=l("esc"),k("esc"),j("esc",t.description,i)):(k("esc"),t!==!1&&j(t))}function j(a,b,c,d,e,f){var h,i=["INPUT","SELECT","TEXTAREA"],j=Object.prototype.toString.call(a);if("[object Object]"===j&&(b=a.description,c=a.callback,d=a.action,f=a.persistent,e=a.allowIn,a=a.combo),b instanceof Function?(d=c,c=b,b="$$undefined$$"):angular.isUndefined(b)&&(b="$$undefined$$"),void 0===f&&(f=!0),"function"==typeof c){h=c,e instanceof Array||(e=[]);for(var k,l=0;l<e.length;l++)e[l]=e[l].toUpperCase(),k=i.indexOf(e[l]),-1!==k&&i.splice(k,1);c=function(a){var b=!0,c=a.target||a.srcElement,d=c.nodeName.toUpperCase();if((" "+c.className+" ").indexOf(" mousetrap ")>-1)b=!0;else for(var e=0;e<i.length;e++)if(i[e]===d){b=!1;break}b&&n(h.apply(this,arguments))}}"string"==typeof d?Mousetrap.bind(a,n(c),d):Mousetrap.bind(a,n(c));var m=new g(a,b,c,d,e,f);return o.hotkeys.push(m),m}function k(a){var b=a instanceof g?a.combo:a;if(Mousetrap.unbind(b),angular.isArray(b)){for(var c=!0,d=b.length;d--;)c=k(b[d])&&c;return c}var e=o.hotkeys.indexOf(l(b));return e>-1?(o.hotkeys[e].combo.length>1?o.hotkeys[e].combo.splice(o.hotkeys[e].combo.indexOf(b),1):o.hotkeys.splice(e,1),!0):!1}function l(a){for(var b,c=0;c<o.hotkeys.length;c++)if(b=o.hotkeys[c],b.combo.indexOf(a)>-1)return b;return!1}function m(a){return a.$id in p||(p[a.$id]=[],a.$on("$destroy",function(){for(var b=p[a.$id].length;b--;)k(p[a.$id][b]),delete p[a.$id][b]})),{add:function(b){var c;return c=arguments.length>1?j.apply(this,arguments):j(b),p[a.$id].push(c),this}}}function n(a){return function(c,d){if(a instanceof Array){var e=a[0],f=a[1];a=function(){f.scope.$eval(e)}}b.$apply(function(){a(c,l(d))})}}Mousetrap.stopCallback=function(a,b){return(" "+b.className+" ").indexOf(" mousetrap ")>-1?!1:b.contentEditable&&"true"==b.contentEditable},g.prototype.format=function(){for(var a=this.combo[0],b=a.split(/[\s]/),c=0;c<b.length;c++)b[c]=f(b[c]);return b};var o=b.$new();o.hotkeys=[],o.helpVisible=!1,o.title=this.templateTitle,o.toggleCheatSheet=i;var p=[];if(b.$on("$routeChangeSuccess",function(a,b){h(),b&&b.hotkeys&&angular.forEach(b.hotkeys,function(a){var c=a[2];("string"==typeof c||c instanceof String)&&(a[2]=[c,b]),a[5]=!1,j.apply(this,a)})}),this.includeCheatSheet){var q=e[0],r=a[0],s=angular.element(this.template);j(this.cheatSheetHotkey,this.cheatSheetDescription,i),(r===q||r===q.documentElement)&&(r=q.body),angular.element(r).append(c(s)(o))}var t=!1,u={add:j,del:k,get:l,bindTo:m,template:this.template,toggleCheatSheet:i,includeCheatSheet:this.includeCheatSheet,cheatSheetHotkey:this.cheatSheetHotkey,cheatSheetDescription:this.cheatSheetDescription,purgeHotkeys:h,templateTitle:this.templateTitle};return u}]}).directive("hotkey",["hotkeys",function(a){return{restrict:"A",link:function(b,c,d){var e,f;angular.forEach(b.$eval(d.hotkey),function(b,c){f="string"==typeof d.hotkeyAllowIn?d.hotkeyAllowIn.split(/[\s,]+/):[],e=c,a.add({combo:c,description:d.hotkeyDescription,callback:b,action:d.hotkeyAction,allowIn:f})}),c.bind("$destroy",function(){a.del(e)})}}}]).run(["hotkeys",function(){}])}(),function(a,b){function c(a,b,c){return a.addEventListener?void a.addEventListener(b,c,!1):void a.attachEvent("on"+b,c)}function d(a){if("keypress"==a.type){var b=String.fromCharCode(a.which);return a.shiftKey||(b=b.toLowerCase()),b}return y[a.which]?y[a.which]:z[a.which]?z[a.which]:String.fromCharCode(a.which).toLowerCase()}function e(a,b){return a.sort().join(",")===b.sort().join(",")}function f(a){a=a||{};var b,c=!1;for(b in E)a[b]?c=!0:E[b]=0;c||(H=!1)}function g(a,b,c,d,f,g){var h,i,j=[],k=c.type;if(!C[a])return[];for("keyup"==k&&n(a)&&(b=[a]),h=0;h<C[a].length;++h)if(i=C[a][h],(d||!i.seq||E[i.seq]==i.level)&&k==i.action&&("keypress"==k&&!c.metaKey&&!c.ctrlKey||e(b,i.modifiers))){var l=!d&&i.combo==f,m=d&&i.seq==d&&i.level==g;(l||m)&&C[a].splice(h,1),j.push(i)}return j}function h(a){var b=[];return a.shiftKey&&b.push("shift"),a.altKey&&b.push("alt"),a.ctrlKey&&b.push("ctrl"),a.metaKey&&b.push("meta"),b}function i(a){return a.preventDefault?void a.preventDefault():void(a.returnValue=!1)}function j(a){return a.stopPropagation?void a.stopPropagation():void(a.cancelBubble=!0)}function k(a,b,c,d){J.stopCallback(b,b.target||b.srcElement,c,d)||a(b,c)===!1&&(i(b),j(b))}function l(a,b,c){var d,e=g(a,b,c),h={},i=0,j=!1;for(d=0;d<e.length;++d)e[d].seq&&(i=Math.max(i,e[d].level));for(d=0;d<e.length;++d)if(e[d].seq){if(e[d].level!=i)continue;j=!0,h[e[d].seq]=1,k(e[d].callback,c,e[d].combo,e[d].seq)}else j||k(e[d].callback,c,e[d].combo);var l="keypress"==c.type&&G;c.type!=H||n(a)||l||f(h),G=j&&"keydown"==c.type}function m(a){"number"!=typeof a.which&&(a.which=a.keyCode);var b=d(a);if(b)return"keyup"==a.type&&F===b?void(F=!1):void J.handleKey(b,h(a),a)}function n(a){return"shift"==a||"ctrl"==a||"alt"==a||"meta"==a}function o(){clearTimeout(x),x=setTimeout(f,1e3)}function p(){if(!w){w={};for(var a in y)a>95&&112>a||y.hasOwnProperty(a)&&(w[y[a]]=a)}return w}function q(a,b,c){return c||(c=p()[a]?"keydown":"keypress"),"keypress"==c&&b.length&&(c="keydown"),c}function r(a,b,c,e){function g(b){return function(){H=b,++E[a],o()}}function h(b){k(c,b,a),"keyup"!==e&&(F=d(b)),setTimeout(f,10)}E[a]=0;for(var i=0;i<b.length;++i){var j=i+1===b.length,l=j?h:g(e||t(b[i+1]).action);u(b[i],l,e,a,i)}}function s(a){return"+"===a?["+"]:a.split("+")}function t(a,b){var c,d,e,f=[];for(c=s(a),e=0;e<c.length;++e)d=c[e],B[d]&&(d=B[d]),b&&"keypress"!=b&&A[d]&&(d=A[d],f.push("shift")),n(d)&&f.push(d);return b=q(d,f,b),{key:d,modifiers:f,action:b}}function u(a,b,c,d,e){D[a+":"+c]=b,a=a.replace(/\s+/g," ");var f,h=a.split(" ");return h.length>1?void r(a,h,b,c):(f=t(a,c),C[f.key]=C[f.key]||[],g(f.key,f.modifiers,{type:f.action},d,a,e),void C[f.key][d?"unshift":"push"]({callback:b,modifiers:f.modifiers,action:f.action,seq:d,level:e,combo:a}))}function v(a,b,c){for(var d=0;d<a.length;++d)u(a[d],b,c)}for(var w,x,y={8:"backspace",9:"tab",13:"enter",16:"shift",17:"ctrl",18:"alt",20:"capslock",27:"esc",32:"space",33:"pageup",34:"pagedown",35:"end",36:"home",37:"left",38:"up",39:"right",40:"down",45:"ins",46:"del",91:"meta",93:"meta",224:"meta"},z={106:"*",107:"+",109:"-",110:".",111:"/",186:";",187:"=",188:",",189:"-",190:".",191:"/",192:"`",219:"[",220:"\\",221:"]",222:"'"},A={"~":"`","!":"1","@":"2","#":"3",$:"4","%":"5","^":"6","&":"7","*":"8","(":"9",")":"0",_:"-","+":"=",":":";",'"':"'","<":",",">":".","?":"/","|":"\\"},B={option:"alt",command:"meta","return":"enter",escape:"esc",mod:/Mac|iPod|iPhone|iPad/.test(navigator.platform)?"meta":"ctrl"},C={},D={},E={},F=!1,G=!1,H=!1,I=1;20>I;++I)y[111+I]="f"+I;for(I=0;9>=I;++I)y[I+96]=I;c(b,"keypress",m),c(b,"keydown",m),c(b,"keyup",m);var J={bind:function(a,b,c){return a=a instanceof Array?a:[a],v(a,b,c),this},unbind:function(a,b){return J.bind(a,function(){},b)},trigger:function(a,b){return D[a+":"+b]&&D[a+":"+b]({},a),this},reset:function(){return C={},D={},this},stopCallback:function(a,b){return(" "+b.className+" ").indexOf(" mousetrap ")>-1?!1:"INPUT"==b.tagName||"SELECT"==b.tagName||"TEXTAREA"==b.tagName||b.isContentEditable},handleKey:l};a.Mousetrap=J,"function"=="function"&&__webpack_require__(121)&&!(__WEBPACK_AMD_DEFINE_FACTORY__ = (J), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))}(window,document);
+	!function(){"use strict";angular.module("cfp.hotkeys",[]).provider("hotkeys",function(){this.includeCheatSheet=!0,this.templateTitle="Keyboard Shortcuts:",this.template='<div class="cfp-hotkeys-container fade" ng-class="{in: helpVisible}" style="display: none;"><div class="cfp-hotkeys"><h4 class="cfp-hotkeys-title">{{ title }}</h4><table><tbody><tr ng-repeat="hotkey in hotkeys | filter:{ description: \'!$$undefined$$\' }"><td class="cfp-hotkeys-keys"><span ng-repeat="key in hotkey.format() track by $index" class="cfp-hotkeys-key">{{ key }}</span></td><td class="cfp-hotkeys-text">{{ hotkey.description }}</td></tr></tbody></table><div class="cfp-hotkeys-close" ng-click="toggleCheatSheet()">×</div></div></div>',this.cheatSheetHotkey="?",this.cheatSheetDescription="Show / hide this help menu",this.$get=["$rootElement","$rootScope","$compile","$window","$document",function(a,b,c,d,e){function f(a){var b={command:"⌘",shift:"⇧",left:"←",right:"→",up:"↑",down:"↓","return":"↩",backspace:"⌫"};a=a.split("+");for(var c=0;c<a.length;c++)"mod"===a[c]&&(a[c]=d.navigator&&d.navigator.platform.indexOf("Mac")>=0?"command":"ctrl"),a[c]=b[a[c]]||a[c];return a.join(" + ")}function g(a,b,c,d,e,f){this.combo=a instanceof Array?a:[a],this.description=b,this.callback=c,this.action=d,this.allowIn=e,this.persistent=f}function h(){for(var a=o.hotkeys.length;a--;){var b=o.hotkeys[a];b&&!b.persistent&&k(b)}}function i(){o.helpVisible=!o.helpVisible,o.helpVisible?(t=l("esc"),k("esc"),j("esc",t.description,i)):(k("esc"),t!==!1&&j(t))}function j(a,b,c,d,e,f){var h,i=["INPUT","SELECT","TEXTAREA"],j=Object.prototype.toString.call(a);if("[object Object]"===j&&(b=a.description,c=a.callback,d=a.action,f=a.persistent,e=a.allowIn,a=a.combo),b instanceof Function?(d=c,c=b,b="$$undefined$$"):angular.isUndefined(b)&&(b="$$undefined$$"),void 0===f&&(f=!0),"function"==typeof c){h=c,e instanceof Array||(e=[]);for(var k,l=0;l<e.length;l++)e[l]=e[l].toUpperCase(),k=i.indexOf(e[l]),-1!==k&&i.splice(k,1);c=function(a){var b=!0,c=a.target||a.srcElement,d=c.nodeName.toUpperCase();if((" "+c.className+" ").indexOf(" mousetrap ")>-1)b=!0;else for(var e=0;e<i.length;e++)if(i[e]===d){b=!1;break}b&&n(h.apply(this,arguments))}}"string"==typeof d?Mousetrap.bind(a,n(c),d):Mousetrap.bind(a,n(c));var m=new g(a,b,c,d,e,f);return o.hotkeys.push(m),m}function k(a){var b=a instanceof g?a.combo:a;if(Mousetrap.unbind(b),angular.isArray(b)){for(var c=!0,d=b.length;d--;)c=k(b[d])&&c;return c}var e=o.hotkeys.indexOf(l(b));return e>-1?(o.hotkeys[e].combo.length>1?o.hotkeys[e].combo.splice(o.hotkeys[e].combo.indexOf(b),1):o.hotkeys.splice(e,1),!0):!1}function l(a){for(var b,c=0;c<o.hotkeys.length;c++)if(b=o.hotkeys[c],b.combo.indexOf(a)>-1)return b;return!1}function m(a){return a.$id in p||(p[a.$id]=[],a.$on("$destroy",function(){for(var b=p[a.$id].length;b--;)k(p[a.$id][b]),delete p[a.$id][b]})),{add:function(b){var c;return c=arguments.length>1?j.apply(this,arguments):j(b),p[a.$id].push(c),this}}}function n(a){return function(c,d){if(a instanceof Array){var e=a[0],f=a[1];a=function(){f.scope.$eval(e)}}b.$apply(function(){a(c,l(d))})}}Mousetrap.stopCallback=function(a,b){return(" "+b.className+" ").indexOf(" mousetrap ")>-1?!1:b.contentEditable&&"true"==b.contentEditable},g.prototype.format=function(){for(var a=this.combo[0],b=a.split(/[\s]/),c=0;c<b.length;c++)b[c]=f(b[c]);return b};var o=b.$new();o.hotkeys=[],o.helpVisible=!1,o.title=this.templateTitle,o.toggleCheatSheet=i;var p=[];if(b.$on("$routeChangeSuccess",function(a,b){h(),b&&b.hotkeys&&angular.forEach(b.hotkeys,function(a){var c=a[2];("string"==typeof c||c instanceof String)&&(a[2]=[c,b]),a[5]=!1,j.apply(this,a)})}),this.includeCheatSheet){var q=e[0],r=a[0],s=angular.element(this.template);j(this.cheatSheetHotkey,this.cheatSheetDescription,i),(r===q||r===q.documentElement)&&(r=q.body),angular.element(r).append(c(s)(o))}var t=!1,u={add:j,del:k,get:l,bindTo:m,template:this.template,toggleCheatSheet:i,includeCheatSheet:this.includeCheatSheet,cheatSheetHotkey:this.cheatSheetHotkey,cheatSheetDescription:this.cheatSheetDescription,purgeHotkeys:h,templateTitle:this.templateTitle};return u}]}).directive("hotkey",["hotkeys",function(a){return{restrict:"A",link:function(b,c,d){var e,f;angular.forEach(b.$eval(d.hotkey),function(b,c){f="string"==typeof d.hotkeyAllowIn?d.hotkeyAllowIn.split(/[\s,]+/):[],e=c,a.add({combo:c,description:d.hotkeyDescription,callback:b,action:d.hotkeyAction,allowIn:f})}),c.bind("$destroy",function(){a.del(e)})}}}]).run(["hotkeys",function(){}])}(),function(a,b){function c(a,b,c){return a.addEventListener?void a.addEventListener(b,c,!1):void a.attachEvent("on"+b,c)}function d(a){if("keypress"==a.type){var b=String.fromCharCode(a.which);return a.shiftKey||(b=b.toLowerCase()),b}return y[a.which]?y[a.which]:z[a.which]?z[a.which]:String.fromCharCode(a.which).toLowerCase()}function e(a,b){return a.sort().join(",")===b.sort().join(",")}function f(a){a=a||{};var b,c=!1;for(b in E)a[b]?c=!0:E[b]=0;c||(H=!1)}function g(a,b,c,d,f,g){var h,i,j=[],k=c.type;if(!C[a])return[];for("keyup"==k&&n(a)&&(b=[a]),h=0;h<C[a].length;++h)if(i=C[a][h],(d||!i.seq||E[i.seq]==i.level)&&k==i.action&&("keypress"==k&&!c.metaKey&&!c.ctrlKey||e(b,i.modifiers))){var l=!d&&i.combo==f,m=d&&i.seq==d&&i.level==g;(l||m)&&C[a].splice(h,1),j.push(i)}return j}function h(a){var b=[];return a.shiftKey&&b.push("shift"),a.altKey&&b.push("alt"),a.ctrlKey&&b.push("ctrl"),a.metaKey&&b.push("meta"),b}function i(a){return a.preventDefault?void a.preventDefault():void(a.returnValue=!1)}function j(a){return a.stopPropagation?void a.stopPropagation():void(a.cancelBubble=!0)}function k(a,b,c,d){J.stopCallback(b,b.target||b.srcElement,c,d)||a(b,c)===!1&&(i(b),j(b))}function l(a,b,c){var d,e=g(a,b,c),h={},i=0,j=!1;for(d=0;d<e.length;++d)e[d].seq&&(i=Math.max(i,e[d].level));for(d=0;d<e.length;++d)if(e[d].seq){if(e[d].level!=i)continue;j=!0,h[e[d].seq]=1,k(e[d].callback,c,e[d].combo,e[d].seq)}else j||k(e[d].callback,c,e[d].combo);var l="keypress"==c.type&&G;c.type!=H||n(a)||l||f(h),G=j&&"keydown"==c.type}function m(a){"number"!=typeof a.which&&(a.which=a.keyCode);var b=d(a);if(b)return"keyup"==a.type&&F===b?void(F=!1):void J.handleKey(b,h(a),a)}function n(a){return"shift"==a||"ctrl"==a||"alt"==a||"meta"==a}function o(){clearTimeout(x),x=setTimeout(f,1e3)}function p(){if(!w){w={};for(var a in y)a>95&&112>a||y.hasOwnProperty(a)&&(w[y[a]]=a)}return w}function q(a,b,c){return c||(c=p()[a]?"keydown":"keypress"),"keypress"==c&&b.length&&(c="keydown"),c}function r(a,b,c,e){function g(b){return function(){H=b,++E[a],o()}}function h(b){k(c,b,a),"keyup"!==e&&(F=d(b)),setTimeout(f,10)}E[a]=0;for(var i=0;i<b.length;++i){var j=i+1===b.length,l=j?h:g(e||t(b[i+1]).action);u(b[i],l,e,a,i)}}function s(a){return"+"===a?["+"]:a.split("+")}function t(a,b){var c,d,e,f=[];for(c=s(a),e=0;e<c.length;++e)d=c[e],B[d]&&(d=B[d]),b&&"keypress"!=b&&A[d]&&(d=A[d],f.push("shift")),n(d)&&f.push(d);return b=q(d,f,b),{key:d,modifiers:f,action:b}}function u(a,b,c,d,e){D[a+":"+c]=b,a=a.replace(/\s+/g," ");var f,h=a.split(" ");return h.length>1?void r(a,h,b,c):(f=t(a,c),C[f.key]=C[f.key]||[],g(f.key,f.modifiers,{type:f.action},d,a,e),void C[f.key][d?"unshift":"push"]({callback:b,modifiers:f.modifiers,action:f.action,seq:d,level:e,combo:a}))}function v(a,b,c){for(var d=0;d<a.length;++d)u(a[d],b,c)}for(var w,x,y={8:"backspace",9:"tab",13:"enter",16:"shift",17:"ctrl",18:"alt",20:"capslock",27:"esc",32:"space",33:"pageup",34:"pagedown",35:"end",36:"home",37:"left",38:"up",39:"right",40:"down",45:"ins",46:"del",91:"meta",93:"meta",224:"meta"},z={106:"*",107:"+",109:"-",110:".",111:"/",186:";",187:"=",188:",",189:"-",190:".",191:"/",192:"`",219:"[",220:"\\",221:"]",222:"'"},A={"~":"`","!":"1","@":"2","#":"3",$:"4","%":"5","^":"6","&":"7","*":"8","(":"9",")":"0",_:"-","+":"=",":":";",'"':"'","<":",",">":".","?":"/","|":"\\"},B={option:"alt",command:"meta","return":"enter",escape:"esc",mod:/Mac|iPod|iPhone|iPad/.test(navigator.platform)?"meta":"ctrl"},C={},D={},E={},F=!1,G=!1,H=!1,I=1;20>I;++I)y[111+I]="f"+I;for(I=0;9>=I;++I)y[I+96]=I;c(b,"keypress",m),c(b,"keydown",m),c(b,"keyup",m);var J={bind:function(a,b,c){return a=a instanceof Array?a:[a],v(a,b,c),this},unbind:function(a,b){return J.bind(a,function(){},b)},trigger:function(a,b){return D[a+":"+b]&&D[a+":"+b]({},a),this},reset:function(){return C={},D={},this},stopCallback:function(a,b){return(" "+b.className+" ").indexOf(" mousetrap ")>-1?!1:"INPUT"==b.tagName||"SELECT"==b.tagName||"TEXTAREA"==b.tagName||b.isContentEditable},handleKey:l};a.Mousetrap=J,"function"=="function"&&__webpack_require__(122)&&!(__WEBPACK_AMD_DEFINE_FACTORY__ = (J), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))}(window,document);
 
 	/*** EXPORTS FROM exports-loader ***/
 	module.exports = angular
 
 /***/ },
-/* 149 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(150);
+	var content = __webpack_require__(152);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(97)(content, {});
@@ -9687,74 +9697,59 @@ webpackJsonp([1],[
 	}
 
 /***/ },
-/* 150 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "/*! \n * angular-hotkeys v1.4.5\n * https://chieffancypants.github.io/angular-hotkeys\n * Copyright (c) 2014 Wes Cruver\n * License: MIT\n */\n\n.cfp-hotkeys-container{display:table!important;position:fixed;width:100%;height:100%;top:0;left:0;color:#333;font-size:1em;background-color:rgba(255,255,255,.9)}.cfp-hotkeys-container.fade{z-index:-1024;visibility:hidden;opacity:0;-webkit-transition:opacity .15s linear;-moz-transition:opacity .15s linear;-o-transition:opacity .15s linear;transition:opacity .15s linear}.cfp-hotkeys-container.fade.in{z-index:10002;visibility:visible;opacity:1}.cfp-hotkeys-title{font-weight:700;text-align:center;font-size:1.2em}.cfp-hotkeys{width:100%;height:100%;display:table-cell;vertical-align:middle}.cfp-hotkeys table{margin:auto;color:#333}.cfp-content{display:table-cell;vertical-align:middle}.cfp-hotkeys-keys{padding:5px;text-align:right}.cfp-hotkeys-key{display:inline-block;color:#fff;background-color:#333;border:1px solid #333;border-radius:5px;text-align:center;margin-right:5px;box-shadow:inset 0 1px 0 #666,0 1px 0 #bbb;padding:5px 9px;font-size:1em}.cfp-hotkeys-text{padding-left:10px;font-size:1em}.cfp-hotkeys-close{position:fixed;top:20px;right:20px;font-size:2em;font-weight:700;padding:5px 10px;border:1px solid #ddd;border-radius:5px;min-height:45px;min-width:45px;text-align:center}.cfp-hotkeys-close:hover{background-color:#fff;cursor:pointer}@media all and (max-width:500px){.cfp-hotkeys{font-size:.8em}}@media all and (min-width:750px){.cfp-hotkeys{font-size:1.2em}}\n\n/*** EXPORTS FROM exports-loader ***/\nmodule.exports = angular"
 
 /***/ },
-/* 151 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(145);
-	__webpack_require__(146);
-	__webpack_require__(148);
-	__webpack_require__(149);
-
-	module.exports = __webpack_require__(3)
-			.module('directives.person', ['cfp.hotkeys', 'ui.bootstrap'])
-			.directive('person', __webpack_require__(152)).name;
-
-/***/ },
-/* 152 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	function PersonDirective() {
-		return {
-			restrict: 'E',
-			scope: {person: "=for"},
-			template: __webpack_require__(153),
-			controller: __webpack_require__(154)
-		};
-	}
-	module.exports = PersonDirective;
-
-/***/ },
 /* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<section class=\"person\">\n\t<div class=\"person-photo\" ng-click=\"showModal()\">\n\t\t<img ng-src=\"{{person.photo}}\"/>\n\t</div>\n\t<h2>{{person.fullName}}</h2>\n</section>";
+	__webpack_require__(147);
+	__webpack_require__(148);
+	__webpack_require__(150);
+	__webpack_require__(151);
+
+	module.exports = __webpack_require__(3)
+			.module('directives.person', ['cfp.hotkeys', 'ui.bootstrap'])
+			.directive('person', __webpack_require__(154))
+			.service('PersonModal', __webpack_require__(157))
+			.name;
 
 /***/ },
 /* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	function PersonDirective() {
+		return {
+			restrict: 'E',
+			scope: {
+				person: "=for"
+			},
+			template: __webpack_require__(155),
+			controller: __webpack_require__(156)
+		};
+	}
+	module.exports = PersonDirective;
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "<section class=\"person\">\n\t<div class=\"person-photo\" ng-click=\"showModal()\" ng-if=\"showPhoto\">\n\t\t<img ng-src=\"{{person.photo}}\"/>\n\t</div>\n\t<h2>{{person.fullName}}</h2>\n</section>";
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	/* @ngInject */
-	function PersonDirectiveController($scope, $modal) {
-		var speakerModal;
-
+	function PersonDirectiveController($scope, $attrs, PersonModal) {
+		$scope.showPhoto = $attrs.textOnly !== undefined ? false : true;
 		$scope.showModal = function () {
-			if (speakerModal) {
-				return;
-			}
-			speakerModal = $modal.open({
-				backdropClass: 'person-modal-backdrop',
-				windowClass: 'person-modal',
-				size: 'md',
-
-				template: __webpack_require__(155),
-				controller: __webpack_require__(156),
-				resolve: {
-					persons: function () {
-						return [$scope.person];
-					}
-				}
-			});
-			speakerModal.result.finally(function () {
-				speakerModal = null;
-			});
+			PersonModal.openFor([$scope.person]);
 		};
 
 		$scope.$on('person.modal:open', function (event, speakers) {
@@ -9762,17 +9757,50 @@ webpackJsonp([1],[
 		});
 
 	}
-	PersonDirectiveController.$inject = ["$scope", "$modal"];
+	PersonDirectiveController.$inject = ["$scope", "$attrs", "PersonModal"];
 	module.exports = PersonDirectiveController;
 
 /***/ },
-/* 155 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div class=\"modal-body\">\n\t<aside ng-if=\"hasMany()\" class=\"navigation\">\n\t\t<span class=\"prev-arrow\" ng-click=\"prev()\"></span>\n\t</aside>\n\t<section>\n\t\t<div class=\"person-photo\">\n\t\t\t<img ng-src=\"{{person().photo}}\"/>\n\t\t</div>\n\t\t<section>\n\t\t\t<h1>{{person().fullName}}</h1>\n\n\t\t\t<div ng-bind-html=\"person().bio\"></div>\n\t\t</section>\n\t\t<section>\n\t\t\t<h3 ng-repeat=\"presentation in person().presentations\" class=\"presentation-title\">\n\t\t\t\t{{presentation.title}}\n\t\t\t</h3>\n\t\t</section>\n\t</section>\n\n\t<aside ng-if=\"hasMany()\" class=\"navigation\">\n\t\t<span class=\"next-arrow\" ng-click=\"next()\"></span>\n\t</aside>\n</div>";
+	'use strict';
+	/* @ngInject */
+	function PersonModal($modal) {
+		var speakerModal;
+		this.openFor = function (persons) {
+			if (speakerModal) {
+				return;
+			}
+			speakerModal = $modal.open({
+				backdropClass: 'person-modal-backdrop',
+				windowClass: 'person-modal',
+				size: 'md',
+				template: __webpack_require__(158),
+				controller: __webpack_require__(159),
+				resolve: {
+					persons: function () {
+						return persons;
+					}
+				}
+			});
+			speakerModal.result.finally(function () {
+				speakerModal = null;
+			});
+		};
+	}
+	PersonModal.$inject = ["$modal"];
+
+	module.exports = PersonModal;
 
 /***/ },
-/* 156 */
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "<div class=\"modal-body\">\n\t<aside ng-if=\"hasMany()\" class=\"navigation\">\n\t\t<span class=\"prev-arrow\" ng-click=\"prev()\"></span>\n\t</aside>\n\t<section>\n\t\t<div class=\"person-photo\">\n\t\t\t<img ng-src=\"{{person().photo}}\"/>\n\t\t</div>\n\t\t<section>\n\t\t\t<h1>{{person().fullName}}</h1>\n\n\t\t\t<div ng-bind-html=\"person().bio\"></div>\n\t\t</section>\n\t\t<section>\n\t\t\t<a ng-repeat=\"presentation in person().presentations\"\n\t\t\t\t ui-sref=\"presentations({id: presentation.id})\"\n\t\t\t\t\tng-click=\"$close()\">\n\t\t\t\t<h3 class=\"presentation-title\">\n\t\t\t\t\t{{presentation.title}}\n\t\t\t\t</h3>\n\t\t\t</a>\n\t\t</section>\n\t</section>\n\n\t<aside ng-if=\"hasMany()\" class=\"navigation\">\n\t\t<span class=\"next-arrow\" ng-click=\"next()\"></span>\n\t</aside>\n</div>";
+
+/***/ },
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9831,7 +9859,7 @@ webpackJsonp([1],[
 	module.exports = PersonModalController;
 
 /***/ },
-/* 157 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9845,7 +9873,7 @@ webpackJsonp([1],[
 	module.exports = Vote;
 
 /***/ },
-/* 158 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9946,7 +9974,7 @@ webpackJsonp([1],[
 	module.exports = Voting;
 
 /***/ },
-/* 159 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10134,20 +10162,20 @@ webpackJsonp([1],[
 	module.exports = VotingController;
 
 /***/ },
-/* 160 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var ngModule = __webpack_require__(3)
 			.module('pages', ['ngResource'])
-			.factory('Pages', __webpack_require__(161))
-			.directive('page', __webpack_require__(162));
+			.factory('Pages', __webpack_require__(164))
+			.directive('page', __webpack_require__(165));
 
 	module.exports = ngModule.name;
 
 /***/ },
-/* 161 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10160,7 +10188,7 @@ webpackJsonp([1],[
 	module.exports = Pages;
 
 /***/ },
-/* 162 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10179,17 +10207,17 @@ webpackJsonp([1],[
 	module.exports = PageDirective;
 
 /***/ },
-/* 163 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(3).module('speakers', [__webpack_require__(151)])
-	    .factory('Speakers', __webpack_require__(164))
-	    .controller('SpeakersController', __webpack_require__(165));
+	__webpack_require__(3).module('speakers', [__webpack_require__(153)])
+	    .factory('Speakers', __webpack_require__(167))
+	    .controller('SpeakersController', __webpack_require__(168));
 	module.exports ='speakers';
 
 /***/ },
-/* 164 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10202,7 +10230,7 @@ webpackJsonp([1],[
 	module.exports = Speakers;
 
 /***/ },
-/* 165 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10215,7 +10243,53 @@ webpackJsonp([1],[
 	module.exports = SpeakersController;
 
 /***/ },
-/* 166 */
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	module.exports = __webpack_require__(3).module('presentations', [__webpack_require__(153)])
+			.factory('Presentations', __webpack_require__(170))
+			.controller('PresentationsController', __webpack_require__(171))
+			.name;
+
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	/* @ngInject */
+	function Presentations($resource, apiServer) {
+		return $resource(apiServer + '/presentations');
+	}
+	Presentations.$inject = ["$resource", "apiServer"];
+	module.exports = Presentations;
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	/* @ngInject */
+	function PresentationsController(Presentations, PersonModal, $anchorScroll, $timeout, $stateParams) {
+		var vm = this;
+		vm.presentations = Presentations.query(function () {
+			$timeout(function () {
+				$anchorScroll.yOffset = 50;
+				$anchorScroll($stateParams.id);
+			});
+		});
+
+		vm.show = function (speaker) {
+			PersonModal.openFor([speaker]);
+		};
+
+	}
+	PresentationsController.$inject = ["Presentations", "PersonModal", "$anchorScroll", "$timeout", "$stateParams"];
+	module.exports = PresentationsController;
+
+/***/ },
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = "<div class=\"row\">\n\t<div class=\"col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1\">\n\t\t<div class=\"banner\"></div>\n\t</div>\n</div>\n<div class=\"corner\"></div>\n<div class=\"top\"></div>\n<div class=\"main\">\n\t<div class=\"twitter \" ng-controller=\"TwitterCtrl\">\n\t\t<div class=\"twitter-icon-big\"></div>\n\t\t<div class=\"ng-cloak\">\n\t\t\t<div class=\"twitter-text\">{{tweet.text}}</div>\n\t\t\t<div class=\"twitter-date\">{{getDate(tweet.created_at)}}</div>\n\t\t\t<div class=\"twitter-name\">@confiturapl</div>\n\t\t</div>\n\t</div>\n\t<div class=\"splitter hidden-xs hidden-sm \"></div>\n\t<div class=\"news\" ng-controller=\"NewsCtrl\">\n\t\t<div class=\"ng-cloak\">\n\t\t\t<h2 class=\"news-title\">{{news.title}}</h2>\n\n\t\t\t<div class=\"news-author\">Napisał: {{news.author}}</div>\n\t\t\t<div class=\"news-text\" ng-bind-html=\"news.shortText\"></div>\n\t\t</div>\n\n\t</div>\n\t<div class=\"clearfix\"></div>\n</div>\n<div class=\"bottom-margin\"></div>\n\n";

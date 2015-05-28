@@ -12,9 +12,13 @@
 			<div ng-bind-html="person().bio"></div>
 		</section>
 		<section>
-			<h3 ng-repeat="presentation in person().presentations" class="presentation-title">
-				{{presentation.title}}
-			</h3>
+			<a ng-repeat="presentation in person().presentations"
+				 ui-sref="presentations({id: presentation.id})"
+					ng-click="$close()">
+				<h3 class="presentation-title">
+					{{presentation.title}}
+				</h3>
+			</a>
 		</section>
 	</section>
 

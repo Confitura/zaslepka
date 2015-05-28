@@ -2,7 +2,9 @@
 function PersonDirective() {
 	return {
 		restrict: 'E',
-		scope: {person: "=for"},
+		scope: {
+			person: "=for"
+		},
 		template: require('./template.html'),
 		controller: require('./PersonDirectiveController')
 	};

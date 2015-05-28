@@ -1,28 +1,9 @@
 'use strict';
 /* @ngInject */
-function PersonDirectiveController($scope, $modal) {
-	var speakerModal;
-
+function PersonDirectiveController($scope, $attrs, PersonModal) {
+	$scope.showPhoto = $attrs.textOnly !== undefined ? false : true;
 	$scope.showModal = function () {
-		if (speakerModal) {
-			return;
-		}
-		speakerModal = $modal.open({
-			backdropClass: 'person-modal-backdrop',
-			windowClass: 'person-modal',
-			size: 'md',
-
-			template: require('./modal-template.html'),
-			controller: require('./PersonModalController'),
-			resolve: {
-				persons: function () {
-					return [$scope.person];
-				}
-			}
-		});
-		speakerModal.result.finally(function () {
-			speakerModal = null;
-		});
+		PersonModal.openFor([$scope.person]);
 	};
 
 	$scope.$on('person.modal:open', function (event, speakers) {

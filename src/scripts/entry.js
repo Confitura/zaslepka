@@ -11,9 +11,13 @@ require('angular-ui-router/release/angular-ui-router');
 require('moment').locale('pl');
 require('angular-loading-bar/build/loading-bar');
 ng.module('confitura', [
-			'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
-			require('twitter'), require('news'), require('partners'), require('v4p'), require('pages'), require('speakers')])
-		//.constant('apiServer', 'http://c4p.confitura.pl/api')
+	'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
+	require('twitter'),
+	require('news'),
+	require('partners'), require('v4p'), require('pages'),
+	require('speakers'),
+	require('presentations')])
+	//.constant('apiServer', 'http://c4p.confitura.pl/api')
 		.constant('apiServer', 'http://confitura.pl:18080/api')
 		.config(/*@ngInject*/ function ($stateProvider, $urlRouterProvider) {
 			$urlRouterProvider.when('', '/');
@@ -29,6 +33,10 @@ ng.module('confitura', [
 					.state('speakers', {
 						url: '/speakers',
 						templateUrl: 'views/speakers.html'
+					})
+					.state('presentations', {
+						url: '/presentations/:id',
+						templateUrl: 'views/presentations.html'
 					})
 					.state('v4p', {
 						url: '/v4p',

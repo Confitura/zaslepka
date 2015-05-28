@@ -5,4 +5,6 @@ require('angular-hotkeys/build/hotkeys.min.css');
 
 module.exports = require('ng')
 		.module('directives.person', ['cfp.hotkeys', 'ui.bootstrap'])
-		.directive('person', require('./PersonDirective')).name;
+		.directive('person', require('./PersonDirective'))
+		.service('PersonModal', require('./PersonModal'))
+		.name;
