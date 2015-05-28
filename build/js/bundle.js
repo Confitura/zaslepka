@@ -161,10 +161,12 @@ webpackJsonp([1],[
 		__webpack_require__(143), __webpack_require__(146),
 		__webpack_require__(166),
 		__webpack_require__(169)])
-		.constant('apiServer', 'http://c4p.confitura.pl/api')
-			//.constant('apiServer', 'http://confitura.pl:18080/api')
+			.constant('apiServer', 'http://c4p.confitura.pl/api')
+		//.constant('apiServer', 'http://confitura.pl:18080/api')
 			.config(/*@ngInject*/ ["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
-				$urlRouterProvider.when('', '/');
+				$urlRouterProvider
+						.when('', '/')
+						.when('/presentations', '/presentations/');
 				$stateProvider
 						.state('main', {
 							url: '/',
@@ -9769,12 +9771,13 @@ webpackJsonp([1],[
 	'use strict';
 	/* @ngInject */
 	function PersonModal($modal) {
-		var speakerModal;
+		var _speakerModal;
+		var _callback = null;
 		this.openFor = function (persons) {
-			if (speakerModal) {
+			if (_speakerModal) {
 				return;
 			}
-			speakerModal = $modal.open({
+			_speakerModal = $modal.open({
 				backdropClass: 'person-modal-backdrop',
 				windowClass: 'person-modal',
 				size: 'md',
@@ -9786,9 +9789,18 @@ webpackJsonp([1],[
 					}
 				}
 			});
-			speakerModal.result.finally(function () {
-				speakerModal = null;
+			_speakerModal.result.finally(function () {
+				_speakerModal = null;
+				if (_callback !== null) {
+					console.log("abc");
+					_callback();
+				}
 			});
+			return this;
+		};
+
+		this.onClose = function (callback) {
+			_callback = callback;
 		};
 	}
 	PersonModal.$inject = ["$modal"];
@@ -10026,7 +10038,7 @@ webpackJsonp([1],[
 	'use strict';
 	var _ = __webpack_require__(1);
 	/* @ngInject */
-	function VotingController(Voting, hotkeys, $scope) {
+	function VotingController(Voting, hotkeys, $scope, PersonModal) {
 		var vm = this;
 		var speakerModal = null;
 
@@ -10111,21 +10123,13 @@ webpackJsonp([1],[
 		};
 
 		vm.showSpeakers = function () {
-			showModal(Voting.getCurrent().presentation.speakers);
+			PersonModal
+					.openFor(Voting.getCurrent().presentation.speakers)
+					.onClose(function () {
+						bindKeys();
+					});
 		};
-
-		vm.showSpeaker = function (speaker) {
-			showModal([speaker]);
-		};
-
-
-
-
 		bindKeys();
-
-		function showModal(speakers) {
-			$scope.$broadcast('person.modal:open', speakers);
-		}
 
 		function submit(callback) {
 			vm.saving = true;
@@ -10203,7 +10207,7 @@ webpackJsonp([1],[
 		}
 
 	}
-	VotingController.$inject = ["Voting", "hotkeys", "$scope"];
+	VotingController.$inject = ["Voting", "hotkeys", "$scope", "PersonModal"];
 
 	module.exports = VotingController;
 

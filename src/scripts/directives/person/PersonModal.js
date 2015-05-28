@@ -1,12 +1,13 @@
 'use strict';
 /* @ngInject */
 function PersonModal($modal) {
-	var speakerModal;
+	var _speakerModal;
+	var _callback = null;
 	this.openFor = function (persons) {
-		if (speakerModal) {
+		if (_speakerModal) {
 			return;
 		}
-		speakerModal = $modal.open({
+		_speakerModal = $modal.open({
 			backdropClass: 'person-modal-backdrop',
 			windowClass: 'person-modal',
 			size: 'md',
@@ -18,9 +19,17 @@ function PersonModal($modal) {
 				}
 			}
 		});
-		speakerModal.result.finally(function () {
-			speakerModal = null;
+		_speakerModal.result.finally(function () {
+			_speakerModal = null;
+			if (_callback !== null) {
+				_callback();
+			}
 		});
+		return this;
+	};
+
+	this.onClose = function (callback) {
+		_callback = callback;
 	};
 }
 

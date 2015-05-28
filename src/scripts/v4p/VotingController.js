@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 /* @ngInject */
-function VotingController(Voting, hotkeys, $scope) {
+function VotingController(Voting, hotkeys, $scope, PersonModal) {
 	var vm = this;
 	var speakerModal = null;
 
@@ -86,21 +86,13 @@ function VotingController(Voting, hotkeys, $scope) {
 	};
 
 	vm.showSpeakers = function () {
-		showModal(Voting.getCurrent().presentation.speakers);
+		PersonModal
+				.openFor(Voting.getCurrent().presentation.speakers)
+				.onClose(function () {
+					bindKeys();
+				});
 	};
-
-	vm.showSpeaker = function (speaker) {
-		showModal([speaker]);
-	};
-
-
-
-
 	bindKeys();
-
-	function showModal(speakers) {
-		$scope.$broadcast('person.modal:open', speakers);
-	}
 
 	function submit(callback) {
 		vm.saving = true;
