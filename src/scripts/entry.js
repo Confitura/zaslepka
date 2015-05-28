@@ -14,11 +14,11 @@ ng.module('confitura', [
 	'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
 	require('twitter'),
 	require('news'),
-	require('partners'), require('v4p'), require('pages'),
+	require('partners'), require('v4p'),
 	require('speakers'),
 	require('presentations')])
-	//.constant('apiServer', 'http://c4p.confitura.pl/api')
-		.constant('apiServer', 'http://confitura.pl:18080/api')
+	.constant('apiServer', 'http://c4p.confitura.pl/api')
+		//.constant('apiServer', 'http://confitura.pl:18080/api')
 		.config(/*@ngInject*/ function ($stateProvider, $urlRouterProvider) {
 			$urlRouterProvider.when('', '/');
 			$stateProvider
