@@ -13,5 +13,9 @@ function PresentationsController(Presentations, PersonModal, $anchorScroll, $tim
 		PersonModal.openFor([speaker]);
 	};
 
+	vm.getDescriptionFor = function (presentation) {
+		return presentation.longDesc ? presentation.longDesc : presentation.shortDesc;
+	};
+
 }
 module.exports = PresentationsController;

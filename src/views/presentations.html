@@ -22,7 +22,7 @@
 					</h3>
 				</section>
 				<h1 class="presentation-title">{{presentation.title}}</h1>
-				<span ng-bind-html="presentation.longDesc"></span></section>
+				<span ng-bind-html="ctrl.getDescriptionFor(presentation)"></span></section>
 		</article>
 	</div>
 	<div class="footer">
