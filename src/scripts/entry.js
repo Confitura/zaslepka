@@ -16,7 +16,9 @@ ng.module('confitura', [
 	require('news'),
 	require('partners'), require('v4p'),
 	require('speakers'),
-	require('presentations')])
+	require('presentations'),
+	require('organizers')
+])
 		.constant('apiServer', 'http://c4p.confitura.pl/api')
 	//.constant('apiServer', 'http://confitura.pl:18080/api')
 		.config(/*@ngInject*/ function ($stateProvider, $urlRouterProvider) {
@@ -43,6 +45,10 @@ ng.module('confitura', [
 					.state('v4p', {
 						url: '/v4p',
 						templateUrl: 'views/v4p.html'
+					})
+					.state('organizers', {
+						url: '/organizers',
+						templateUrl: 'views/organizers.html'
 					})
 			;
 		});
