@@ -1,9 +1,10 @@
 #presentations.content {
   display: flex;
   flex-direction: column;
-  article {
+  article.presentation {
     display: flex;
     flex-direction: row;
+
     section.icons {
       flex-grow: 0;
       flex-shrink: 0;
@@ -36,5 +37,25 @@
       font-weight: bold;
       margin-top: 0;
     }
+  }
+}
+
+//animation
+.presentation {
+  transition: all linear .5s;
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+
+  &.ng-enter.ng-enter-active,
+  &.ng-leave {
+    opacity: 1;
+  }
+
+  &.ng-enter-stagger {
+    transition-delay: .15s;
+    transition-duration: 0s;
   }
 }

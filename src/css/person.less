@@ -44,6 +44,7 @@
 
 .person {
   .person();
+
 }
 
 @media all and (max-width: @small-screen) {
@@ -59,4 +60,24 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+// Animation
+person {
+  transition: all linear .5s;
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+
+  &.ng-enter.ng-enter-active,
+  &.ng-leave {
+    opacity: 1;
+  }
+
+  &.ng-enter-stagger {
+    transition-delay: .2s;
+    transition-duration: 0s;
+  }
 }

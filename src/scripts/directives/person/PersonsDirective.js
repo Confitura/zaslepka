@@ -3,7 +3,8 @@ function PersonsDirective() {
 	return {
 		restrict: 'E',
 		scope: {
-			persons: "=for"
+			persons: "=for",
+			filter: "="
 		},
 		template: require('./persons-template.html')
 	};
