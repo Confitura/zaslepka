@@ -50,5 +50,8 @@ ng.module('confitura', [
 						url: '/organizers',
 						templateUrl: 'views/organizers.html'
 					})
-			;
+					.state('registration', {
+						url: '/registration',
+						templateUrl: 'views/registration.html'
+					});
 		});
