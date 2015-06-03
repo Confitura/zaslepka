@@ -62,6 +62,23 @@
   justify-content: space-around;
 }
 
+.persons-widget {
+  background-color: @third;
+  margin-top: 10px;
+  padding-top: 30px;
+  .persons-widget-container {
+    max-width: 900px;
+    margin: auto;
+    .slick-slider {
+      margin-bottom: 0;
+      .persons-in-widget {
+        display: flex;
+        justify-content: space-around
+      }
+    }
+  }
+}
+
 // Animation
 person {
   transition: all linear .5s;

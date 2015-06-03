@@ -3,3 +3,5 @@ zaslepka.iml
 .idea/*
 .DS_store
 node_modules
+bower_components
+npm-debug.log

@@ -22,9 +22,11 @@
 			<div class="news-author">Napisał: {{news.author}}</div>
 			<div class="news-text" ng-bind-html="news.shortText"></div>
 		</div>
-
 	</div>
 	<div class="clearfix"></div>
 </div>
 <div class="bottom-margin"></div>
+<div class="persons-widget">
+	<div ng-include="'views/speakers-widget.html'"></div>
+</div>
 

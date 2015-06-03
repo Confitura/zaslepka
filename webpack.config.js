@@ -24,7 +24,7 @@ module.exports = {
 		publicPath: 'js/'
 	},
 	resolve: {
-		modulesDirectories: ['./src/scripts/', './src/css/', 'node_modules'],
+		modulesDirectories: ['./src/scripts/', './src/css/', 'node_modules', 'bower_components'],
 		extensions: ['', '.webpack.js', '.web.js', '.js'],
 		alias: {
 			"ng": "angular/angular",
@@ -37,7 +37,7 @@ module.exports = {
 		preLoaders: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules|google/,
+				exclude: /node_modules|google|bower_components/,
 				loader: 'jshint-loader'
 			}
 		],
@@ -81,18 +81,22 @@ module.exports = {
 		emitErrors: false
 	},
 	plugins: [
+		//new webpack.ResolverPlugin(
+		//		new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
+		//),
 		new ngAnnotatePlugin({
 			add: true
 		}),
 		new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity),
 		new webpack.ProvidePlugin({
-			'window.Hammer': "hammerjs/hammer.js"
+			'window.Hammer': 'hammerjs/hammer.js',
+			"$": "jquery"
 		})
 	],
 	devServer: {
 		contentBase: "./build",
 		hot: true,
 		inline: true,
-		stats: { colors: true }
+		stats: {colors: true}
 	}
 };
