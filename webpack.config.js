@@ -10,6 +10,8 @@ module.exports = {
 			'angular-animate/angular-animate',
 			'angular-resource/angular-resource',
 			'angular-sanitize/angular-sanitize',
+			'angular-material/angular-material.min',
+			'angular-messages/angular-messages.min',
 			'angular-ui-router/release/angular-ui-router',
 			'moment',
 			'angular-loading-bar/build/loading-bar',

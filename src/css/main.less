@@ -1,13 +1,15 @@
 @import "colors";
 @import "sizes";
 
-html, body {
+html, body#confitura {
   height: 100%;
+  //background: @secondary;
+  background: @secondary url("../img/background.png") no-repeat !important;
+  background-size: 100% !important;
 }
 
-body {
-  background: @secondary url("../img/background.png") no-repeat;
-  background-size: 100%;
+body#confitura {
+  //background-size: 100%;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: white;
   word-wrap: break-word;
@@ -81,8 +83,6 @@ a {
   flex-wrap: wrap;
 }
 
-
-
 footer {
   width: 100%;
   height: 50px;
@@ -126,6 +126,7 @@ footer {
 .icon-picasa {
   background-image: url("../img/picasa.png");
 }
+
 .icon-download {
   width: 36px;
   height: 48px;
@@ -251,3 +252,4 @@ footer {
 @import "v4p";
 @import "presentations";
 @import "loading-bar";
+@import "registration";

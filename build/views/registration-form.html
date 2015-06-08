@@ -1,0 +1,118 @@
+<div class="page" ng-controller="RegistrationFormController as ctrl">
+	<div class="logo"></div>
+	<div class="header">
+		<div class="header-color">
+			<h1>formularz rejestracyjny</h1>
+		</div>
+		<div class="submenu">
+		</div>
+	</div>
+	<div class="content" id="registration">
+		<h1 ng-if="ctrl.error" class="error">Ups... Coś poszło nie tak :(</h1>
+
+		<form name="ctrl.form" novalidate ng-if="ctrl.participant" ng-submit="ctrl.doRegister()">
+			<md-content layout="row">
+				<md-input-container flex>
+					<label>imię</label>
+					<input name="firstName" ng-model="ctrl.participant.firstName">
+
+					<div ng-messages="ctrl.form.firstName.$error">
+						<div ng-message="required">jest wymagane</div>
+					</div>
+				</md-input-container>
+				<md-input-container flex>
+					<label>nazwisko</label>
+					<input name="lastName" ng-model="ctrl.participant.lastName">
+
+					<div ng-messages="ctrl.form.lastName.$error">
+						<div ng-message="required">jest wymagane</div>
+					</div>
+				</md-input-container>
+				<md-input-container flex>
+					<label>e-mail</label>
+					<input name="mail" ng-model="ctrl.participant.mail">
+
+					<div ng-messages="ctrl.form.mail.$error">
+						<div ng-message="required">jest wymagane</div>
+					</div>
+				</md-input-container>
+			</md-content>
+			<md-content layout="row">
+				<md-input-container flex>
+					<label>miasto</label>
+					<input name="city" ng-model="ctrl.participant.city" required>
+
+					<div ng-messages="ctrl.form.city.$error">
+						<div ng-message="required">jest wymagane</div>
+					</div>
+				</md-input-container>
+			</md-content>
+			<md-content layout-md="column" layout="row">
+				<md-input-container flex>
+					<md-select name="sex"
+										 required placeholder="Płeć" ng-model="ctrl.participant.sex">
+						<md-option value="K">Kobieta</md-option>
+						<md-option value="M">Mężczyzna</md-option>
+					</md-select>
+					<div ng-messages="ctrl.form.sex.$error">
+						<div ng-message="required">jest wymagana</div>
+					</div>
+				</md-input-container>
+				<md-input-container flex>
+					<md-select name="size" required
+										 placeholder="Rozmiar koszulki" ng-model="ctrl.participant.size">
+						<md-option ng-repeat="size in ctrl.sizes" value="{{size}}">{{size}}</md-option>
+					</md-select>
+					<div ng-messages="ctrl.form.size.$error">
+						<div ng-message="required">jest wymagany</div>
+					</div>
+				</md-input-container>
+				<md-input-container flex>
+
+					<md-select name="experience" required
+										 placeholder="Doświadczenie" ng-model="ctrl.participant.experience">
+						<md-option ng-repeat="level in ctrl.experienceLevels" value="{{level}}">{{level}}</md-option>
+					</md-select>
+					<div ng-messages="ctrl.form.experience.$error">
+						<div ng-message="required">jest wymagane</div>
+					</div>
+				</md-input-container>
+				<md-input-container flex>
+
+					<md-select
+							name="position" required
+							placeholder="Stanowisko" ng-model="ctrl.participant.position">
+						<md-option ng-repeat="level in ctrl.occupationLevels" value="{{level}}">{{level}}</md-option>
+					</md-select>
+					<div ng-messages="ctrl.form.position.$error">
+						<div ng-message="required">jest wymagane</div>
+					</div>
+				</md-input-container>
+			</md-content>
+			<md-content>
+				<md-list>
+					<md-subheader>Wskaż {{ctrl.LIMIT}} prezentacji które najbardziej Cię interesują</md-subheader>
+					<md-list-item ng-repeat="presentation in ctrl.presentations">
+
+						<div>
+							<h3>{{presentation.title}}</h3>
+
+							<div>
+								<span ng-repeat="speaker in presentation.speakers">{{speaker.fullName}} </span>
+							</div>
+						</div>
+						<md-checkbox class="md-secondary" ng-model="presentation.selected"
+												 ng-change="ctrl.showWarning()"
+												 ng-disabled="ctrl.isDisabled(presentation)">
+							<md-tooltip ng-if="ctrl.isDisabled(presentation)">Możesz wybrać maksymalnie {{ctrl.LIMIT}} prezentacji
+							</md-tooltip>
+						</md-checkbox>
+					</md-list-item>
+				</md-list>
+			</md-content>
+			<md-button class="md-primary md-raised" type="submit" ng-disabled="ctrl.form.$invalid">OK</md-button>
+		</form>
+	</div>
+<div class="footer">
+</div>
+</div>
