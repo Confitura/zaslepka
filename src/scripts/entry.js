@@ -2,7 +2,7 @@
 require('../css/external');
 require('../css/main.less');
 require('google/analytics');
-//require('bootstrap/js/collapse.js');
+require('bootstrap/js/collapse.js');
 var ng = require('ng');
 require('angular-animate/angular-animate');
 require('angular-resource/angular-resource');

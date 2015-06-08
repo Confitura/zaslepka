@@ -2,25 +2,29 @@
 	<div class="logo"></div>
 	<div class="header">
 		<div class="header-color">
-			<h1>partners</h1>
+			<h1>partnerzy</h1>
 		</div>
 
 		<div class="submenu">
-			<div class="navbar-header">
-				<a class="collapsed item navbar-toggle" data-toggle="collapse" data-target="#partners-menu"
-					 aria-expanded="false" aria-controls="navbar">
-					partnerzy
-				</a>
+			<nav class="navbar">
+				<div class="navbar-header">
+					<a class="collapsed item navbar-toggle" data-toggle="collapse" data-target="#partners-menu"
+						 aria-expanded="false" aria-controls="navbar">
+						{{ctrl.selected}}
+					</a>
 
-			</div>
-			<div id="partners-menu" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li ng-repeat="type in ctrl.types" ng-if="ctrl.hasAnyFor(type)">
-						<a class="item" ng-click="ctrl.select(type)"
-							 ng-class="{'active' : ctrl.isSelected(type)}">{{type}}</a>
-					</li>
-				</ul>
-			</div>
+				</div>
+				<div id="partners-menu" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li ng-repeat="type in ctrl.types" ng-if="ctrl.hasAnyFor(type)">
+							<a class="item"
+								 data-toggle="collapse" data-target="#partners-menu"
+								 ng-click="ctrl.select(type)"
+								 ng-class="{'active' : ctrl.isSelected(type)}">{{type}}</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
 		</div>
 	</div>
 	<div class="content" id="partners">

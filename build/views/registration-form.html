@@ -11,7 +11,7 @@
 		<h1 ng-if="ctrl.error" class="error">Ups... Coś poszło nie tak :(</h1>
 
 		<form name="ctrl.form" novalidate ng-if="ctrl.participant" ng-submit="ctrl.doRegister()">
-			<md-content layout="row">
+			<md-content layout="row" layout-sm="column">
 				<md-input-container flex>
 					<label>imię</label>
 					<input name="firstName" ng-model="ctrl.participant.firstName">
@@ -37,7 +37,7 @@
 					</div>
 				</md-input-container>
 			</md-content>
-			<md-content layout="row">
+			<md-content layout="row" layout-sm="column">
 				<md-input-container flex>
 					<label>miasto</label>
 					<input name="city" ng-model="ctrl.participant.city" required>
@@ -47,7 +47,7 @@
 					</div>
 				</md-input-container>
 			</md-content>
-			<md-content layout-md="column" layout="row">
+			<md-content layout-sm="column" layout="row">
 				<md-input-container flex>
 					<md-select name="sex"
 										 required placeholder="Płeć" ng-model="ctrl.participant.sex">

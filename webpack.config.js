@@ -92,7 +92,8 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity),
 		new webpack.ProvidePlugin({
 			'window.Hammer': 'hammerjs/hammer.js',
-			"$": "jquery"
+			"$": "jquery",
+			"jQuery": "jquery"
 		})
 	],
 	devServer: {

@@ -3,17 +3,17 @@
 
 html, body#confitura {
   height: 100%;
-  //background: @secondary;
-  background: @secondary url("../img/background.png") no-repeat !important;
-  background-size: 100% !important;
+  background-color: @secondary !important;
 }
 
 body#confitura {
-  //background-size: 100%;
+  background: @secondary url("../img/background.png") no-repeat !important;
+  background-size: 100% !important;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
   color: white;
   word-wrap: break-word;
-  margin-top: 40px;
+  padding-top: 40px;
 }
 
 h1, h2, h3 {
@@ -52,6 +52,11 @@ a {
 .info {
   margin-top: 20px;
   margin-bottom: 100px;
+  @media (max-width: @small-screen) {
+    margin-top: 40px;
+    margin-bottom: 50px;
+  }
+
 }
 
 .info img {
@@ -211,7 +216,7 @@ footer {
   }
 }
 
-@media all and (max-width: @small-screen) {
+@media (max-width: @small-screen) {
   body {
     margin-top: 90px;
   }
