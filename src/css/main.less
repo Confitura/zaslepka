@@ -51,10 +51,10 @@ a {
 
 .info {
   margin-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   @media (max-width: @small-screen) {
     margin-top: 40px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
 
 }
@@ -234,20 +234,25 @@ footer {
   }
 
   footer {
-    height: 80px;
+    height: 50px;
   }
 
   .icon {
-    width: 60px;
-    height: 58px;
+    width: 30px;
+    height: 29px;
     display: inline-block;
     background-size: contain;
     background-repeat: no-repeat;
   }
 
   .footer-div {
-    width: 272px;
+    width: 60%;
     margin: auto;
+    .icons {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
   }
 }
 
