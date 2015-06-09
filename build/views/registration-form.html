@@ -110,6 +110,21 @@
 
 				</md-list>
 			</md-content>
+			<md-content>
+				<md-input-container>
+					<md-checkbox name="acceptance" required ng-model="acceptance">
+						<div style="margin-left:10px">Akceptuję, że dane umieszczone formularzu rejestracyjnym
+							będą przetwarzane i przechowywane zgodnie z ustawą z dnia 29 sierpnia
+							1997 r. o ochronie danych osobowych (tekst jedn.: Dz. Ustaw z 2002 Nr
+							101, poz. 926 z późn. zm.), przez Kapitułę Organizacyjną Konferencji
+							„Confitura”, wyłącznie dla celów organizacyjnych niniejszej
+							Konferencji.</div>
+					</md-checkbox>
+					<div ng-messages="ctrl.form.acceptance.$error">
+						<div ng-message="required">Akceptacja jest wymagane</div>
+					</div>
+				</md-input-container>
+			</md-content>
 			<md-button class="md-primary md-raised" type="submit" ng-disabled="ctrl.form.$invalid">OK</md-button>
 		</form>
 	</div>

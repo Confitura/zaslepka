@@ -8,7 +8,8 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 		'S',
 		'M',
 		'L',
-		'XL'
+		'XL',
+		'XXL'
 	];
 	vm.experienceLevels = [
 		"Dopiero się uczę",
@@ -30,15 +31,10 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 	Registration.get({token: $stateParams.token})
 			.$promise
 			.then(function (participant) {
-				//if (participant.status === 'FINAL_CONFIRMED') {
-				//	$state.go('registration-success');
-				//}
-				vm.participant = participant;
-				if (vm.participant.firstName.endsWith('a')) {
-					vm.participant.sex = 'K';
-				} else {
-					vm.participant.sex = 'M';
+				if (participant.status === 'FINAL_CONFIRMED') {
+					$state.go('registration-success');
 				}
+				vm.participant = participant;
 			})
 			.catch(function () {
 				vm.error = true;
