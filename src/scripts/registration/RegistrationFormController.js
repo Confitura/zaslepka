@@ -19,11 +19,11 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 		"Zawodowo powyżej 8 lat"
 	];
 	vm.occupationLevels = [
-		"Studentem/uczniem",
-		"Programistą",
-		"Testerem",
-		"Kierownikiem zespołu",
-		"Kierownikiem projektu",
+		"Student/uczeń",
+		"Programista",
+		"Tester",
+		"Kierownik zespołu",
+		"Kierownik projektu",
 		"Inne"
 	];
 	vm.presentations = Presentations.query();
@@ -53,7 +53,7 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 		if (maxNumberOfPresentationsSelected()) {
 			$mdToast.show(
 					$mdToast.simple()
-							.content('Max number of presentations selected')
+							.content('Wybrano maksymalną liczbę prezentacji')
 							.position('top right')
 							.hideDelay(10000)
 			);
