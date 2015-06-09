@@ -30,9 +30,9 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 	Registration.get({token: $stateParams.token})
 			.$promise
 			.then(function (participant) {
-				if (participant.status === 'FINAL_CONFIRMED') {
-					$state.go('registration-success');
-				}
+				//if (participant.status === 'FINAL_CONFIRMED') {
+				//	$state.go('registration-success');
+				//}
 				vm.participant = participant;
 				if (vm.participant.firstName.endsWith('a')) {
 					vm.participant.sex = 'K';

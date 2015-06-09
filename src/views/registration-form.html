@@ -93,7 +93,12 @@
 				<md-list>
 					<md-subheader>Wskaż {{ctrl.LIMIT}} prezentacji które najbardziej Cię interesują</md-subheader>
 					<md-list-item ng-repeat="presentation in ctrl.presentations">
-
+						<md-checkbox ng-model="presentation.selected"
+												 ng-change="ctrl.showWarning()"
+												 ng-disabled="ctrl.isDisabled(presentation)">
+							<md-tooltip ng-if="ctrl.isDisabled(presentation)">Możesz wybrać maksymalnie {{ctrl.LIMIT}} prezentacji
+							</md-tooltip>
+						</md-checkbox>
 						<div>
 							<h3>{{presentation.title}}</h3>
 
@@ -101,18 +106,13 @@
 								<span ng-repeat="speaker in presentation.speakers">{{speaker.fullName}} </span>
 							</div>
 						</div>
-						<md-checkbox class="md-secondary" ng-model="presentation.selected"
-												 ng-change="ctrl.showWarning()"
-												 ng-disabled="ctrl.isDisabled(presentation)">
-							<md-tooltip ng-if="ctrl.isDisabled(presentation)">Możesz wybrać maksymalnie {{ctrl.LIMIT}} prezentacji
-							</md-tooltip>
-						</md-checkbox>
 					</md-list-item>
+
 				</md-list>
 			</md-content>
 			<md-button class="md-primary md-raised" type="submit" ng-disabled="ctrl.form.$invalid">OK</md-button>
 		</form>
 	</div>
-<div class="footer">
-</div>
+	<div class="footer">
+	</div>
 </div>
