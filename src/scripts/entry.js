@@ -18,11 +18,10 @@ ng.module('confitura', [
 	require('speakers'),
 	require('presentations'),
 	require('organizers'),
-	require('registration')
+	require('registration'),
+	require('agenda')
 ])
-	.constant('apiServer', 'http://c4p.confitura.pl/api')
-	//.constant('apiServer', 'http://confitura.pl:18080/api')
-	//	.constant('apiServer', 'http://localhost:9090/api')
+		.constant('apiServer', 'http://c4p.confitura.pl/api')
 		.config(/*@ngInject*/ function ($stateProvider, $urlRouterProvider) {
 			$urlRouterProvider
 					.when('', '/')
@@ -63,6 +62,10 @@ ng.module('confitura', [
 					.state('registration-form', {
 						url: '/registration/:token',
 						templateUrl: 'views/registration-form.html'
+					})
+					.state('agenda', {
+						url: '/agenda',
+						templateUrl: 'views/agenda.html'
 					})
 			;
 		});

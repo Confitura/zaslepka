@@ -1,0 +1,40 @@
+<div class="page" ng-controller="AgendaController as ctrl">
+	<div class="logo"></div>
+	<div class="header">
+		<div class="header-color">
+			<h1>Agenda</h1>
+		</div>
+		<div class="submenu">
+			don't miss a thing
+		</div>
+	</div>
+	<div class="content" id="agenda">
+		<table ng-if="ctrl.agenda.rooms">
+			<tr>
+				<th>
+					<div>godzina</div>
+				</th>
+				<th ng-repeat="room in ctrl.agenda.rooms">
+					<div>{{room}}</div>
+				</th>
+			</tr>
+			<tr ng-repeat="slot in ctrl.agenda.slots" ng-class-even="'highlight'">
+				<td>
+					<div class="time">{{slot.start}} - {{slot.end}}</div>
+				</td>
+				<td ng-repeat="presentationInRoom in ctrl.getAllPresentationsForSlot(slot.id)"
+						ng-class="{'all': presentationInRoom.room == 'ALL'}"
+						colspan="{{ctrl.getRoomSpanFor(presentationInRoom)}}">
+					<div class="presentation">
+						<span class="title">{{presentationInRoom.presentation.title}}</span>
+						<small ng-repeat="speaker in presentationInRoom.presentation.speakers" class="clearfix">
+							<person for="speaker" presentation="presentationInRoom.presentation" text-only></person>
+						</small>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="footer">
+	</div>
+</div>
