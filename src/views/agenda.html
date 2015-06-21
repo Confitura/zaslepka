@@ -1,4 +1,4 @@
-<div class="page" ng-controller="AgendaController as ctrl">
+<div class="page agenda" ng-controller="AgendaController as ctrl">
 	<div class="logo"></div>
 	<div class="header">
 		<div class="header-color">
@@ -8,8 +8,8 @@
 			don't miss a thing
 		</div>
 	</div>
-	<div class="content" id="agenda">
-		<table ng-if="ctrl.agenda.rooms">
+	<div class="content" id="agenda" ng-if="ctrl.agenda.rooms">
+		<table >
 			<tr>
 				<th>
 					<div>godzina</div>
