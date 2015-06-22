@@ -1,4 +1,5 @@
 <div class="modal-body">
+	<md-button class="md-icon-button close" ng-click="$close()"><md-icon>close</md-icon></md-button>
 	<aside ng-if="hasMany()" class="navigation">
 		<span class="prev-arrow" ng-click="prev()"></span>
 	</aside>
@@ -14,7 +15,7 @@
 		<section>
 			<a ng-repeat="presentation in person().presentations"
 				 ui-sref="presentations({id: presentation.id})"
-					ng-click="$close()">
+				 ng-click="$close()">
 				<h3 class="presentation-title">
 					{{presentation.title}}
 				</h3>

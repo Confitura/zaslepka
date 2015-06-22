@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 /* @ngInject */
-function AgendaController(Agenda) {
+function AgendaController(Agenda, $modal) {
 	var vm = this;
 	Agenda.get(function (agenda) {
 		vm.agenda = agenda;
@@ -23,6 +23,20 @@ function AgendaController(Agenda) {
 	};
 	vm.select = function (room) {
 		vm.selected = room;
+	};
+	vm.show = function (presentation) {
+		$modal.open({
+			backdropClass: 'person-modal-backdrop',
+			windowClass: 'person-modal',
+			size: 'md',
+			template: require('./modal-template.html'),
+			controller: require('./PresentationModalController'),
+			resolve: {
+				presentation: function () {
+					return presentation;
+				}
+			}
+		})
 	};
 
 	function findSlotBy(id) {

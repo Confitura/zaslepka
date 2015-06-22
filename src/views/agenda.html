@@ -8,7 +8,7 @@
 			don't miss a thing
 		</div>
 	</div>
-	<div class="content" id="agenda" >
+	<div class="content" id="agenda">
 		<table ng-if="ctrl.agenda">
 			<tr>
 				<th class="time-column">
@@ -49,9 +49,11 @@
 						class="presentation"
 						colspan="{{ctrl.getRoomSpanFor(presentationInRoom)}}">
 					<div>
-						<span class="title">{{presentationInRoom.presentation.title}}</span>
+						<span class="title" ng-click="ctrl.show(presentationInRoom.presentation)">
+							{{presentationInRoom.presentation.title}}
+						</span>
 						<small ng-repeat="speaker in presentationInRoom.presentation.speakers" class="clearfix">
-							<person for="speaker" presentation="presentationInRoom.presentation" text-only></person>
+							<person for="speaker" text-only></person>
 						</small>
 					</div>
 				</td>

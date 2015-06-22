@@ -1,43 +1,49 @@
-#presentations.content {
+article.presentation {
   display: flex;
-  flex-direction: column;
-  article.presentation {
-    display: flex;
-    flex-direction: row;
+  flex-direction: row;
+  @media (max-width: @small-screen) {
+    flex-direction: column;
+  }
 
-    section.icons {
-      flex-grow: 0;
-      flex-shrink: 0;
-      width: 50px;
-      span {
-        margin-top: 20px;
-      }
+  section.icons {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 50px;
+    margin-bottom: 10px;
+    span {
+      margin-top: 20px;
     }
-    section.presentation-info {
-      flex-grow: 1;
-      border-bottom: solid 2px @main;
-      padding-bottom: 10px;
-      section.speakers {
-        h3 {
-          color: @main;
-          display: inline-flex;
-          cursor: pointer;
-          font-weight: bold;
-          &:after {
-            content: ", ";
-            margin-right: 5px;
-          }
-          &:last-child:after {
-            content: "";
-          }
+  }
+  section.presentation-info {
+    flex-grow: 1;
+    border-bottom: solid 2px @main;
+    padding-bottom: 10px;
+    section.speakers {
+      h3 {
+        color: @main;
+        display: inline-flex;
+        cursor: pointer;
+        font-weight: bold;
+        &:after {
+          content: ", ";
+          margin-right: 5px;
+        }
+        &:last-child:after {
+          content: "";
         }
       }
     }
-    .presentation-title {
-      font-weight: bold;
-      margin-top: 0;
-    }
   }
+  .presentation-title {
+    font-weight: bold;
+    margin-top: 0;
+  }
+}
+
+#presentations.content {
+  display: flex;
+  flex-direction: column;
+
   //animation
   .presentation {
     transition: all linear .5s;
