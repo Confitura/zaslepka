@@ -80,13 +80,12 @@
   }
   .presentation, .room {
 
-    transition: all linear .5s;
     &.ng-enter {
+      transition: all linear .5s;
       opacity: 0;
-    }
-
-    &.ng-enter.ng-enter-active {
-      opacity: 1;
+      &.ng-enter-active {
+        opacity: 1;
+      }
     }
 
   }
