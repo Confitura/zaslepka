@@ -18,6 +18,7 @@ gulp.task('watch', function () {
 	gulp.run('webpack');
 	return gulp.watch(['src/index.html', 'src/fonts/*', 'src/views/*'], ['build']);
 });
+
 gulp.task('jshint', function () {
 	return gulp.src('src/scripts/**/*.js')
 			.pipe(plugins.jshint())

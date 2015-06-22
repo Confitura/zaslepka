@@ -4,12 +4,12 @@ require('../css/main.less');
 require('google/analytics');
 require('bootstrap/js/collapse.js');
 var ng = require('ng');
-require('angular-animate/angular-animate');
-require('angular-resource/angular-resource');
-require('angular-sanitize/angular-sanitize');
-require('angular-ui-router/release/angular-ui-router');
+require('angular-animate/angular-animate.min');
+require('angular-resource/angular-resource.min');
+require('angular-sanitize/angular-sanitize.min');
+require('angular-ui-router/release/angular-ui-router.min');
 require('moment').locale('pl');
-require('angular-loading-bar/build/loading-bar');
+require('angular-loading-bar/build/loading-bar.min');
 ng.module('confitura', [
 	'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
 	require('twitter'),

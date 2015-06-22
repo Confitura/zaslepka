@@ -7,14 +7,14 @@ module.exports = {
 		vendor: [
 			'lodash',
 			'ng',
-			'angular-animate/angular-animate',
-			'angular-resource/angular-resource',
-			'angular-sanitize/angular-sanitize',
+			'angular-animate/angular-animate.min',
+			'angular-resource/angular-resource.min',
+			'angular-sanitize/angular-sanitize.min',
 			'angular-material/angular-material.min',
 			'angular-messages/angular-messages.min',
-			'angular-ui-router/release/angular-ui-router',
+			'angular-ui-router/release/angular-ui-router.min',
 			'moment',
-			'angular-loading-bar/build/loading-bar',
+			'angular-loading-bar/build/loading-bar.min',
 			'./src/css/external',
 			'hammerjs/hammer.min.js',
 			'imports?require=>false!angular-hammer/angular.hammer.js'
@@ -29,20 +29,13 @@ module.exports = {
 		modulesDirectories: ['./src/scripts/', './src/css/', 'node_modules', 'bower_components'],
 		extensions: ['', '.webpack.js', '.web.js', '.js'],
 		alias: {
-			"ng": "angular/angular",
-			"lodash": "lodash/index",
-			"moment": "moment/moment",
-			"jquery": "jquery/dist/jquery"
+			"ng": "angular/angular.min",
+			"lodash": "lodash",
+			"moment": "moment/min/moment.min",
+			"jquery": "jquery/dist/jquery.min"
 		}
 	},
 	module: {
-		preLoaders: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules|google|bower_components/,
-				loader: 'jshint-loader'
-			}
-		],
 		loaders: [
 			{
 				test: /\.ts$/,

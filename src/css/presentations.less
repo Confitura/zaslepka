@@ -38,24 +38,25 @@
       margin-top: 0;
     }
   }
+  //animation
+  .presentation {
+    transition: all linear .5s;
+
+    &.ng-enter,
+    &.ng-leave.ng-leave-active {
+      opacity: 0;
+    }
+
+    &.ng-enter.ng-enter-active,
+    &.ng-leave {
+      opacity: 1;
+    }
+
+    &.ng-enter-stagger {
+      transition-delay: .1s;
+      transition-duration: 0s;
+    }
+  }
+
 }
 
-//animation
-.presentation {
-  transition: all linear .5s;
-
-  &.ng-enter,
-  &.ng-leave.ng-leave-active {
-    opacity: 0;
-  }
-
-  &.ng-enter.ng-enter-active,
-  &.ng-leave {
-    opacity: 1;
-  }
-
-  &.ng-enter-stagger {
-    transition-delay: .1s;
-    transition-duration: 0s;
-  }
-}

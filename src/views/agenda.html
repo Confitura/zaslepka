@@ -9,13 +9,35 @@
 		</div>
 	</div>
 	<div class="content" id="agenda" ng-if="ctrl.agenda.rooms">
-		<table >
+		<table>
 			<tr>
-				<th>
-					<div>godzina</div>
+				<th class="time-column">
+					<div class="room">godzina</div>
 				</th>
-				<th ng-repeat="room in ctrl.agenda.rooms">
-					<div>{{room}}</div>
+				<th class="hidden-sm hidden-md hidden-lg rooms-navbar">
+					<div class="room">
+						<nav class="navbar">
+							<div class="navbar-header">
+								<a class="collapsed item navbar-toggle" data-toggle="collapse" data-target="#rooms-menu"
+									 aria-expanded="false" aria-controls="navbar">
+									{{ctrl.selected}}
+								</a>
+
+							</div>
+							<div id="rooms-menu" class="navbar-collapse collapse">
+								<ul class="nav navbar-nav">
+									<li ng-repeat="room in ctrl.agenda.rooms">
+										<a class="item"
+											 ng-click="ctrl.select(room)"
+											 data-toggle="collapse" data-target="#rooms-menu">{{room}}</a>
+									</li>
+								</ul>
+							</div>
+						</nav>
+					</div>
+				</th>
+				<th ng-repeat="room in ctrl.agenda.rooms" class="hidden-xs">
+					<div class="room">{{room}}</div>
 				</th>
 			</tr>
 			<tr ng-repeat="slot in ctrl.agenda.slots" ng-class-even="'highlight'">
@@ -24,8 +46,9 @@
 				</td>
 				<td ng-repeat="presentationInRoom in ctrl.getAllPresentationsForSlot(slot.id)"
 						ng-class="{'all': presentationInRoom.room == 'ALL'}"
+						class="presentation"
 						colspan="{{ctrl.getRoomSpanFor(presentationInRoom)}}">
-					<div class="presentation">
+					<div>
 						<span class="title">{{presentationInRoom.presentation.title}}</span>
 						<small ng-repeat="speaker in presentationInRoom.presentation.speakers" class="clearfix">
 							<person for="speaker" presentation="presentationInRoom.presentation" text-only></person>
