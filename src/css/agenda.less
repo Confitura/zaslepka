@@ -10,6 +10,9 @@
     font-family: "Bebas Neue", Helvetica;
 
     th {
+      &:not(:last-child) {
+        padding-right: 10px;
+      }
       &.time-column {
         width: 120px;
       }
@@ -20,7 +23,6 @@
         padding-left: 20px;
         padding-right: 20px;
         color: @main;
-        margin-right: 10px;
         padding-top: 5px;
         text-align: center;
         .navbar {
@@ -78,15 +80,14 @@
       }
     }
   }
-  .presentation, .room {
+  .presentation {
 
     &.ng-enter {
-      transition: all linear .5s;
+      transition: all linear 1s;
       opacity: 0;
       &.ng-enter-active {
         opacity: 1;
       }
     }
-
   }
 }
