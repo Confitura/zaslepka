@@ -67,5 +67,9 @@ ng.module('confitura', [
 						url: '/agenda',
 						templateUrl: 'views/agenda.html'
 					})
+					.state('spoina', {
+						url: '/spoina',
+						templateUrl: 'views/spoina.html'
+					})
 			;
 		});
