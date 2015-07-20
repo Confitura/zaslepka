@@ -26,6 +26,8 @@ ng.module('confitura', [
 			$urlRouterProvider
 					.when('', '/')
 					.when('/presentations', '/presentations/');
+			$urlRouterProvider
+					.otherwise('/');
 			$stateProvider
 					.state('main', {
 						url: '/',
