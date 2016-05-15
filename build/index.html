@@ -309,7 +309,7 @@
                         <a class="social-link twitter" href="https://twitter.com/confiturapl" title="twitter" target="_blank">
                             <i class="fa fa-twitter" aria-hidden="true"></i>
                         </a>
-                        <a class="social-link facebook" href="https://plus.google.com/u/0/communities/111143182611552730655"
+                        <a class="social-link facebook" href="https://www.facebook.com/Confitura"
                            title="facebook" target="_blank">
                             <i class="fa fa-facebook" aria-hidden="true"></i>
                         </a>
@@ -333,139 +333,11 @@
 </div>
 
 <!-- Bootstrap core JavaScript -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/jquery.min.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
 <!-- BxSlider -->
-<script src="js/bxslider.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="js/bxslider.js"></script>-->
 
-<!--<script>-->
-<!--$(document).ready(function () {-->
-<!--// deklaracja zmiennych-->
-<!--var h = $(window).height();-->
-<!--var w = $(window).width();-->
-<!--var p = '<img src="css/images/black-prev.png" alt="poprzedni" />';-->
-<!--var n = '<img src="css/images/black-next.png" alt="następny" />';-->
-<!--var m = (w <= 1141) ? 55 : 100;-->
-<!--var e = (h - m) / 9;-->
-<!--// obsługa menu mobilnego-->
-<!--$("#mobile-menu").click(function () {-->
-<!--var m = $('#mobile-nav');-->
-<!--m.is(':visible') ? m.fadeOut('fast') : m.fadeIn('fast');-->
-<!--});-->
-<!--// cuda, wianki i pomysły projektanta layout'u-->
-<!--// kwadrat-->
-<!--$('.square').height($('.square').width());-->
-<!--// czasem kwadrat, czasem prostokąt-->
-<!--if (w <= 1200) {-->
-<!--$('.semi-square').height($('.semi-square').width());-->
-<!--$('.double').height(($('.square').width() * 2) + 60);-->
-<!--}-->
-<!--else {-->
-<!--$('.semi-square').height(($('.semi-square').width() / 2) - 60);-->
-<!--$('.double').height($('.semi-square').width());-->
-<!--}-->
-<!--// wysokość menu-->
-<!--$('.mobile-nav').height(h - m);-->
-<!--// wysokość elementu w menu, aby pokryć 100% ekranu-->
-<!--$('.mlink').css({'line-height': e + 'px', 'height': e + 'px'});-->
-<!--// czasem kwadrat, czasem nie-->
-<!--(w >= 615 && w <= 900) ? $('#own-carousel').addClass('square') : $('#own-carousel').removeClass('square');-->
-<!--// rotatory-->
-<!--$('.slider-agenda').bxSlider({-->
-<!--touchEnabled: true,-->
-<!--slideWidth: 320,-->
-<!--minSlides: 2,-->
-<!--maxSlides: 3,-->
-<!--moveSlides: 1,-->
-<!--slideMargin: 30,-->
-<!--nextSelector: '#agenda-next',-->
-<!--prevSelector: '#agenda-prev',-->
-<!--nextText: n,-->
-<!--prevText: p-->
-<!--});-->
-<!--$('.slider-speakers').bxSlider({-->
-<!--touchEnabled: true,-->
-<!--slideWidth: 380,-->
-<!--minSlides: 2,-->
-<!--maxSlides: 3,-->
-<!--moveSlides: 1,-->
-<!--slideMargin: 0,-->
-<!--nextSelector: '#speakers-next',-->
-<!--prevSelector: '#speakers-prev',-->
-<!--nextText: n,-->
-<!--prevText: p-->
-<!--});-->
-<!--});-->
-<!--&lt;!&ndash; window resize &ndash;&gt;-->
-<!--$(window).on('resize', function () {-->
-<!--// deklaracja zmiennych-->
-<!--var h = $(window).height();-->
-<!--var w = $(window).width();-->
-<!--var m = (w <= 1140) ? 55 : 100;-->
-<!--var e = (h - m) / 9;-->
-<!--// cuda, wianki i pomysły projektanta layout'u-->
-<!--// kwadrat-->
-<!--$('.square').height($('.square').width());-->
-<!--// czasem kwadrat, czasem prostokąt-->
-<!--if (w <= 1200) {-->
-<!--$('.semi-square').height($('.semi-square').width());-->
-<!--$('.double').height(($('.square').width() * 2) + 60);-->
-<!--}-->
-<!--else {-->
-<!--$('.semi-square').height(($('.semi-square').width() / 2) - 60);-->
-<!--$('.double').height($('.semi-square').width());-->
-<!--}-->
-<!--// wysokość menu-->
-<!--$('.mobile-nav').height(h - m);-->
-<!--// wysokość elementu w menu, aby pokryć 100% ekranu-->
-<!--$('.mlink').css({'line-height': e + 'px', 'height': e + 'px'});-->
-<!--// czasem kwadrat, czasem nie-->
-<!--(w >= 615 && w <= 900) ? $('#own-carousel').addClass('square') : $('#own-carousel').removeClass('square');-->
-<!--});-->
-<!--(function ($, undefined) {-->
-<!--var agenda_items_count = $('.agenda-carousel-item').length;-->
-<!--var agenda_item_dimension = 380;-->
-<!--var agenda_inner_width = agenda_item_dimension * agenda_items_count;-->
-<!--var agenda_visible_items_count = $('.agenda-carousel-container').width() / agenda_item_dimension;-->
-<!--var agenda_item_pos = 0;-->
-<!--var agenda_item_min = 0;-->
-<!--var agenda_item_max = -1 * (agenda_inner_width - (agenda_visible_items_count * agenda_item_dimension));-->
-
-<!--$('.agenda-block').css({-->
-<!--'width': agenda_inner_width + 'px',-->
-<!--'height': agenda_item_dimension + 'px'-->
-<!--});-->
-<!--$('.agenda-carousel-item').css({-->
-<!--'width': agenda_item_dimension + 'px',-->
-<!--'height': agenda_item_dimension + 'px'-->
-<!--});-->
-<!--$("#agenda-right").click(function () {-->
-<!--if (agenda_item_pos < 0) {-->
-<!--$(".agenda-block").animate({-->
-<!--"left": "+=" + agenda_item_dimension + "px"-->
-<!--},-->
-<!--100,-->
-<!--function () {-->
-<!--agenda_item_pos = $('#agenda-block').position().left;-->
-<!--}-->
-<!--);-->
-<!--}-->
-<!--});-->
-<!--$("#agenda-left").click(function () {-->
-<!--if ((agenda_item_pos > agenda_item_max) || (agenda_item_pos == 0)) {-->
-<!--$(".agenda-block").animate({-->
-<!--"left": "-=" + agenda_item_dimension + "px"-->
-<!--},-->
-<!--100,-->
-<!--function () {-->
-<!--agenda_item_pos = $('#agenda-block').position().left;-->
-<!--}-->
-<!--);-->
-<!--}-->
-<!--});-->
-<!--})(window.jQuery);-->
-<!--</script>-->
 <script src="js/vendor.js"></script>
 <script src="js/bundle.js"></script>
 </body>
