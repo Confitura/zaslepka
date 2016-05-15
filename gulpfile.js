@@ -35,5 +35,5 @@ gulp.task('copy', function () {
 			.pipe(gulp.dest('./build/fonts'))
 });
 
-gulp.task('build', ['webpack'], function () {
+gulp.task('default', ['webpack'], function () {
 });
