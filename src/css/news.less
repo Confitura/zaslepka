@@ -1,0 +1,24 @@
+.news-container {
+  display: flex;
+  align-items: stretch;
+  height: 720px;
+  flex-direction: row;
+  padding: 0;
+
+  @media all and (max-width: 768px) {
+    flex-direction: column;
+  }
+  .news-confitura-left, .news-confitura-right {
+    flex-grow: 1;
+    flex-basis: 50%;
+  }
+  .news-confitura-right {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+    div {
+      flex-grow: 1;
+    }
+  }
+}

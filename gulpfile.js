@@ -16,7 +16,8 @@ gulp.task('webpack', ['copy'], function () {
 gulp.task('watch', function () {
 	webpackConfig.watch = true;
 	gulp.run('webpack');
-	return gulp.watch(['src/index.html', 'src/fonts/*', 'src/views/*'], ['build']);
+	gulp.watch(['src/index.html', 'src/fonts/*', 'src/views/*'], ['copy']);
+	//gulp.watch(['src/index.html', 'src/fonts/*', 'src/views/*'], ['build']);
 });
 
 gulp.task('jshint', function () {

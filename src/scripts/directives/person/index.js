@@ -1,6 +1,6 @@
 require('angular-animate/angular-animate');
-require('angular-bootstrap/dist/ui-bootstrap.min');
-require('angular-bootstrap/dist/ui-bootstrap-tpls.min');
+require('angular-bootstrap/ui-bootstrap.min');
+require('angular-bootstrap/ui-bootstrap-tpls.min');
 require('angular-hotkeys/build/hotkeys.min');
 require('angular-hotkeys/build/hotkeys.min.css');
 
