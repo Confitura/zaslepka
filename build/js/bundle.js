@@ -440,7 +440,7 @@ webpackJsonp([0],[
 	'use strict';
 	/* @ngInject */
 	function News($resource, apiServer) {
-	    return $resource(apiServer + '/news/0/1');
+	    return $resource(apiServer + '/news/0/3');
 	}
 	News.$inject = ["$resource", "apiServer"];
 	module.exports = News;
@@ -452,8 +452,10 @@ webpackJsonp([0],[
 	'use strict';
 	/* @ngInject */
 	function NewsCtrl($scope, News) {
+	    var vm = this;
+
 	    News.query(function (news) {
-	        $scope.news = news[0];
+	        vm.list = news;
 	    });
 	}
 	NewsCtrl.$inject = ["$scope", "News"];

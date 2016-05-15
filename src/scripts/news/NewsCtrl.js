@@ -1,8 +1,10 @@
 'use strict';
 /* @ngInject */
 function NewsCtrl($scope, News) {
+    var vm = this;
+
     News.query(function (news) {
-        $scope.news = news[0];
+        vm.list = news;
     });
 }
 module.exports = NewsCtrl;
