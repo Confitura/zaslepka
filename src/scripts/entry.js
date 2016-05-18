@@ -12,14 +12,15 @@ require('moment').locale('pl');
 require('angular-loading-bar/build/loading-bar.min');
 ng.module('confitura', [
 	'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
-	require('twitter'),
+	//require('twitter'),
 	require('news'),
-	require('partners'), require('v4p'),
-	require('speakers'),
-	require('presentations'),
-	require('organizers'),
-	require('registration'),
-	require('agenda')
+	require('partners'),
+	//require('v4p'),
+	//require('speakers'),
+	//require('presentations'),
+	//require('organizers'),
+	//require('registration'),
+	//require('agenda')
 ])
 		.constant('apiServer', 'http://c4p.confitura.pl/api')
 		.config(/*@ngInject*/ function ($stateProvider, $urlRouterProvider) {

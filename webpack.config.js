@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var path = require('path');
 
 module.exports = {
     entry: {
@@ -61,10 +62,10 @@ module.exports = {
                 test: /collapse.js$ /,
                 loader: 'imports?jQuery=jquery'
             },
-            //{
-            //	test: /template.html$/,
-            //	loader: 'ng-cache?prefix=[dir]'
-            //},
+            {
+                test: /\.tpl.html$/,
+                loader: 'ngtemplate?relativeTo=' + (path.resolve(__dirname, './src/scripts')) + '/'
+            },
             {
                 test: /\.html$/,
                 loader: 'html'

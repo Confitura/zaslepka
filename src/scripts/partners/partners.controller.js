@@ -1,5 +1,6 @@
 'use strict';
 var _ = require('lodash');
+require('./partners.tpl.html');
 
 /* @ngInject */
 function PartnersController(Partners) {

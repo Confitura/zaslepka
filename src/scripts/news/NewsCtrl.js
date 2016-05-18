@@ -1,4 +1,5 @@
 'use strict';
+require('./news.banner.tpl.html');
 /* @ngInject */
 function NewsCtrl($scope, News) {
     var vm = this;
