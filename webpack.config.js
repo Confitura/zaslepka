@@ -51,7 +51,7 @@ module.exports = {
                 loader: 'style!raw'
             },
             {
-                test: /\.png$/,
+                test: /\.(png|jpg)$/,
                 loader: 'file'
             },
             {

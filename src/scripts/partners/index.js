@@ -1,5 +1,8 @@
 'use strict';
 require('ng').module('partners',[])
     .factory('Partners', require('./partners.service'))
-    .controller('PartnersController', require('./partners.controller'));
+    .controller('PartnersController', require('./partners.controller'))
+    .controller('PartnerController', require('./partner.controller'))
+    .controller('PartnersBannerController', require('./partners.banner.controller'))
+;
 module.exports ='partners';
