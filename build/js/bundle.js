@@ -35,7 +35,7 @@ webpackJsonp([0],[
 	        //require('registration'),
 	        //require('agenda')
 	    ])
-	    .constant('apiServer', 'http://c4p.confitura.pl:18080/api')
+	    .constant('apiServer', 'http://c4p.confitura.pl/api')
 	    .config(/*@ngInject*/ ["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
 	        $urlRouterProvider
 	            .when('', '/')
