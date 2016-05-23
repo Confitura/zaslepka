@@ -1,4 +1,5 @@
 'use strict';
+require('./partners.less');
 require('ng').module('partners',[])
     .factory('Partners', require('./partners.service'))
     .controller('PartnersController', require('./partners.controller'))

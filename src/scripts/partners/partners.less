@@ -1,13 +1,41 @@
 section#partners-confitura {
   .partners-header {
     position: relative;
-    background: transparent url(../img/header-register.jpg) center center no-repeat;
+    background: transparent url(../../img/header-register.jpg) center center no-repeat;
     background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/header-register.jpg', sizingMethod='scale');
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../img/header-register.jpg', sizingMethod='scale');
     h2 {
       color: #ffffff;
     }
 
+  }
+
+  .partners-items {
+    background: transparent;
+    min-height: 350px;
+    @media all and (max-width: 768px) {
+      min-height: 150px;
+    }
+  }
+  .partner-type {
+    font-size: 3rem;
+    font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;
+    padding-top: 70px;
+    @media all and (max-width: 768px) {
+      padding-top: 5px;
+      padding-bottom: 20px;
+    }
+  }
+  .partners-banner-container {
+    display: flex;
+    justify-content: space-around;
+    align-content: stretch;
+    @media all and (max-width: 768px) {
+      flex-direction: column;
+    }
+    > div {
+      flex-basis: 100%;
+    }
   }
   .partner-header {
     display: block;
@@ -39,7 +67,7 @@ section#partners-confitura {
   img {
     margin: auto;
     max-width: 210px;
-    max-height: 50px;
+    max-height: 80px;
 
   }
   #partner {

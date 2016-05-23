@@ -1,0 +1,23 @@
+<section id="partners-confitura" ng-controller="PartnersBannerController as banner">
+    <div class="row-fluid">
+        <div class="col-lg-12 col-md-12"><h2>our partners</h2></div>
+    </div>
+    <div class="row-fluid col-lg-12 partners-banner-container">
+        <div ng-repeat="type in banner.types" ng-include="'partner-item.html'" ng-if="banner.hasAnyFor(type)"></div>
+    </div>
+</section>
+
+<script type="text/ng-template" id="partner-item.html">
+    <div class="partners-items">
+        <div class="partner-logo text-center" >
+            <ul class="bxslider">
+                <li ng-repeat="partner in banner.getAllFor(type)">
+                    <a ng-href="{{partner.url}}" target="_blank">
+                        <img ng-src="{{partner.logo}}"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <span class="partner-type text-center" ng-if="banner.hasAnyFor(type)">{{type}}</span>
+    </div>
+</script>
