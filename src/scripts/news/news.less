@@ -1,9 +1,7 @@
 .news-container {
   display: flex;
   align-items: stretch;
-  //@media all and (min-width: 1200px) {
-  //  height: 720px;
-  //}
+
   flex-direction: row;
   padding: 0;
   news-item {
@@ -32,6 +30,7 @@
 
   .news-excerpt {
     padding-top: 32px;
+    padding-bottom: 32px;
   }
 
   .news-confitura-left, .news-confitura-right {
@@ -46,7 +45,7 @@
     flex-direction: column;
     align-items: stretch;
     align-content: stretch;
-    div {
+    > div {
       flex-grow: 1;
     }
   }
