@@ -567,7 +567,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	var path = 'news/news.item.tpl.html';
-	var html = "<span class=\"news-title  ease\">\n    {{item.title}}\n</span>\n<span class=\"news-excerpt ease\" ng-bind-html=\"item.shortText\">\n</span>\n<span class=\"news-date ease\">\n    {{item.date.month}} {{item.date.day}} {{item.date.year}}\n</span>";
+	var html = "<div class=\"news-title  ease\">\n    {{item.title}}\n</div>\n<div class=\"news-excerpt ease\" ng-bind-html=\"item.shortText\">\n</div>\n<div class=\"news-date ease\">\n    {{item.date.month}} {{item.date.day}} {{item.date.year}}\n</div>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
