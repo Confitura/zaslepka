@@ -10,16 +10,18 @@ require('angular-sanitize/angular-sanitize.min');
 require('angular-ui-router/release/angular-ui-router.min');
 require('moment').locale('pl');
 require('angular-loading-bar/build/loading-bar.min');
+require('directives/page');
 ng.module('confitura', [
-        'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
+        'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router','directives.page',
         //require('twitter'),
         require('news'),
         require('partners')
+    //,
         //require('v4p'),
         //require('speakers'),
         //require('presentations'),
         //require('organizers'),
-        //require('registration'),
+        //require('registration')
         //require('agenda')
     ])
     .constant('apiServer', 'http://c4p.confitura.pl/api')

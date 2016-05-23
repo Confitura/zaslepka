@@ -22,16 +22,18 @@ webpackJsonp([0],[
 	__webpack_require__(42);
 	__webpack_require__(43).locale('pl');
 	__webpack_require__(45);
+	__webpack_require__(46);
 	ng.module('confitura', [
-	        'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router',
+	        'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router','directives.page',
 	        //require('twitter'),
-	        __webpack_require__(46),
-	        __webpack_require__(50)
+	        __webpack_require__(49),
+	        __webpack_require__(57)
+	    //,
 	        //require('v4p'),
 	        //require('speakers'),
 	        //require('presentations'),
 	        //require('organizers'),
-	        //require('registration'),
+	        //require('registration')
 	        //require('agenda')
 	    ])
 	    .constant('apiServer', 'http://c4p.confitura.pl/api')
@@ -44,7 +46,7 @@ webpackJsonp([0],[
 	        $stateProvider
 	            .state('main', {
 	                url: '/',
-	                template: __webpack_require__(64)
+	                template: __webpack_require__(71)
 	            })
 	            .state('partners', {
 	                url: '/partners',
@@ -416,13 +418,100 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(38).module('news', [])
-	    .factory('News', __webpack_require__(47))
-	    .controller('NewsCtrl', __webpack_require__(48));
-	module.exports ='news';
+
+	module.exports = __webpack_require__(38)
+			.module('directives.page', ['ngResource'])
+			.factory('Pages', __webpack_require__(47))
+			.directive('page', __webpack_require__(48))
+			.name;
 
 /***/ },
 /* 47 */
+/***/ function(module, exports) {
+
+	'use strict';
+	/* @ngInject */
+	function Pages($resource, apiServer) {
+		return $resource(apiServer + '/pages/:name', {name: '@name'}, {});
+	}
+	Pages.$inject = ["$resource", "apiServer"];
+
+	module.exports = Pages;
+
+/***/ },
+/* 48 */
+/***/ function(module, exports) {
+
+	'use strict';
+	/* @ngInject */
+	function PageDirective(Pages) {
+		return {
+			scope: {name: '@'},
+			template: '<div ng-bind-html="content.text"></div>',
+			controller: /* @ngInject */["$scope", function ($scope) {
+				$scope.content = Pages.get({name: $scope.name});
+			}]
+		};
+	}
+	PageDirective.$inject = ["Pages"];
+
+	module.exports = PageDirective;
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	__webpack_require__(50);
+	__webpack_require__(38).module('news', [])
+	    .factory('News', __webpack_require__(52))
+	    .controller('NewsCtrl', __webpack_require__(53))
+	    .directive('newsItem', __webpack_require__(55))
+	;
+	module.exports ='news';
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(51);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./news.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./news.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(13)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".news-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: stretch;\n  -webkit-align-items: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  padding: 0;\n}\n.news-container news-item {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n.news-container news-item .news-title {\n  display: block;\n  font-size: 4rem;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n}\n.news-container news-item .news-excerpt {\n  -webkit-box-flex: 1;\n  -webkit-flex-grow: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.news-container news-item .news-excerpt,\n.news-container news-item .news-date {\n  display: block;\n  font-size: 2rem;\n}\n@media all and (max-width: 768px) {\n  .news-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\n.news-container .news-excerpt {\n  padding-top: 32px;\n}\n.news-container .news-confitura-left,\n.news-container .news-confitura-right {\n  -webkit-box-flex: 1;\n  -webkit-flex-grow: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  -webkit-flex-basis: 50%;\n      -ms-flex-preferred-size: 50%;\n          flex-basis: 50%;\n  min-height: 90vh;\n}\n.news-container .news-confitura-right {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: column;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n  -webkit-align-items: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -webkit-align-content: stretch;\n      -ms-flex-line-pack: stretch;\n          align-content: stretch;\n}\n.news-container .news-confitura-right div {\n  -webkit-box-flex: 1;\n  -webkit-flex-grow: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -434,11 +523,11 @@ webpackJsonp([0],[
 	module.exports = News;
 
 /***/ },
-/* 48 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(49);
+	__webpack_require__(54);
 	/* @ngInject */
 	function NewsCtrl($scope, News) {
 	    var vm = this;
@@ -451,36 +540,59 @@ webpackJsonp([0],[
 	module.exports = NewsCtrl;
 
 /***/ },
-/* 49 */
+/* 54 */
 /***/ function(module, exports) {
 
 	var path = 'news/news.banner.tpl.html';
-	var html = "<section id=\"news-confitura\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 news-confitura-header\"><h2>News</h2></div>\n    </div>\n\n    <div class=\"news-container col-lg-12\" ng-controller=\"NewsCtrl as news\">\n        <div class=\"news-confitura-left\">\n    <span class=\"news-title font-white ease\">\n    {{news.list[0].title}}\n    </span>\n    <span class=\"news-excerpt font-white ease\" ng-bind-html=\"news.list[0].shortText\">\n    </span>\n    <span class=\"news-date font-white ease\">\n     {{news.list[0].date.month}} {{news.list[0].date.day}} {{news.list[0].date.year}}\n    </span>\n        </div>\n        <div class=\"news-confitura-right\" ng-if=\"news.list.length > 1\">\n            <div class=\"semi-square black\">\n    <span class=\"news-title font-white ease\">\n    {{news.list[1].title}}\n    </span>\n    <span class=\"news-excerpt font-white ease\" ng-bind-html=\"news.list[1].shortText\">\n    </span>\n    <span class=\"news-date font-white ease\">\n        {{news.list[1].date.month}} {{news.list[1].date.day}} {{news.list[1].date.year}}\n\n    </span>\n            </div>\n            <div class=\"semi-square beige\" ng-if=\"news.list.length > 2\">\n    <span class=\"news-title font-black ease\">\n   {{news.list[2].title}}\n    </span>\n    <span class=\"news-excerpt font-black ease\" ng-bind-html=\"news.list[2].shortText\">\n    </span>\n    <span class=\"news-date font-black ease\">\n   {{news.list[2].date.month}} {{news.list[2].date.day}} {{news.list[2].date.year}}\n    </span>\n            </div>\n        </div>\n    </div>\n\n</section>";
+	var html = "<section id=\"news-confitura\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 news-confitura-header\"><h2>News</h2></div>\n    </div>\n\n    <div class=\"news-container col-lg-12\" ng-controller=\"NewsCtrl as news\">\n        <news-item class=\"news-confitura-left font-white\" item=\"news.list[0]\"></news-item>\n        <div class=\"news-confitura-right\" ng-if=\"news.list.length > 1\">\n            <div class=\"semi-square black font-white\">\n                <news-item item=\"news.list[1]\"></news-item>\n            </div>\n            <div class=\"semi-square beige\" ng-if=\"news.list.length > 2\">\n                <news-item item=\"news.list[2]\"></news-item>\n            </div>\n        </div>\n    </div>\n\n</section>\n";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
 /***/ },
-/* 50 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(51);
+	__webpack_require__(56);
+	function NewsItemDirective(){
+	    return {
+	        scope: {item: '='},
+	        templateUrl: 'news/news.item.tpl.html'
+	    };
+	}
+	module.exports = NewsItemDirective;
+
+/***/ },
+/* 56 */
+/***/ function(module, exports) {
+
+	var path = 'news/news.item.tpl.html';
+	var html = "    <span class=\"news-title  ease\">\n    {{item.title}}\n    </span>\n<span class=\"news-excerpt ease\" ng-bind-html=\"item.shortText\">\n    </span>\n<span class=\"news-date ease\">\n     {{item.date.month}} {{item.date.day}} {{item.date.year}}\n    </span>";
+	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
+	module.exports = path;
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	__webpack_require__(58);
 	__webpack_require__(38).module('partners',[])
-	    .factory('Partners', __webpack_require__(54))
-	    .controller('PartnersController', __webpack_require__(55))
-	    .controller('PartnerController', __webpack_require__(57))
-	    .controller('PartnersBannerController', __webpack_require__(59))
+	    .factory('Partners', __webpack_require__(61))
+	    .controller('PartnersController', __webpack_require__(62))
+	    .controller('PartnerController', __webpack_require__(64))
+	    .controller('PartnersBannerController', __webpack_require__(66))
 	;
 	module.exports ='partners';
 
 /***/ },
-/* 51 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(52);
+	var content = __webpack_require__(59);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -500,7 +612,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 52 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(13)();
@@ -508,19 +620,19 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, "section#partners-confitura .partners-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(53) + ") center center no-repeat;\n  background-size: cover;\n  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../img/header-register.jpg', sizingMethod='scale');\n}\nsection#partners-confitura .partners-header h2 {\n  color: #ffffff;\n}\nsection#partners-confitura .partners-items {\n  background: transparent;\n  min-height: 350px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-items {\n    min-height: 150px;\n  }\n}\nsection#partners-confitura .partner-type {\n  font-size: 3rem;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  padding-top: 70px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partner-type {\n    padding-top: 5px;\n    padding-bottom: 20px;\n  }\n}\nsection#partners-confitura .partners-banner-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  -webkit-align-content: stretch;\n      -ms-flex-line-pack: stretch;\n          align-content: stretch;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-banner-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\nsection#partners-confitura .partners-banner-container > div {\n  -webkit-flex-basis: 100%;\n      -ms-flex-preferred-size: 100%;\n          flex-basis: 100%;\n}\nsection#partners-confitura .partner-header {\n  display: block;\n  text-align: center;\n  font-size: 4rem;\n  height: 110px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n}\nsection#partners-confitura .min-h {\n  height: 150px !important;\n}\nsection#partners-confitura .vcenter {\n  position: relative !important;\n}\nsection#partners-confitura .row-1140 {\n  display: block;\n  max-width: 1080px;\n  margin: 0 auto !important;\n}\nsection#partners-confitura .pt100 {\n  margin-top: 100px;\n}\nsection#partners-confitura .pb50 {\n  margin-bottom: 50px;\n}\nsection#partners-confitura .pb150 {\n  padding-bottom: 150px;\n}\nsection#partners-confitura img {\n  margin: auto;\n  max-width: 210px;\n  max-height: 80px;\n}\nsection#partners-confitura #partner {\n  padding-top: 50px;\n}\nsection#partners-confitura #partner img {\n  max-width: 400px;\n  max-height: 150px;\n}\nsection#partners-confitura .platinum img {\n  max-width: 350px;\n  max-height: 100px;\n}\nsection#partners-confitura .gold img {\n  max-width: 300px;\n  max-height: 70px;\n}\nsection#partners-confitura .silver img {\n  max-width: 250px;\n  max-height: 70px;\n}\nsection#partners-confitura .partner-description {\n  display: block;\n  text-shadow: none;\n  font-size: 2.5rem;\n  padding-top: 20px;\n  padding-left: 20px;\n  padding-right: 20px;\n}\nsection#partners-confitura .partners-logo-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-logo-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\nsection#partners-confitura .partners-logo-container a {\n  padding: 20px;\n}\n", ""]);
+	exports.push([module.id, "section#partners-confitura .partners-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(60) + ") center center no-repeat;\n  background-size: cover;\n  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../img/header-register.jpg', sizingMethod='scale');\n}\nsection#partners-confitura .partners-header h2 {\n  color: #ffffff;\n}\nsection#partners-confitura .partners-items {\n  background: transparent;\n  min-height: 350px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-items {\n    min-height: 150px;\n  }\n}\nsection#partners-confitura .partner-type {\n  font-size: 3rem;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  padding-top: 70px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partner-type {\n    padding-top: 5px;\n    padding-bottom: 20px;\n  }\n}\nsection#partners-confitura .partners-banner-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  -webkit-align-content: stretch;\n      -ms-flex-line-pack: stretch;\n          align-content: stretch;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-banner-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\nsection#partners-confitura .partners-banner-container > div {\n  -webkit-flex-basis: 100%;\n      -ms-flex-preferred-size: 100%;\n          flex-basis: 100%;\n}\nsection#partners-confitura .partner-header {\n  display: block;\n  text-align: center;\n  font-size: 4rem;\n  height: 110px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n}\nsection#partners-confitura .min-h {\n  height: 150px !important;\n}\nsection#partners-confitura .vcenter {\n  position: relative !important;\n}\nsection#partners-confitura .row-1140 {\n  display: block;\n  max-width: 1080px;\n  margin: 0 auto !important;\n}\nsection#partners-confitura .pt100 {\n  margin-top: 100px;\n}\nsection#partners-confitura .pb50 {\n  margin-bottom: 50px;\n}\nsection#partners-confitura .pb150 {\n  padding-bottom: 150px;\n}\nsection#partners-confitura img {\n  margin: auto;\n  max-width: 210px;\n  max-height: 80px;\n}\nsection#partners-confitura #partner {\n  padding-top: 50px;\n}\nsection#partners-confitura #partner img {\n  max-width: 400px;\n  max-height: 150px;\n}\nsection#partners-confitura .platinum img {\n  max-width: 350px;\n  max-height: 100px;\n}\nsection#partners-confitura .gold img {\n  max-width: 300px;\n  max-height: 70px;\n}\nsection#partners-confitura .silver img {\n  max-width: 250px;\n  max-height: 70px;\n}\nsection#partners-confitura .partner-description {\n  display: block;\n  text-shadow: none;\n  font-size: 2.5rem;\n  padding-top: 20px;\n  padding-left: 20px;\n  padding-right: 20px;\n}\nsection#partners-confitura .partners-logo-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-logo-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\nsection#partners-confitura .partners-logo-container a {\n  padding: 20px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 53 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "90e11006d489a2df093eb831379f754f.jpg";
 
 /***/ },
-/* 54 */
+/* 61 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -533,11 +645,11 @@ webpackJsonp([0],[
 	module.exports = Partners;
 
 /***/ },
-/* 55 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(56);
+	__webpack_require__(63);
 
 	/* @ngInject */
 	function PartnersController(Partners, $state) {
@@ -561,7 +673,7 @@ webpackJsonp([0],[
 	module.exports = PartnersController;
 
 /***/ },
-/* 56 */
+/* 63 */
 /***/ function(module, exports) {
 
 	var path = 'partners/partners.tpl.html';
@@ -570,11 +682,11 @@ webpackJsonp([0],[
 	module.exports = path;
 
 /***/ },
-/* 57 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(58);
+	__webpack_require__(65);
 
 	/* @ngInject */
 	function PartnersController($stateParams) {
@@ -588,7 +700,7 @@ webpackJsonp([0],[
 	module.exports = PartnersController;
 
 /***/ },
-/* 58 */
+/* 65 */
 /***/ function(module, exports) {
 
 	var path = 'partners/partner.tpl.html';
@@ -597,13 +709,13 @@ webpackJsonp([0],[
 	module.exports = path;
 
 /***/ },
-/* 59 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-	__webpack_require__(60);
-	__webpack_require__(61);
-	__webpack_require__(62);
+	__webpack_require__(67);
+	__webpack_require__(68);
+	__webpack_require__(69);
 
 	/* @ngInject */
 	function PartnersBannerController(Partners, $timeout) {
@@ -644,7 +756,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 60 */
+/* 67 */
 /***/ function(module, exports) {
 
 	var path = 'partners/partners.banner.tpl.html';
@@ -653,7 +765,7 @@ webpackJsonp([0],[
 	module.exports = path;
 
 /***/ },
-/* 61 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(jQuery) {/**
@@ -668,13 +780,13 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 62 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(63);
+	var content = __webpack_require__(70);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -694,16 +806,16 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 63 */
+/* 70 */
 /***/ function(module, exports) {
 
 	module.exports = "/**\n * bxSlider v4.2.5\n * Copyright 2013-2015 Steven Wanderski\n * Written while drinking Belgian ales and listening to jazz\n\n * Licensed under MIT (http://opensource.org/licenses/MIT)\n */\n\n\n.bx-wrapper{position:relative;margin:0 auto 60px;padding:0;*zoom:1;-ms-touch-action:pan-y;touch-action:pan-y}.bx-wrapper img{max-width:100%;display:block}.bxslider{margin:0;padding:0}ul.bxslider{list-style:none}.bx-viewport{-webkit-transform:translatez(0)}.bx-wrapper{-moz-box-shadow:0 0 5px #ccc;-webkit-box-shadow:0 0 5px #ccc;box-shadow:0 0 5px #ccc;border:5px solid #fff;background:#fff}.bx-wrapper .bx-controls-auto,.bx-wrapper .bx-pager{position:absolute;bottom:-30px;width:100%}.bx-wrapper .bx-loading{min-height:50px;background:url(images/bx_loader.gif) center center no-repeat #fff;height:100%;width:100%;position:absolute;top:0;left:0;z-index:2000}.bx-wrapper .bx-pager{text-align:center;font-size:.85em;font-family:Arial;font-weight:700;color:#666;padding-top:20px}.bx-wrapper .bx-pager.bx-default-pager a{background:#666;text-indent:-9999px;display:block;width:10px;height:10px;margin:0 5px;outline:0;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px}.bx-wrapper .bx-pager.bx-default-pager a.active,.bx-wrapper .bx-pager.bx-default-pager a:focus,.bx-wrapper .bx-pager.bx-default-pager a:hover{background:#000}.bx-wrapper .bx-controls-auto .bx-controls-auto-item,.bx-wrapper .bx-pager-item{display:inline-block;*zoom:1;*display:inline}.bx-wrapper .bx-pager-item{font-size:0;line-height:0}.bx-wrapper .bx-prev{left:10px;background:url(images/controls.png) no-repeat 0 -32px}.bx-wrapper .bx-prev:focus,.bx-wrapper .bx-prev:hover{background-position:0 0}.bx-wrapper .bx-next{right:10px;background:url(images/controls.png) no-repeat -43px -32px}.bx-wrapper .bx-next:focus,.bx-wrapper .bx-next:hover{background-position:-43px 0}.bx-wrapper .bx-controls-direction a{position:absolute;top:50%;margin-top:-16px;outline:0;width:32px;height:32px;text-indent:-9999px;z-index:9999}.bx-wrapper .bx-controls-direction a.disabled{display:none}.bx-wrapper .bx-controls-auto{text-align:center}.bx-wrapper .bx-controls-auto .bx-start{display:block;text-indent:-9999px;width:10px;height:11px;outline:0;background:url(images/controls.png) -86px -11px no-repeat;margin:0 3px}.bx-wrapper .bx-controls-auto .bx-start.active,.bx-wrapper .bx-controls-auto .bx-start:focus,.bx-wrapper .bx-controls-auto .bx-start:hover{background-position:-86px 0}.bx-wrapper .bx-controls-auto .bx-stop{display:block;text-indent:-9999px;width:9px;height:11px;outline:0;background:url(images/controls.png) -86px -44px no-repeat;margin:0 3px}.bx-wrapper .bx-controls-auto .bx-stop.active,.bx-wrapper .bx-controls-auto .bx-stop:focus,.bx-wrapper .bx-controls-auto .bx-stop:hover{background-position:-86px -33px}.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager{text-align:left;width:80%}.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto{right:0;width:35px}.bx-wrapper .bx-caption{position:absolute;bottom:0;left:0;background:#666;background:rgba(80,80,80,.75);width:100%}.bx-wrapper .bx-caption span{color:#fff;font-family:Arial;display:block;font-size:.85em;padding:10px}"
 
 /***/ },
-/* 64 */
+/* 71 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<header>\n\n\t<div class=\"row-fluid\">\n\t\t<div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n\t\t\t<div class=\"container\">\n\t\t\t\t<div class=\"carousel-caption\">\n\t\t\t\t\t<h1>confitura 2016</h1>\n\t\t\t\t\t<p class=\"carousel-p\">Java Conference for Polish community\n\t\t\t\t\t</p>\n\t\t\t\t\t<p><a class=\"btn btn-lg btn-primary btn-pink\" href=\"http://c4p.confitura.pl\" role=\"button\">Call 4 Papers</a></p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</header>\n\n<!-- /container fluid -->\n<div class=\"container-fluid\">\n\n\t<section id=\"main-confitura\">\n\t\t<div class=\"row-fluid\">\n\t\t\t<div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n\t\t\t<div class=\"col-lg-12 col-md-12 main-confitura-content\">\n\t\t\t\t<div class=\"main-confitura-content-inner\">\n\t\t\t\t\t<div class=\"col-lg-6 col-md-6\">\n\t\t\t\t\t\t<h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. it starts at around 9 a.m. and finish at 7 p.m.\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-6 col-md-6\">\n\t\t\t\t\t\t<h3>University of Warsaw, the main campus</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\n\t\t</div>\n\t</section>\n\n\t<section id=\"about-confitura\">\n\t\t<div class=\"row-fluid\">\n\t\t\t<div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n\t\t\t<div class=\"col-lg-12 about-confitura-content\">\n\t\t\t\t<div class=\"about-confitura-content-inner\">\n\t\t\t\t\t<div>\n\n\t\t\t\t\t\tConfitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n\t\t\t\t\t\tthe Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n\t\t\t\t\t\t1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n\t\t\t\t\t\tyear we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n\t\t\t\t\t\tWe collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n\t\t\t\t\t\tto a charity organization) and invite our donors to register.\n\t\t\t\t\t\t<br><strong>Registration is required</strong>.\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n\t<div ng-include=\"'news/news.banner.tpl.html'\"></div>\n\t<div ng-include=\"'partners/partners.banner.tpl.html'\"></div>\n\n";
+	module.exports = "<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"registration\" role=\"button\">Registration</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<!-- /container fluid -->\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. it starts at around 9 a.m. and finish at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>University of Warsaw, the main campus</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'news/news.banner.tpl.html'\"></div>\n\n    <div ng-include=\"'partners/partners.banner.tpl.html'\"></div>\n</div>\n\n";
 
 /***/ }
 ]);

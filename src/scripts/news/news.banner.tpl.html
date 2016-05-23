@@ -4,37 +4,13 @@
     </div>
 
     <div class="news-container col-lg-12" ng-controller="NewsCtrl as news">
-        <div class="news-confitura-left">
-    <span class="news-title font-white ease">
-    {{news.list[0].title}}
-    </span>
-    <span class="news-excerpt font-white ease" ng-bind-html="news.list[0].shortText">
-    </span>
-    <span class="news-date font-white ease">
-     {{news.list[0].date.month}} {{news.list[0].date.day}} {{news.list[0].date.year}}
-    </span>
-        </div>
+        <news-item class="news-confitura-left font-white" item="news.list[0]"></news-item>
         <div class="news-confitura-right" ng-if="news.list.length > 1">
-            <div class="semi-square black">
-    <span class="news-title font-white ease">
-    {{news.list[1].title}}
-    </span>
-    <span class="news-excerpt font-white ease" ng-bind-html="news.list[1].shortText">
-    </span>
-    <span class="news-date font-white ease">
-        {{news.list[1].date.month}} {{news.list[1].date.day}} {{news.list[1].date.year}}
-
-    </span>
+            <div class="semi-square black font-white">
+                <news-item item="news.list[1]"></news-item>
             </div>
             <div class="semi-square beige" ng-if="news.list.length > 2">
-    <span class="news-title font-black ease">
-   {{news.list[2].title}}
-    </span>
-    <span class="news-excerpt font-black ease" ng-bind-html="news.list[2].shortText">
-    </span>
-    <span class="news-date font-black ease">
-   {{news.list[2].date.month}} {{news.list[2].date.day}} {{news.list[2].date.year}}
-    </span>
+                <news-item item="news.list[2]"></news-item>
             </div>
         </div>
     </div>
