@@ -1,11 +1,15 @@
 'use strict';
 var angular = require('ng');
-require('imports?require=>false!angular-hammer/angular.hammer.js');
 require('angular-bootstrap/ui-bootstrap.min');
 require('angular-bootstrap/ui-bootstrap-tpls.min');
 require('angular-cookies/angular-cookies.min');
 require('angular-hotkeys/build/hotkeys.min');
 require('angular-hotkeys/build/hotkeys.min.css');
+require('./v4p.tpl.html');
+require('./v4p.less');
+require('slick-carousel/slick/slick.min');
+require('slick-carousel/slick/slick.css');
+require('slick-carousel/slick/slick-theme.css');
 
 module.exports = angular.module('v4p',
 		['ngCookies', 'cfp.hotkeys', 'ui.bootstrap', 'hmTouchEvents',

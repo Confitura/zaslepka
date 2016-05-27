@@ -4,13 +4,16 @@
 		<span class="prev-arrow" ng-click="prev()"></span>
 	</aside>
 	<section>
-		<div class="person-photo">
-			<img ng-src="{{person().photo}}"/>
+		<div class="img-speaker">
+			<img class="img-responsive margin-auto"  ng-src="{{person().photo}}"
+				 ng-class="{empty: person().photo == null}"
+
+			>
 		</div>
 		<section>
-			<h1>{{person().fullName}}</h1>
+			<div class="mcci-header ta-leftperson-name vote-person ng-binding">{{person().fullName}}</div>
 
-			<div ng-bind-html="person().bio"></div>
+			<div class="mcci-content" ng-bind-html="person().bio"></div>
 		</section>
 		<section>
 			<a ng-repeat="presentation in person().presentations"

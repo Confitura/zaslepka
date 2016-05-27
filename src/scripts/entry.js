@@ -15,9 +15,10 @@ ng.module('confitura', [
         'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router','directives.page',
         //require('twitter'),
         require('news'),
-        require('partners')
+        require('partners'),
     //,
-        //require('v4p'),
+        require('v4p'),
+        require('cookies')
         //require('speakers'),
         //require('presentations'),
         //require('organizers'),
@@ -57,7 +58,7 @@ ng.module('confitura', [
             })
             .state('v4p', {
                 url: '/v4p',
-                templateUrl: 'views/v4p.html'
+                templateUrl: 'v4p/v4p.tpl.html'
             })
             .state('organizers', {
                 url: '/organizers',
