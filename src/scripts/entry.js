@@ -18,6 +18,7 @@ ng.module('confitura', [
         require('partners'),
     //,
         require('v4p'),
+        require('about'),
         require('cookies')
         //require('speakers'),
         //require('presentations'),
@@ -60,9 +61,9 @@ ng.module('confitura', [
                 url: '/v4p',
                 templateUrl: 'v4p/v4p.tpl.html'
             })
-            .state('organizers', {
-                url: '/organizers',
-                templateUrl: 'views/organizers.html'
+            .state('about', {
+                url: '/about',
+                templateUrl: 'about/about.tpl.html'
             })
             .state('registration', {
                 url: '/registration',

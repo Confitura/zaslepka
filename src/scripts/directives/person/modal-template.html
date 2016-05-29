@@ -1,32 +1,45 @@
-<div class="modal-body">
-	<md-button class="md-icon-button close" ng-click="$close()"><md-icon>close</md-icon></md-button>
-	<aside ng-if="hasMany()" class="navigation">
-		<span class="prev-arrow" ng-click="prev()"></span>
-	</aside>
-	<section>
-		<div class="img-speaker">
-			<img class="img-responsive margin-auto"  ng-src="{{person().photo}}"
-				 ng-class="{empty: person().photo == null}"
+<div class="modal-body beige person-modal">
+    <!--<md-button class="md-icon-button close" ng-click="$close()">-->
+    <!--<md-icon>close</md-icon>-->
+    <!--</md-button>-->
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
 
-			>
-		</div>
-		<section>
-			<div class="mcci-header ta-leftperson-name vote-person ng-binding">{{person().fullName}}</div>
+    <div class="person-modal-container">
+        <div class="person-photo">
+            <div class="img-speaker">
+                <img class="img-responsive margin-auto" ng-src="{{person().photo}}"
+                     ng-class="{empty: person().photo == null}"/>
+            </div>
+        <span class="social-speaker">
+            <a ng-href="http://www.twitter.com/{{person().twitter}}" title="twitter" target="_blank" ng-if="person().twitter">
+                <i class="fa fa-twitter prelegent-social" aria-hidden="true"></i>
+            </a>
+            <a ng-href="//{{person().url}}" title="direct" target="_blank" ng-if="person().url">
+                <i class="fa fa-arrow-up prelegent-social" aria-hidden="true"></i>
+            </a>
+        </span>
+        </div>
+        <div class="person-info">
+            <section>
+                <div class="ta-leftperson-name person-name"><h3>{{person().fullName}}</h3></div>
+                <div class="mcci-content" ng-bind-html="person().bio"></div>
+            </section>
+            <section>
+                <a ng-repeat="presentation in person().presentations"
+                   ui-sref="presentations({id: presentation.id})"
+                   ng-click="$close()">
+                    <h3 class="presentation-title">
+                        {{presentation.title}}
+                    </h3>
+                </a>
+            </section>
+        </div>
+    </div>
+    <!--<section></section>-->
 
-			<div class="mcci-content" ng-bind-html="person().bio"></div>
-		</section>
-		<section>
-			<a ng-repeat="presentation in person().presentations"
-				 ui-sref="presentations({id: presentation.id})"
-				 ng-click="$close()">
-				<h3 class="presentation-title">
-					{{presentation.title}}
-				</h3>
-			</a>
-		</section>
-	</section>
-
-	<aside ng-if="hasMany()" class="navigation">
-		<span class="next-arrow" ng-click="next()"></span>
-	</aside>
+    <aside ng-if="hasMany()" class="navigation">
+        <span class="next-arrow" ng-click="next()"></span>
+    </aside>
 </div>

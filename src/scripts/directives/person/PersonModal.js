@@ -10,7 +10,7 @@ function PersonModal($modal) {
 		_speakerModal = $modal.open({
 			backdropClass: 'person-modal-backdrop',
 			windowClass: 'person-modal',
-			size: 'md',
+			size: 'lg',
 			template: require('./modal-template.html'),
 			controller: require('./PersonModalController'),
 			resolve: {

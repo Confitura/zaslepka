@@ -31,7 +31,8 @@ webpackJsonp([0],[
 	        __webpack_require__(58),
 	    //,
 	        __webpack_require__(72),
-	        __webpack_require__(102)
+	        __webpack_require__(104),
+	        __webpack_require__(111)
 	        //require('speakers'),
 	        //require('presentations'),
 	        //require('organizers'),
@@ -48,7 +49,7 @@ webpackJsonp([0],[
 	        $stateProvider
 	            .state('main', {
 	                url: '/',
-	                template: __webpack_require__(107)
+	                template: __webpack_require__(116)
 	            })
 	            .state('partners', {
 	                url: '/partners',
@@ -73,9 +74,9 @@ webpackJsonp([0],[
 	                url: '/v4p',
 	                templateUrl: 'v4p/v4p.tpl.html'
 	            })
-	            .state('organizers', {
-	                url: '/organizers',
-	                templateUrl: 'views/organizers.html'
+	            .state('about', {
+	                url: '/about',
+	                templateUrl: 'about/about.tpl.html'
 	            })
 	            .state('registration', {
 	                url: '/registration',
@@ -831,11 +832,11 @@ webpackJsonp([0],[
 	__webpack_require__(86);
 
 	module.exports = angular.module('v4p',
-			['ngCookies', 'cfp.hotkeys', 'ui.bootstrap', 'hmTouchEvents',
+			['ngCookies', 'cfp.hotkeys', 'ui.bootstrap',
 				__webpack_require__(88), __webpack_require__(47)])
-			.factory('Vote', __webpack_require__(98))
-			.factory('Voting', __webpack_require__(99))
-			.controller('VotingController', __webpack_require__(101))
+			.factory('Vote', __webpack_require__(100))
+			.factory('Voting', __webpack_require__(101))
+			.controller('VotingController', __webpack_require__(103))
 			.name;
 
 
@@ -944,7 +945,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	var path = 'v4p/v4p.tpl.html';
-	var html = "<section id=\"speakers-confitura\" ng-controller=\"VotingController as voting\">\n    <div class=\"row-fluid\">\n        <div ng-if=\"voting.notStarted()\" class=\"bg-white row-1080 text-center register-excerpt\">\n            <page name=\"v4p-start\"></page>\n            <div>\n                <a class=\"btn btn-lg btn-primary btn-pink\" href=\"\" role=\"button\" ng-click=\"voting.start()\">Lets Start!</a>\n            </div>\n        </div>\n\n    </div>\n    <div class=\"row-fluid\" ng-if=\"voting.started()\">\n\n        <div class=\"bg-white row-1080 text-center register-excerpt\" ng-if=\"!voting.isActive()\">\n            <page name=\"v4p-end\"></page>\n        </div>\n        <div class=\"col-lg-12 pt150 pb150 vote-slider-cnt\" ng-if=\"voting.isActive()\">\n            <h3>{{voting.currentIdx()}}/{{voting.votes.length}}</h3>\n            <div class=\"row-1140 vote-slider\">\n                <div class=\"vote-slide\" ng-repeat=\"vote in voting.votes\">\n                    <div class=\"col-lg-5\">\n                        <span class=\"img-speaker\" ng-repeat=\"speaker in vote.presentation.speakers\">\n                            <img class=\"img-responsive margin-auto clickable\"\n                                 data-lazy=\"{{speaker.photo}}\"\n                                 ng-class=\"{empty: speaker.photo == ''}\"\n                                 ng-click=\"voting.showSpeaker(speaker)\"\n                            />\n                            <div class=\"mcci-header ta-leftperson-name vote-person\">{{speaker.fullName}}</div>\n                        </span>\n\n                    </div>\n                    <div class=\"col-lg-7 vote-info\">\n\t\t\t\t\t\t\t\t<span class=\"social-speaker\">\n\t\t\t\t\t\t\t\t\t<a class=\"vote-mark\"\n                                       ng-repeat=\"rate in voting.rating\"\n                                       ng-class=\"{selected: rate == vote.vote}\"\n                                       ng-click=\"voting.vote(rate)\">{{rate}}</a>\n\t\t\t\t\t\t\t\t</span>\n                        <div class=\"mcci-header ta-left pt30 vote-title\"><h3>{{vote.presentation.title}}</h3></div>\n\n                        <div class=\"mcci-header ta-left description-type\">\n                            <span class=\"selected\" ng-click=\"voting.showInfo('short')\"\n                                  ng-class=\"{selected: voting.configuration.info == 'short'}\">TL;DR</span> | <span\n                                ng-click=\"voting.showInfo('full')\" ng-class=\"{selected: voting.configuration.info == 'full'}\">Full</span>\n                        </div>\n\n                        <div class=\"mcci-content ta-left\" ng-bind-html=\"voting.getInfoFor(vote.presentation)\">\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</section>";
+	var html = "<section id=\"speakers-confitura\" ng-controller=\"VotingController as voting\">\n    <div class=\"row-fluid\">\n        <div ng-if=\"voting.notStarted()\" class=\"bg-white row-1080 text-center register-excerpt\">\n            <page name=\"v4p-start\"></page>\n            <div>\n                <a class=\"btn btn-lg btn-primary btn-pink\" href=\"\" role=\"button\" ng-click=\"voting.start()\">Let's Start!</a>\n            </div>\n        </div>\n\n    </div>\n    <div class=\"row-fluid\" ng-if=\"voting.started()\">\n\n        <div class=\"bg-white row-1080 text-center register-excerpt\" ng-if=\"!voting.isActive()\">\n            <page name=\"v4p-end\"></page>\n        </div>\n        <div class=\"col-lg-12 pt150 pb150 vote-slider-cnt\" ng-if=\"voting.isActive()\">\n            <h3>{{voting.currentIdx()}}/{{voting.votes.length}}</h3>\n            <div class=\"row-1140 vote-slider\">\n                <div class=\"vote-slide\" ng-repeat=\"vote in voting.votes\">\n                    <div class=\"col-lg-5\">\n                        <span class=\"img-speaker\" ng-repeat=\"speaker in vote.presentation.speakers\">\n                            <img class=\"img-responsive margin-auto clickable\"\n                                 data-lazy=\"{{speaker.photo}}\"\n                                 ng-class=\"{empty: speaker.photo == ''}\"\n                                 ng-click=\"voting.showSpeaker(speaker)\"\n                            />\n                            <div class=\"mcci-header ta-leftperson-name vote-person\">{{speaker.fullName}}</div>\n                        </span>\n\n                    </div>\n                    <div class=\"col-lg-7 vote-info\">\n\t\t\t\t\t\t\t\t<span class=\"social-speaker\">\n\t\t\t\t\t\t\t\t\t<a class=\"vote-mark\"\n                                       ng-repeat=\"rate in voting.rating\"\n                                       ng-class=\"{selected: rate == vote.vote}\"\n                                       ng-click=\"voting.vote(rate)\">{{rate}}</a>\n\t\t\t\t\t\t\t\t</span>\n                        <div class=\"mcci-header ta-left pt30 vote-title\"><h3>{{vote.presentation.title}}</h3></div>\n\n                        <div class=\"mcci-header ta-left description-type\">\n                            <span class=\"selected\" ng-click=\"voting.showInfo('short')\"\n                                  ng-class=\"{selected: voting.configuration.info == 'short'}\">TL;DR</span> | <span\n                                ng-click=\"voting.showInfo('full')\" ng-class=\"{selected: voting.configuration.info == 'full'}\">Full</span>\n                        </div>\n\n                        <div class=\"mcci-content ta-left\" ng-bind-html=\"voting.getInfoFor(vote.presentation)\">\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</section>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -1090,12 +1091,13 @@ webpackJsonp([0],[
 	__webpack_require__(74);
 	__webpack_require__(76);
 	__webpack_require__(77);
+	__webpack_require__(90);
 
 	module.exports = __webpack_require__(39)
 			.module('directives.person', ['ngAnimate', 'cfp.hotkeys', 'ui.bootstrap'])
-			.directive('person', __webpack_require__(90))
-			.directive('persons', __webpack_require__(93))
-			.service('PersonModal', __webpack_require__(95))
+			.directive('person', __webpack_require__(92))
+			.directive('persons', __webpack_require__(95))
+			.service('PersonModal', __webpack_require__(97))
 			.name;
 
 /***/ },
@@ -5258,6 +5260,46 @@ webpackJsonp([0],[
 /* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(91);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?root=..!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/less-loader/index.js!./person-modal.less", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?root=..!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/less-loader/index.js!./person-modal.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(14)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".person-modal .person-modal-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n}\n@media all and (max-width: 768px) {\n  .person-modal .person-modal-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  .person-modal .person-modal-container .modal-dialog {\n    margin: 0;\n  }\n}\n.person-modal .person-modal-container .modal-content {\n  border: none;\n}\n.person-modal .person-modal-container .person-photo {\n  -webkit-flex-shrink: 0;\n      -ms-flex-negative: 0;\n          flex-shrink: 0;\n}\n.person-modal .person-modal-container .person-photo .img-speaker img {\n  min-width: 300px;\n  min-height: 300px;\n}\n.person-modal .person-modal-container .person-info {\n  padding: 20px;\n}\n.person-modal .person-modal-container .person-info .person-name h3:before,\n.person-modal .person-modal-container .person-info .person-name h3:after {\n  content: \" # \";\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	function PersonDirective() {
 		return {
@@ -5265,20 +5307,20 @@ webpackJsonp([0],[
 			scope: {
 				person: "=for"
 			},
-			template: __webpack_require__(91),
-			controller: __webpack_require__(92)
+			template: __webpack_require__(93),
+			controller: __webpack_require__(94)
 		};
 	}
 	module.exports = PersonDirective;
 
 /***/ },
-/* 91 */
+/* 93 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"person\" ng-click=\"showModal()\">\n\t<div class=\"person-photo\"  ng-if=\"showPhoto\">\n\t\t<img ng-src=\"{{person.photo}}\"/>\n\t</div>\n\t<h2>{{person.fullName}}</h2>\n</section>";
 
 /***/ },
-/* 92 */
+/* 94 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5298,7 +5340,7 @@ webpackJsonp([0],[
 	module.exports = PersonDirectiveController;
 
 /***/ },
-/* 93 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5309,19 +5351,19 @@ webpackJsonp([0],[
 				persons: "=for",
 				filter: "="
 			},
-			template: __webpack_require__(94)
+			template: __webpack_require__(96)
 		};
 	}
 	module.exports = PersonsDirective;
 
 /***/ },
-/* 94 */
+/* 96 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"persons\">\n\t<person for=\"person\"\n\t\t\t\t\tng-repeat=\"person in persons | filter: {fullName: filter}\"></person>\n</section>";
 
 /***/ },
-/* 95 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5336,9 +5378,9 @@ webpackJsonp([0],[
 			_speakerModal = $modal.open({
 				backdropClass: 'person-modal-backdrop',
 				windowClass: 'person-modal',
-				size: 'md',
-				template: __webpack_require__(96),
-				controller: __webpack_require__(97),
+				size: 'lg',
+				template: __webpack_require__(98),
+				controller: __webpack_require__(99),
 				resolve: {
 					persons: function () {
 						return persons;
@@ -5363,13 +5405,13 @@ webpackJsonp([0],[
 	module.exports = PersonModal;
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"modal-body\">\n\t<md-button class=\"md-icon-button close\" ng-click=\"$close()\"><md-icon>close</md-icon></md-button>\n\t<aside ng-if=\"hasMany()\" class=\"navigation\">\n\t\t<span class=\"prev-arrow\" ng-click=\"prev()\"></span>\n\t</aside>\n\t<section>\n\t\t<div class=\"img-speaker\">\n\t\t\t<img class=\"img-responsive margin-auto\"  ng-src=\"{{person().photo}}\"\n\t\t\t\t ng-class=\"{empty: person().photo == null}\"\n\n\t\t\t>\n\t\t</div>\n\t\t<section>\n\t\t\t<div class=\"mcci-header ta-leftperson-name vote-person ng-binding\">{{person().fullName}}</div>\n\n\t\t\t<div class=\"mcci-content\" ng-bind-html=\"person().bio\"></div>\n\t\t</section>\n\t\t<section>\n\t\t\t<a ng-repeat=\"presentation in person().presentations\"\n\t\t\t\t ui-sref=\"presentations({id: presentation.id})\"\n\t\t\t\t ng-click=\"$close()\">\n\t\t\t\t<h3 class=\"presentation-title\">\n\t\t\t\t\t{{presentation.title}}\n\t\t\t\t</h3>\n\t\t\t</a>\n\t\t</section>\n\t</section>\n\n\t<aside ng-if=\"hasMany()\" class=\"navigation\">\n\t\t<span class=\"next-arrow\" ng-click=\"next()\"></span>\n\t</aside>\n</div>";
+	module.exports = "<div class=\"modal-body beige person-modal\">\n    <!--<md-button class=\"md-icon-button close\" ng-click=\"$close()\">-->\n    <!--<md-icon>close</md-icon>-->\n    <!--</md-button>-->\n    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" ng-click=\"$close()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n\n    <div class=\"person-modal-container\">\n        <div class=\"person-photo\">\n            <div class=\"img-speaker\">\n                <img class=\"img-responsive margin-auto\" ng-src=\"{{person().photo}}\"\n                     ng-class=\"{empty: person().photo == null}\"/>\n            </div>\n        <span class=\"social-speaker\">\n            <a ng-href=\"http://www.twitter.com/{{person().twitter}}\" title=\"twitter\" target=\"_blank\" ng-if=\"person().twitter\">\n                <i class=\"fa fa-twitter prelegent-social\" aria-hidden=\"true\"></i>\n            </a>\n            <a ng-href=\"//{{person().url}}\" title=\"direct\" target=\"_blank\" ng-if=\"person().url\">\n                <i class=\"fa fa-arrow-up prelegent-social\" aria-hidden=\"true\"></i>\n            </a>\n        </span>\n        </div>\n        <div class=\"person-info\">\n            <section>\n                <div class=\"ta-leftperson-name person-name\"><h3>{{person().fullName}}</h3></div>\n                <div class=\"mcci-content\" ng-bind-html=\"person().bio\"></div>\n            </section>\n            <section>\n                <a ng-repeat=\"presentation in person().presentations\"\n                   ui-sref=\"presentations({id: presentation.id})\"\n                   ng-click=\"$close()\">\n                    <h3 class=\"presentation-title\">\n                        {{presentation.title}}\n                    </h3>\n                </a>\n            </section>\n        </div>\n    </div>\n    <!--<section></section>-->\n\n    <aside ng-if=\"hasMany()\" class=\"navigation\">\n        <span class=\"next-arrow\" ng-click=\"next()\"></span>\n    </aside>\n</div>";
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5428,7 +5470,7 @@ webpackJsonp([0],[
 	module.exports = PersonModalController;
 
 /***/ },
-/* 98 */
+/* 100 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5442,11 +5484,11 @@ webpackJsonp([0],[
 	module.exports = Vote;
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var _ = __webpack_require__(100);
+	var _ = __webpack_require__(102);
 	/* @ngInject */
 	function Voting(Vote, $q, $cookies) {
 		var _items = [];
@@ -5543,14 +5585,14 @@ webpackJsonp([0],[
 	module.exports = Voting;
 
 /***/ },
-/* 100 */,
-/* 101 */
+/* 102 */,
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-	var _ = __webpack_require__(100);
+	var _ = __webpack_require__(102);
 	/* @ngInject */
-	function VotingController(Voting, hotkeys, $scope, PersonModal, $timeout) {
+	function VotingController(Voting, hotkeys, PersonModal, $timeout) {
 	    var vm = this;
 	    var speakerModal = null;
 
@@ -5763,31 +5805,130 @@ webpackJsonp([0],[
 
 
 	}
-	VotingController.$inject = ["Voting", "hotkeys", "$scope", "PersonModal", "$timeout"];
+	VotingController.$inject = ["Voting", "hotkeys", "PersonModal", "$timeout"];
 
 	module.exports = VotingController;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 102 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(103);
 	__webpack_require__(105);
-	__webpack_require__(39).module('cookies', [])
-	    .controller('CookiesController', __webpack_require__(106))
-	;
-	module.exports ='cookies';
+	__webpack_require__(106);
+	module.exports = __webpack_require__(39).module('organizers', [__webpack_require__(88)])
+	    .factory('Organizers', __webpack_require__(109))
+	    .controller('OrganizersController', __webpack_require__(110))
+	    .name;
 
 /***/ },
-/* 103 */
+/* 105 */
+/***/ function(module, exports) {
+
+	var path = 'about/about.tpl.html';
+	var html = "<div id=\"about\">\n    <section id=\"news-confitura\" style=\"overflow: hidden;\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 bg-about-header\"><h2>about us</h2></div>\n        </div>\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12\">\n                <div class=\"bg-white row-1140 text-center about-excerpt\">\n                    <page name=\"about\"></page>\n                </div>\n            </div>\n        </div>\n        <!--<div class=\"row-fluid row-1140\">-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-1 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"tematyka\">tematyka</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-2 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"uczestnicy\">uczestnicy</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--<div class=\"row-fluid row-1140\">-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-3 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"społeczność\">społeczność</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-4 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"sponsorzy\">sponsorzy</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--</div>-->\n    </section>\n    <section id=\"speakers-confitura\" class=\"beige\" ng-controller=\"OrganizersController as organizers\">\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 speakers-confitura-header beige\"><h2>organizers</h2></div>\n        </div>\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 beige pb150\">\n                <div class=\"row-1080\">\n                    <div class=\"beige organizers\">\n                        <div class=\"slide margin-auto organizer\" ng-repeat=\"organizer in organizers.list\">\n                            <span class=\"img-speaker\"><img ng-src=\"{{organizer.photo}}\"></span>\n                            <span class=\"name-speaker\">\n                                <a href=\"\" ng-click=\"organizers.detailsOf(organizer)\">{{organizer.firstName}}<br>{{organizer.lastName}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </section>\n</div>";
+	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
+	module.exports = path;
+
+/***/ },
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(104);
+	var content = __webpack_require__(107);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./about.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./about.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 107 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(14)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#about .bg-about-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(108) + ") center center no-repeat;\n  background-size: cover;\n}\n#about .bg-about-header h2 {\n  color: #ffffff;\n}\n#about .about-excerpt {\n  padding: 50px 0 100px 0;\n  color: #000000;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  font-size: 2.2rem;\n}\n#about .img-speaker img {\n  min-width: 100%;\n  min-height: 100%;\n}\n#about .organizers {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row ;\n      -ms-flex-direction: row ;\n          flex-direction: row ;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n@media all and (max-width: 768px) {\n  #about .organizers {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n        -ms-flex-align: center;\n            align-items: center;\n  }\n}\n#about .organizers .organizer {\n  width: 375px;\n  height: 375px;\n  overflow: hidden;\n}\n#about .organizers .organizer span.name-speaker {\n  display: block;\n  font-size: 24px;\n  line-height: 30px;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  color: #ffffff;\n  position: absolute;\n  bottom: 35px;\n  left: 30px;\n  text-align: left !important;\n}\n#about .organizers .organizer span.name-speaker a:link,\n#about .organizers .organizer span.name-speaker a:active,\n#about .organizers .organizer span.name-speaker a:visited,\n#about .organizers .organizer span.name-speaker a:hover {\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  color: #ffffff;\n}\n#about .organizers .organizer span.name-speaker a:hover {\n  text-decoration: underline;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "960d5fab51bb98dc2b2b4b6bc9b925c6.jpg";
+
+/***/ },
+/* 109 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	/* @ngInject */
+	function Organizers($resource, apiServer) {
+		return $resource(apiServer + '/hosts/:type', {'type': '@type'}, {});
+	}
+	Organizers.$inject = ["$resource", "apiServer"];
+	module.exports = Organizers;
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	/* @ngInject */
+	function OrganizersController(Organizers, PersonModal) {
+		var vm = this;
+		vm.list = Organizers.query({type: 'main'});
+		vm.detailsOf = detailsOf;
+
+		function detailsOf(person){
+			PersonModal.openFor([person]);
+		}
+	}
+	OrganizersController.$inject = ["Organizers", "PersonModal"];
+	module.exports = OrganizersController;
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	__webpack_require__(112);
+	__webpack_require__(114);
+	__webpack_require__(39).module('cookies', [])
+	    .controller('CookiesController', __webpack_require__(115))
+	;
+	module.exports ='cookies';
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(113);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -5807,7 +5948,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 104 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(14)();
@@ -5821,7 +5962,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 105 */
+/* 114 */
 /***/ function(module, exports) {
 
 	var path = 'cookies/cookies.tpl.html';
@@ -5830,7 +5971,7 @@ webpackJsonp([0],[
 	module.exports = path;
 
 /***/ },
-/* 106 */
+/* 115 */
 /***/ function(module, exports) {
 
 	function CookiesController($cookies){
@@ -5852,7 +5993,7 @@ webpackJsonp([0],[
 	module.exports = CookiesController;
 
 /***/ },
-/* 107 */
+/* 116 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"registration\" role=\"button\">Registration</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<!-- /container fluid -->\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. it starts at around 9 a.m. and finish at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>University of Warsaw, the main campus</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'news/news.banner.tpl.html'\"></div>\n\n    <div ng-include=\"'partners/partners.banner.tpl.html'\"></div>\n</div>\n\n";

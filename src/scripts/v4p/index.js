@@ -12,7 +12,7 @@ require('slick-carousel/slick/slick.css');
 require('slick-carousel/slick/slick-theme.css');
 
 module.exports = angular.module('v4p',
-		['ngCookies', 'cfp.hotkeys', 'ui.bootstrap', 'hmTouchEvents',
+		['ngCookies', 'cfp.hotkeys', 'ui.bootstrap',
 			require('directives/person'), require('directives/page')])
 		.factory('Vote', require('./Vote'))
 		.factory('Voting', require('./Voting'))

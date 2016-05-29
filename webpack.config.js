@@ -16,9 +16,7 @@ module.exports = {
             'angular-ui-router/release/angular-ui-router.min',
             'moment',
             'angular-loading-bar/build/loading-bar.min',
-            './src/css/external',
-            'hammerjs/hammer.min.js',
-            'imports?require=>false!angular-hammer/angular.hammer.js'
+            './src/css/external'
         ]
     },
     output: {
@@ -88,7 +86,6 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity),
         new webpack.ProvidePlugin({
-            'window.Hammer': 'hammerjs/hammer.js',
             "$": "jquery",
             "jQuery": "jquery"
         })

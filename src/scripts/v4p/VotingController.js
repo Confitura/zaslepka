@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 /* @ngInject */
-function VotingController(Voting, hotkeys, $scope, PersonModal, $timeout) {
+function VotingController(Voting, hotkeys, PersonModal, $timeout) {
     var vm = this;
     var speakerModal = null;
 
