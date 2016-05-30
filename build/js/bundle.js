@@ -5602,8 +5602,6 @@ webpackJsonp([0],[
 	    vm.votes = [];
 
 
-
-
 	    vm.isVisible = function (idx) {
 	        return Voting.isCurrent(idx);
 	    };
@@ -5748,30 +5746,35 @@ webpackJsonp([0],[
 	                callback(event, "down");
 	            }
 	        });
-	        //hotkeys.add({
-	        //	persistent: false,
-	        //	combo: 'right',
-	        //	description: 'Next presentation',
-	        //	callback: function (event) {
-	        //		callback(event, "next");
-	        //	}
-	        //});
-	        //hotkeys.add({
-	        //	persistent: false,
-	        //	combo: 'left',
-	        //	description: 'previous presentation',
-	        //	callback: function (event) {
-	        //		callback(event, "prev");
-	        //	}
-	        //});
+	        hotkeys.add({
+	        	persistent: false,
+	        	combo: 'right',
+	        	description: 'Next presentation',
+	        	callback: function (event) {
+	        	}
+	        });
+	        hotkeys.add({
+	        	persistent: false,
+	        	combo: 'left',
+	        	description: 'Previous presentation',
+	        	callback: function (event) {
+	        	}
+	        });
 
 
 	    }
+
 	    function loadVotes() {
 	        Voting.get().then(function (votes) {
 	            vm.votes = votes;
 	            $timeout(function () {
 	                var slider = $('.vote-slider');
+	                slider.on('init', function (slick) {
+	                    $timeout(function () {
+	                        slider.find('.slick-list').attr('tabindex', 0).focus();
+	                        $('body').scrollTop(0);
+	                    });
+	                });
 	                slider.slick(
 	                    {
 	                        dots: false,
@@ -5787,7 +5790,6 @@ webpackJsonp([0],[
 	                slider.slick('slickGoTo', vm.currentIdx() - 1, true);
 	                slider.on('beforeChange', function (event, slick, curentSlide, nextSlide) {
 	                    var step = nextSlide - curentSlide;
-	                    console.log('move', step);
 	                    if (step == 1) {
 	                        vm.next();
 	                    } else if (step == -1) {
@@ -5795,11 +5797,14 @@ webpackJsonp([0],[
 	                    }
 	                });
 
+	                slider.focus();
+
+
 	            });
 	        });
 	    }
 
-	    if (vm.started()){
+	    if (vm.started()) {
 	        loadVotes();
 	    }
 
@@ -5827,7 +5832,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	var path = 'about/about.tpl.html';
-	var html = "<div id=\"about\">\n    <section id=\"news-confitura\" style=\"overflow: hidden;\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 bg-about-header\"><h2>about us</h2></div>\n        </div>\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12\">\n                <div class=\"bg-white row-1140 text-center about-excerpt\">\n                    <page name=\"about\"></page>\n                </div>\n            </div>\n        </div>\n        <!--<div class=\"row-fluid row-1140\">-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-1 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"tematyka\">tematyka</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-2 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"uczestnicy\">uczestnicy</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--<div class=\"row-fluid row-1140\">-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-3 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"społeczność\">społeczność</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--<div class=\"col-lg-6 col-md-6 about-items item-4 about-item\">-->\n        <!--<div class=\"block\"><a class=\"block\" href=\"#\" title=\"sponsorzy\">sponsorzy</a></div>-->\n        <!--<div class=\"block-desc\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->\n        <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to-->\n        <!--make a type specimen book.<br><br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum-->\n        <!--has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->\n        <!--scrambled it to make a type specimen book.-->\n        <!--</div>-->\n        <!--</div>-->\n        <!--</div>-->\n    </section>\n    <section id=\"speakers-confitura\" class=\"beige\" ng-controller=\"OrganizersController as organizers\">\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 speakers-confitura-header beige\"><h2>organizers</h2></div>\n        </div>\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 beige pb150\">\n                <div class=\"row-1080\">\n                    <div class=\"beige organizers\">\n                        <div class=\"slide margin-auto organizer\" ng-repeat=\"organizer in organizers.list\">\n                            <span class=\"img-speaker\"><img ng-src=\"{{organizer.photo}}\"></span>\n                            <span class=\"name-speaker\">\n                                <a href=\"\" ng-click=\"organizers.detailsOf(organizer)\">{{organizer.firstName}}<br>{{organizer.lastName}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </section>\n</div>";
+	var html = "<div id=\"about\">\n    <section id=\"news-confitura\" style=\"overflow: hidden;\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 bg-about-header\"><h2>about us</h2></div>\n        </div>\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12\">\n                <div class=\"bg-white row-1140 text-center about-excerpt\">\n                    <page name=\"about\"></page>\n                </div>\n            </div>\n        </div>\n    </section>\n    <section id=\"speakers-confitura\" class=\"beige\" ng-controller=\"OrganizersController as organizers\">\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 speakers-confitura-header beige\"><h2>organizers</h2></div>\n        </div>\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 beige pb150\">\n                <div class=\"row-1080\">\n                    <div class=\"beige organizers\">\n                        <div class=\"slide margin-auto organizer\" ng-repeat=\"organizer in organizers.list\">\n                            <span class=\"img-speaker\"><img ng-src=\"{{organizer.photo}}\"></span>\n                            <span class=\"name-speaker\">\n                                <a href=\"\" ng-click=\"organizers.detailsOf(organizer)\">{{organizer.firstName}}<br>{{organizer.lastName}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </section>\n</div>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -5956,7 +5961,7 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, "#cookie {\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  display: block;\n  width: 100%;\n  height: 100px;\n  background: #000000;\n  z-index: 9999;\n  color: #ffffff;\n  padding: 10px;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 14px;\n  line-height: 16px;\n  text-align: center;\n}\n#cookie #cookie-agree {\n  display: block;\n  width: 100%;\n  color: #ff0040;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, "#cookie {\n  position: fixed;\n  left: 0;\n  bottom: 0;\n  display: block;\n  width: 100%;\n  height: 100px;\n  background: #000000;\n  z-index: 9999;\n  color: #ffffff;\n  padding: 10px;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 1.5rem;\n  text-align: center;\n}\n@media all and (max-width: 768px) {\n  #cookie {\n    height: 150px;\n  }\n}\n#cookie #cookie-agree {\n  display: block;\n  width: 100%;\n  color: #ff0040;\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 
@@ -5966,7 +5971,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	var path = 'cookies/cookies.tpl.html';
-	var html = "<div id=\"cookie\" ng-controller=\"CookiesController as cookies\" ng-show=\"cookies.isNotAccepted()\">\n    <strong>Our website uses cookies!</strong>\n    confitura.pl uses cookies to improve user experience. We also show safe and secure advertising to support this site.By using our website you consent to our cookies in accordance with our Cookie Policy.\n    <a id=\"cookie-agree\" ng-click=\"cookies.accept()\" href=\"\">I agree</a>\n</div>";
+	var html = "<div id=\"cookie\" ng-controller=\"CookiesController as cookies\" ng-show=\"cookies.isNotAccepted()\">\n    <strong>Our website uses cookies!</strong><br/>\n    confitura.pl uses cookies to improve user experience. We also show safe and secure advertising to support this site.By using our website you consent to our cookies in accordance with our Cookie Policy.\n    <a id=\"cookie-agree\" ng-click=\"cookies.accept()\" href=\"\">I agree</a>\n</div>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -5996,7 +6001,7 @@ webpackJsonp([0],[
 /* 116 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"registration\" role=\"button\">Registration</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<!-- /container fluid -->\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. it starts at around 9 a.m. and finish at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>University of Warsaw, the main campus</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'news/news.banner.tpl.html'\"></div>\n\n    <div ng-include=\"'partners/partners.banner.tpl.html'\"></div>\n</div>\n\n";
+	module.exports = "<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"v4p\" role=\"button\">Vote 4 Papers</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<!-- /container fluid -->\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. it starts at around 9 a.m. and finish at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>Bobrowiecka Conference Center</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'news/news.banner.tpl.html'\"></div>\n\n    <div ng-include=\"'partners/partners.banner.tpl.html'\"></div>\n</div>\n\n";
 
 /***/ }
 ]);

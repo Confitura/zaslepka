@@ -11,8 +11,6 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
     vm.votes = [];
 
 
-
-
     vm.isVisible = function (idx) {
         return Voting.isCurrent(idx);
     };
@@ -157,30 +155,35 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
                 callback(event, "down");
             }
         });
-        //hotkeys.add({
-        //	persistent: false,
-        //	combo: 'right',
-        //	description: 'Next presentation',
-        //	callback: function (event) {
-        //		callback(event, "next");
-        //	}
-        //});
-        //hotkeys.add({
-        //	persistent: false,
-        //	combo: 'left',
-        //	description: 'previous presentation',
-        //	callback: function (event) {
-        //		callback(event, "prev");
-        //	}
-        //});
+        hotkeys.add({
+        	persistent: false,
+        	combo: 'right',
+        	description: 'Next presentation',
+        	callback: function (event) {
+        	}
+        });
+        hotkeys.add({
+        	persistent: false,
+        	combo: 'left',
+        	description: 'Previous presentation',
+        	callback: function (event) {
+        	}
+        });
 
 
     }
+
     function loadVotes() {
         Voting.get().then(function (votes) {
             vm.votes = votes;
             $timeout(function () {
                 var slider = $('.vote-slider');
+                slider.on('init', function (slick) {
+                    $timeout(function () {
+                        slider.find('.slick-list').attr('tabindex', 0).focus();
+                        $('body').scrollTop(0);
+                    });
+                });
                 slider.slick(
                     {
                         dots: false,
@@ -196,7 +199,6 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
                 slider.slick('slickGoTo', vm.currentIdx() - 1, true);
                 slider.on('beforeChange', function (event, slick, curentSlide, nextSlide) {
                     var step = nextSlide - curentSlide;
-                    console.log('move', step);
                     if (step == 1) {
                         vm.next();
                     } else if (step == -1) {
@@ -204,11 +206,14 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
                     }
                 });
 
+                slider.focus();
+
+
             });
         });
     }
 
-    if (vm.started()){
+    if (vm.started()) {
         loadVotes();
     }
 
