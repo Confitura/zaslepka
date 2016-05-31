@@ -5680,6 +5680,7 @@ webpackJsonp([0],[
 	            .openFor(Voting.getCurrent().presentation.speakers)
 	            .onClose(function () {
 	                bindKeys();
+	                focusOnSlider();
 	            });
 	    };
 	    vm.showSpeaker = function (speaker) {
@@ -5687,6 +5688,7 @@ webpackJsonp([0],[
 	            .openFor([speaker])
 	            .onClose(function () {
 	                bindKeys();
+	                focusOnSlider();
 	            });
 	    };
 	    bindKeys();
@@ -5696,6 +5698,7 @@ webpackJsonp([0],[
 	        Voting.submit()
 	            .then(function () {
 	                vm.saving = false;
+	                vm.configuration.info = vm.info.SHORT;
 	                callback();
 	            });
 	    }
@@ -5747,22 +5750,24 @@ webpackJsonp([0],[
 	            }
 	        });
 	        hotkeys.add({
-	        	persistent: false,
-	        	combo: 'right',
-	        	description: 'Next presentation',
-	        	callback: function (event) {
-	        	}
+	            persistent: false,
+	            combo: 'right',
+	            description: 'Next presentation',
+	            callback: function (event) {
+	            }
 	        });
 	        hotkeys.add({
-	        	persistent: false,
-	        	combo: 'left',
-	        	description: 'Previous presentation',
-	        	callback: function (event) {
-	        	}
+	            persistent: false,
+	            combo: 'left',
+	            description: 'Previous presentation',
+	            callback: function (event) {
+	            }
 	        });
 
 
 	    }
+
+
 
 	    function loadVotes() {
 	        Voting.get().then(function (votes) {
@@ -5771,8 +5776,7 @@ webpackJsonp([0],[
 	                var slider = $('.vote-slider');
 	                slider.on('init', function (slick) {
 	                    $timeout(function () {
-	                        slider.find('.slick-list').attr('tabindex', 0).focus();
-	                        $('body').scrollTop(0);
+	                        focusOnSlider();
 	                    });
 	                });
 	                slider.slick(
@@ -5802,6 +5806,10 @@ webpackJsonp([0],[
 
 	            });
 	        });
+	    }
+	    function focusOnSlider() {
+	        $('.vote-slider').find('.slick-list').attr('tabindex', 0).focus();
+	        $('body').scrollTop(0);
 	    }
 
 	    if (vm.started()) {

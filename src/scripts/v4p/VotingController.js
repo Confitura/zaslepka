@@ -89,6 +89,7 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
             .openFor(Voting.getCurrent().presentation.speakers)
             .onClose(function () {
                 bindKeys();
+                focusOnSlider();
             });
     };
     vm.showSpeaker = function (speaker) {
@@ -96,6 +97,7 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
             .openFor([speaker])
             .onClose(function () {
                 bindKeys();
+                focusOnSlider();
             });
     };
     bindKeys();
@@ -105,6 +107,7 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
         Voting.submit()
             .then(function () {
                 vm.saving = false;
+                vm.configuration.info = vm.info.SHORT;
                 callback();
             });
     }
@@ -156,22 +159,24 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
             }
         });
         hotkeys.add({
-        	persistent: false,
-        	combo: 'right',
-        	description: 'Next presentation',
-        	callback: function (event) {
-        	}
+            persistent: false,
+            combo: 'right',
+            description: 'Next presentation',
+            callback: function (event) {
+            }
         });
         hotkeys.add({
-        	persistent: false,
-        	combo: 'left',
-        	description: 'Previous presentation',
-        	callback: function (event) {
-        	}
+            persistent: false,
+            combo: 'left',
+            description: 'Previous presentation',
+            callback: function (event) {
+            }
         });
 
 
     }
+
+
 
     function loadVotes() {
         Voting.get().then(function (votes) {
@@ -180,8 +185,7 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
                 var slider = $('.vote-slider');
                 slider.on('init', function (slick) {
                     $timeout(function () {
-                        slider.find('.slick-list').attr('tabindex', 0).focus();
-                        $('body').scrollTop(0);
+                        focusOnSlider();
                     });
                 });
                 slider.slick(
@@ -211,6 +215,10 @@ function VotingController(Voting, hotkeys, PersonModal, $timeout) {
 
             });
         });
+    }
+    function focusOnSlider() {
+        $('.vote-slider').find('.slick-list').attr('tabindex', 0).focus();
+        $('body').scrollTop(0);
     }
 
     if (vm.started()) {
