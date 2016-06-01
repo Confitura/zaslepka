@@ -33,6 +33,7 @@ body {
   padding-top: 100px;
   overflow-y: scroll;
   font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif; /* NeuzeitGro-Bol */
+  background-color: black;
 }
 
 .container-fluid {
@@ -680,7 +681,7 @@ h3 {
   text-decoration: underline;
 }
 
-.about-items{
+.about-items {
   background: transparent;
   min-height: 350px;
 }
@@ -763,7 +764,6 @@ h3 {
 
 @media screen and (min-width: 320px) and (max-width: 480px) {
 
-
   .news-confitura-left, .semi-square {
     padding: 20px !important;
   }
@@ -788,8 +788,6 @@ h3 {
   display: block;
   background: transparent;
 }
-
-
 
 #footer-confitura .footer-left, #footer-confitura .footer-right {
   padding-top: 60px;
@@ -916,23 +914,40 @@ div#patronat {
 .partner-logo .bx-wrapper {
   border: none;
   box-shadow: none;
-  img{
+  img {
     margin: auto;
     max-width: 210px;
     max-height: 55px;
   }
 }
+
 .bg-white {
   background: #ffffff;
 }
+
 .ta-left {
   text-align: left !important;
 }
 
-.pb150{
- padding-bottom: 150px !important;
+.pb150 {
+  padding-bottom: 150px !important;
 }
 
+.row-1140 {
+  display: block;
+  max-width: 1140px;
+  margin: 0 auto !important;
+  @media all and (max-width: 1140px) {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+.row-1080 {
+  display: block;
+  max-width: 1080px;
+  margin: 0 auto;
+}
 
 @import "registration";
 @import "loading-bar";

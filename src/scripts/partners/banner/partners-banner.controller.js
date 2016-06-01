@@ -1,5 +1,6 @@
 'use strict';
-require('./partners.banner.tpl.html');
+require('./partners-banner.tpl.html');
+require('./partners-banner.less');
 require('bxslider/dist/jquery.bxslider.min.js');
 require('bxslider/dist/jquery.bxslider.min.css');
 
@@ -23,7 +24,7 @@ function PartnersBannerController(Partners, $timeout) {
         });
 
     var vm = this;
-    vm.types = ['platinum', 'gold', 'silver', 'brown'];
+    vm.types = ['gold', 'platinum', 'silver'];
     vm.hasAnyFor = hasAnyFor;
     vm.getAllFor = getAllFor;
 

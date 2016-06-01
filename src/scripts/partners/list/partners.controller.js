@@ -14,7 +14,7 @@ function PartnersController(Partners, $state) {
         'press'
     ];
     vm.detailsOf = function(partner){
-        $state.go('partner', {partner: partner});
+        $state.go('partner', {partner: partner, name: partner.name});
     }
 
 

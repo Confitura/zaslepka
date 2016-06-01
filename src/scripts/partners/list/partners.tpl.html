@@ -3,7 +3,7 @@
         <div class="col-lg-12 partners-header"><h2>partners</h2></div>
     </div>
     <div class="row-fluid">
-        <div class="col-lg-12 pt100 pb50" ng-repeat="type in partners.types" ng-if="partners.list[type]" ng-class="type">
+        <div class="col-lg-12 pt100 pb50 partners-type" ng-repeat="type in partners.types" ng-if="partners.list[type]" ng-class="type+'-type'">
             <div class="bg-white row-1140 text-center partner-header">{{type}}</div>
             <div class="bg-white row-1140 text-center">
                 <div class="text-center">

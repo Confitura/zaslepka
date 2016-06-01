@@ -40,14 +40,14 @@ ng.module('confitura', [
             })
             .state('partners', {
                 url: '/partners',
-                templateUrl: 'partners/partners.tpl.html'
+                templateUrl: 'partners/list/partners.tpl.html'
             })
             .state('partner', {
-                url: '/partner',
+                url: '/partner/:name',
                 params: {
                     'partner': null
                 },
-                templateUrl: 'partners/partner.tpl.html'
+                templateUrl: 'partners/details/partner.tpl.html'
             })
             .state('speakers', {
                 url: '/speakers',

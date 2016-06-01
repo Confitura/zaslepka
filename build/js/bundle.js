@@ -30,9 +30,9 @@ webpackJsonp([0],[
 	        __webpack_require__(50),
 	        __webpack_require__(58),
 	    //,
-	        __webpack_require__(72),
-	        __webpack_require__(104),
-	        __webpack_require__(111)
+	        __webpack_require__(74),
+	        __webpack_require__(106),
+	        __webpack_require__(113)
 	        //require('speakers'),
 	        //require('presentations'),
 	        //require('organizers'),
@@ -49,18 +49,18 @@ webpackJsonp([0],[
 	        $stateProvider
 	            .state('main', {
 	                url: '/',
-	                template: __webpack_require__(116)
+	                template: __webpack_require__(118)
 	            })
 	            .state('partners', {
 	                url: '/partners',
-	                templateUrl: 'partners/partners.tpl.html'
+	                templateUrl: 'partners/list/partners.tpl.html'
 	            })
 	            .state('partner', {
-	                url: '/partner',
+	                url: '/partner/:name',
 	                params: {
 	                    'partner': null
 	                },
-	                templateUrl: 'partners/partner.tpl.html'
+	                templateUrl: 'partners/details/partner.tpl.html'
 	            })
 	            .state('speakers', {
 	                url: '/speakers',
@@ -623,7 +623,7 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, "section#partners-confitura .partners-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(61) + ") center center no-repeat;\n  background-size: cover;\n  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../img/header-register.jpg', sizingMethod='scale');\n}\nsection#partners-confitura .partners-header h2 {\n  color: #ffffff;\n}\nsection#partners-confitura .partners-items {\n  background: transparent;\n  min-height: 350px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-items {\n    min-height: 150px;\n  }\n}\nsection#partners-confitura .partner-type {\n  font-size: 3rem;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  padding-top: 70px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partner-type {\n    padding-top: 5px;\n    padding-bottom: 20px;\n  }\n}\nsection#partners-confitura .partners-banner-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  -webkit-align-content: stretch;\n      -ms-flex-line-pack: stretch;\n          align-content: stretch;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-banner-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\nsection#partners-confitura .partners-banner-container > div {\n  -webkit-flex-basis: 100%;\n      -ms-flex-preferred-size: 100%;\n          flex-basis: 100%;\n}\nsection#partners-confitura .partner-header {\n  display: block;\n  text-align: center;\n  font-size: 4rem;\n  height: 110px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n}\nsection#partners-confitura .min-h {\n  height: 150px !important;\n}\nsection#partners-confitura .vcenter {\n  position: relative !important;\n}\nsection#partners-confitura .row-1140 {\n  display: block;\n  max-width: 1080px;\n  margin: 0 auto !important;\n}\nsection#partners-confitura .pt100 {\n  margin-top: 100px;\n}\nsection#partners-confitura .pb50 {\n  margin-bottom: 50px;\n}\nsection#partners-confitura .pb150 {\n  padding-bottom: 150px;\n}\nsection#partners-confitura img {\n  margin: auto;\n  max-width: 210px;\n  max-height: 80px;\n}\nsection#partners-confitura #partner {\n  padding-top: 50px;\n}\nsection#partners-confitura #partner img {\n  max-width: 400px;\n  max-height: 150px;\n}\nsection#partners-confitura .platinum img {\n  max-width: 350px;\n  max-height: 100px;\n}\nsection#partners-confitura .gold img {\n  max-width: 300px;\n  max-height: 70px;\n}\nsection#partners-confitura .silver img {\n  max-width: 250px;\n  max-height: 70px;\n}\nsection#partners-confitura .partner-description {\n  display: block;\n  text-shadow: none;\n  font-size: 2.5rem;\n  padding-top: 20px;\n  padding-left: 20px;\n  padding-right: 20px;\n}\nsection#partners-confitura .partners-logo-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-logo-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\nsection#partners-confitura .partners-logo-container a {\n  padding: 20px;\n}\n", ""]);
+	exports.push([module.id, "section#partners-confitura .partners-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(61) + ") center center no-repeat;\n  background-size: cover;\n  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../img/header-register.jpg', sizingMethod='scale');\n}\nsection#partners-confitura .partners-header h2 {\n  color: #ffffff;\n}\nsection#partners-confitura .partners-type {\n  background-color: #ffffff;\n}\nsection#partners-confitura .partners-items {\n  background: transparent;\n  min-height: 350px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-items {\n    min-height: 150px;\n  }\n}\nsection#partners-confitura .partner-type {\n  font-size: 3rem;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  padding-top: 70px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partner-type {\n    padding-top: 5px;\n    padding-bottom: 20px;\n  }\n}\nsection#partners-confitura .partners-banner-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n  -webkit-align-content: stretch;\n      -ms-flex-line-pack: stretch;\n          align-content: stretch;\n}\nsection#partners-confitura .partners-banner-container .partner-logo {\n  height: 120px;\n}\nsection#partners-confitura .partners-banner-container .gold-type .partner-logo {\n  padding-top: 15px;\n}\nsection#partners-confitura .partners-banner-container .silver-type .partner-logo {\n  padding-top: 25px;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-banner-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n  section#partners-confitura .partners-banner-container .platinum-type {\n    -webkit-box-ordinal-group: 2;\n    -webkit-order: 1;\n        -ms-flex-order: 1;\n            order: 1;\n  }\n  section#partners-confitura .partners-banner-container .gold-type {\n    -webkit-box-ordinal-group: 3;\n    -webkit-order: 2;\n        -ms-flex-order: 2;\n            order: 2;\n  }\n  section#partners-confitura .partners-banner-container .silver-type {\n    -webkit-box-ordinal-group: 4;\n    -webkit-order: 3;\n        -ms-flex-order: 3;\n            order: 3;\n  }\n}\nsection#partners-confitura .partners-banner-container > div {\n  -webkit-flex-basis: 100%;\n      -ms-flex-preferred-size: 100%;\n          flex-basis: 100%;\n}\nsection#partners-confitura .partner-header {\n  display: block;\n  text-align: center;\n  font-size: 4rem;\n  height: 110px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n}\nsection#partners-confitura .min-h {\n  height: 150px !important;\n}\nsection#partners-confitura .vcenter {\n  position: relative !important;\n}\nsection#partners-confitura .row-1140 {\n  display: block;\n  max-width: 1080px;\n  margin: 0 auto !important;\n}\nsection#partners-confitura .pt100 {\n  padding-top: 100px;\n}\nsection#partners-confitura .pb50 {\n  padding-bottom: 50px;\n}\nsection#partners-confitura .pb150 {\n  padding-bottom: 150px;\n}\nsection#partners-confitura img {\n  margin: auto;\n  max-width: 210px;\n  max-height: 80px;\n}\nsection#partners-confitura #partner {\n  padding-top: 50px;\n}\nsection#partners-confitura #partner img {\n  max-width: 400px;\n  max-height: 150px;\n}\nsection#partners-confitura .platinum-type img {\n  max-width: 350px;\n  max-height: 120px;\n}\nsection#partners-confitura .gold-type img {\n  max-width: 300px;\n  max-height: 90px;\n}\nsection#partners-confitura .silver-type img {\n  max-width: 250px;\n  max-height: 70px;\n}\nsection#partners-confitura .partner-description {\n  display: block;\n  text-shadow: none;\n  font-size: 2.5rem;\n  padding-top: 20px;\n  padding-left: 20px;\n  padding-right: 20px;\n}\nsection#partners-confitura .partners-logo-container {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-flex-flow: row wrap;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n  -webkit-justify-content: space-around;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n}\n@media all and (max-width: 768px) {\n  section#partners-confitura .partners-logo-container {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n  }\n}\nsection#partners-confitura .partners-logo-container a {\n  padding: 20px;\n}\n", ""]);
 
 	// exports
 
@@ -642,7 +642,7 @@ webpackJsonp([0],[
 
 	/* @ngInject */
 	function Partners($resource, apiServer) {
-		return $resource(apiServer + '/sponsors');
+		return $resource(apiServer + '/sponsors/:name');
 	}
 	Partners.$inject = ["$resource", "apiServer"];
 	module.exports = Partners;
@@ -667,7 +667,7 @@ webpackJsonp([0],[
 	        'press'
 	    ];
 	    vm.detailsOf = function(partner){
-	        $state.go('partner', {partner: partner});
+	        $state.go('partner', {partner: partner, name: partner.name});
 	    }
 
 
@@ -679,8 +679,8 @@ webpackJsonp([0],[
 /* 64 */
 /***/ function(module, exports) {
 
-	var path = 'partners/partners.tpl.html';
-	var html = "<section id=\"partners-confitura\" ng-controller=\"PartnersController as partners\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 partners-header\"><h2>partners</h2></div>\n    </div>\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 pt100 pb50\" ng-repeat=\"type in partners.types\" ng-if=\"partners.list[type]\" ng-class=\"type\">\n            <div class=\"bg-white row-1140 text-center partner-header\">{{type}}</div>\n            <div class=\"bg-white row-1140 text-center\">\n                <div class=\"text-center\">\n                    <div class=\"vcenter text-center partners-logo-container\">\n                        <a href=\"\" class=\"a-abs\" ng-repeat=\"partner in partners.list[type]\" ng-click=\"partners.detailsOf(partner)\">\n                            <img class=\"img-responsive\" ng-src=\"{{partner.logo}}\"/>\n                        </a>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</section>";
+	var path = 'partners/list/partners.tpl.html';
+	var html = "<section id=\"partners-confitura\" ng-controller=\"PartnersController as partners\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 partners-header\"><h2>partners</h2></div>\n    </div>\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 pt100 pb50 partners-type\" ng-repeat=\"type in partners.types\" ng-if=\"partners.list[type]\" ng-class=\"type+'-type'\">\n            <div class=\"bg-white row-1140 text-center partner-header\">{{type}}</div>\n            <div class=\"bg-white row-1140 text-center\">\n                <div class=\"text-center\">\n                    <div class=\"vcenter text-center partners-logo-container\">\n                        <a href=\"\" class=\"a-abs\" ng-repeat=\"partner in partners.list[type]\" ng-click=\"partners.detailsOf(partner)\">\n                            <img class=\"img-responsive\" ng-src=\"{{partner.logo}}\"/>\n                        </a>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</section>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -692,22 +692,26 @@ webpackJsonp([0],[
 	__webpack_require__(66);
 
 	/* @ngInject */
-	function PartnersController($stateParams) {
+	function PartnersController($stateParams, Partners) {
 	    var vm = this;
 	    console.log($stateParams);
-	    vm.model = $stateParams.partner
+	    if ($stateParams.partner) {
+	        vm.model = $stateParams.partner
+	    } else {
+	        vm.model = Partners.get($stateParams)
+	    }
 
 
 	}
-	PartnersController.$inject = ["$stateParams"];
+	PartnersController.$inject = ["$stateParams", "Partners"];
 	module.exports = PartnersController;
 
 /***/ },
 /* 66 */
 /***/ function(module, exports) {
 
-	var path = 'partners/partner.tpl.html';
-	var html = "<section id=\"partners-confitura\" class=\"beige\" ng-controller=\"PartnerController as partner\">\n    <!--<div class=\"row-fluid beige\">-->\n    <!--<div class=\"col-lg-12 beige\"><h2></h2></div>-->\n    <!--</div>-->\n    <div class=\"row-fluid beige\" id=\"partner\">\n        <div class=\"col-lg-12 beige pb150\">\n            <div class=\"row-1140\">\n                <div class=\"col-lg-5 beige\">\n                    <span class=\"img-speaker\">\n<a ng-href=\"{{partner.model.url}}\" target=\"_blank\">\n    <img class=\"img-responsive margin-auto\" ng-src=\"{{partner.model.logo}}\"/>\n</a>                    </span>\n                </div>\n                <div class=\"col-lg-7 beige\">\n                    <div class=\"ta-left pt30 person-name\"><h3># {{partner.model.name}} #</h3></div>\n                    <div class=\"partner-description\" ng-bind-html=\"partner.model.description\"></div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n</section>";
+	var path = 'partners/details/partner.tpl.html';
+	var html = "<section id=\"partners-confitura\" class=\"beige\" ng-controller=\"PartnerController as partner\">\n    <!--<div class=\"row-fluid beige\">-->\n    <!--<div class=\"col-lg-12 beige\"><h2></h2></div>-->\n    <!--</div>-->\n    <div class=\"row-fluid beige\" id=\"partner\">\n        <div class=\"col-lg-12 beige pb150\">\n            <div class=\"row-1140\">\n                <div class=\"col-lg-5 beige\">\n                    <span>\n<a ng-href=\"{{partner.model.url}}\" target=\"_blank\">\n    <img class=\"img-responsive margin-auto\" ng-src=\"{{partner.model.logo}}\"/>\n</a>                    </span>\n                </div>\n                <div class=\"col-lg-7 beige\">\n                    <div class=\"ta-left pt30 person-name\"><h3># {{partner.model.name}} #</h3></div>\n                    <div class=\"partner-description\" ng-bind-html=\"partner.model.description\"></div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n</section>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -718,7 +722,8 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
 	__webpack_require__(68);
 	__webpack_require__(69);
-	__webpack_require__(70);
+	__webpack_require__(71);
+	__webpack_require__(72);
 
 	/* @ngInject */
 	function PartnersBannerController(Partners, $timeout) {
@@ -740,7 +745,7 @@ webpackJsonp([0],[
 	        });
 
 	    var vm = this;
-	    vm.types = ['platinum', 'gold', 'silver', 'brown'];
+	    vm.types = ['gold', 'platinum', 'silver'];
 	    vm.hasAnyFor = hasAnyFor;
 	    vm.getAllFor = getAllFor;
 
@@ -762,13 +767,53 @@ webpackJsonp([0],[
 /* 68 */
 /***/ function(module, exports) {
 
-	var path = 'partners/partners.banner.tpl.html';
-	var html = "<section id=\"partners-confitura\" ng-controller=\"PartnersBannerController as banner\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 col-md-12\"><h2>our partners</h2></div>\n    </div>\n    <div class=\"row-fluid col-lg-12 partners-banner-container\">\n        <div ng-repeat=\"type in banner.types\" ng-include=\"'partner-item.html'\" ng-if=\"banner.hasAnyFor(type)\"></div>\n    </div>\n</section>\n\n<script type=\"text/ng-template\" id=\"partner-item.html\">\n    <div class=\"partners-items\">\n        <div class=\"partner-logo text-center\" >\n            <ul class=\"bxslider\">\n                <li ng-repeat=\"partner in banner.getAllFor(type)\">\n                    <a ng-href=\"{{partner.url}}\" target=\"_blank\">\n                        <img ng-src=\"{{partner.logo}}\"/>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <span class=\"partner-type text-center\" ng-if=\"banner.hasAnyFor(type)\">{{type}}</span>\n    </div>\n</script>";
+	var path = 'partners/banner/partners-banner.tpl.html';
+	var html = "<section id=\"partners-confitura\" class=\"partners-banner\" ng-controller=\"PartnersBannerController as banner\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 col-md-12\"><h2>our partners</h2></div>\n    </div>\n    <div class=\"row-fluid col-lg-12 partners-banner-container\">\n        <div ng-repeat=\"type in banner.types\" ng-include=\"'partner-item.html'\" ng-if=\"banner.hasAnyFor(type)\" ng-class=\"type+'-type'\"></div>\n    </div>\n</section>\n\n<script type=\"text/ng-template\" id=\"partner-item.html\">\n    <div class=\"partners-items\">\n        <div class=\"partner-logo text-center\">\n            <ul class=\"bxslider\">\n                <li ng-repeat=\"partner in banner.getAllFor(type)\">\n                    <a ng-href=\"{{partner.url}}\" target=\"_blank\">\n                        <img ng-src=\"{{partner.logo}}\"/>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <span class=\"partner-type text-center\" ng-if=\"banner.hasAnyFor(type)\">{{type}}</span>\n    </div>\n</script>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
 /***/ },
 /* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(70);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?root=..!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/less-loader/index.js!./partners-banner.less", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?root=..!./../../../../node_modules/autoprefixer-loader/index.js!./../../../../node_modules/less-loader/index.js!./partners-banner.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(14)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "", ""]);
+
+	// exports
+
+
+/***/ },
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(jQuery) {/**
@@ -783,13 +828,13 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(71);
+	var content = __webpack_require__(73);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -809,39 +854,39 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports) {
 
 	module.exports = "/**\n * bxSlider v4.2.5\n * Copyright 2013-2015 Steven Wanderski\n * Written while drinking Belgian ales and listening to jazz\n\n * Licensed under MIT (http://opensource.org/licenses/MIT)\n */\n\n\n.bx-wrapper{position:relative;margin:0 auto 60px;padding:0;*zoom:1;-ms-touch-action:pan-y;touch-action:pan-y}.bx-wrapper img{max-width:100%;display:block}.bxslider{margin:0;padding:0}ul.bxslider{list-style:none}.bx-viewport{-webkit-transform:translatez(0)}.bx-wrapper{-moz-box-shadow:0 0 5px #ccc;-webkit-box-shadow:0 0 5px #ccc;box-shadow:0 0 5px #ccc;border:5px solid #fff;background:#fff}.bx-wrapper .bx-controls-auto,.bx-wrapper .bx-pager{position:absolute;bottom:-30px;width:100%}.bx-wrapper .bx-loading{min-height:50px;background:url(images/bx_loader.gif) center center no-repeat #fff;height:100%;width:100%;position:absolute;top:0;left:0;z-index:2000}.bx-wrapper .bx-pager{text-align:center;font-size:.85em;font-family:Arial;font-weight:700;color:#666;padding-top:20px}.bx-wrapper .bx-pager.bx-default-pager a{background:#666;text-indent:-9999px;display:block;width:10px;height:10px;margin:0 5px;outline:0;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px}.bx-wrapper .bx-pager.bx-default-pager a.active,.bx-wrapper .bx-pager.bx-default-pager a:focus,.bx-wrapper .bx-pager.bx-default-pager a:hover{background:#000}.bx-wrapper .bx-controls-auto .bx-controls-auto-item,.bx-wrapper .bx-pager-item{display:inline-block;*zoom:1;*display:inline}.bx-wrapper .bx-pager-item{font-size:0;line-height:0}.bx-wrapper .bx-prev{left:10px;background:url(images/controls.png) no-repeat 0 -32px}.bx-wrapper .bx-prev:focus,.bx-wrapper .bx-prev:hover{background-position:0 0}.bx-wrapper .bx-next{right:10px;background:url(images/controls.png) no-repeat -43px -32px}.bx-wrapper .bx-next:focus,.bx-wrapper .bx-next:hover{background-position:-43px 0}.bx-wrapper .bx-controls-direction a{position:absolute;top:50%;margin-top:-16px;outline:0;width:32px;height:32px;text-indent:-9999px;z-index:9999}.bx-wrapper .bx-controls-direction a.disabled{display:none}.bx-wrapper .bx-controls-auto{text-align:center}.bx-wrapper .bx-controls-auto .bx-start{display:block;text-indent:-9999px;width:10px;height:11px;outline:0;background:url(images/controls.png) -86px -11px no-repeat;margin:0 3px}.bx-wrapper .bx-controls-auto .bx-start.active,.bx-wrapper .bx-controls-auto .bx-start:focus,.bx-wrapper .bx-controls-auto .bx-start:hover{background-position:-86px 0}.bx-wrapper .bx-controls-auto .bx-stop{display:block;text-indent:-9999px;width:9px;height:11px;outline:0;background:url(images/controls.png) -86px -44px no-repeat;margin:0 3px}.bx-wrapper .bx-controls-auto .bx-stop.active,.bx-wrapper .bx-controls-auto .bx-stop:focus,.bx-wrapper .bx-controls-auto .bx-stop:hover{background-position:-86px -33px}.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager{text-align:left;width:80%}.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto{right:0;width:35px}.bx-wrapper .bx-caption{position:absolute;bottom:0;left:0;background:#666;background:rgba(80,80,80,.75);width:100%}.bx-wrapper .bx-caption span{color:#fff;font-family:Arial;display:block;font-size:.85em;padding:10px}"
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var angular = __webpack_require__(39);
-	__webpack_require__(73);
-	__webpack_require__(74);
 	__webpack_require__(75);
 	__webpack_require__(76);
 	__webpack_require__(77);
+	__webpack_require__(78);
 	__webpack_require__(79);
-	__webpack_require__(80);
-	__webpack_require__(83);
-	__webpack_require__(84);
+	__webpack_require__(81);
+	__webpack_require__(82);
+	__webpack_require__(85);
 	__webpack_require__(86);
+	__webpack_require__(88);
 
 	module.exports = angular.module('v4p',
 			['ngCookies', 'cfp.hotkeys', 'ui.bootstrap',
-				__webpack_require__(88), __webpack_require__(47)])
-			.factory('Vote', __webpack_require__(100))
-			.factory('Voting', __webpack_require__(101))
-			.controller('VotingController', __webpack_require__(103))
+				__webpack_require__(90), __webpack_require__(47)])
+			.factory('Vote', __webpack_require__(102))
+			.factory('Voting', __webpack_require__(103))
+			.controller('VotingController', __webpack_require__(105))
 			.name;
 
 
 /***/ },
-/* 73 */
+/* 75 */
 /***/ function(module, exports) {
 
 	/*
@@ -858,7 +903,7 @@ webpackJsonp([0],[
 	module.exports = angular;
 
 /***/ },
-/* 74 */
+/* 76 */
 /***/ function(module, exports) {
 
 	/*
@@ -876,7 +921,7 @@ webpackJsonp([0],[
 	module.exports = angular;
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports) {
 
 	/*
@@ -894,7 +939,7 @@ webpackJsonp([0],[
 	module.exports = angular;
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! 
@@ -909,13 +954,13 @@ webpackJsonp([0],[
 	module.exports = angular;
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(78);
+	var content = __webpack_require__(80);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -935,13 +980,13 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports) {
 
 	module.exports = ".cfp-hotkeys,.cfp-hotkeys-container{width:100%;height:100%}.cfp-hotkeys-container{display:table!important;position:fixed;top:0;left:0;color:#333;font-size:1em;background-color:rgba(255,255,255,.9)}.cfp-content,.cfp-hotkeys{display:table-cell;vertical-align:middle}.cfp-hotkeys-container.fade{z-index:-1024;visibility:hidden;opacity:0;-webkit-transition:opacity .15s linear;-moz-transition:opacity .15s linear;-o-transition:opacity .15s linear;transition:opacity .15s linear}.cfp-hotkeys-container.fade.in{z-index:10002;visibility:visible;opacity:1}.cfp-hotkeys-title{font-weight:700;text-align:center;font-size:1.2em}.cfp-hotkeys table{margin:auto;color:#333}.cfp-hotkeys-keys{padding:5px;text-align:right}.cfp-hotkeys-key{display:inline-block;color:#fff;background-color:#333;border:1px solid #333;border-radius:5px;text-align:center;margin-right:5px;box-shadow:inset 0 1px 0 #666,0 1px 0 #bbb;padding:5px 9px;font-size:1em}.cfp-hotkeys-text{padding-left:10px;font-size:1em}.cfp-hotkeys-close{position:fixed;top:20px;right:20px;font-size:2em;font-weight:700;padding:5px 10px;border:1px solid #ddd;border-radius:5px;min-height:45px;min-width:45px;text-align:center}.cfp-hotkeys-close:hover{background-color:#fff;cursor:pointer}@media all and (max-width:500px){.cfp-hotkeys{font-size:.8em}}@media all and (min-width:750px){.cfp-hotkeys{font-size:1.2em}}\n\n/*** EXPORTS FROM exports-loader ***/\nmodule.exports = angular;"
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports) {
 
 	var path = 'v4p/v4p.tpl.html';
@@ -950,13 +995,13 @@ webpackJsonp([0],[
 	module.exports = path;
 
 /***/ },
-/* 80 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(81);
+	var content = __webpack_require__(83);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -976,7 +1021,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 81 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(14)();
@@ -984,19 +1029,19 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, ".vote-slider {\n  position: relative;\n  display: block;\n  max-width: 1140px;\n  margin: 0 auto !important;\n}\n.vote-title h3 {\n  text-align: left;\n}\n.vote-person {\n  font-size: 2.5rem;\n  padding-top: 30px;\n  padding-bottom: 30px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  text-align: center;\n}\n.social-content {\n  display: block;\n  text-align: center;\n  padding: 30px 0;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 24px;\n  color: #ff0040;\n}\n.social-speaker a.vote-mark,\n.social-speaker a.vote-mark:link,\n.social-speaker a.vote-mark:active,\n.social-speaker a.vote-mark:visited,\n.social-speaker a.vote-mark:hover {\n  display: inline-block;\n  width: 60px;\n  height: 60px;\n  background: #e2e2e2;\n  color: #000000;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  margin: 0 15px;\n  font-size: 2rem;\n  line-height: 60px;\n}\n.social-speaker a.vote-mark:hover,\n.social-speaker a.vote-mark.selected {\n  color: #ffffff;\n  background: #ff0040;\n}\n.img-speaker img {\n  width: 250px;\n  margin: auto;\n}\n.img-speaker img.empty {\n  background: url(" + __webpack_require__(82) + ");\n  height: 250px;\n  background-size: contain;\n}\ndiv.vote-next,\ndiv.vote-prev {\n  width: 28px;\n  height: 44px;\n  background-size: cover;\n  display: block;\n}\ndiv.vote-next:before,\ndiv.vote-prev:before {\n  display: none;\n}\ndiv.vote-next,\ndiv.vote-next:hover {\n  background: url(" + __webpack_require__(27) + ") no-repeat;\n}\ndiv.vote-prev,\ndiv.vote-prev:hover {\n  background: url(" + __webpack_require__(26) + ") no-repeat;\n}\n@media screen and (max-width: 1280px) {\n  .vote-prev,\n  .vote-next {\n    display: none !important;\n  }\n}\n.vote-slider-cnt {\n  background: #ffffff !important;\n}\n.vote-slide {\n  height: auto !important;\n}\n.social-speaker a:link,\n.social-speaker a:active,\n.social-speaker a:visited,\n.social-speaker a:hover {\n  border: none;\n  outline: none;\n  font-size: 24px;\n  color: #e4d7c6;\n  text-decoration: none;\n}\n.social-speaker {\n  display: block;\n  text-align: center;\n}\n.social-speaker [class*=\"fa fa-\"] {\n  background-color: #b9ad9f;\n  border-radius: 30px !important;\n  -webkit-border-radius: 30px !important;\n  -moz-border-radius: 30px !important;\n  display: inline-block;\n  height: 30px;\n  line-height: 30px;\n  width: 30px;\n  font-size: 15px;\n  text-align: center;\n  margin: 20px 0;\n}\n.social-speaker [class*=\"fa fa-\"]:hover {\n  background-color: #ff0040;\n}\n.slick-slide,\n.slide {\n  margin: 0;\n}\n.slide {\n  position: relative;\n  width: 375px;\n  height: 375px;\n}\n@media screen and (max-width: 768px) {\n  #speakers-confitura .vote-info {\n    padding: 20px;\n  }\n}\n#speakers-confitura .slick-prev,\n#speakers-confitura .slick-next {\n  top: 200px;\n}\n#speakers-confitura .slick-prev:before,\n#speakers-confitura .slick-next:before {\n  color: #000000;\n}\n.slick-arrow {\n  width: 28px;\n  height: 44px;\n}\n.description-type {\n  font-size: 2rem;\n  font-weight: bold;\n  color: lightgrey;\n}\n@media screen and (max-width: 768px) {\n  .description-type {\n    text-align: center !important;\n  }\n}\n.description-type span {\n  cursor: pointer;\n}\n.description-type span.selected,\n.description-type span:hover {\n  color: #ff0040;\n}\n.clickable {\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, ".vote-slider {\n  position: relative;\n  display: block;\n  max-width: 1140px;\n  margin: 0 auto !important;\n}\n.vote-title h3 {\n  text-align: left;\n}\n.vote-person {\n  font-size: 2.5rem;\n  padding-top: 30px;\n  padding-bottom: 30px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  text-align: center;\n}\n.social-content {\n  display: block;\n  text-align: center;\n  padding: 30px 0;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 24px;\n  color: #ff0040;\n}\n.social-speaker a.vote-mark,\n.social-speaker a.vote-mark:link,\n.social-speaker a.vote-mark:active,\n.social-speaker a.vote-mark:visited,\n.social-speaker a.vote-mark:hover {\n  display: inline-block;\n  width: 60px;\n  height: 60px;\n  background: #e2e2e2;\n  color: #000000;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  margin: 0 15px;\n  font-size: 2rem;\n  line-height: 60px;\n}\n.social-speaker a.vote-mark:hover,\n.social-speaker a.vote-mark.selected {\n  color: #ffffff;\n  background: #ff0040;\n}\n.img-speaker img {\n  width: 250px;\n  margin: auto;\n}\n.img-speaker img.empty {\n  background: url(" + __webpack_require__(84) + ");\n  height: 250px;\n  background-size: contain;\n}\ndiv.vote-next,\ndiv.vote-prev {\n  width: 28px;\n  height: 44px;\n  background-size: cover;\n  display: block;\n}\ndiv.vote-next:before,\ndiv.vote-prev:before {\n  display: none;\n}\ndiv.vote-next,\ndiv.vote-next:hover {\n  background: url(" + __webpack_require__(27) + ") no-repeat;\n}\ndiv.vote-prev,\ndiv.vote-prev:hover {\n  background: url(" + __webpack_require__(26) + ") no-repeat;\n}\n@media screen and (max-width: 1280px) {\n  .vote-prev,\n  .vote-next {\n    display: none !important;\n  }\n}\n.vote-slider-cnt {\n  background: #ffffff !important;\n}\n.vote-slide {\n  height: auto !important;\n}\n.social-speaker a:link,\n.social-speaker a:active,\n.social-speaker a:visited,\n.social-speaker a:hover {\n  border: none;\n  outline: none;\n  font-size: 24px;\n  color: #e4d7c6;\n  text-decoration: none;\n}\n.social-speaker {\n  display: block;\n  text-align: center;\n}\n.social-speaker [class*=\"fa fa-\"] {\n  background-color: #b9ad9f;\n  border-radius: 30px !important;\n  -webkit-border-radius: 30px !important;\n  -moz-border-radius: 30px !important;\n  display: inline-block;\n  height: 30px;\n  line-height: 30px;\n  width: 30px;\n  font-size: 15px;\n  text-align: center;\n  margin: 20px 0;\n}\n.social-speaker [class*=\"fa fa-\"]:hover {\n  background-color: #ff0040;\n}\n.slick-slide,\n.slide {\n  margin: 0;\n}\n.slide {\n  position: relative;\n  width: 375px;\n  height: 375px;\n}\n@media screen and (max-width: 768px) {\n  #speakers-confitura .vote-info {\n    padding: 20px;\n  }\n}\n#speakers-confitura .slick-prev,\n#speakers-confitura .slick-next {\n  top: 200px;\n}\n#speakers-confitura .slick-prev:before,\n#speakers-confitura .slick-next:before {\n  color: #000000;\n}\n.slick-arrow {\n  width: 28px;\n  height: 44px;\n}\n.description-type {\n  font-size: 2rem;\n  font-weight: bold;\n  color: lightgrey;\n}\n@media screen and (max-width: 768px) {\n  .description-type {\n    text-align: center !important;\n  }\n}\n.description-type span {\n  cursor: pointer;\n}\n.description-type span.selected,\n.description-type span:hover {\n  color: #ff0040;\n}\n.clickable {\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "75cfddffcef0911f354e1783ba351d9e.png";
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -1019,13 +1064,13 @@ webpackJsonp([0],[
 	d.slice(e-c+1,e+c+2).addClass("slick-active").attr("aria-hidden","false")),0===a?d.eq(d.length-1-b.options.slidesToShow).addClass("slick-center"):a===b.slideCount-1&&d.eq(b.options.slidesToShow).addClass("slick-center")),b.$slides.eq(a).addClass("slick-center")):a>=0&&a<=b.slideCount-b.options.slidesToShow?b.$slides.slice(a,a+b.options.slidesToShow).addClass("slick-active").attr("aria-hidden","false"):d.length<=b.options.slidesToShow?d.addClass("slick-active").attr("aria-hidden","false"):(f=b.slideCount%b.options.slidesToShow,e=b.options.infinite===!0?b.options.slidesToShow+a:a,b.options.slidesToShow==b.options.slidesToScroll&&b.slideCount-a<b.options.slidesToShow?d.slice(e-(b.options.slidesToShow-f),e+f).addClass("slick-active").attr("aria-hidden","false"):d.slice(e,e+b.options.slidesToShow).addClass("slick-active").attr("aria-hidden","false")),"ondemand"===b.options.lazyLoad&&b.lazyLoad()},b.prototype.setupInfinite=function(){var c,d,e,b=this;if(b.options.fade===!0&&(b.options.centerMode=!1),b.options.infinite===!0&&b.options.fade===!1&&(d=null,b.slideCount>b.options.slidesToShow)){for(e=b.options.centerMode===!0?b.options.slidesToShow+1:b.options.slidesToShow,c=b.slideCount;c>b.slideCount-e;c-=1)d=c-1,a(b.$slides[d]).clone(!0).attr("id","").attr("data-slick-index",d-b.slideCount).prependTo(b.$slideTrack).addClass("slick-cloned");for(c=0;e>c;c+=1)d=c,a(b.$slides[d]).clone(!0).attr("id","").attr("data-slick-index",d+b.slideCount).appendTo(b.$slideTrack).addClass("slick-cloned");b.$slideTrack.find(".slick-cloned").find("[id]").each(function(){a(this).attr("id","")})}},b.prototype.interrupt=function(a){var b=this;a||b.autoPlay(),b.interrupted=a},b.prototype.selectHandler=function(b){var c=this,d=a(b.target).is(".slick-slide")?a(b.target):a(b.target).parents(".slick-slide"),e=parseInt(d.attr("data-slick-index"));return e||(e=0),c.slideCount<=c.options.slidesToShow?(c.setSlideClasses(e),void c.asNavFor(e)):void c.slideHandler(e)},b.prototype.slideHandler=function(a,b,c){var d,e,f,g,j,h=null,i=this;return b=b||!1,i.animating===!0&&i.options.waitForAnimate===!0||i.options.fade===!0&&i.currentSlide===a||i.slideCount<=i.options.slidesToShow?void 0:(b===!1&&i.asNavFor(a),d=a,h=i.getLeft(d),g=i.getLeft(i.currentSlide),i.currentLeft=null===i.swipeLeft?g:i.swipeLeft,i.options.infinite===!1&&i.options.centerMode===!1&&(0>a||a>i.getDotCount()*i.options.slidesToScroll)?void(i.options.fade===!1&&(d=i.currentSlide,c!==!0?i.animateSlide(g,function(){i.postSlide(d)}):i.postSlide(d))):i.options.infinite===!1&&i.options.centerMode===!0&&(0>a||a>i.slideCount-i.options.slidesToScroll)?void(i.options.fade===!1&&(d=i.currentSlide,c!==!0?i.animateSlide(g,function(){i.postSlide(d)}):i.postSlide(d))):(i.options.autoplay&&clearInterval(i.autoPlayTimer),e=0>d?i.slideCount%i.options.slidesToScroll!==0?i.slideCount-i.slideCount%i.options.slidesToScroll:i.slideCount+d:d>=i.slideCount?i.slideCount%i.options.slidesToScroll!==0?0:d-i.slideCount:d,i.animating=!0,i.$slider.trigger("beforeChange",[i,i.currentSlide,e]),f=i.currentSlide,i.currentSlide=e,i.setSlideClasses(i.currentSlide),i.options.asNavFor&&(j=i.getNavTarget(),j=j.slick("getSlick"),j.slideCount<=j.options.slidesToShow&&j.setSlideClasses(i.currentSlide)),i.updateDots(),i.updateArrows(),i.options.fade===!0?(c!==!0?(i.fadeSlideOut(f),i.fadeSlide(e,function(){i.postSlide(e)})):i.postSlide(e),void i.animateHeight()):void(c!==!0?i.animateSlide(h,function(){i.postSlide(e)}):i.postSlide(e))))},b.prototype.startLoad=function(){var a=this;a.options.arrows===!0&&a.slideCount>a.options.slidesToShow&&(a.$prevArrow.hide(),a.$nextArrow.hide()),a.options.dots===!0&&a.slideCount>a.options.slidesToShow&&a.$dots.hide(),a.$slider.addClass("slick-loading")},b.prototype.swipeDirection=function(){var a,b,c,d,e=this;return a=e.touchObject.startX-e.touchObject.curX,b=e.touchObject.startY-e.touchObject.curY,c=Math.atan2(b,a),d=Math.round(180*c/Math.PI),0>d&&(d=360-Math.abs(d)),45>=d&&d>=0?e.options.rtl===!1?"left":"right":360>=d&&d>=315?e.options.rtl===!1?"left":"right":d>=135&&225>=d?e.options.rtl===!1?"right":"left":e.options.verticalSwiping===!0?d>=35&&135>=d?"down":"up":"vertical"},b.prototype.swipeEnd=function(a){var c,d,b=this;if(b.dragging=!1,b.interrupted=!1,b.shouldClick=b.touchObject.swipeLength>10?!1:!0,void 0===b.touchObject.curX)return!1;if(b.touchObject.edgeHit===!0&&b.$slider.trigger("edge",[b,b.swipeDirection()]),b.touchObject.swipeLength>=b.touchObject.minSwipe){switch(d=b.swipeDirection()){case"left":case"down":c=b.options.swipeToSlide?b.checkNavigable(b.currentSlide+b.getSlideCount()):b.currentSlide+b.getSlideCount(),b.currentDirection=0;break;case"right":case"up":c=b.options.swipeToSlide?b.checkNavigable(b.currentSlide-b.getSlideCount()):b.currentSlide-b.getSlideCount(),b.currentDirection=1}"vertical"!=d&&(b.slideHandler(c),b.touchObject={},b.$slider.trigger("swipe",[b,d]))}else b.touchObject.startX!==b.touchObject.curX&&(b.slideHandler(b.currentSlide),b.touchObject={})},b.prototype.swipeHandler=function(a){var b=this;if(!(b.options.swipe===!1||"ontouchend"in document&&b.options.swipe===!1||b.options.draggable===!1&&-1!==a.type.indexOf("mouse")))switch(b.touchObject.fingerCount=a.originalEvent&&void 0!==a.originalEvent.touches?a.originalEvent.touches.length:1,b.touchObject.minSwipe=b.listWidth/b.options.touchThreshold,b.options.verticalSwiping===!0&&(b.touchObject.minSwipe=b.listHeight/b.options.touchThreshold),a.data.action){case"start":b.swipeStart(a);break;case"move":b.swipeMove(a);break;case"end":b.swipeEnd(a)}},b.prototype.swipeMove=function(a){var d,e,f,g,h,b=this;return h=void 0!==a.originalEvent?a.originalEvent.touches:null,!b.dragging||h&&1!==h.length?!1:(d=b.getLeft(b.currentSlide),b.touchObject.curX=void 0!==h?h[0].pageX:a.clientX,b.touchObject.curY=void 0!==h?h[0].pageY:a.clientY,b.touchObject.swipeLength=Math.round(Math.sqrt(Math.pow(b.touchObject.curX-b.touchObject.startX,2))),b.options.verticalSwiping===!0&&(b.touchObject.swipeLength=Math.round(Math.sqrt(Math.pow(b.touchObject.curY-b.touchObject.startY,2)))),e=b.swipeDirection(),"vertical"!==e?(void 0!==a.originalEvent&&b.touchObject.swipeLength>4&&a.preventDefault(),g=(b.options.rtl===!1?1:-1)*(b.touchObject.curX>b.touchObject.startX?1:-1),b.options.verticalSwiping===!0&&(g=b.touchObject.curY>b.touchObject.startY?1:-1),f=b.touchObject.swipeLength,b.touchObject.edgeHit=!1,b.options.infinite===!1&&(0===b.currentSlide&&"right"===e||b.currentSlide>=b.getDotCount()&&"left"===e)&&(f=b.touchObject.swipeLength*b.options.edgeFriction,b.touchObject.edgeHit=!0),b.options.vertical===!1?b.swipeLeft=d+f*g:b.swipeLeft=d+f*(b.$list.height()/b.listWidth)*g,b.options.verticalSwiping===!0&&(b.swipeLeft=d+f*g),b.options.fade===!0||b.options.touchMove===!1?!1:b.animating===!0?(b.swipeLeft=null,!1):void b.setCSS(b.swipeLeft)):void 0)},b.prototype.swipeStart=function(a){var c,b=this;return b.interrupted=!0,1!==b.touchObject.fingerCount||b.slideCount<=b.options.slidesToShow?(b.touchObject={},!1):(void 0!==a.originalEvent&&void 0!==a.originalEvent.touches&&(c=a.originalEvent.touches[0]),b.touchObject.startX=b.touchObject.curX=void 0!==c?c.pageX:a.clientX,b.touchObject.startY=b.touchObject.curY=void 0!==c?c.pageY:a.clientY,void(b.dragging=!0))},b.prototype.unfilterSlides=b.prototype.slickUnfilter=function(){var a=this;null!==a.$slidesCache&&(a.unload(),a.$slideTrack.children(this.options.slide).detach(),a.$slidesCache.appendTo(a.$slideTrack),a.reinit())},b.prototype.unload=function(){var b=this;a(".slick-cloned",b.$slider).remove(),b.$dots&&b.$dots.remove(),b.$prevArrow&&b.htmlExpr.test(b.options.prevArrow)&&b.$prevArrow.remove(),b.$nextArrow&&b.htmlExpr.test(b.options.nextArrow)&&b.$nextArrow.remove(),b.$slides.removeClass("slick-slide slick-active slick-visible slick-current").attr("aria-hidden","true").css("width","")},b.prototype.unslick=function(a){var b=this;b.$slider.trigger("unslick",[b,a]),b.destroy()},b.prototype.updateArrows=function(){var b,a=this;b=Math.floor(a.options.slidesToShow/2),a.options.arrows===!0&&a.slideCount>a.options.slidesToShow&&!a.options.infinite&&(a.$prevArrow.removeClass("slick-disabled").attr("aria-disabled","false"),a.$nextArrow.removeClass("slick-disabled").attr("aria-disabled","false"),0===a.currentSlide?(a.$prevArrow.addClass("slick-disabled").attr("aria-disabled","true"),a.$nextArrow.removeClass("slick-disabled").attr("aria-disabled","false")):a.currentSlide>=a.slideCount-a.options.slidesToShow&&a.options.centerMode===!1?(a.$nextArrow.addClass("slick-disabled").attr("aria-disabled","true"),a.$prevArrow.removeClass("slick-disabled").attr("aria-disabled","false")):a.currentSlide>=a.slideCount-1&&a.options.centerMode===!0&&(a.$nextArrow.addClass("slick-disabled").attr("aria-disabled","true"),a.$prevArrow.removeClass("slick-disabled").attr("aria-disabled","false")))},b.prototype.updateDots=function(){var a=this;null!==a.$dots&&(a.$dots.find("li").removeClass("slick-active").attr("aria-hidden","true"),a.$dots.find("li").eq(Math.floor(a.currentSlide/a.options.slidesToScroll)).addClass("slick-active").attr("aria-hidden","false"))},b.prototype.visibility=function(){var a=this;a.options.autoplay&&(document[a.hidden]?a.interrupted=!0:a.interrupted=!1)},a.fn.slick=function(){var f,g,a=this,c=arguments[0],d=Array.prototype.slice.call(arguments,1),e=a.length;for(f=0;e>f;f++)if("object"==typeof c||"undefined"==typeof c?a[f].slick=new b(a[f],c):g=a[f].slick[c].apply(a[f].slick,d),"undefined"!=typeof g)return g;return a}});
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(85);
+	var content = __webpack_require__(87);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -1045,19 +1090,19 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports) {
 
 	module.exports = "/* Slider */\n.slick-slider\n{\n    position: relative;\n\n    display: block;\n    box-sizing: border-box;\n\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n\n    -webkit-touch-callout: none;\n    -khtml-user-select: none;\n    -ms-touch-action: pan-y;\n        touch-action: pan-y;\n    -webkit-tap-highlight-color: transparent;\n}\n\n.slick-list\n{\n    position: relative;\n\n    display: block;\n    overflow: hidden;\n\n    margin: 0;\n    padding: 0;\n}\n.slick-list:focus\n{\n    outline: none;\n}\n.slick-list.dragging\n{\n    cursor: pointer;\n    cursor: hand;\n}\n\n.slick-slider .slick-track,\n.slick-slider .slick-list\n{\n    -webkit-transform: translate3d(0, 0, 0);\n       -moz-transform: translate3d(0, 0, 0);\n        -ms-transform: translate3d(0, 0, 0);\n         -o-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0);\n}\n\n.slick-track\n{\n    position: relative;\n    top: 0;\n    left: 0;\n\n    display: block;\n}\n.slick-track:before,\n.slick-track:after\n{\n    display: table;\n\n    content: '';\n}\n.slick-track:after\n{\n    clear: both;\n}\n.slick-loading .slick-track\n{\n    visibility: hidden;\n}\n\n.slick-slide\n{\n    display: none;\n    float: left;\n\n    height: 100%;\n    min-height: 1px;\n}\n[dir='rtl'] .slick-slide\n{\n    float: right;\n}\n.slick-slide img\n{\n    display: block;\n}\n.slick-slide.slick-loading img\n{\n    display: none;\n}\n.slick-slide.dragging img\n{\n    pointer-events: none;\n}\n.slick-initialized .slick-slide\n{\n    display: block;\n}\n.slick-loading .slick-slide\n{\n    visibility: hidden;\n}\n.slick-vertical .slick-slide\n{\n    display: block;\n\n    height: auto;\n\n    border: 1px solid transparent;\n}\n.slick-arrow.slick-hidden {\n    display: none;\n}\n"
 
 /***/ },
-/* 86 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(87);
+	var content = __webpack_require__(89);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -1077,31 +1122,31 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 87 */
+/* 89 */
 /***/ function(module, exports) {
 
 	module.exports = "@charset 'UTF-8';\n/* Slider */\n.slick-loading .slick-list\n{\n    background: #fff url('./ajax-loader.gif') center center no-repeat;\n}\n\n/* Icons */\n@font-face\n{\n    font-family: 'slick';\n    font-weight: normal;\n    font-style: normal;\n\n    src: url('./fonts/slick.eot');\n    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');\n}\n/* Arrows */\n.slick-prev,\n.slick-next\n{\n    font-size: 0;\n    line-height: 0;\n\n    position: absolute;\n    top: 50%;\n\n    display: block;\n\n    width: 20px;\n    height: 20px;\n    padding: 0;\n    -webkit-transform: translate(0, -50%);\n    -ms-transform: translate(0, -50%);\n    transform: translate(0, -50%);\n\n    cursor: pointer;\n\n    color: transparent;\n    border: none;\n    outline: none;\n    background: transparent;\n}\n.slick-prev:hover,\n.slick-prev:focus,\n.slick-next:hover,\n.slick-next:focus\n{\n    color: transparent;\n    outline: none;\n    background: transparent;\n}\n.slick-prev:hover:before,\n.slick-prev:focus:before,\n.slick-next:hover:before,\n.slick-next:focus:before\n{\n    opacity: 1;\n}\n.slick-prev.slick-disabled:before,\n.slick-next.slick-disabled:before\n{\n    opacity: .25;\n}\n\n.slick-prev:before,\n.slick-next:before\n{\n    font-family: 'slick';\n    font-size: 20px;\n    line-height: 1;\n\n    opacity: .75;\n    color: white;\n\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n\n.slick-prev\n{\n    left: -25px;\n}\n[dir='rtl'] .slick-prev\n{\n    right: -25px;\n    left: auto;\n}\n.slick-prev:before\n{\n    content: '←';\n}\n[dir='rtl'] .slick-prev:before\n{\n    content: '→';\n}\n\n.slick-next\n{\n    right: -25px;\n}\n[dir='rtl'] .slick-next\n{\n    right: auto;\n    left: -25px;\n}\n.slick-next:before\n{\n    content: '→';\n}\n[dir='rtl'] .slick-next:before\n{\n    content: '←';\n}\n\n/* Dots */\n.slick-dotted.slick-slider\n{\n    margin-bottom: 30px;\n}\n\n.slick-dots\n{\n    position: absolute;\n    bottom: -25px;\n\n    display: block;\n\n    width: 100%;\n    padding: 0;\n    margin: 0;\n\n    list-style: none;\n\n    text-align: center;\n}\n.slick-dots li\n{\n    position: relative;\n\n    display: inline-block;\n\n    width: 20px;\n    height: 20px;\n    margin: 0 5px;\n    padding: 0;\n\n    cursor: pointer;\n}\n.slick-dots li button\n{\n    font-size: 0;\n    line-height: 0;\n\n    display: block;\n\n    width: 20px;\n    height: 20px;\n    padding: 5px;\n\n    cursor: pointer;\n\n    color: transparent;\n    border: 0;\n    outline: none;\n    background: transparent;\n}\n.slick-dots li button:hover,\n.slick-dots li button:focus\n{\n    outline: none;\n}\n.slick-dots li button:hover:before,\n.slick-dots li button:focus:before\n{\n    opacity: 1;\n}\n.slick-dots li button:before\n{\n    font-family: 'slick';\n    font-size: 6px;\n    line-height: 20px;\n\n    position: absolute;\n    top: 0;\n    left: 0;\n\n    width: 20px;\n    height: 20px;\n\n    content: '•';\n    text-align: center;\n\n    opacity: .25;\n    color: black;\n\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n.slick-dots li.slick-active button:before\n{\n    opacity: .75;\n    color: black;\n}\n"
 
 /***/ },
-/* 88 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(89);
-	__webpack_require__(73);
-	__webpack_require__(74);
+	__webpack_require__(91);
+	__webpack_require__(75);
 	__webpack_require__(76);
-	__webpack_require__(77);
-	__webpack_require__(90);
+	__webpack_require__(78);
+	__webpack_require__(79);
+	__webpack_require__(92);
 
 	module.exports = __webpack_require__(39)
 			.module('directives.person', ['ngAnimate', 'cfp.hotkeys', 'ui.bootstrap'])
-			.directive('person', __webpack_require__(92))
-			.directive('persons', __webpack_require__(95))
-			.service('PersonModal', __webpack_require__(97))
+			.directive('person', __webpack_require__(94))
+			.directive('persons', __webpack_require__(97))
+			.service('PersonModal', __webpack_require__(99))
 			.name;
 
 /***/ },
-/* 89 */
+/* 91 */
 /***/ function(module, exports) {
 
 	/**
@@ -5257,13 +5302,13 @@ webpackJsonp([0],[
 	module.exports = angular;
 
 /***/ },
-/* 90 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(91);
+	var content = __webpack_require__(93);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -5283,7 +5328,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 91 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(14)();
@@ -5297,7 +5342,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 92 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5307,20 +5352,20 @@ webpackJsonp([0],[
 			scope: {
 				person: "=for"
 			},
-			template: __webpack_require__(93),
-			controller: __webpack_require__(94)
+			template: __webpack_require__(95),
+			controller: __webpack_require__(96)
 		};
 	}
 	module.exports = PersonDirective;
 
 /***/ },
-/* 93 */
+/* 95 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"person\" ng-click=\"showModal()\">\n\t<div class=\"person-photo\"  ng-if=\"showPhoto\">\n\t\t<img ng-src=\"{{person.photo}}\"/>\n\t</div>\n\t<h2>{{person.fullName}}</h2>\n</section>";
 
 /***/ },
-/* 94 */
+/* 96 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5340,7 +5385,7 @@ webpackJsonp([0],[
 	module.exports = PersonDirectiveController;
 
 /***/ },
-/* 95 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5351,19 +5396,19 @@ webpackJsonp([0],[
 				persons: "=for",
 				filter: "="
 			},
-			template: __webpack_require__(96)
+			template: __webpack_require__(98)
 		};
 	}
 	module.exports = PersonsDirective;
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"persons\">\n\t<person for=\"person\"\n\t\t\t\t\tng-repeat=\"person in persons | filter: {fullName: filter}\"></person>\n</section>";
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5379,8 +5424,8 @@ webpackJsonp([0],[
 				backdropClass: 'person-modal-backdrop',
 				windowClass: 'person-modal',
 				size: 'lg',
-				template: __webpack_require__(98),
-				controller: __webpack_require__(99),
+				template: __webpack_require__(100),
+				controller: __webpack_require__(101),
 				resolve: {
 					persons: function () {
 						return persons;
@@ -5405,13 +5450,13 @@ webpackJsonp([0],[
 	module.exports = PersonModal;
 
 /***/ },
-/* 98 */
+/* 100 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"modal-body beige person-modal\">\n    <!--<md-button class=\"md-icon-button close\" ng-click=\"$close()\">-->\n    <!--<md-icon>close</md-icon>-->\n    <!--</md-button>-->\n    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" ng-click=\"$close()\">\n        <span aria-hidden=\"true\">&times;</span>\n    </button>\n\n    <div class=\"person-modal-container\">\n        <div class=\"person-photo\">\n            <div class=\"img-speaker\">\n                <img class=\"img-responsive margin-auto\" ng-src=\"{{person().photo}}\"\n                     ng-class=\"{empty: person().photo == null}\"/>\n            </div>\n        <span class=\"social-speaker\">\n            <a ng-href=\"http://www.twitter.com/{{person().twitter}}\" title=\"twitter\" target=\"_blank\" ng-if=\"person().twitter\">\n                <i class=\"fa fa-twitter prelegent-social\" aria-hidden=\"true\"></i>\n            </a>\n            <a ng-href=\"//{{person().url}}\" title=\"direct\" target=\"_blank\" ng-if=\"person().url\">\n                <i class=\"fa fa-arrow-up prelegent-social\" aria-hidden=\"true\"></i>\n            </a>\n        </span>\n        </div>\n        <div class=\"person-info\">\n            <section>\n                <div class=\"ta-leftperson-name person-name\"><h3>{{person().fullName}}</h3></div>\n                <div class=\"mcci-content\" ng-bind-html=\"person().bio\"></div>\n            </section>\n            <section>\n                <a ng-repeat=\"presentation in person().presentations\"\n                   ui-sref=\"presentations({id: presentation.id})\"\n                   ng-click=\"$close()\">\n                    <h3 class=\"presentation-title\">\n                        {{presentation.title}}\n                    </h3>\n                </a>\n            </section>\n        </div>\n    </div>\n    <!--<section></section>-->\n\n    <aside ng-if=\"hasMany()\" class=\"navigation\">\n        <span class=\"next-arrow\" ng-click=\"next()\"></span>\n    </aside>\n</div>";
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5470,7 +5515,7 @@ webpackJsonp([0],[
 	module.exports = PersonModalController;
 
 /***/ },
-/* 100 */
+/* 102 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5484,11 +5529,11 @@ webpackJsonp([0],[
 	module.exports = Vote;
 
 /***/ },
-/* 101 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var _ = __webpack_require__(102);
+	var _ = __webpack_require__(104);
 	/* @ngInject */
 	function Voting(Vote, $q, $cookies) {
 		var _items = [];
@@ -5585,12 +5630,12 @@ webpackJsonp([0],[
 	module.exports = Voting;
 
 /***/ },
-/* 102 */,
-/* 103 */
+/* 104 */,
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {'use strict';
-	var _ = __webpack_require__(102);
+	var _ = __webpack_require__(104);
 	/* @ngInject */
 	function VotingController(Voting, hotkeys, PersonModal, $timeout) {
 	    var vm = this;
@@ -5824,34 +5869,34 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 104 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(105);
-	__webpack_require__(106);
-	module.exports = __webpack_require__(39).module('organizers', [__webpack_require__(88)])
-	    .factory('Organizers', __webpack_require__(109))
-	    .controller('OrganizersController', __webpack_require__(110))
+	__webpack_require__(107);
+	__webpack_require__(108);
+	module.exports = __webpack_require__(39).module('organizers', [__webpack_require__(90)])
+	    .factory('Organizers', __webpack_require__(111))
+	    .controller('OrganizersController', __webpack_require__(112))
 	    .name;
 
 /***/ },
-/* 105 */
+/* 107 */
 /***/ function(module, exports) {
 
 	var path = 'about/about.tpl.html';
-	var html = "<div id=\"about\">\n    <section id=\"news-confitura\" style=\"overflow: hidden;\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 bg-about-header\"><h2>about us</h2></div>\n        </div>\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12\">\n                <div class=\"bg-white row-1140 text-center about-excerpt\">\n                    <page name=\"about\"></page>\n                </div>\n            </div>\n        </div>\n    </section>\n    <section id=\"speakers-confitura\" class=\"beige\" ng-controller=\"OrganizersController as organizers\">\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 speakers-confitura-header beige\"><h2>organizers</h2></div>\n        </div>\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 beige pb150\">\n                <div class=\"row-1080\">\n                    <div class=\"beige organizers\">\n                        <div class=\"slide margin-auto organizer\" ng-repeat=\"organizer in organizers.list\">\n                            <span class=\"img-speaker\"><img ng-src=\"{{organizer.photo}}\"></span>\n                            <span class=\"name-speaker\">\n                                <a href=\"\" ng-click=\"organizers.detailsOf(organizer)\">{{organizer.firstName}}<br>{{organizer.lastName}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </section>\n</div>";
+	var html = "<div id=\"about\">\n    <section id=\"news-confitura\" style=\"overflow: hidden;\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 bg-about-header\"><h2>about us</h2></div>\n        </div>\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12\">\n                <div class=\"bg-white row-1140 text-center about-excerpt\">\n                    <page name=\"about\"></page>\n                </div>\n            </div>\n        </div>\n    </section>\n    <section id=\"speakers-confitura\" class=\"beige\" ng-controller=\"OrganizersController as organizers\">\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 speakers-confitura-header beige\"><h2>organizers</h2></div>\n        </div>\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 beige pb150\">\n                <div class=\"row-1140\">\n                    <div class=\"beige organizers\">\n                        <div class=\"slide margin-auto organizer\" ng-repeat=\"organizer in organizers.list\">\n                            <span class=\"img-speaker\"><img ng-src=\"{{organizer.photo}}\"></span>\n                            <span class=\"name-speaker\">\n                                <a href=\"\" ng-click=\"organizers.detailsOf(organizer)\">{{organizer.firstName}}<br>{{organizer.lastName}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </section>\n</div>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
 /***/ },
-/* 106 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(107);
+	var content = __webpack_require__(109);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -5871,7 +5916,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 107 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(14)();
@@ -5879,19 +5924,19 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, "#about .bg-about-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(108) + ") center center no-repeat;\n  background-size: cover;\n}\n#about .bg-about-header h2 {\n  color: #ffffff;\n}\n#about .about-excerpt {\n  padding: 50px 0 100px 0;\n  color: #000000;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  font-size: 2.2rem;\n}\n#about .img-speaker img {\n  min-width: 100%;\n  min-height: 100%;\n}\n#about .organizers {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row ;\n      -ms-flex-direction: row ;\n          flex-direction: row ;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n@media all and (max-width: 768px) {\n  #about .organizers {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n        -ms-flex-align: center;\n            align-items: center;\n  }\n}\n#about .organizers .organizer {\n  width: 375px;\n  height: 375px;\n  overflow: hidden;\n}\n#about .organizers .organizer span.name-speaker {\n  display: block;\n  font-size: 24px;\n  line-height: 30px;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  color: #ffffff;\n  position: absolute;\n  bottom: 35px;\n  left: 30px;\n  text-align: left !important;\n}\n#about .organizers .organizer span.name-speaker a:link,\n#about .organizers .organizer span.name-speaker a:active,\n#about .organizers .organizer span.name-speaker a:visited,\n#about .organizers .organizer span.name-speaker a:hover {\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  color: #ffffff;\n}\n#about .organizers .organizer span.name-speaker a:hover {\n  text-decoration: underline;\n}\n", ""]);
+	exports.push([module.id, "#about .bg-about-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(110) + ") center center no-repeat;\n  background-size: cover;\n}\n#about .bg-about-header h2 {\n  color: #ffffff;\n}\n#about .about-excerpt {\n  padding: 50px 0 100px 0;\n  color: #000000;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  font-size: 2.2rem;\n}\n#about .img-speaker img {\n  min-width: 100%;\n  min-height: 100%;\n}\n#about .organizers {\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row ;\n      -ms-flex-direction: row ;\n          flex-direction: row ;\n  -webkit-flex-wrap: wrap;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n@media all and (max-width: 768px) {\n  #about .organizers {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n    -webkit-flex-direction: column;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n        -ms-flex-align: center;\n            align-items: center;\n  }\n}\n#about .organizers .organizer {\n  width: 375px;\n  height: 375px;\n  overflow: hidden;\n}\n#about .organizers .organizer span.name-speaker {\n  display: block;\n  font-size: 24px;\n  line-height: 30px;\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  color: #ffffff;\n  position: absolute;\n  bottom: 35px;\n  left: 30px;\n  text-align: left !important;\n}\n#about .organizers .organizer span.name-speaker a:link,\n#about .organizers .organizer span.name-speaker a:active,\n#about .organizers .organizer span.name-speaker a:visited,\n#about .organizers .organizer span.name-speaker a:hover {\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  color: #ffffff;\n}\n#about .organizers .organizer span.name-speaker a:hover {\n  text-decoration: underline;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 108 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "960d5fab51bb98dc2b2b4b6bc9b925c6.jpg";
 
 /***/ },
-/* 109 */
+/* 111 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5904,7 +5949,7 @@ webpackJsonp([0],[
 	module.exports = Organizers;
 
 /***/ },
-/* 110 */
+/* 112 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5923,25 +5968,25 @@ webpackJsonp([0],[
 	module.exports = OrganizersController;
 
 /***/ },
-/* 111 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(112);
 	__webpack_require__(114);
+	__webpack_require__(116);
 	__webpack_require__(39).module('cookies', [])
-	    .controller('CookiesController', __webpack_require__(115))
+	    .controller('CookiesController', __webpack_require__(117))
 	;
 	module.exports ='cookies';
 
 /***/ },
-/* 112 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(113);
+	var content = __webpack_require__(115);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -5961,7 +6006,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 113 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(14)();
@@ -5975,7 +6020,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 114 */
+/* 116 */
 /***/ function(module, exports) {
 
 	var path = 'cookies/cookies.tpl.html';
@@ -5984,7 +6029,7 @@ webpackJsonp([0],[
 	module.exports = path;
 
 /***/ },
-/* 115 */
+/* 117 */
 /***/ function(module, exports) {
 
 	function CookiesController($cookies){
@@ -6006,10 +6051,10 @@ webpackJsonp([0],[
 	module.exports = CookiesController;
 
 /***/ },
-/* 116 */
+/* 118 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"v4p\" role=\"button\">Vote 4 Papers</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<!-- /container fluid -->\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. It starts at around 9 a.m. and finishes at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>Bobrowiecka Conference Center</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'news/news.banner.tpl.html'\"></div>\n\n    <div ng-include=\"'partners/partners.banner.tpl.html'\"></div>\n</div>\n\n";
+	module.exports = "\n<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"v4p\" role=\"button\">Vote 4 Papers</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<!-- /container fluid -->\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. It starts at around 9 a.m. and finishes at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>Bobrowiecka Conference Center</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'news/news.banner.tpl.html'\"></div>\n    <div ng-include=\"'partners/banner/partners-banner.tpl.html'\"></div>\n\n</div>\n\n";
 
 /***/ }
 ]);
