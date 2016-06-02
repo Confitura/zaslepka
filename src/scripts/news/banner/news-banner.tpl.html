@@ -1,0 +1,16 @@
+<section id="news-confitura">
+    <div class="row-fluid">
+        <div class="col-lg-12 news-confitura-header"><h2>News</h2></div>
+    </div>
+
+    <div class="news-container col-lg-12" ng-controller="NewsController as news">
+        <div class="news-confitura-left">
+            <news-item class=" font-white" item="news.list[0]"></news-item>
+        </div>
+        <div class="news-confitura-right" ng-if="news.list.length > 1">
+            <news-item item="news.list[1]" class="semi-square black font-white"></news-item>
+            <news-item ng-if="news.list.length > 2" item="news.list[2]" class="semi-square beige"></news-item>
+        </div>
+    </div>
+
+</section>
