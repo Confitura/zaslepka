@@ -3,14 +3,13 @@ section#partners-confitura {
     position: relative;
     background: transparent url(../../img/header-register.jpg) center center no-repeat;
     background-size: cover;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../../img/header-register.jpg', sizingMethod='scale');
     h2 {
       color: #ffffff;
     }
 
   }
 
-  .partners-type{
+  .partners-type {
     background-color: #ffffff;
   }
 
@@ -60,7 +59,9 @@ section#partners-confitura {
       }
     }
     > div {
-      flex-basis: 100%;
+      @media all and (min-width: 767px) {
+        flex-basis: 100%;
+      }
     }
 
   }
