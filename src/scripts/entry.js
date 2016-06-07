@@ -85,6 +85,10 @@ ng.module('confitura', [
                 url: '/spoina',
                 templateUrl: 'views/spoina.html'
             })
+            .state('show-cookie', {
+                url: '/show-cookie',
+                templateUrl: 'cookies/show/cookie-show.tpl.html'
+            })
         ;
     })
     .run(function ($timeout, $rootScope) {

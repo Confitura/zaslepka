@@ -9,9 +9,10 @@ function PartnersController(Partners, $state) {
         'platinum',
         'gold',
         'silver',
-        'brown',
+        'bronze',
         'media',
-        'press'
+        'press',
+        'technical'
     ];
     vm.detailsOf = function(partner){
         $state.go('partner', {partner: partner, name: partner.name});

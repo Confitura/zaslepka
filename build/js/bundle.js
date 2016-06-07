@@ -49,7 +49,7 @@ webpackJsonp([0],[
 	        $stateProvider
 	            .state('main', {
 	                url: '/',
-	                template: __webpack_require__(118)
+	                template: __webpack_require__(120)
 	            })
 	            .state('partners', {
 	                url: '/partners',
@@ -97,6 +97,10 @@ webpackJsonp([0],[
 	            .state('spoina', {
 	                url: '/spoina',
 	                templateUrl: 'views/spoina.html'
+	            })
+	            .state('show-cookie', {
+	                url: '/show-cookie',
+	                templateUrl: 'cookies/show/cookie-show.tpl.html'
 	            })
 	        ;
 	    }])
@@ -662,9 +666,10 @@ webpackJsonp([0],[
 	        'platinum',
 	        'gold',
 	        'silver',
-	        'brown',
+	        'bronze',
 	        'media',
-	        'press'
+	        'press',
+	        'technical'
 	    ];
 	    vm.detailsOf = function(partner){
 	        $state.go('partner', {partner: partner, name: partner.name});
@@ -5976,8 +5981,9 @@ webpackJsonp([0],[
 	__webpack_require__(116);
 	__webpack_require__(39).module('cookies', [])
 	    .controller('CookiesController', __webpack_require__(117))
+	    .controller('CookieShowController', __webpack_require__(118))
 	;
-	module.exports ='cookies';
+	module.exports = 'cookies';
 
 /***/ },
 /* 114 */
@@ -6052,6 +6058,31 @@ webpackJsonp([0],[
 
 /***/ },
 /* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(119);
+
+	function CookieShowController($cookies){
+	    var vm = this;
+	    vm.get = get;
+	    function get(){
+	        return $cookies.get('key');
+	    }
+	}
+
+	module.exports = CookieShowController;
+
+/***/ },
+/* 119 */
+/***/ function(module, exports) {
+
+	var path = 'cookies/show/cookie-show.tpl.html';
+	var html = "<section id=\"partners-confitura\" ng-controller=\"CookieShowController as cookie\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 bg-white\">\n            <div class=\"bg-white row-1080 text-center register-excerpt\">\n                {{cookie.get()}}\n            </div>\n        </div>\n    </div>\n</section>";
+	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
+	module.exports = path;
+
+/***/ },
+/* 120 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"registration\" role=\"button\">Registration</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. It starts at around 9 a.m. and finishes at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>Bobrowiecka Conference Center</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'partners/banner/partners-banner.tpl.html'\"></div>\n    <div ng-include=\"'news/banner/news-banner.tpl.html'\"></div>\n\n\n</div>\n\n";
