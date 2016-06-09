@@ -7,11 +7,10 @@ require('angular-messages/angular-messages.min');
 
 module.exports = ng
 		.module('registration', ['ngAria', 'ngMaterial', 'ngMessages', require('presentations')])
-		.controller('RegistrationFormController', require('./RegistrationFormController'))
-		.factory('Registration', require('./Registration'))
+		.controller('RegistrationFormController', require('./form/registration-form.controller'))
+		.factory('Registration', require('./registration.service'))
 		.config(/* @ngInject */function ($mdThemingProvider) {
 			$mdThemingProvider
-					.theme('default')
-					.dark();
+					.theme('default');
 		})
 		.name;

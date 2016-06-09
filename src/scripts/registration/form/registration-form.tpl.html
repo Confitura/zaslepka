@@ -1,0 +1,145 @@
+<section id="partners-confitura" ng-controller="RegistrationFormController as registration">
+    <div class="row-fluid">
+        <div class="col-lg-12 partners-header"><h2>registration form</h2></div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-12 bg-white">
+            <div class="bg-white row-1080 registration-form">
+
+                <div ng-if="registration.error">
+                    <h2  class="error">Oops! Something went horribly wrong!</h2>
+                    <h3>If you believe that you should be able to register to confitura conference then contact us on <a href="mailto:confitura@confitura.pl">confitura@confitura.pl</a></h3>
+                </div>
+
+                <form name="registration.form" novalidate ng-submit="registration.doRegister()" ng-if="registration.participant">
+                    <md-content layout-gt-sm="row" layout="column">
+                        <md-input-container flex>
+                            <label>First Name</label>
+                            <input name="firstName" required ng-model="registration.participant.firstName">
+
+                            <div ng-messages="registration.form.firstName.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Last Name</label>
+                            <input name="lastName" required ng-model="registration.participant.lastName">
+
+                            <div ng-messages="registration.form.lastName.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>e-mail</label>
+                            <input name="mail" required ng-model="registration.participant.mail" type="email">
+
+                            <div ng-messages="registration.form.mail.$error">
+                                <div ng-message="required">This field is required</div>
+                                <div ng-message="email">This is not a valid e-mail address</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                    <md-content layout="column" layout-gt-sm="row">
+                        <md-input-container flex>
+                            <label>city</label>
+                            <input name="city" ng-model="registration.participant.city" required>
+
+                            <div ng-messages="registration.form.city.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                    <md-content layout="column" layout-gt-sm="row">
+                        <md-input-container flex>
+                            <md-select name="sex" required placeholder="Gender" ng-model="registration.participant.sex">
+                                <md-option value="F">Female</md-option>
+                                <md-option value="M">Male</md-option>
+                            </md-select>
+                            <div ng-messages="registration.form.sex.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <md-select name="size" required
+                                       placeholder="T-shirt size" ng-model="registration.participant.size">
+                                <md-option ng-repeat="size in registration.sizes" value="{{size}}">{{size}}</md-option>
+                            </md-select>
+                            <div ng-messages="registration.form.size.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+
+                            <md-select name="experience" required
+                                       placeholder="Experience" ng-model="registration.participant.experience">
+                                <md-option ng-repeat="level in registration.experienceLevels" value="{{level}}">{{level}}</md-option>
+                            </md-select>
+                            <div ng-messages="registration.form.experience.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+
+                            <md-select
+                                    name="position" required
+                                    placeholder="Position" ng-model="registration.participant.position">
+                                <md-option ng-repeat="level in registration.occupationLevels" value="{{level}}">{{level}}</md-option>
+                            </md-select>
+                            <div ng-messages="registration.form.position.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                    <!--<md-content>-->
+                    <!--<md-list>-->
+                    <!--<md-subheader>Wskaż {{registration.LIMIT}} prezentacji które najbardziej Cię interesują</md-subheader>-->
+                    <!--<md-list-item ng-repeat="presentation in registration.presentations">-->
+                    <!--<md-checkbox ng-model="presentation.selected"-->
+                    <!--ng-change="registration.showWarning()"-->
+                    <!--ng-disabled="registration.isDisabled(presentation)">-->
+                    <!--<md-tooltip ng-if="registration.isDisabled(presentation)">Możesz wybrać maksymalnie {{registration.LIMIT}}-->
+                    <!--prezentacji-->
+                    <!--</md-tooltip>-->
+                    <!--</md-checkbox>-->
+                    <!--<div>-->
+                    <!--<h3>{{presentation.title}}</h3>-->
+
+                    <!--<div>-->
+                    <!--<span ng-repeat="speaker in presentation.speakers">{{speaker.fullName}} </span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</md-list-item>-->
+
+                    <!--</md-list>-->
+                    <!--</md-content>-->
+                    <md-content>
+                        <md-input-container>
+                            <md-checkbox name="acceptance" required ng-model="acceptance">
+                                <div style="margin-left:10px">Akceptuję, że dane umieszczone formularzu rejestracyjnym
+                                    będą przetwarzane i przechowywane zgodnie z ustawą z dnia 29 sierpnia
+                                    1997 r. o ochronie danych osobowych (tekst jedn.: Dz. Ustaw z 2002 Nr
+                                    101, poz. 926 z późn. zm.), przez Kapitułę Organizacyjną Konferencji
+                                    „Confitura”, wyłącznie dla celów organizacyjnych niniejszej
+                                    Konferencji.
+                                </div>
+                                <div style="margin-left:10px; padding-top: 10px;">I hereby agree for processing my personal data, included in registration form, for
+                                    organization purposes of Confitura conference (as defined in the Act of August 29, 1997 on the Protection of Personal Data
+                                    (Journal of Laws No. 101, item 926).
+                                </div>
+                            </md-checkbox>
+                            <div ng-messages="registration.form.acceptance.$error">
+                                <div ng-message="required">This field is required</div>
+                            </div>
+                        </md-input-container>
+                    </md-content>
+                    <div class="registration-button">
+                        <button type="submit" class="btn btn-lg btn-primary btn-pink" ng-disabled="registration.form.$invalid">REGISTER
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+

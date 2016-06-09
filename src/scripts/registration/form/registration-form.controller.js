@@ -1,4 +1,7 @@
 'use strict';
+require('./registration-form.tpl.html');
+require('./registration-success.tpl.html');
+require('./registration-form.less');
 var _ = require('lodash');
 /* @ngInject */
 function RegistrationFormController(Registration, Presentations, $mdToast, $stateParams, $state) {
@@ -12,20 +15,20 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 		'XXL'
 	];
 	vm.experienceLevels = [
-		"Dopiero się uczę",
-		"Zawodowo mniej niż rok",
-		"Zawodowo 1-2 lata",
-		"Zawodowo 2-4 lata",
-		"Zawodowo 4-8 lata",
-		"Zawodowo powyżej 8 lat"
+		"I am just learning",
+		"Less than a year",
+		"1-2 years",
+		"2-4 years",
+		"4-8 years",
+		"More than 8 years"
 	];
 	vm.occupationLevels = [
-		"Student/uczeń",
-		"Programista",
+		"Student",
+		"Developer",
 		"Tester",
-		"Kierownik zespołu",
-		"Kierownik projektu",
-		"Inne"
+		"Team Lead",
+		"Project Lead",
+		"Other"
 	];
 	vm.presentations = Presentations.query();
 	Registration.get({token: $stateParams.token})
@@ -49,7 +52,7 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 		if (maxNumberOfPresentationsSelected()) {
 			$mdToast.show(
 					$mdToast.simple()
-							.content('Wybrano maksymalną liczbę prezentacji')
+							.content('Maximum number of presentations have been selected')
 							.position('top right')
 							.hideDelay(10000)
 			);

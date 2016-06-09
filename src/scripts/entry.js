@@ -18,13 +18,16 @@ ng.module('confitura', [
         require('partners'),
     //,
         require('v4p'),
-        require('about'),
-        require('cookies')
+
         //require('speakers'),
         //require('presentations'),
         //require('organizers'),
         //require('registration')
         //require('agenda')
+        require('about'),
+        require('cookies'),
+        require('registration')
+
     ])
     .constant('apiServer', 'http://c4p.confitura.pl/api')
     .config(/*@ngInject*/ function ($stateProvider, $urlRouterProvider) {
@@ -71,11 +74,11 @@ ng.module('confitura', [
             })
             .state('registration-success', {
                 url: '/registration/success',
-                templateUrl: 'views/registration-success.html'
+                templateUrl: 'registration/form/registration-success.tpl.html'
             })
             .state('registration-form', {
                 url: '/registration/:token',
-                templateUrl: 'views/registration-form.html'
+                templateUrl: 'registration/form/registration-form.tpl.html'
             })
             .state('agenda', {
                 url: '/agenda',

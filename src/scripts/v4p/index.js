@@ -1,7 +1,7 @@
 'use strict';
 var angular = require('ng');
-require('angular-bootstrap/ui-bootstrap.min');
-require('angular-bootstrap/ui-bootstrap-tpls.min');
+require('angular-ui-bootstrap/dist/ui-bootstrap');
+require('angular-ui-bootstrap/dist/ui-bootstrap-tpls');
 require('angular-cookies/angular-cookies.min');
 require('angular-hotkeys/build/hotkeys.min');
 require('angular-hotkeys/build/hotkeys.min.css');
