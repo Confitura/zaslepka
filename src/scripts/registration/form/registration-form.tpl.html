@@ -7,8 +7,9 @@
             <div class="bg-white row-1080 registration-form">
 
                 <div ng-if="registration.error">
-                    <h2  class="error">Oops! Something went horribly wrong!</h2>
-                    <h3>If you believe that you should be able to register to confitura conference then contact us on <a href="mailto:confitura@confitura.pl">confitura@confitura.pl</a></h3>
+                    <h2 class="error">Oops! Something went horribly wrong!</h2>
+                    <h3>If you believe that you should be able to register to confitura conference then contact us on <a
+                            href="mailto:confitura@confitura.pl">confitura@confitura.pl</a></h3>
                 </div>
 
                 <form name="registration.form" novalidate ng-submit="registration.doRegister()" ng-if="registration.participant">
@@ -117,14 +118,16 @@
                             <md-checkbox name="acceptance" required ng-model="acceptance">
                                 <div style="margin-left:10px">Akceptuję, że dane umieszczone formularzu rejestracyjnym
                                     będą przetwarzane i przechowywane zgodnie z ustawą z dnia 29 sierpnia
-                                    1997 r. o ochronie danych osobowych (tekst jedn.: Dz. Ustaw z 2002 Nr
-                                    101, poz. 926 z późn. zm.), przez Kapitułę Organizacyjną Konferencji
+                                    1997 r. o ochronie danych osobowych (dz. u. 97 r. nr 133 poz. 883), przez Kapitułę Organizacyjną
+                                    Konferencji
                                     „Confitura”, wyłącznie dla celów organizacyjnych niniejszej
                                     Konferencji.
                                 </div>
-                                <div style="margin-left:10px; padding-top: 10px;">I hereby agree for processing my personal data, included in registration form, for
-                                    organization purposes of Confitura conference (as defined in the Act of August 29, 1997 on the Protection of Personal Data
-                                    (Journal of Laws No. 101, item 926).
+                                <div style="margin-left:10px; padding-top: 10px;">I hereby agree for processing my personal data, included
+                                    in registration form, for
+                                    organization purposes of Confitura conference (as defined in the Act of August 29, 1997 on the Polish
+                                    Protection of Personal Data
+                                    (Journal of Laws No. 97, item 133, pos. 883).
                                 </div>
                             </md-checkbox>
                             <div ng-messages="registration.form.acceptance.$error">

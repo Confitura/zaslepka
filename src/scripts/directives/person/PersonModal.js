@@ -1,13 +1,13 @@
 'use strict';
 /* @ngInject */
-function PersonModal($modal) {
+function PersonModal($uibModal) {
 	var _speakerModal;
 	var _callback = null;
 	this.openFor = function (persons) {
 		if (_speakerModal) {
 			return;
 		}
-		_speakerModal = $modal.open({
+		_speakerModal = $uibModal.open({
 			backdropClass: 'person-modal-backdrop',
 			windowClass: 'person-modal',
 			size: 'lg',
