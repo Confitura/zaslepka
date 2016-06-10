@@ -70,7 +70,7 @@ ng.module('confitura', [
             })
             .state('registration', {
                 url: '/registration',
-                templateUrl: 'views/registration.html'
+                templateUrl: 'registration/registration.tpl.html'
             })
             .state('registration-success', {
                 url: '/registration/success',

@@ -13,7 +13,7 @@
                 </div>
 
                 <form name="registration.form" novalidate ng-submit="registration.doRegister()" ng-if="registration.participant">
-                    <md-content layout-gt-sm="row" layout="column">
+                    <div layout-gt-sm="row" layout="column">
                         <md-input-container flex>
                             <label>First Name</label>
                             <input name="firstName" required ng-model="registration.participant.firstName">
@@ -39,7 +39,7 @@
                                 <div ng-message="email">This is not a valid e-mail address</div>
                             </div>
                         </md-input-container>
-                    </md-content>
+                    </div>
                     <md-content layout="column" layout-gt-sm="row">
                         <md-input-container flex>
                             <label>city</label>

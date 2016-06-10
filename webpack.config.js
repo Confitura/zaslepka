@@ -78,9 +78,6 @@ module.exports = {
         emitErrors: false
     },
     plugins: [
-        //new webpack.ResolverPlugin(
-        //		new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
-        //),
         new ngAnnotatePlugin({
             add: true
         }),

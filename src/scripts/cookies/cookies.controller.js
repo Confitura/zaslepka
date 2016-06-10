@@ -1,3 +1,4 @@
+/* @ngInject */
 function CookiesController($cookies){
     var vm = this;
     vm.isNotAccepted = isNotAccepted;

@@ -23,7 +23,6 @@
     "autoprefixer-loader": "^2.1.0",
     "bootstrap": "^3.3.6",
     "bxslider": "^4.2.6",
-    "dropzone": "^4.3.0",
     "exports-loader": "^0.6.3",
     "expose-loader": "^0.7.1",
     "file-loader": "^0.8.5",

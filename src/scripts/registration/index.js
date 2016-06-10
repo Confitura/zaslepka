@@ -4,6 +4,8 @@ require('angular-aria/angular-aria.min');
 require('angular-material/angular-material.min');
 require('angular-material/angular-material.min.css');
 require('angular-messages/angular-messages.min');
+require('./registration.less');
+require('./registration.tpl.html');
 
 module.exports = ng
 		.module('registration', ['ngAria', 'ngMaterial', 'ngMessages', require('presentations')])

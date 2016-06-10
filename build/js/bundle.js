@@ -52,7 +52,7 @@ webpackJsonp([0],[
 	        $stateProvider
 	            .state('main', {
 	                url: '/',
-	                template: __webpack_require__(135)
+	                template: __webpack_require__(138)
 	            })
 	            .state('partners', {
 	                url: '/partners',
@@ -83,7 +83,7 @@ webpackJsonp([0],[
 	            })
 	            .state('registration', {
 	                url: '/registration',
-	                templateUrl: 'views/registration.html'
+	                templateUrl: 'registration/registration.tpl.html'
 	            })
 	            .state('registration-success', {
 	                url: '/registration/success',
@@ -20258,6 +20258,7 @@ webpackJsonp([0],[
 /* 117 */
 /***/ function(module, exports) {
 
+	/* @ngInject */
 	function CookiesController($cookies){
 	    var vm = this;
 	    vm.isNotAccepted = isNotAccepted;
@@ -20273,6 +20274,7 @@ webpackJsonp([0],[
 
 
 	}
+	CookiesController.$inject = ["$cookies"];
 
 	module.exports = CookiesController;
 
@@ -20281,7 +20283,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(119);
-
+	/* @ngInject */
 	function CookieShowController($cookies){
 	    var vm = this;
 	    vm.get = get;
@@ -20289,6 +20291,7 @@ webpackJsonp([0],[
 	        return $cookies.get('key');
 	    }
 	}
+	CookieShowController.$inject = ["$cookies"];
 
 	module.exports = CookieShowController;
 
@@ -20311,11 +20314,13 @@ webpackJsonp([0],[
 	__webpack_require__(122);
 	__webpack_require__(123);
 	__webpack_require__(125);
+	__webpack_require__(126);
+	__webpack_require__(128);
 
 	module.exports = ng
-			.module('registration', ['ngAria', 'ngMaterial', 'ngMessages', __webpack_require__(126)])
-			.controller('RegistrationFormController', __webpack_require__(129))
-			.factory('Registration', __webpack_require__(134))
+			.module('registration', ['ngAria', 'ngMaterial', 'ngMessages', __webpack_require__(129)])
+			.controller('RegistrationFormController', __webpack_require__(132))
+			.factory('Registration', __webpack_require__(137))
 			.config(/* @ngInject */["$mdThemingProvider", function ($mdThemingProvider) {
 				$mdThemingProvider
 						.theme('default');
@@ -20383,17 +20388,66 @@ webpackJsonp([0],[
 /* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(127);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./registration.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./registration.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(14)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".register-excerpt {\n  text-align: left;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 128 */
+/***/ function(module, exports) {
+
+	var path = 'registration/registration.tpl.html';
+	var html = "<section id=\"partners-confitura\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 partners-header\"><h2>registration</h2></div>\n    </div>\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 bg-white\">\n            <div class=\"bg-white row-1080 text-center register-excerpt\">\n                <page name=\"registration-info\"></page>\n            </div>\n        </div>\n    </div>\n</section>";
+	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
+	module.exports = path;
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	__webpack_require__(91);
 	module.exports = __webpack_require__(39).module('presentations',
 			[__webpack_require__(90), 'ngAnimate'])
-			.factory('Presentations', __webpack_require__(127))
-			.controller('PresentationsController', __webpack_require__(128))
+			.factory('Presentations', __webpack_require__(130))
+			.controller('PresentationsController', __webpack_require__(131))
 			.name;
 
 
 /***/ },
-/* 127 */
+/* 130 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20405,7 +20459,7 @@ webpackJsonp([0],[
 	module.exports = Presentations;
 
 /***/ },
-/* 128 */
+/* 131 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20432,13 +20486,13 @@ webpackJsonp([0],[
 	module.exports = PresentationsController;
 
 /***/ },
-/* 129 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(130);
-	__webpack_require__(131);
-	__webpack_require__(132);
+	__webpack_require__(133);
+	__webpack_require__(134);
+	__webpack_require__(135);
 	var _ = __webpack_require__(104);
 	/* @ngInject */
 	function RegistrationFormController(Registration, Presentations, $mdToast, $stateParams, $state) {
@@ -20519,16 +20573,16 @@ webpackJsonp([0],[
 	module.exports = RegistrationFormController;
 
 /***/ },
-/* 130 */
+/* 133 */
 /***/ function(module, exports) {
 
 	var path = 'registration/form/registration-form.tpl.html';
-	var html = "<section id=\"partners-confitura\" ng-controller=\"RegistrationFormController as registration\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 partners-header\"><h2>registration form</h2></div>\n    </div>\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 bg-white\">\n            <div class=\"bg-white row-1080 registration-form\">\n\n                <div ng-if=\"registration.error\">\n                    <h2 class=\"error\">Oops! Something went horribly wrong!</h2>\n                    <h3>If you believe that you should be able to register to confitura conference then contact us on <a\n                            href=\"mailto:confitura@confitura.pl\">confitura@confitura.pl</a></h3>\n                </div>\n\n                <form name=\"registration.form\" novalidate ng-submit=\"registration.doRegister()\" ng-if=\"registration.participant\">\n                    <md-content layout-gt-sm=\"row\" layout=\"column\">\n                        <md-input-container flex>\n                            <label>First Name</label>\n                            <input name=\"firstName\" required ng-model=\"registration.participant.firstName\">\n\n                            <div ng-messages=\"registration.form.firstName.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n                            <label>Last Name</label>\n                            <input name=\"lastName\" required ng-model=\"registration.participant.lastName\">\n\n                            <div ng-messages=\"registration.form.lastName.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n                            <label>e-mail</label>\n                            <input name=\"mail\" required ng-model=\"registration.participant.mail\" type=\"email\">\n\n                            <div ng-messages=\"registration.form.mail.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                                <div ng-message=\"email\">This is not a valid e-mail address</div>\n                            </div>\n                        </md-input-container>\n                    </md-content>\n                    <md-content layout=\"column\" layout-gt-sm=\"row\">\n                        <md-input-container flex>\n                            <label>city</label>\n                            <input name=\"city\" ng-model=\"registration.participant.city\" required>\n\n                            <div ng-messages=\"registration.form.city.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                    </md-content>\n                    <md-content layout=\"column\" layout-gt-sm=\"row\">\n                        <md-input-container flex>\n                            <md-select name=\"sex\" required placeholder=\"Gender\" ng-model=\"registration.participant.sex\">\n                                <md-option value=\"F\">Female</md-option>\n                                <md-option value=\"M\">Male</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.sex.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n                            <md-select name=\"size\" required\n                                       placeholder=\"T-shirt size\" ng-model=\"registration.participant.size\">\n                                <md-option ng-repeat=\"size in registration.sizes\" value=\"{{size}}\">{{size}}</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.size.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n\n                            <md-select name=\"experience\" required\n                                       placeholder=\"Experience\" ng-model=\"registration.participant.experience\">\n                                <md-option ng-repeat=\"level in registration.experienceLevels\" value=\"{{level}}\">{{level}}</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.experience.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n\n                            <md-select\n                                    name=\"position\" required\n                                    placeholder=\"Position\" ng-model=\"registration.participant.position\">\n                                <md-option ng-repeat=\"level in registration.occupationLevels\" value=\"{{level}}\">{{level}}</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.position.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                    </md-content>\n                    <!--<md-content>-->\n                    <!--<md-list>-->\n                    <!--<md-subheader>Wskaż {{registration.LIMIT}} prezentacji które najbardziej Cię interesują</md-subheader>-->\n                    <!--<md-list-item ng-repeat=\"presentation in registration.presentations\">-->\n                    <!--<md-checkbox ng-model=\"presentation.selected\"-->\n                    <!--ng-change=\"registration.showWarning()\"-->\n                    <!--ng-disabled=\"registration.isDisabled(presentation)\">-->\n                    <!--<md-tooltip ng-if=\"registration.isDisabled(presentation)\">Możesz wybrać maksymalnie {{registration.LIMIT}}-->\n                    <!--prezentacji-->\n                    <!--</md-tooltip>-->\n                    <!--</md-checkbox>-->\n                    <!--<div>-->\n                    <!--<h3>{{presentation.title}}</h3>-->\n\n                    <!--<div>-->\n                    <!--<span ng-repeat=\"speaker in presentation.speakers\">{{speaker.fullName}} </span>-->\n                    <!--</div>-->\n                    <!--</div>-->\n                    <!--</md-list-item>-->\n\n                    <!--</md-list>-->\n                    <!--</md-content>-->\n                    <md-content>\n                        <md-input-container>\n                            <md-checkbox name=\"acceptance\" required ng-model=\"acceptance\">\n                                <div style=\"margin-left:10px\">Akceptuję, że dane umieszczone formularzu rejestracyjnym\n                                    będą przetwarzane i przechowywane zgodnie z ustawą z dnia 29 sierpnia\n                                    1997 r. o ochronie danych osobowych (dz. u. 97 r. nr 133 poz. 883), przez Kapitułę Organizacyjną\n                                    Konferencji\n                                    „Confitura”, wyłącznie dla celów organizacyjnych niniejszej\n                                    Konferencji.\n                                </div>\n                                <div style=\"margin-left:10px; padding-top: 10px;\">I hereby agree for processing my personal data, included\n                                    in registration form, for\n                                    organization purposes of Confitura conference (as defined in the Act of August 29, 1997 on the Polish\n                                    Protection of Personal Data\n                                    (Journal of Laws No. 97, item 133, pos. 883).\n                                </div>\n                            </md-checkbox>\n                            <div ng-messages=\"registration.form.acceptance.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                    </md-content>\n                    <div class=\"registration-button\">\n                        <button type=\"submit\" class=\"btn btn-lg btn-primary btn-pink\" ng-disabled=\"registration.form.$invalid\">REGISTER\n                        </button>\n                    </div>\n                </form>\n\n            </div>\n        </div>\n    </div>\n</section>\n\n";
+	var html = "<section id=\"partners-confitura\" ng-controller=\"RegistrationFormController as registration\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 partners-header\"><h2>registration form</h2></div>\n    </div>\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 bg-white\">\n            <div class=\"bg-white row-1080 registration-form\">\n\n                <div ng-if=\"registration.error\">\n                    <h2 class=\"error\">Oops! Something went horribly wrong!</h2>\n                    <h3>If you believe that you should be able to register to confitura conference then contact us on <a\n                            href=\"mailto:confitura@confitura.pl\">confitura@confitura.pl</a></h3>\n                </div>\n\n                <form name=\"registration.form\" novalidate ng-submit=\"registration.doRegister()\" ng-if=\"registration.participant\">\n                    <div layout-gt-sm=\"row\" layout=\"column\">\n                        <md-input-container flex>\n                            <label>First Name</label>\n                            <input name=\"firstName\" required ng-model=\"registration.participant.firstName\">\n\n                            <div ng-messages=\"registration.form.firstName.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n                            <label>Last Name</label>\n                            <input name=\"lastName\" required ng-model=\"registration.participant.lastName\">\n\n                            <div ng-messages=\"registration.form.lastName.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n                            <label>e-mail</label>\n                            <input name=\"mail\" required ng-model=\"registration.participant.mail\" type=\"email\">\n\n                            <div ng-messages=\"registration.form.mail.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                                <div ng-message=\"email\">This is not a valid e-mail address</div>\n                            </div>\n                        </md-input-container>\n                    </div>\n                    <md-content layout=\"column\" layout-gt-sm=\"row\">\n                        <md-input-container flex>\n                            <label>city</label>\n                            <input name=\"city\" ng-model=\"registration.participant.city\" required>\n\n                            <div ng-messages=\"registration.form.city.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                    </md-content>\n                    <md-content layout=\"column\" layout-gt-sm=\"row\">\n                        <md-input-container flex>\n                            <md-select name=\"sex\" required placeholder=\"Gender\" ng-model=\"registration.participant.sex\">\n                                <md-option value=\"F\">Female</md-option>\n                                <md-option value=\"M\">Male</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.sex.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n                            <md-select name=\"size\" required\n                                       placeholder=\"T-shirt size\" ng-model=\"registration.participant.size\">\n                                <md-option ng-repeat=\"size in registration.sizes\" value=\"{{size}}\">{{size}}</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.size.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n\n                            <md-select name=\"experience\" required\n                                       placeholder=\"Experience\" ng-model=\"registration.participant.experience\">\n                                <md-option ng-repeat=\"level in registration.experienceLevels\" value=\"{{level}}\">{{level}}</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.experience.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                        <md-input-container flex>\n\n                            <md-select\n                                    name=\"position\" required\n                                    placeholder=\"Position\" ng-model=\"registration.participant.position\">\n                                <md-option ng-repeat=\"level in registration.occupationLevels\" value=\"{{level}}\">{{level}}</md-option>\n                            </md-select>\n                            <div ng-messages=\"registration.form.position.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                    </md-content>\n                    <!--<md-content>-->\n                    <!--<md-list>-->\n                    <!--<md-subheader>Wskaż {{registration.LIMIT}} prezentacji które najbardziej Cię interesują</md-subheader>-->\n                    <!--<md-list-item ng-repeat=\"presentation in registration.presentations\">-->\n                    <!--<md-checkbox ng-model=\"presentation.selected\"-->\n                    <!--ng-change=\"registration.showWarning()\"-->\n                    <!--ng-disabled=\"registration.isDisabled(presentation)\">-->\n                    <!--<md-tooltip ng-if=\"registration.isDisabled(presentation)\">Możesz wybrać maksymalnie {{registration.LIMIT}}-->\n                    <!--prezentacji-->\n                    <!--</md-tooltip>-->\n                    <!--</md-checkbox>-->\n                    <!--<div>-->\n                    <!--<h3>{{presentation.title}}</h3>-->\n\n                    <!--<div>-->\n                    <!--<span ng-repeat=\"speaker in presentation.speakers\">{{speaker.fullName}} </span>-->\n                    <!--</div>-->\n                    <!--</div>-->\n                    <!--</md-list-item>-->\n\n                    <!--</md-list>-->\n                    <!--</md-content>-->\n                    <md-content>\n                        <md-input-container>\n                            <md-checkbox name=\"acceptance\" required ng-model=\"acceptance\">\n                                <div style=\"margin-left:10px\">Akceptuję, że dane umieszczone formularzu rejestracyjnym\n                                    będą przetwarzane i przechowywane zgodnie z ustawą z dnia 29 sierpnia\n                                    1997 r. o ochronie danych osobowych (dz. u. 97 r. nr 133 poz. 883), przez Kapitułę Organizacyjną\n                                    Konferencji\n                                    „Confitura”, wyłącznie dla celów organizacyjnych niniejszej\n                                    Konferencji.\n                                </div>\n                                <div style=\"margin-left:10px; padding-top: 10px;\">I hereby agree for processing my personal data, included\n                                    in registration form, for\n                                    organization purposes of Confitura conference (as defined in the Act of August 29, 1997 on the Polish\n                                    Protection of Personal Data\n                                    (Journal of Laws No. 97, item 133, pos. 883).\n                                </div>\n                            </md-checkbox>\n                            <div ng-messages=\"registration.form.acceptance.$error\">\n                                <div ng-message=\"required\">This field is required</div>\n                            </div>\n                        </md-input-container>\n                    </md-content>\n                    <div class=\"registration-button\">\n                        <button type=\"submit\" class=\"btn btn-lg btn-primary btn-pink\" ng-disabled=\"registration.form.$invalid\">REGISTER\n                        </button>\n                    </div>\n                </form>\n\n            </div>\n        </div>\n    </div>\n</section>\n\n";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
 /***/ },
-/* 131 */
+/* 134 */
 /***/ function(module, exports) {
 
 	var path = 'registration/form/registration-success.tpl.html';
@@ -20537,13 +20591,13 @@ webpackJsonp([0],[
 	module.exports = path;
 
 /***/ },
-/* 132 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(133);
+	var content = __webpack_require__(136);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(9)(content, {});
@@ -20563,7 +20617,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 133 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(14)();
@@ -20577,7 +20631,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 134 */
+/* 137 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20590,7 +20644,7 @@ webpackJsonp([0],[
 	module.exports = Registration;
 
 /***/ },
-/* 135 */
+/* 138 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"registration\" role=\"button\">Registration</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. It starts at around 9 a.m. and finishes at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>Bobrowiecka Conference Center</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'partners/banner/partners-banner.tpl.html'\"></div>\n    <div ng-include=\"'news/banner/news-banner.tpl.html'\"></div>\n\n\n</div>\n\n";
