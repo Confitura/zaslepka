@@ -10,7 +10,7 @@
         <div class="person-photo">
             <div class="img-speaker">
                 <img class="img-responsive margin-auto" ng-src="{{person().photo}}"
-                     ng-class="{empty: person().photo == null}"/>
+                     ng-class="{empty: person().photo == null || person().photo == ''}"/>
             </div>
         <span class="social-speaker">
             <a ng-href="http://www.twitter.com/{{person().twitter}}" title="twitter" target="_blank" ng-if="person().twitter">

@@ -1,0 +1,55 @@
+.p60 {
+  padding-bottom: 60px !important;
+}
+
+.lecture {
+  padding: 60px;
+  @media all and (max-width: 767px) {
+    padding: 20px;
+  }
+}
+
+div [class*="lecture-"] {
+  display: block;
+  max-width: 100%;
+  color: #000000;
+}
+
+.lecture-topic {
+  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;
+  font-size: 4.5rem;
+  line-height: 4.5rem;
+}
+
+.lecture-speaker {
+  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;
+  font-size: 2.7rem;
+  padding-top: 15px;
+  > span {
+    cursor: pointer;
+  }
+}
+
+.lecture-content {
+  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;
+  font-size: 2rem;
+  padding-top: 60px;
+  line-height: 2.5rem;
+  @media all and (max-width: 767px) {
+    padding-top: 20px;
+  }
+}
+
+.lecture-footer {
+  display: block;
+  max-width: 340px !important;
+}
+
+.bg-lectures-header {
+  position: relative;
+  background: transparent url('../../../img/header-lectures.jpg') center center no-repeat;
+  background-size: cover;
+  h2 {
+    color: #ffffff;
+  }
+}

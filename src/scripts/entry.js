@@ -19,8 +19,8 @@ ng.module('confitura', [
     //,
         require('v4p'),
 
-        //require('speakers'),
-        //require('presentations'),
+        require('speaker'),
+        require('presentation'),
         //require('organizers'),
         //require('registration')
         //require('agenda')
@@ -54,11 +54,11 @@ ng.module('confitura', [
             })
             .state('speakers', {
                 url: '/speakers',
-                templateUrl: 'views/speakers.html'
+                templateUrl: 'speaker/list/speaker-list.tpl.html'
             })
             .state('presentations', {
                 url: '/presentations/:id',
-                templateUrl: 'views/presentations.html'
+                templateUrl: 'presentation/list/presentation-list.tpl.html'
             })
             .state('v4p', {
                 url: '/v4p',
@@ -109,8 +109,8 @@ ng.module('confitura', [
 
             });
         });
-        $rootScope.$on('$viewContentLoaded', function () {
-            $("body").animate({ scrollTop: 0 });
-        });
+        //$rootScope.$on('$viewContentLoaded', function () {
+        //    $("body").animate({ scrollTop: 0 });
+        //});
 
     });

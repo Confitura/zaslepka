@@ -8,7 +8,7 @@ require('./registration.less');
 require('./registration.tpl.html');
 
 module.exports = ng
-		.module('registration', ['ngAria', 'ngMaterial', 'ngMessages', require('presentations')])
+		.module('registration', ['ngAria', 'ngMaterial', 'ngMessages', require('presentation')])
 		.controller('RegistrationFormController', require('./form/registration-form.controller'))
 		.factory('Registration', require('./registration.service'))
 		.config(/* @ngInject */function ($mdThemingProvider) {

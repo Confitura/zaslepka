@@ -49,6 +49,7 @@
     "jshint": "^2.8.0",
     "jshint-loader": "^0.8.3",
     "json-server": "^0.8.10",
+    "less": "^2.7.1",
     "less-loader": "^2.2.0",
     "live-server": "^1.0.0",
     "minimist": "^1.1.1",

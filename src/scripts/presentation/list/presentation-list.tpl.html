@@ -1,0 +1,23 @@
+<section id="news-confitura" ng-controller="PresentationListController as presentations">
+    <div class="row-fluid">
+        <div class="col-lg-12 news-confitura-header bg-lectures-header"><h2>presentations</h2></div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-12 row-form pb0 bg-white">
+            <div class="row-1080 lecture" ng-repeat="presentation in presentations.list" id="{{presentation.id}}"
+                 ng-class-odd="'bg-white'" ng-class-even="'bg-beige'">
+                <div class="lecture-topic">{{presentation.title}}</div>
+
+                <div class="lecture-speaker">
+                    <span ng-repeat="speaker in presentation.speakers" ng-click="presentations.show(speaker)">{{speaker.fullName}} </span>
+                </div>
+                <div class="lecture-content" ng-bind-html="presentations.getDescriptionFor(presentation)">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
