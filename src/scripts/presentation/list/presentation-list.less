@@ -4,6 +4,7 @@
 
 .lecture {
   padding: 60px;
+  word-wrap: break-word;
   @media all and (max-width: 767px) {
     padding: 20px;
   }
@@ -17,8 +18,12 @@ div [class*="lecture-"] {
 
 .lecture-topic {
   font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;
-  font-size: 4.5rem;
-  line-height: 4.5rem;
+  font-size: 4rem;
+  line-height: 4rem;
+  @media all and (max-width: 767px) {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
 }
 
 .lecture-speaker {
@@ -51,5 +56,8 @@ div [class*="lecture-"] {
   background-size: cover;
   h2 {
     color: #ffffff;
+    @media all and (max-width: 767px) {
+      font-size: 4rem;
+    }
   }
 }
