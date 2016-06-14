@@ -12,18 +12,12 @@ require('moment').locale('pl');
 require('angular-loading-bar/build/loading-bar.min');
 require('directives/page');
 ng.module('confitura', [
-        'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router','directives.page',
-        //require('twitter'),
+        'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router', 'directives.page',
         require('news'),
         require('partners'),
-    //,
         require('v4p'),
-
         require('speaker'),
         require('presentation'),
-        //require('organizers'),
-        //require('registration')
-        //require('agenda')
         require('about'),
         require('cookies'),
         require('registration')
@@ -102,10 +96,16 @@ ng.module('confitura', [
                 m.is(':visible') ? m.fadeOut('fast') : m.fadeIn('fast');
             });
 
-            $('a.mlink').click(function () {
-                console.log('clicked');
+            var hideMenu = function () {
                 var m = $('#mobile-nav');
                 m.fadeOut('fast');
+            };
+            $('a.mlink').click(function () {
+                hideMenu();
+
+            });
+            $('a.navbar-brand').click(function () {
+                hideMenu();
 
             });
         });
