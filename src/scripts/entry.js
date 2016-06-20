@@ -20,7 +20,9 @@ ng.module('confitura', [
         require('presentation'),
         require('about'),
         require('cookies'),
-        require('registration')
+        require('registration'),
+        require('agenda')
+
 
     ])
     .constant('apiServer', 'http://c4p.confitura.pl/api')
@@ -76,7 +78,7 @@ ng.module('confitura', [
             })
             .state('agenda', {
                 url: '/agenda',
-                templateUrl: 'views/agenda.html'
+                templateUrl: 'agenda/agenda.tpl.html'
             })
             .state('spoina', {
                 url: '/spoina',

@@ -33,7 +33,9 @@ webpackJsonp([0],[
 	        __webpack_require__(110),
 	        __webpack_require__(117),
 	        __webpack_require__(124),
-	        __webpack_require__(131)
+	        __webpack_require__(131),
+	        __webpack_require__(146)
+
 
 	    ])
 	    .constant('apiServer', 'http://c4p.confitura.pl/api')
@@ -46,7 +48,7 @@ webpackJsonp([0],[
 	        $stateProvider
 	            .state('main', {
 	                url: '/',
-	                template: __webpack_require__(146)
+	                template: __webpack_require__(153)
 	            })
 	            .state('partners', {
 	                url: '/partners',
@@ -89,7 +91,7 @@ webpackJsonp([0],[
 	            })
 	            .state('agenda', {
 	                url: '/agenda',
-	                templateUrl: 'views/agenda.html'
+	                templateUrl: 'agenda/agenda.tpl.html'
 	            })
 	            .state('spoina', {
 	                url: '/spoina',
@@ -15250,7 +15252,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	var path = 'v4p/v4p.tpl.html';
-	var html = "<section id=\"v4p\" ng-controller=\"VotingController as voting\">\n    <div class=\"row-fluid\">\n        <div ng-if=\"voting.notStarted()\" class=\"bg-white row-1080 text-center register-excerpt\">\n            <page name=\"v4p-start\"></page>\n            <div>\n                <a class=\"btn btn-lg btn-primary btn-pink\" href=\"\" role=\"button\" ng-click=\"voting.start()\">Let's Start!</a>\n            </div>\n        </div>\n\n    </div>\n    <div class=\"row-fluid\" ng-if=\"voting.started()\">\n\n        <div class=\"bg-white row-1080 text-center register-excerpt\" ng-if=\"!voting.isActive()\">\n            <page name=\"v4p-end\"></page>\n        </div>\n        <div class=\"col-lg-12 pt150 pb150 vote-slider-cnt\" ng-if=\"voting.isActive()\">\n            <h3>{{voting.currentIdx()}}/{{voting.votes.length}}</h3>\n            <div class=\"row-1140 vote-slider\">\n                <div class=\"vote-slide\" ng-repeat=\"vote in voting.votes\">\n                    <div class=\"col-lg-5\">\n                        <span class=\"img-speaker\" ng-repeat=\"speaker in vote.presentation.speakers\">\n                            <img class=\"img-responsive margin-auto clickable\"\n                                 data-lazy=\"{{speaker.photo}}\"\n                                 ng-class=\"{empty: speaker.photo == ''}\"\n                                 ng-click=\"voting.showSpeaker(speaker)\"\n                            />\n                            <div class=\"mcci-header ta-leftperson-name vote-person\">{{speaker.fullName}}</div>\n                        </span>\n\n                    </div>\n                    <div class=\"col-lg-7 vote-info\">\n\t\t\t\t\t\t\t\t<span class=\"social-speaker\">\n\t\t\t\t\t\t\t\t\t<a class=\"vote-mark\"\n                                       ng-repeat=\"rate in voting.rating\"\n                                       ng-class=\"{selected: rate == vote.vote}\"\n                                       ng-click=\"voting.vote(rate)\">{{rate}}</a>\n\t\t\t\t\t\t\t\t</span>\n                        <div class=\"mcci-header ta-left pt30 vote-title\"><h3>{{vote.presentation.title}}</h3></div>\n\n                        <div class=\"mcci-header ta-left description-type\">\n                            <span class=\"selected\" ng-click=\"voting.showInfo('short')\"\n                                  ng-class=\"{selected: voting.configuration.info == 'short'}\">TL;DR</span> | <span\n                                ng-click=\"voting.showInfo('full')\" ng-class=\"{selected: voting.configuration.info == 'full'}\">Full</span>\n                        </div>\n\n                        <div class=\"mcci-content ta-left\" ng-bind-html=\"voting.getInfoFor(vote.presentation)\">\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</section>";
+	var html = "<section id=\"v4p\" ng-controller=\"VotingController as voting\">\n    <div class=\"row-fluid\">\n        <div ng-if=\"voting.notStarted()\" class=\"bg-white row-1080 text-center register-excerpt\">\n            <page name=\"v4p-start\"></page>\n            <div>\n                <a class=\"btn btn-lg btn-primary btn-pink\" href=\"\" role=\"button\" ng-click=\"voting.start()\">Let's Start!</a>\n            </div>\n        </div>\n\n    </div>\n    <div class=\"row-fluid\" ng-if=\"voting.started()\">\n\n        <div class=\"bg-white row-1080 text-center register-excerpt\" ng-if=\"!voting.isActive()\">\n            <page name=\"v4p-end\"></page>\n        </div>\n        <div class=\"col-lg-12 pt150 pb150 vote-slider-cnt\" ng-if=\"voting.isActive()\">\n            <h3>{{voting.currentIdx()}}/{{voting.votes.length}}</h3>\n            <div class=\"row-1140 vote-slider\">\n                <div class=\"vote-slide\" ng-repeat=\"vote in voting.votes\">\n                    <div class=\"col-lg-5\">\n                        <span class=\"img-speaker\" ng-repeat=\"speaker in vote.presentation.speakers\">\n                            <img class=\"img-responsive margin-auto clickable\"\n                                 data-lazy=\"{{speaker.photo}}\"\n                                 ng-class=\"{empty: speaker.photo == ''}\"\n                                 ng-click=\"voting.showSpeaker(speaker)\"\n                            />\n                            <div class=\"mcci-header ta-leftperson-name vote-person\">{{speaker.fullName}}</div>\n                        </span>\n\n                    </div>\n                    <div class=\"col-lg-7 vote-info\">\n\t\t\t\t\t\t\t\t<span class=\"social-speaker\">\n\t\t\t\t\t\t\t\t\t<a class=\"vote-mark\"\n                                       ng-repeat=\"rate in voting.rating\"\n                                       ng-class=\"{selectedRoom: rate == vote.vote}\"\n                                       ng-click=\"voting.vote(rate)\">{{rate}}</a>\n\t\t\t\t\t\t\t\t</span>\n                        <div class=\"mcci-header ta-left pt30 vote-title\"><h3>{{vote.presentation.title}}</h3></div>\n\n                        <div class=\"mcci-header ta-left description-type\">\n                            <span class=\"selected\" ng-click=\"voting.showInfo('short')\"\n                                  ng-class=\"{selectedRoom: voting.configuration.info == 'short'}\">TL;DR</span> | <span\n                                ng-click=\"voting.showInfo('full')\" ng-class=\"{selectedRoom: voting.configuration.info == 'full'}\">Full</span>\n                        </div>\n\n                        <div class=\"mcci-content ta-left\" ng-bind-html=\"voting.getInfoFor(vote.presentation)\">\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>\n</section>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -20693,7 +20695,7 @@ webpackJsonp([0],[
 				});
 
 		vm.isDisabled = function (presentation) {
-			return (_.isUndefined(presentation.selected) || presentation.selected == false) &&
+			return (_.isUndefined(presentation.selectedRoom) || presentation.selectedRoom == false) &&
 					maxNumberOfPresentationsSelected();
 		};
 
@@ -20802,6 +20804,161 @@ webpackJsonp([0],[
 
 /***/ },
 /* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	__webpack_require__(147);
+	__webpack_require__(148);
+
+	module.exports = __webpack_require__(39)
+	    .module('agenda', [])
+	    .factory('Agenda', __webpack_require__(151))
+	    .controller('AgendaController', __webpack_require__(152))
+	    .name;
+
+/***/ },
+/* 147 */
+/***/ function(module, exports) {
+
+	var path = 'agenda/agenda.tpl.html';
+	var html = "<section id=\"agenda-confitura\" ng-controller=\"AgendaController as agenda\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 news-confitura-header bg-agenda-header\"><h2>agenda</h2></div>\n    </div>\n    <!-- jeden szablon dla wszystkich pokoi -->\n    <!-- okodować dynamicznie w CMS -->\n\n    <div class=\"row-fluid row-1140 text-center\">\n        <div class=\"room-link-cnt\">\n            <a class=\"room-link\"\n               href=\"\"\n               ng-repeat=\"room in agenda.model.rooms\"\n               ng-class=\"{'room-active': agenda.isActive(room)}\"\n               ng-click=\"agenda.select(room)\">{{room}}</a>\n        </div>\n        <div class=\"row-fluid row-1122\">\n            <div class=\"col-lg-12 agenda-row agenda-white\"\n                 ng-class-odd=\"'agenda-white'\" ng-class-even=\"'agenda-beige'\"\n                 ng-repeat=\"slot in agenda.model.slots\">\n                <div class=\"col-lg-3 agenda-hours\">{{slot.start}} - {{slot.end}}</div>\n                <div class=\"col-lg-9 agenda-content\" ng-repeat=\"item in agenda.getAllPresentationsForSlot(slot.id)\">\n                    <div ng-if=\"item.presentation.id === undefined\">{{item.presentation.title}}</div>\n                    <div ng-if=\"item.presentation.id !== undefined\">{{item.presentation.title}}\n                        <div class=\"agenda-persons\">\n                            <span class=\"agenda-person\" ng-repeat=\"speaker in item.presentation.speakers\"\n                                  ng-click=\"agenda.showSpeaker(speaker)\">{{speaker.fullName}}</span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>";
+	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
+	module.exports = path;
+
+/***/ },
+/* 148 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(149);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(9)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./agenda.less", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?root=..!./../../../node_modules/autoprefixer-loader/index.js!./../../../node_modules/less-loader/index.js!./agenda.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 149 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(14)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "#agenda-confitura {\n  display: table;\n  margin-bottom: 50px;\n}\n#agenda-confitura .bg-agenda-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(150) + ") center center no-repeat;\n  background-size: cover;\n}\n#agenda-confitura .bg-agenda-header h2 {\n  color: #ffffff;\n}\n#agenda-confitura a.room-link:active,\n#agenda-confitura a.room-link:link,\n#agenda-confitura a.room-link:visited,\n#agenda-confitura a.room-link:hover {\n  display: inline-block;\n  width: 210px;\n  height: 80px;\n  line-height: 80px;\n  background: #e2e2e2;\n  text-align: center;\n  color: #000000;\n  border: none;\n  margin: 7px 7px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 24px;\n}\n#agenda-confitura a.room-link:hover {\n  text-decoration: underline;\n}\n#agenda-confitura .room-active {\n  background: #ff0040 !important;\n  color: #ffffff !important;\n}\n#agenda-confitura .room-link-cnt {\n  display: inline-block;\n  width: 100%;\n  padding: 50px 0 60px 0;\n}\n#agenda-confitura .row-1122 {\n  display: block;\n  max-width: 1122px !important;\n  margin: 0 auto;\n}\n#agenda-confitura .agenda-row {\n  display: block;\n  width: 100%;\n  min-height: 100px;\n  margin: 0 auto;\n}\n#agenda-confitura .agenda-beige {\n  padding-top: 0 !important;\n  padding-bottom: 0 !important;\n  background: #e4d7c6;\n}\n#agenda-confitura .agenda-hours {\n  display: block;\n  max-width: 210px;\n  height: 100px;\n  line-height: 100px;\n  text-align: center;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 2rem;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-hours {\n    text-align: left;\n    padding-left: 30px !important;\n    line-height: 40px;\n    height: 40px;\n  }\n}\n#agenda-confitura .agenda-content,\n#agenda-confitura .agenda-person {\n  display: block;\n  max-width: 912px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  text-align: left;\n}\n#agenda-confitura .agenda-content {\n  padding-left: 30px !important;\n  min-height: 100px;\n  font-size: 3.5rem;\n  padding-top: 25px;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-content {\n    padding-right: 30px;\n    padding-top: 0;\n    min-height: 50px;\n    font-size: 3rem;\n    word-wrap: break-word;\n    line-height: 4rem;\n  }\n}\n#agenda-confitura .agenda-person {\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 2.2rem;\n  line-height: 4rem;\n  padding-left: 0 !important;\n  min-height: 50px;\n  float: left;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-person {\n    min-height: 30px;\n  }\n}\n#agenda-confitura .agenda-last {\n  margin-bottom: 90px !important;\n}\n#agenda-confitura .agenda-content a:link,\n#agenda-confitura .agenda-content a:active,\n#agenda-confitura .agenda-content a:visited,\n#agenda-confitura .agenda-content a:hover {\n  color: #000000;\n}\n#agenda-confitura .agenda-white:hover,\n#agenda-confitura .agenda-white:hover a {\n  background: #000000;\n  color: #ffffff;\n}\n#agenda-confitura .agenda-white:hover a {\n  color: #ff0040;\n  cursor: pointer;\n}\n#agenda-confitura .agenda-white:hover .agenda-person {\n  color: #ff0040;\n}\n#agenda-confitura .agenda-persons {\n  display: table;\n}\n#agenda-confitura .agenda-persons .agenda-person:not(:last-child):after {\n  content: \", \";\n  padding-right: 5px;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .row-1140 {\n    padding-right: 0;\n    padding-left: 0;\n  }\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "a5cc14100368c48d0f711788ca0b2092.jpg";
+
+/***/ },
+/* 151 */
+/***/ function(module, exports) {
+
+	'use strict';
+	/* @ngInject */
+	Agenda.$inject = ["$resource", "apiServer"];
+	function Agenda($resource, apiServer) {
+	    return $resource(apiServer + '/agenda');
+	}
+	module.exports = Agenda;
+
+/***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	AgendaController.$inject = ["Agenda", "PersonModal"];
+	var _ = __webpack_require__(104);
+	/* @ngInject */
+	function AgendaController(Agenda, PersonModal) {
+	    var vm = this;
+	    vm.model = {};
+	    vm.selectedRoom = null;
+	    vm.isActive = isActive;
+	    vm.getAllPresentationsForSlot = getAllPresentationsForSlot;
+	    vm.getRoomSpanFor = getRoomSpanFor;
+	    vm.select = select;
+	    vm.showSpeaker = showSpeaker;
+
+	    Agenda.get(function (agenda) {
+	        vm.model = agenda;
+	        console.log(vm.model.rooms);
+	        vm.selectedRoom = agenda.rooms[0];
+	    });
+
+	    function getAllPresentationsForSlot(slotId) {
+	        return _.chain(findSlotBy(slotId).presentations)
+	            .filter(function (presentation) {
+	                //if ($('.rooms-navbar').is(':visible')) {
+	                    return presentation.room === 'ALL' || presentation.room === vm.selectedRoom;
+	                //}
+	                //return true;
+	            })
+	            .value();
+	    }
+
+	    function getRoomSpanFor(presentation) {
+	        return presentation.room === 'ALL' ? vm.model.rooms.length : 1;
+	    }
+
+	    function select(room) {
+	        vm.selectedRoom = room;
+	    }
+
+	    //function show(presentation) {
+	    //    $modal.open({
+	    //        backdropClass: 'person-modal-backdrop',
+	    //        windowClass: 'person-modal',
+	    //        size: 'md',
+	    //        template: require('./modal-template.html'),
+	    //        controller: require('./PresentationModalController'),
+	    //        resolve: {
+	    //            presentation: function () {
+	    //                return presentation;
+	    //            }
+	    //        }
+	    //    })
+	    //}
+
+	    function findSlotBy(id) {
+	        return _.find(vm.model.schedule, function (item) {
+	            return item.slotId === id;
+	        });
+	    }
+
+	    function isActive(room){
+	        return room === vm.selectedRoom;
+	    }
+
+	    function showSpeaker(speaker){
+	        PersonModal.openFor([speaker]);
+	    }
+	}
+	module.exports = AgendaController;
+
+/***/ },
+/* 153 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n<header>\n    <div class=\"row-fluid\">\n        <div id=\"own-carousel\" class=\"col-lg-12 own-carousel\">\n            <div class=\"container\">\n                <div class=\"carousel-caption\">\n                    <h1>confitura 2016</h1>\n                    <p class=\"carousel-p\">Java Conference for Polish community\n                    </p>\n                    <p><a class=\"btn btn-lg btn-primary btn-pink\" ui-sref=\"registration\" role=\"button\">Registration</a></p>\n                </div>\n            </div>\n        </div>\n    </div>\n</header>\n\n<div class=\"container-fluid\">\n\n    <section id=\"main-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 col-md-12\"><h2>confitura 2016</h2></div>\n            <div class=\"col-lg-12 col-md-12 main-confitura-content\">\n                <div class=\"main-confitura-content-inner\">\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>2nd of July 2016</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\tConfitura is a one day conference. It starts at around 9 a.m. and finishes at 7 p.m.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                    <div class=\"col-lg-6 col-md-6\">\n                        <h3>Bobrowiecka Conference Center</h3>\n\t\t\t\t\t\t\t<span class=\"mcci-content\">\n\t\t\t\t\t\t\t\t5 parallel sessions. 7 slots in each session. Chillout room and, last but not least, sponsors booth where you can talk, win attractive awards or even find a new job.\n\t\t\t\t\t\t\t</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </section>\n\n    <section id=\"about-confitura\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 about-confitura-header\"><h2>about us</h2></div>\n            <div class=\"col-lg-12 about-confitura-content\">\n                <div class=\"about-confitura-content-inner\">\n                    <div>\n\n                        Confitura is one of the biggest Java conferences in Poland. It’s the place where Polish and International leaders of\n                        the Java community share their Java knowledge and experience during sessions and breaks. Each year we host around\n                        1400 participants keen to find out about new technologies. The conference used to be totally free of charge but last\n                        year we decided to use the opportunity to help others and introduced a charity donation based model of registering.\n                        We collect symbolic donations of 20 zł (~ €4) with help of the Allegro Charity Platform (all the money go <strong>directly</strong>\n                        to a charity organization) and invite our donors to register.\n                        <br><strong>Registration is required</strong>.\n                    </div>\n                </div>\n            </div>\n        </div>\n    </section>\n\n    <div ng-include=\"'partners/banner/partners-banner.tpl.html'\"></div>\n    <div ng-include=\"'news/banner/news-banner.tpl.html'\"></div>\n\n\n</div>\n\n";

@@ -32,15 +32,15 @@
 								<span class="social-speaker">
 									<a class="vote-mark"
                                        ng-repeat="rate in voting.rating"
-                                       ng-class="{selected: rate == vote.vote}"
+                                       ng-class="{selectedRoom: rate == vote.vote}"
                                        ng-click="voting.vote(rate)">{{rate}}</a>
 								</span>
                         <div class="mcci-header ta-left pt30 vote-title"><h3>{{vote.presentation.title}}</h3></div>
 
                         <div class="mcci-header ta-left description-type">
                             <span class="selected" ng-click="voting.showInfo('short')"
-                                  ng-class="{selected: voting.configuration.info == 'short'}">TL;DR</span> | <span
-                                ng-click="voting.showInfo('full')" ng-class="{selected: voting.configuration.info == 'full'}">Full</span>
+                                  ng-class="{selectedRoom: voting.configuration.info == 'short'}">TL;DR</span> | <span
+                                ng-click="voting.showInfo('full')" ng-class="{selectedRoom: voting.configuration.info == 'full'}">Full</span>
                         </div>
 
                         <div class="mcci-content ta-left" ng-bind-html="voting.getInfoFor(vote.presentation)">

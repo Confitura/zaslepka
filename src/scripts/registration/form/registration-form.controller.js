@@ -44,7 +44,7 @@ function RegistrationFormController(Registration, Presentations, $mdToast, $stat
 			});
 
 	vm.isDisabled = function (presentation) {
-		return (_.isUndefined(presentation.selected) || presentation.selected == false) &&
+		return (_.isUndefined(presentation.selectedRoom) || presentation.selectedRoom == false) &&
 				maxNumberOfPresentationsSelected();
 	};
 

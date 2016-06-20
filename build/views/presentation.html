@@ -11,7 +11,7 @@
 			<aside class="rating">
 				<div class="rate"
 						 ng-repeat="rate in ctrl.rating"
-						 ng-class="{selected: rate == presentationVote.vote}"
+						 ng-class="{selectedRoom: rate == presentationVote.vote}"
 						 ng-click="ctrl.vote(rate)">{{rate}}
 				</div>
 			</aside>
@@ -19,10 +19,10 @@
 				<h1 class="presentation-title">{{presentationVote.presentation.title}}</h1>
 
 				<div class="presentation-info-type">
-					<h3 ng-class="{selected: ctrl.configuration.info == ctrl.info.SHORT}"
+					<h3 ng-class="{selectedRoom: ctrl.configuration.info == ctrl.info.SHORT}"
 							ng-click="ctrl.showInfo(ctrl.info.SHORT)">Krótki opis</h3>
 
-					<h3 ng-class="{selected: ctrl.configuration.info == ctrl.info.FULL}" ng-click="ctrl.showInfo(ctrl.info.FULL)">
+					<h3 ng-class="{selectedRoom: ctrl.configuration.info == ctrl.info.FULL}" ng-click="ctrl.showInfo(ctrl.info.FULL)">
 						Pełny opis</h3>
 				</div>
 				<div ng-bind-html="ctrl.getInfoFor(presentationVote.presentation)"></div>
