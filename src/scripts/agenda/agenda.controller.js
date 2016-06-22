@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 /* @ngInject */
-function AgendaController(Agenda, PersonModal) {
+function AgendaController(Agenda, PersonModal, $window) {
     var vm = this;
     vm.model = {};
     vm.selectedRoom = null;
@@ -15,8 +15,9 @@ function AgendaController(Agenda, PersonModal) {
 
     Agenda.get(function (agenda) {
         vm.model = agenda;
-        vm.rooms = _.map(agenda.rooms, function (room) {
-            return {name: room, selected: true};
+        var isMobile = $window.innerWidth < 768;
+        vm.rooms = _.map(agenda.rooms, function (room, idx) {
+            return {name: room, selected: isMobile ? idx == 0 : true};
         });
     });
 
@@ -34,6 +35,12 @@ function AgendaController(Agenda, PersonModal) {
     }
 
     function select(name) {
+        var isMobile = $window.innerWidth < 768;
+        if (isMobile) {
+            _.each(vm.rooms, function (room) {
+                room.selected = false;
+            });
+        }
         var room = getRoomBy(name);
         room.selected = !room.selected;
     }
