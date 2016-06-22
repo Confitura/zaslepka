@@ -2,9 +2,6 @@
     <div class="row-fluid">
         <div class="col-lg-12 news-confitura-header bg-agenda-header"><h2>agenda</h2></div>
     </div>
-    <!-- jeden szablon dla wszystkich pokoi -->
-    <!-- okodować dynamicznie w CMS -->
-
     <div class="row-fluid row-1140 text-center">
         <div class="room-link-cnt">
             <a class="room-link"
@@ -14,17 +11,17 @@
                ng-click="agenda.select(room)">{{room}}</a>
         </div>
         <div class="row-fluid row-1122">
-            <div class="col-lg-12 agenda-row agenda-white"
+            <div class="agenda-row agenda-white"
                  ng-class-odd="'agenda-white'" ng-class-even="'agenda-beige'"
                  ng-repeat="slot in agenda.model.slots">
-                <div class="col-lg-3 agenda-hours">{{slot.start}} - {{slot.end}}</div>
-                <div class="col-lg-9 agenda-content" ng-repeat="item in agenda.getAllPresentationsForSlot(slot.id)">
-                    <div ng-if="item.presentation.id === undefined">{{item.presentation.title}}</div>
-                    <div ng-if="item.presentation.id !== undefined">{{item.presentation.title}}
-                        <div class="agenda-persons">
+                <div class="agenda-hours">{{slot.start}} - {{slot.end}}</div>
+                <div class="agenda-content agenda-content-{{agenda.countSelected()}}"
+                     ng-repeat="item in agenda.getAllPresentationsForSlot(slot.id)"
+                     ng-class="">
+                    <div class="agenda-title">{{item.presentation.title}}</div>
+                    <div class="agenda-persons" ng-if="item.presentation.id !== undefined">
                             <span class="agenda-person" ng-repeat="speaker in item.presentation.speakers"
                                   ng-click="agenda.showSpeaker(speaker)">{{speaker.fullName}}</span>
-                        </div>
                     </div>
                 </div>
             </div>

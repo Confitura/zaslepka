@@ -5,35 +5,37 @@ function AgendaController(Agenda, PersonModal) {
     var vm = this;
     vm.model = {};
     vm.selectedRoom = null;
+    vm.rooms = [];
     vm.isActive = isActive;
     vm.getAllPresentationsForSlot = getAllPresentationsForSlot;
     vm.getRoomSpanFor = getRoomSpanFor;
     vm.select = select;
     vm.showSpeaker = showSpeaker;
+    vm.countSelected = countSelected;
 
     Agenda.get(function (agenda) {
         vm.model = agenda;
-        console.log(vm.model.rooms);
-        vm.selectedRoom = agenda.rooms[0];
+        vm.rooms = _.map(agenda.rooms, function (room) {
+            return {name: room, selected: true};
+        });
     });
+
 
     function getAllPresentationsForSlot(slotId) {
         return _.chain(findSlotBy(slotId).presentations)
             .filter(function (presentation) {
-                //if ($('.rooms-navbar').is(':visible')) {
-                    return presentation.room === 'ALL' || presentation.room === vm.selectedRoom;
-                //}
-                //return true;
+                return presentation.room === 'ALL' || isSelected(presentation.room);
             })
             .value();
     }
 
-    function getRoomSpanFor(presentation) {
+    function getRoomSpanFor(room) {
         return presentation.room === 'ALL' ? vm.model.rooms.length : 1;
     }
 
-    function select(room) {
-        vm.selectedRoom = room;
+    function select(name) {
+        var room = getRoomBy(name);
+        room.selected = !room.selected;
     }
 
     //function show(presentation) {
@@ -57,12 +59,25 @@ function AgendaController(Agenda, PersonModal) {
         });
     }
 
-    function isActive(room){
-        return room === vm.selectedRoom;
+    function isActive(room) {
+        return isSelected(room);
     }
 
-    function showSpeaker(speaker){
+    function showSpeaker(speaker) {
         PersonModal.openFor([speaker]);
     }
+
+    function countSelected() {
+        return _.filter(vm.rooms, 'selected').length;
+    }
+
+    var getRoomBy = function (name) {
+        return _.find(vm.rooms, function (room) {
+            return room.name == name;
+        });
+    };
+    var isSelected = function (name) {
+        return getRoomBy(name).selected;
+    };
 }
 module.exports = AgendaController;

@@ -24,7 +24,9 @@ webpackJsonp([0],[
 	__webpack_require__(44).locale('pl');
 	__webpack_require__(46);
 	__webpack_require__(47);
+	//require('angular-google-maps');
 	ng.module('confitura', [
+	        //'uiGmapgoogle-maps',
 	        'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router', 'directives.page',
 	        __webpack_require__(50),
 	        __webpack_require__(58),
@@ -40,6 +42,11 @@ webpackJsonp([0],[
 	    ])
 	    .constant('apiServer', 'http://c4p.confitura.pl/api')
 	    .config(/*@ngInject*/ ["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+	        //uiGmapGoogleMapApiProvider.configure({
+	        //    key: 'AIzaSyAsc6YlEdr6GDF1yjhmzthQpghAZapNNkE',
+	        //    v: '3.20',
+	        //    libraries: 'weather,geometry,visualization'
+	        //});
 	        $urlRouterProvider
 	            .when('', '/')
 	            .when('/presentations', '/presentations/');
@@ -20311,7 +20318,9 @@ webpackJsonp([0],[
 	'use strict';
 	__webpack_require__(118);
 	__webpack_require__(119);
-	module.exports = __webpack_require__(39).module('organizers', [__webpack_require__(90)])
+	__webpack_require__(104);
+	module.exports = __webpack_require__(39)
+	    .module('organizers', [__webpack_require__(90)])
 	    .factory('Organizers', __webpack_require__(122))
 	    .controller('OrganizersController', __webpack_require__(123))
 	    .name;
@@ -20321,7 +20330,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	var path = 'about/about.tpl.html';
-	var html = "<div id=\"about\">\n    <section id=\"news-confitura\" style=\"overflow: hidden;\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 bg-about-header\"><h2>about us</h2></div>\n        </div>\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12\">\n                <div class=\"bg-white row-1140 text-center about-excerpt\">\n                    <page name=\"about\"></page>\n                </div>\n            </div>\n        </div>\n    </section>\n    <section id=\"speakers-confitura\" class=\"beige\" ng-controller=\"OrganizersController as organizers\">\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 speakers-confitura-header beige\"><h2>organizers</h2></div>\n        </div>\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 beige pb150\">\n                <div class=\"row-1140\">\n                    <div class=\"beige organizers\">\n                        <div class=\"slide margin-auto organizer\" ng-repeat=\"organizer in organizers.list\" ng-click=\"organizers.detailsOf(organizer)\">\n                            <span class=\"img-speaker\"><img ng-src=\"{{organizer.photo}}\"></span>\n                            <span class=\"name-speaker\">\n                                <a href=\"\" >{{organizer.firstName}}<br>{{organizer.lastName}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </section>\n</div>";
+	var html = "<div id=\"about\">\n    <section id=\"news-confitura\" style=\"overflow: hidden;\">\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12 bg-about-header\"><h2>about us</h2></div>\n        </div>\n        <div class=\"row-fluid\">\n            <div class=\"col-lg-12\">\n                <div class=\"bg-white row-1140 text-center about-excerpt\">\n                    <page name=\"about\"></page>\n                </div>\n            </div>\n        </div>\n    </section>\n    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>\n    <!--<ui-gmap-google-map></ui-gmap-google-map>-->\n    <section id=\"speakers-confitura\" class=\"beige\n    \" ng-controller=\"OrganizersController as organizers\">\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 speakers-confitura-header beige\"><h2>organizers</h2></div>\n        </div>\n        <div class=\"row-fluid beige\">\n            <div class=\"col-lg-12 beige pb150\">\n                <div class=\"row-1140\">\n                    <div class=\"beige organizers\">\n                        <div class=\"slide margin-auto organizer\" ng-repeat=\"organizer in organizers.list\" ng-click=\"organizers.detailsOf(organizer)\">\n                            <span class=\"img-speaker\"><img ng-src=\"{{organizer.photo}}\"></span>\n                            <span class=\"name-speaker\">\n                                <a href=\"\" >{{organizer.firstName}}<br>{{organizer.lastName}}</a>\n                            </span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </section>\n</div>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -20391,8 +20400,8 @@ webpackJsonp([0],[
 	'use strict';
 
 	/* @ngInject */
-	OrganizersController.$inject = ["Organizers", "PersonModal"];
-	function OrganizersController(Organizers, PersonModal) {
+	OrganizersController.$inject = ["Organizers", "PersonModal", "$scope"];
+	function OrganizersController(Organizers, PersonModal, $scope) {
 		var vm = this;
 		vm.list = Organizers.query({type: 'main'});
 		vm.detailsOf = detailsOf;
@@ -20400,6 +20409,7 @@ webpackJsonp([0],[
 		function detailsOf(person){
 			PersonModal.openFor([person]);
 		}
+		$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
 	}
 	module.exports = OrganizersController;
 
@@ -20821,7 +20831,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	var path = 'agenda/agenda.tpl.html';
-	var html = "<section id=\"agenda-confitura\" ng-controller=\"AgendaController as agenda\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 news-confitura-header bg-agenda-header\"><h2>agenda</h2></div>\n    </div>\n    <!-- jeden szablon dla wszystkich pokoi -->\n    <!-- okodować dynamicznie w CMS -->\n\n    <div class=\"row-fluid row-1140 text-center\">\n        <div class=\"room-link-cnt\">\n            <a class=\"room-link\"\n               href=\"\"\n               ng-repeat=\"room in agenda.model.rooms\"\n               ng-class=\"{'room-active': agenda.isActive(room)}\"\n               ng-click=\"agenda.select(room)\">{{room}}</a>\n        </div>\n        <div class=\"row-fluid row-1122\">\n            <div class=\"col-lg-12 agenda-row agenda-white\"\n                 ng-class-odd=\"'agenda-white'\" ng-class-even=\"'agenda-beige'\"\n                 ng-repeat=\"slot in agenda.model.slots\">\n                <div class=\"col-lg-3 agenda-hours\">{{slot.start}} - {{slot.end}}</div>\n                <div class=\"col-lg-9 agenda-content\" ng-repeat=\"item in agenda.getAllPresentationsForSlot(slot.id)\">\n                    <div ng-if=\"item.presentation.id === undefined\">{{item.presentation.title}}</div>\n                    <div ng-if=\"item.presentation.id !== undefined\">{{item.presentation.title}}\n                        <div class=\"agenda-persons\">\n                            <span class=\"agenda-person\" ng-repeat=\"speaker in item.presentation.speakers\"\n                                  ng-click=\"agenda.showSpeaker(speaker)\">{{speaker.fullName}}</span>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>";
+	var html = "<section id=\"agenda-confitura\" ng-controller=\"AgendaController as agenda\">\n    <div class=\"row-fluid\">\n        <div class=\"col-lg-12 news-confitura-header bg-agenda-header\"><h2>agenda</h2></div>\n    </div>\n    <div class=\"row-fluid row-1140 text-center\">\n        <div class=\"room-link-cnt\">\n            <a class=\"room-link\"\n               href=\"\"\n               ng-repeat=\"room in agenda.model.rooms\"\n               ng-class=\"{'room-active': agenda.isActive(room)}\"\n               ng-click=\"agenda.select(room)\">{{room}}</a>\n        </div>\n        <div class=\"row-fluid row-1122\">\n            <div class=\"agenda-row agenda-white\"\n                 ng-class-odd=\"'agenda-white'\" ng-class-even=\"'agenda-beige'\"\n                 ng-repeat=\"slot in agenda.model.slots\">\n                <div class=\"agenda-hours\">{{slot.start}} - {{slot.end}}</div>\n                <div class=\"agenda-content agenda-content-{{agenda.countSelected()}}\"\n                     ng-repeat=\"item in agenda.getAllPresentationsForSlot(slot.id)\"\n                     ng-class=\"\">\n                    <div class=\"agenda-title\">{{item.presentation.title}}</div>\n                    <div class=\"agenda-persons\" ng-if=\"item.presentation.id !== undefined\">\n                            <span class=\"agenda-person\" ng-repeat=\"speaker in item.presentation.speakers\"\n                                  ng-click=\"agenda.showSpeaker(speaker)\">{{speaker.fullName}}</span>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>";
 	window.angular.module('ng').run(['$templateCache', function(c) { c.put(path, html) }]);
 	module.exports = path;
 
@@ -20860,7 +20870,7 @@ webpackJsonp([0],[
 
 
 	// module
-	exports.push([module.id, "#agenda-confitura {\n  display: table;\n  margin-bottom: 50px;\n}\n#agenda-confitura .bg-agenda-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(150) + ") center center no-repeat;\n  background-size: cover;\n}\n#agenda-confitura .bg-agenda-header h2 {\n  color: #ffffff;\n}\n#agenda-confitura a.room-link:active,\n#agenda-confitura a.room-link:link,\n#agenda-confitura a.room-link:visited,\n#agenda-confitura a.room-link:hover {\n  display: inline-block;\n  width: 210px;\n  height: 80px;\n  line-height: 80px;\n  background: #e2e2e2;\n  text-align: center;\n  color: #000000;\n  border: none;\n  margin: 7px 7px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 24px;\n}\n#agenda-confitura a.room-link:hover {\n  text-decoration: underline;\n}\n#agenda-confitura .room-active {\n  background: #ff0040 !important;\n  color: #ffffff !important;\n}\n#agenda-confitura .room-link-cnt {\n  display: inline-block;\n  width: 100%;\n  padding: 50px 0 60px 0;\n}\n#agenda-confitura .row-1122 {\n  display: block;\n  max-width: 1122px !important;\n  margin: 0 auto;\n}\n#agenda-confitura .agenda-row {\n  display: block;\n  width: 100%;\n  min-height: 100px;\n  margin: 0 auto;\n}\n#agenda-confitura .agenda-beige {\n  padding-top: 0 !important;\n  padding-bottom: 0 !important;\n  background: #e4d7c6;\n}\n#agenda-confitura .agenda-hours {\n  display: block;\n  max-width: 210px;\n  height: 100px;\n  line-height: 100px;\n  text-align: center;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 2rem;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-hours {\n    text-align: left;\n    padding-left: 30px !important;\n    line-height: 40px;\n    height: 40px;\n  }\n}\n#agenda-confitura .agenda-content,\n#agenda-confitura .agenda-person {\n  display: block;\n  max-width: 912px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  text-align: left;\n}\n#agenda-confitura .agenda-content {\n  padding-left: 30px !important;\n  min-height: 100px;\n  font-size: 3.5rem;\n  padding-top: 25px;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-content {\n    padding-right: 30px;\n    padding-top: 0;\n    min-height: 50px;\n    font-size: 3rem;\n    word-wrap: break-word;\n    line-height: 4rem;\n  }\n}\n#agenda-confitura .agenda-person {\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 2.2rem;\n  line-height: 4rem;\n  padding-left: 0 !important;\n  min-height: 50px;\n  float: left;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-person {\n    min-height: 30px;\n  }\n}\n#agenda-confitura .agenda-last {\n  margin-bottom: 90px !important;\n}\n#agenda-confitura .agenda-content a:link,\n#agenda-confitura .agenda-content a:active,\n#agenda-confitura .agenda-content a:visited,\n#agenda-confitura .agenda-content a:hover {\n  color: #000000;\n}\n#agenda-confitura .agenda-white:hover,\n#agenda-confitura .agenda-white:hover a {\n  background: #000000;\n  color: #ffffff;\n}\n#agenda-confitura .agenda-white:hover a {\n  color: #ff0040;\n  cursor: pointer;\n}\n#agenda-confitura .agenda-white:hover .agenda-person {\n  color: #ff0040;\n}\n#agenda-confitura .agenda-persons {\n  display: table;\n}\n#agenda-confitura .agenda-persons .agenda-person:not(:last-child):after {\n  content: \", \";\n  padding-right: 5px;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .row-1140 {\n    padding-right: 0;\n    padding-left: 0;\n  }\n}\n", ""]);
+	exports.push([module.id, "#agenda-confitura {\n  display: table;\n  margin-bottom: 50px;\n}\n#agenda-confitura .bg-agenda-header {\n  position: relative;\n  background: transparent url(" + __webpack_require__(150) + ") center center no-repeat;\n  background-size: cover;\n}\n#agenda-confitura .bg-agenda-header h2 {\n  color: #ffffff;\n}\n#agenda-confitura a.room-link:active,\n#agenda-confitura a.room-link:link,\n#agenda-confitura a.room-link:visited,\n#agenda-confitura a.room-link:hover {\n  display: inline-block;\n  width: 210px;\n  height: 80px;\n  line-height: 80px;\n  background: #e2e2e2;\n  text-align: center;\n  color: #000000;\n  border: none;\n  margin: 7px 7px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 24px;\n}\n#agenda-confitura a.room-link:hover {\n  text-decoration: underline;\n}\n#agenda-confitura .room-active {\n  background: #ff0040 !important;\n  color: #ffffff !important;\n}\n#agenda-confitura .room-link-cnt {\n  display: inline-block;\n  width: 100%;\n  padding: 50px 0 60px 0;\n}\n#agenda-confitura .row-1122 {\n  display: block;\n  max-width: 1122px !important;\n  margin: 0 auto;\n}\n#agenda-confitura .agenda-row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  width: 100%;\n  min-height: 100px;\n  margin: 0 auto;\n}\n#agenda-confitura .agenda-beige {\n  padding-top: 0 !important;\n  padding-bottom: 0 !important;\n  background: #e4d7c6;\n}\n#agenda-confitura .agenda-hours {\n  -webkit-box-flex: 0;\n      -ms-flex-positive: 0;\n          flex-grow: 0;\n  -ms-flex-negative: 0;\n      flex-shrink: 0;\n  -ms-flex-preferred-size: 150px;\n      flex-basis: 150px;\n  -ms-flex-item-align: center;\n      align-self: center;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 2rem;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-hours {\n    text-align: left;\n    padding-left: 30px !important;\n    line-height: 40px;\n    height: 40px;\n  }\n}\n#agenda-confitura .agenda-content,\n#agenda-confitura .agenda-person {\n  max-width: 912px;\n  font-family: 'NeuzeitGro-Bol', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  text-align: left;\n}\n#agenda-confitura .agenda-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  padding-left: 30px !important;\n  min-height: 100px;\n  font-size: 3.5rem;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n}\n#agenda-confitura .agenda-content.agenda-content-1 {\n  -ms-flex-preferred-size: 100%;\n      flex-basis: 100%;\n}\n#agenda-confitura .agenda-content.agenda-content-2 {\n  -ms-flex-preferred-size: 50%;\n      flex-basis: 50%;\n  font-size: 3rem;\n}\n#agenda-confitura .agenda-content.agenda-content-2 .agenda-person {\n  font-size: 2rem;\n}\n#agenda-confitura .agenda-content.agenda-content-3 {\n  -ms-flex-preferred-size: 33%;\n      flex-basis: 33%;\n  font-size: 2.5rem;\n}\n#agenda-confitura .agenda-content.agenda-content-3 .agenda-persons {\n  padding-top: 10px;\n}\n#agenda-confitura .agenda-content.agenda-content-3 .agenda-persons .agenda-person {\n  font-size: 1.5rem;\n}\n#agenda-confitura .agenda-content.agenda-content-4 {\n  -ms-flex-preferred-size: 25%;\n      flex-basis: 25%;\n  font-size: 2rem;\n}\n#agenda-confitura .agenda-content.agenda-content-4 .agenda-persons {\n  padding-top: 10px;\n}\n#agenda-confitura .agenda-content.agenda-content-4 .agenda-persons .agenda-person {\n  font-size: 1.5rem;\n}\n#agenda-confitura .agenda-content.agenda-content-5 {\n  -ms-flex-preferred-size: 20%;\n      flex-basis: 20%;\n  font-size: 1.5rem;\n}\n#agenda-confitura .agenda-content.agenda-content-5 .agenda-persons {\n  padding-top: 10px;\n}\n#agenda-confitura .agenda-content.agenda-content-5 .agenda-persons .agenda-person {\n  font-size: 1.5rem;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-content {\n    padding-right: 30px;\n    padding-top: 0;\n    min-height: 50px;\n    font-size: 3rem;\n    word-wrap: break-word;\n    line-height: 4rem;\n  }\n}\n#agenda-confitura .agenda-content .agenda-person {\n  font-family: 'NeuzeitGro-Reg', Verdana, Tahoma, sans-serif;\n  /* NeuzeitGro-Bol */\n  font-size: 2.2rem;\n  float: left;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .agenda-content .agenda-person {\n    min-height: 30px;\n  }\n}\n#agenda-confitura .agenda-last {\n  margin-bottom: 90px !important;\n}\n#agenda-confitura .agenda-content a:link,\n#agenda-confitura .agenda-content a:active,\n#agenda-confitura .agenda-content a:visited,\n#agenda-confitura .agenda-content a:hover {\n  color: #000000;\n}\n#agenda-confitura .agenda-white:hover,\n#agenda-confitura .agenda-white:hover a {\n  background: #000000;\n  color: #ffffff;\n}\n#agenda-confitura .agenda-white:hover a {\n  color: #ff0040;\n  cursor: pointer;\n}\n#agenda-confitura .agenda-white:hover .agenda-person {\n  color: #ff0040;\n}\n#agenda-confitura .agenda-persons {\n  display: table;\n}\n#agenda-confitura .agenda-persons .agenda-person:not(:last-child):after {\n  content: \", \";\n  padding-right: 5px;\n}\n@media screen and (max-width: 1140px) {\n  #agenda-confitura .row-1140 {\n    padding-right: 0;\n    padding-left: 0;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -20895,35 +20905,37 @@ webpackJsonp([0],[
 	    var vm = this;
 	    vm.model = {};
 	    vm.selectedRoom = null;
+	    vm.rooms = [];
 	    vm.isActive = isActive;
 	    vm.getAllPresentationsForSlot = getAllPresentationsForSlot;
 	    vm.getRoomSpanFor = getRoomSpanFor;
 	    vm.select = select;
 	    vm.showSpeaker = showSpeaker;
+	    vm.countSelected = countSelected;
 
 	    Agenda.get(function (agenda) {
 	        vm.model = agenda;
-	        console.log(vm.model.rooms);
-	        vm.selectedRoom = agenda.rooms[0];
+	        vm.rooms = _.map(agenda.rooms, function (room) {
+	            return {name: room, selected: true};
+	        });
 	    });
+
 
 	    function getAllPresentationsForSlot(slotId) {
 	        return _.chain(findSlotBy(slotId).presentations)
 	            .filter(function (presentation) {
-	                //if ($('.rooms-navbar').is(':visible')) {
-	                    return presentation.room === 'ALL' || presentation.room === vm.selectedRoom;
-	                //}
-	                //return true;
+	                return presentation.room === 'ALL' || isSelected(presentation.room);
 	            })
 	            .value();
 	    }
 
-	    function getRoomSpanFor(presentation) {
+	    function getRoomSpanFor(room) {
 	        return presentation.room === 'ALL' ? vm.model.rooms.length : 1;
 	    }
 
-	    function select(room) {
-	        vm.selectedRoom = room;
+	    function select(name) {
+	        var room = getRoomBy(name);
+	        room.selected = !room.selected;
 	    }
 
 	    //function show(presentation) {
@@ -20947,13 +20959,26 @@ webpackJsonp([0],[
 	        });
 	    }
 
-	    function isActive(room){
-	        return room === vm.selectedRoom;
+	    function isActive(room) {
+	        return isSelected(room);
 	    }
 
-	    function showSpeaker(speaker){
+	    function showSpeaker(speaker) {
 	        PersonModal.openFor([speaker]);
 	    }
+
+	    function countSelected() {
+	        return _.filter(vm.rooms, 'selected').length;
+	    }
+
+	    var getRoomBy = function (name) {
+	        return _.find(vm.rooms, function (room) {
+	            return room.name == name;
+	        });
+	    };
+	    var isSelected = function (name) {
+	        return getRoomBy(name).selected;
+	    };
 	}
 	module.exports = AgendaController;
 

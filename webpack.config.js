@@ -15,6 +15,7 @@ module.exports = {
             'angular-messages/angular-messages.min',
             'angular-ui-router/release/angular-ui-router.min',
             'moment',
+            'angular-google-maps',
             'angular-loading-bar/build/loading-bar.min',
             './src/css/external'
         ]
@@ -29,6 +30,7 @@ module.exports = {
         extensions: ['', '.webpack.js', '.web.js', '.js'],
         alias: {
             "ng": "angular/angular.min",
+            "angular": "angular/angular.min",
             "lodash": "lodash",
             "moment": "moment/min/moment.min",
             "jquery": "jquery/dist/jquery.min"
