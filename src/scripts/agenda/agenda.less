@@ -94,18 +94,23 @@
     font-size: 3.5rem;
 
     &.agenda-content-1 {
-      flex-basis: 100%;
-
+      @media screen and (min-width: 1141px) {
+        flex-basis: 100%;
+      }
     }
     &.agenda-content-2 {
-      flex-basis: 50%;
+      @media screen and (min-width: 1141px) {
+        flex-basis: 50%;
+      }
       font-size: 3rem;
       .agenda-person {
         font-size: 2rem;
       }
     }
     &.agenda-content-3 {
-      flex-basis: 33%;
+      @media screen and (min-width: 1141px) {
+        flex-basis: 33%;
+      }
       font-size: 2.5rem;
       .agenda-persons {
         padding-top: 10px;
@@ -115,7 +120,9 @@
       }
     }
     &.agenda-content-4 {
-      flex-basis: 25%;
+      @media screen and (min-width: 1141px) {
+        flex-basis: 25%;
+      }
       font-size: 2rem;
       .agenda-persons {
         padding-top: 10px;
@@ -126,7 +133,9 @@
       }
     }
     &.agenda-content-5 {
-      flex-basis: 20%;
+      @media screen and (min-width: 1141px) {
+        flex-basis: 20%;
+      }
       font-size: 1.5rem;
       .agenda-persons {
         padding-top: 10px;
@@ -193,3 +202,5 @@
   }
 
 }
+
+
