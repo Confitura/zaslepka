@@ -11,9 +11,8 @@ require('angular-ui-router/release/angular-ui-router.min');
 require('moment').locale('pl');
 require('angular-loading-bar/build/loading-bar.min');
 require('directives/page');
-//require('angular-google-maps');
+require('faq');
 ng.module('confitura', [
-        //'uiGmapgoogle-maps',
         'ngAnimate', 'ngResource', 'ngSanitize', 'angular-loading-bar', 'ui.router', 'directives.page',
         require('news'),
         require('partners'),
@@ -29,11 +28,6 @@ ng.module('confitura', [
     ])
     .constant('apiServer', 'http://c4p.confitura.pl/api')
     .config(/*@ngInject*/ function ($stateProvider, $urlRouterProvider) {
-        //uiGmapGoogleMapApiProvider.configure({
-        //    key: 'AIzaSyAsc6YlEdr6GDF1yjhmzthQpghAZapNNkE',
-        //    v: '3.20',
-        //    libraries: 'weather,geometry,visualization'
-        //});
         $urlRouterProvider
             .when('', '/')
             .when('/presentations', '/presentations/');
@@ -94,6 +88,10 @@ ng.module('confitura', [
             .state('show-cookie', {
                 url: '/show-cookie',
                 templateUrl: 'cookies/show/cookie-show.tpl.html'
+            })
+            .state('faq', {
+                url: '/faq',
+                templateUrl: 'faq/faq.tpl.html'
             })
         ;
     })

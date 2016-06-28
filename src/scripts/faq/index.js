@@ -1,0 +1,1 @@
+require('./faq.tpl.html');
