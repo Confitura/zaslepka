@@ -4,6 +4,7 @@
 function OrganizersController(Organizers, PersonModal, $scope, $timeout) {
 	var vm = this;
 	vm.list = Organizers.query({type: 'main'});
+	vm.volunteers = Organizers.query({type: 'volunteers'});
 	vm.detailsOf = detailsOf;
 
 	function detailsOf(person){
