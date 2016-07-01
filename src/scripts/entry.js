@@ -93,9 +93,13 @@ ng.module('confitura', [
                 url: '/faq',
                 templateUrl: 'faq/faq.tpl.html'
             })
+            .state('live-stream', {
+                url: 'https://www.youtube.com/watch?v=NLD0btOtFbg',
+                external: true
+            })
         ;
     })
-    .run(function ($timeout, $rootScope) {
+    .run(function ($timeout, $rootScope, $window) {
         $timeout(function () {
             //TO REPLACE WITH BS
             $('#mobile-menu').click(function () {
@@ -116,6 +120,14 @@ ng.module('confitura', [
 
             });
         });
+
+        $rootScope.$on('$stateChangeStart',
+            function(event, toState, toParams, fromState, fromParams) {
+                if (toState.external) {
+                    event.preventDefault();
+                    $window.open(toState.url, '_blank');
+                }
+            });
         //$rootScope.$on('$viewContentLoaded', function () {
         //    $("body").animate({ scrollTop: 0 });
         //});
